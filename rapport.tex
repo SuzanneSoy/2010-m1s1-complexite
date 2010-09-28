@@ -12,7 +12,13 @@
 
 \begin{figure}[h!]
   \centering
-  \begin{tikzpicture}
+  \begin{tikzpicture}[node distance=3cm]
+  \node (J1) {$J_{1}$};
+  \node (J2) [above of=J1] {$J_{2}$};
+  \node (J3) [right of=J1] {$J_{3}$};
+  \draw[->] (J1) -- (J2);
+  \draw[->] (J1) -- (J3);
+  \draw[->] (J3) -- (J2);
   \end{tikzpicture}
   \caption{Graphe G}
 \label{fig:graphe-g}
