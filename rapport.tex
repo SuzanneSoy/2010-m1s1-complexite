@@ -39,7 +39,10 @@
 		precedence/.style = {
 			draw=blue,
 			->
-		}
+		},
+		capacité/.style = {
+			auto
+        }
   ]
   
   \matrix[matrix of math nodes, nodes in empty cells, row sep=1cm, column sep=1cm] (m) {
@@ -48,22 +51,22 @@
 		  & v_{2,0} & v_{2,1} & v_{2,2} & v_{2,3} & v_{2,4} & & \\
   };
   
-  	\draw[affectation] (m-1-2)--(m-1-3);
-	\draw[affectation] (m-1-3)--(m-1-4);
-	\draw[affectation] (m-1-4)--(m-1-5);
-	\draw[affectation] (m-1-5)--(m-1-6);
-	\draw[affectation] (m-1-6)--(m-1-7);
+  	\draw[affectation] (m-1-2)-- node[capacité]{0} (m-1-3);
+	\draw[affectation] (m-1-3)-- node[capacité]{2} (m-1-4);
+	\draw[affectation] (m-1-4)-- node[capacité]{5} (m-1-5);
+	\draw[affectation] (m-1-5)-- node[capacité]{0} (m-1-6);
+	\draw[affectation] (m-1-6)-- node[capacité]{1} (m-1-7);
 
-	\draw[affectation] (m-2-2)--(m-2-3);
-	\draw[affectation] (m-2-3)--(m-2-4);
-	\draw[affectation] (m-2-4)--(m-2-5);
-	\draw[affectation] (m-2-5)--(m-2-6);
-	\draw[affectation] (m-2-6)--(m-2-7);
+	\draw[affectation] (m-2-2)-- node[capacité]{1} (m-2-3);
+	\draw[affectation] (m-2-3)-- node[capacité]{10} (m-2-4);
+	\draw[affectation] (m-2-4)-- node[capacité]{2} (m-2-5);
+	\draw[affectation] (m-2-5)-- node[capacité]{3} (m-2-6);
+	\draw[affectation] (m-2-6)-- node[capacité]{3} (m-2-7);
 
-	\draw[affectation] (m-3-2)--(m-3-3);
-	\draw[affectation] (m-3-3)--(m-3-4);
-	\draw[affectation] (m-3-4)--(m-3-5);
-	\draw[affectation] (m-3-5)--(m-3-6);
+	\draw[affectation] (m-3-2)-- node[capacité]{1} (m-3-3);
+	\draw[affectation] (m-3-3)-- node[capacité]{1} (m-3-4);
+	\draw[affectation] (m-3-4)-- node[capacité]{2} (m-3-5);
+	\draw[affectation] (m-3-5)-- node[capacité]{4} (m-3-6);
 	
   	\draw[auxiliaire] (m-2-1)--(m-1-2);
   	\draw[auxiliaire] (m-2-1)--(m-2-2);
