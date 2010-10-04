@@ -67,6 +67,8 @@
       & v_{2,0} & v_{2,1} & v_{2,2} & v_{2,3} & v_{2,4} & & \\
     };
     
+    %% Penser a rajouter les J1, J2 et J3 a gauche du graphe.
+    
   	\draw[affectation] (m-1-2)-- node[capacité affectation]{0} (m-1-3);
 	\draw[affectation] (m-1-3)-- node[capacité affectation]{2} (m-1-4);
 	\draw[affectation] (m-1-4)-- node[capacité affectation]{5} (m-1-5);
@@ -112,5 +114,17 @@
   \label{fig:graphe-g*}
 \end{figure}
 
+\subsection{Demonstration}
 
+Démonstration par construction :
+On éffectue un tri topologique sur le graphe des contraintes de précédence, le graphe resultant est $G' (\{J_{1}\ldots J_{n}\}, E') $ on a donc :
+$$\forall J_{i} \quad \not\exists \ j < i \quad | \quad \exists (J_{j}, J_{i}) \in E'$$
+On transforme ensuite $G'$ en un graphe de flots avec l'algorithme donné dans le sujet.
+Considérons les arcs entre les $v_{i,j}$ : 
+\begin{itemize}
+	\item Arcs d'affectation : ces arcs sont entre des sommets $v_{i,j}$ et $v_{k,l}$ avec $i = k$
+	\item Arcs de précédences : ces arcs sont entre des sommets $v_{i,j}$ et $v_{k,l}$ avec $i < k$ à cause du tri topologique.
+	\item Arcs auxiliaires : ces arcs ne sont pas entre des sommets $v_{i,j}$.
+\end{itemize}
+On va créer une $(s-t)-\mathrm{coupe}$ minimale. Comme cette coupe et minimale, aucun arc de capacité infinie n'a son origine dans $S$ et son extremité dans $\overline{S}$.
 \end{document}
