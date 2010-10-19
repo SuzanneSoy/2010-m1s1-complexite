@@ -4,6 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[frenchb]{babel}
 \usepackage{tikz}
+\usepackage{amsmath}
 \usetikzlibrary{chains,positioning,matrix}
 
 \begin{document}
@@ -114,7 +115,7 @@
   \label{fig:graphe-g*}
 \end{figure}
 
-\subsection{Demonstration}
+\subsubsection{Question 2}
 
 Démonstration par construction :
 On éffectue un tri topologique sur le graphe des contraintes de précédence, le graphe resultant est $G' (\{J_{1}\ldots J_{n}\}, E') $ on a donc :
@@ -127,4 +128,148 @@ Considérons les arcs entre les $v_{i,j}$ :
 	\item Arcs auxiliaires : ces arcs ne sont pas entre des sommets $v_{i,j}$.
 \end{itemize}
 On va créer une $(s-t)-\mathrm{coupe}$ minimale. Comme cette coupe et minimale, aucun arc de capacité infinie n'a son origine dans $S$ et son extremité dans $\overline{S}$.
+
+TODO : on montre que si c'est une coupe min, il ne sort qu'un et un
+seul arc d'affectation par job. Il faut aussi montrer qu'il existe.
+
+\subsubsection{Question 3}
+TODO : Attention à la phrase suivante, ce n'est pas tout à fait ce qu'on a montré dans l'exo 2
+
+Dans l'exercice précédent, on a montré que de toute coupe minimale sort un et un seul art d'affectation par job.
+
+On cherche à associer un ordonancement réalisable à toute coupe minimale.
+
+On va construire cet ordonancement de la manière suivante : à chaque
+fois qu'un arc d'affectation $v_{i,t}, v_{i,t+1}$ traverse la coupe,
+on exécute le job $i$ à l'instant $t$ dans l'ordonancement.
+
+On cherche un ordonancement, donc une suite de paires
+$(\text{tâche},\text{date de début})$ respectant les dépendances,
+autrement dit chaque tâche apparaît après ses dépendances dans la
+suite.
+
+Comme chaque arc de précédence a une capacité finie, pour que la coupe
+soit minimale, cela signifie qu'aucun arc de précédence ne sort de la
+coupe. Cela signifie donc qu'à chaque fois qu'on exécute un job (à
+chaque fois qu'un arc d'affectation sort de la coupe), tous les arcs
+de précédence entrants dans ce noeud ont leur extrémité déjà présente
+dans la partie \og gauche \fg de la coupe (TODO : on n'a pas prouvé
+ça, on a prouvé pour tous les sortants, mais pas les entrants. Il faut
+montrer qu'en partant de la source, on est obligié d'avoir tous les
+arcs de précédence entrants.), et donc toutes les tâches dont dépend
+celle-là ont été exécutées à un temps antérieur.
+
+On cherche un ordonancement réalisable, c'est à dire pour lequel
+toutes les tâches peuvent être menées à bout durant le temps
+imparti.
+
+La propriété énoncée dans l'exercice 2 nous indique que dans toute
+coupe minimale, un et un seul arc d'affectation par job sort de la
+coupe. Cela signifie que chaque job a commencé à être exécuté. Comme
+il exite un noeud pour je job $j$ à l'instant $t$ si et seulement s'il
+y a le temps de l'exécuter (\ogà chaque date de début possible\fg),
+cela signifie que tous les jobs commencés ont eu le temps d'être
+terminés, et comme nous venons de voir que tous les jobs ont pu être
+commencés, ils ont tous pu être terminés. Donc l'ordonancement est
+réalisable.
+
+\subsubsection{Question 4}
+
+On construit la coupe à partir de l'ordonancement de la même manière
+qu'on a construit l'ordonancement à partir de la coupe dans l'exercice
+précédent, mais en suivant l'algorithme dans l'autre sens~:
+
+Si on exécute le job $i$ à l'instant $t$ dans l'ordonancement, alors
+tous les noeuds $v_{i,t'}$ avec $t' \leq t$ sont dans la partie \og
+gauche\fg de la coupe. De plus, s appartient lui aussi à la partie
+gauche de la coupe.
+
+TODO : et les arcs de précédence ? prouver qu'aucun ne sort de la
+coupe dans notre construction.
+
+La capacité de cette coupe est la somme de la capacité de tous les
+arcs qui sortent de la coupe, autrement dit la somme des capacités des
+arcs $v_{i,t}, v_{i,t+1}$. Comme la capacité de ces arcs est égale au
+coût d'exécution de la tâche i à l'instant t, on a bien égalité entre
+la somme des capacités et la somme des coûts de démarrage des jobs,
+donc la capacité de la coupe est égale au coût de l'ordonancement.
+
+\subsection{Exercice 2}
+
+Il existe un ensemble de chemins d'arcs disjoints de cardinal 3~:
+
+$$
+\begin{array}{ccccccc}
+  1 & \rightarrow & 2 & \rightarrow & 3 & \rightarrow & 6 \\
+  1 & \rightarrow & 3 & \rightarrow & 4 & \rightarrow & 6 \\
+  1 & \rightarrow & 4 & \rightarrow & 5 & \rightarrow & 6 \\
+\end{array}
+$$
+
+Cherchons s'il en existe un de cardinal 4. Voici la liste des chemins,
+obtenue par un parcours en profondeur (en prennant toujours en premier
+les sommets voisins avec le numéro le plus petit possible) :
+
+TODO : numéroter les "équations"
+$$
+\begin{array}{ccccccccccc}
+  1 & \rightarrow & 2 & \rightarrow & 3 & \rightarrow & 4 & \rightarrow & 5 & \rightarrow & 6 \\
+  1 & \rightarrow & 2 & \rightarrow & 3 & \rightarrow & 4 & \rightarrow & 6 &             &   \\
+  1 & \rightarrow & 2 & \rightarrow & 3 & \rightarrow & 6 &             &   &             &   \\
+  1 & \rightarrow & 3 & \rightarrow & 4 & \rightarrow & 5 & \rightarrow & 6 &             &   \\
+  1 & \rightarrow & 3 & \rightarrow & 4 & \rightarrow & 6 &             &   &             &   \\
+  1 & \rightarrow & 3 & \rightarrow & 6 &             &   &             &   &             &   \\
+  1 & \rightarrow & 4 & \rightarrow & 5 & \rightarrow & 6 &             &   &             &   \\
+  1 & \rightarrow & 4 & \rightarrow & 6 &             &   &             &   &             &   \\
+\end{array}
+$$
+
+Voyons les ensembles qui contiennent le chemin $A$~: On ne peut pas
+prendre les chemins $B$ et $C$, car ils ont l'arc $(1,2)$ en commun
+avec $A$. On ne peut pas prendre non plus les chemin $D$ et $G$, car
+ils ont l'arc $(5,6)$ en commun avec $A$, ni le chemin $E$ à cause de
+l'arc $(3,4)$. Il ne reste plus que les chemins $F$ et $H$ qu'on
+pourrait peut-être prendre si on prend $A$, mais le cardinal de
+l'ensemble serait alors 3, donc on n'améliorerait pas le résultat
+existant, et donc ce n'est pas la peine de chercher si ces chemins
+sont \og compatibles\fg avec $A$.
+
+Procédons de la même manière pour $B$ (sachant que $A$ ne peut pas
+faire partie de l'ensemble). Si on a le chemin $B$, alors on ne peut
+pas avoir~:
+\begin{item}
+  \item $C$ (arc $(2,3)$),
+  \item $D$ (arc $(3,4)$),
+  \item $E$ (arc $(3,4)$),
+  \item $H$ (arc $(4,6)$).
+\end{item}
+À partir de ce moment, il ne reste plus que $F$ et $G$, l'ensemble
+serait de cardinal 3, donc $B$ ne peut pas être dans un ensemble de
+cardinal 4.
+
+Passons à $D$ avec $A$ et $B$ exclus. On ne peut pas avoir~:
+\begin{itemize}
+\item $E$ (arc $(3,4)$),
+\item $F$ (arc $(1,3)$),
+\item $G$ (arc $(4,5)$).
+\end{itemize}
+Donc $D$ n'est pas dans l'ensemble.
+
+Passons à $F$ avec $A,B,D$ exclus. On ne peut pas avoir~:
+\begin{itemize}
+\item $C$ (arc $(3,6)$),
+\item $E$ (arc $(1,3)$).
+\end{itemize}
+Donc $F$ n'est pas dans l'ensemble.
+
+Comme $A,B,D,F$ ne sont pas dans l'ensemble, et que nous avons
+seulement 8 candidats, la seule possibilité qui reste pour un ensemble
+de cardinal 4 est $C,E,G,H$, or dans cet ensemble, l'arrête $(1,4)$
+est commune à $G$ et $H$, donc on ne peut pas construire un ensemble
+de chemins d'arcs disjoints de taille 4 (donc pas de taille supérieure
+à 4 non plus).
+
+Conclusion : Le nombre maximum de chemins d'arcs disjoints est 3.
+
+
 \end{document}
