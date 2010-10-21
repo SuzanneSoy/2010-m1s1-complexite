@@ -7,10 +7,20 @@
 \usepackage{amsmath}
 \usetikzlibrary{chains,positioning,matrix}
 
+\newenvironment{enonce}{}{}
+
 \begin{document}
 
 \section{Partie théorique}
 \subsection{Partie algorithmique}
+
+\subsubsection{Exercice 1}
+\begin{enonce}
+Modélisation et résolution d'un problème d'ordonnancement par un problème de flot maximum :
+ordonnancement avec coûts dépendants des dates de début.
+\end{enonce}
+
+
 
 \begin{figure}[h!]
   \centering
@@ -25,6 +35,24 @@
   \caption{Graphe G}
   \label{fig:graphe-g}
 \end{figure}
+
+\begin{enonce}
+Construire le graphe $G*$ pour $n = 3$, $T = 5$, $p_1 = 1$, $p_2 = 2$, $p_3 = 1$, 
+$E = \{(1,2), (1,3), (3,2)\}$ et les coûts suivants :
+
+\begin{figure}[h!]
+  \centering
+	\begin{tabular}{cccccc}
+	\hline	
+	$i,t$ & 0 & 1 & 2 & 3 & 4\\
+	\hline
+	1 & 0 & 2 & 5 & 0 & 1\\
+	2 & 1 & 1 & 2 & 4 & -\\
+	3 & 1 & 10 & 2 & 3 & 3\\
+	\hline
+\end{tabular}
+\end{figure}
+\end{enonce}
 
 \begin{figure}[h!]
   \centering
@@ -116,16 +144,19 @@
 \end{figure}
 
 \subsubsection{Question 2}
+\begin{enonce}
+Montrer qu'il existe une coupe dans G* de capacité minimale de laquelle sort un et un seul arc d'affectation par job.
+\end{enonce}
 
 Démonstration par construction~: 
-On effectue un tri topologique sur le graphe des contraintes de précédence. Le graphe resultant est $G' (\{J_{1}\ldots J_{n}\}, E') $. On a donc~:
-$$\forall J_{i} \quad \not\exists \ j < i \quad | \quad \exists (J_{j}, J_{i}) \in E'$$
-On transforme ensuite $G'$ en un graphe de flots à l'aide de l'algorithme fourni dans le sujet. 
-Considérons les arcs entre les $v_{i,j}$~: 
+On effectue un tri topologique sur le graphe des contraintes de précédence $G(\{J_1, \dots, J_n\}, E)$. Ce tri topologique nous donne un ensemble ordonné de n\oe uds $(J_{a1}, \dots, J_{an})$. On a donc~:
+$$\forall J_{ai} \quad \not\exists \ j < i \quad | \quad \exists (J_{aj}, J_{ai}) \in E$$
+On transforme ensuite $G$ en un graphe de flots à l'aide de l'algorithme fourni dans le sujet. 
+Considérons les arcs entre les $v_{ai,t}$~: 
 \begin{itemize}
-	\item Arcs d'affectation~: ces arcs sont entre des sommets $v_{i,j}$ et $v_{k,l}$ avec $i = k$
-	\item Arcs de précédences~: ces arcs sont entre des sommets $v_{i,j}$ et $v_{k,l}$ avec $i < k$ à cause du tri topologique.
-	\item Arcs auxiliaires~: ces arcs ne sont pas entre des sommets $v_{i,j}$.
+	\item Arcs d'affectation~: ces arcs sont entre des sommets $v_{ai,t}$ et $v_{aj,t'}$ avec $ai = aj$
+	\item Arcs de précédences~: ces arcs sont entre des sommets $v_{ai,t}$ et $v_{aj,t'}$ avec $ai < aj$, car grâce au tri topologique, il n'existe pas d'arcs entre des sommets $J_{ai}$ et $J_{aj}$ avec $aj < ai$, et de plus il n'y a pas de boucle (donc pas d'arc $(J_{ai},J_{ai})$ dans $G$, donc pas d'arc $(v_{ai,t}, v_{ai,t'})$ dans $G*$).
+	\item Arcs auxiliaires~: ces arcs ne sont pas entre des sommets $v_{ai,t}$.
 \end{itemize}
 On va créer une $(s-t)-\mathrm{coupe}$ minimale. Etant donné que cette coupe est minimale, aucun arc de capacité infinie n'a son origine dans $S$ et son extremité dans $\overline{S}$.
 
