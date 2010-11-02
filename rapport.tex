@@ -304,4 +304,57 @@ de chemins d'arcs disjoints de taille 4 (donc pas de taille supérieure
 
 Conclusion~: Le nombre maximum de chemins d'arcs disjoints est 3.
 
+
+
+\subsubsection{Exercice 3}
+\begin{enonce}
+Sur quelques réductions...
+\end{enonce}
+
+
+\subsubsection{Question 1}
+\begin{enonce}
+On vous demande de rappeler la réduction de SAT à 3-SAT.
+\end{enonce}
+
+\begin{enonce}
+(a) Enoncer SAT et 3-SAT.
+\end{enonce}
+
+SAT est une abbrévation pour 'problème de satisfiabilité'. En logique propositionnelle, résoudre un problème SAT consiste à déterminer s'il existe une assignation des variables booléennes telle qu'une formule logique sous forme normale conjonctive s'évalue à vrai. Si tel est le cas, la formule est dite 'satisfiable', sinon elle est 'insatisfiable'. Etant donné le résultat booléen ('satisfiable' ou 'insatisfiable') de ce genre de problème, il s'agit bien d'un problème de décision.  
+
+On appelle 2-sat un problème dont chaque clause de la formule logique en question contient au plus 2 littéraux, 3-sat un problème SAT dans lequel chaque clause de la formule logique en question contient au plus 3 littéraux. Un problème 2-sat est NL-complet alors qu'un problème 3-sat est NP-complet.
+
+Un exemple d'un problème 3-SAT est le suivant :
+
+$(v_{1} \vee v_{2} \vee v_{3}) \wedge (v_{4} \vee v_{5} \vee v_{6}) \wedge (v_{7} \vee v_{8} \vee v_{9}) \wedge$ ...	
+
+où chaque v est une variable ou la négation d'une variable, chaque variable pouvant figurer plusieurs fois dans l'expression. 
+
+\begin{enonce}
+(b) Définir la réduction.
+\end{enonce}
+
+En théorie de complexité, une 'réduction' est la transformation d'un problème en un autre problème. Selon la transformation utilisée, la réduction peut être utilisée afin de définir une classe de complexité à un ensemble de problèmes. Problème A est réductible à Problème B si les solutions au Problème B existe et donne des solutions au Problème A à chaque fois que A a des solutions. Par conséquent, la solution de A ne peut pas être plus difficile que la solution de B. 
+
+Il peut être utile de transformer d'autres types de problème en un type de problèmes que l'on sait résoudre et/ou de subdiviser le problème ne plusieurs problèmes que l'on sait résoudre, d'où le terme 'réduction'. De même, lorsque l'on a un problème qu'on a prouvé difficile à résoudre 
+
+Il peut être utile de résoudre un problème qui est similaire à un problème que l'on a déjà résolu. Dans ce cas, une méthodes efficace de résoudre le nouveau problème est de transformer chaque instance du nouveau problème en un instance d'un problème que l'on sait résoudre, résoudre chaque instance à l'aide de solutions existantes afin d'obtenir une solution finale.
+
+Une autre application des 'réduction' est aux problèmes qui sont difficiles à résoudre. Lorsque l'on a un problème qui a été prouvé difficile à résoudre et que nous avons un nouveau problème similaire, nous pouvous faire l'hypothèse que le nouveau problème, lui aussi, est difficile à résoudre. Le raisonnement est l'inverse de celui des problèmes qui peuvent être résolu aisément. 
+
+Un exemple simple est de passer de la multiplication à la quadrature. Supposons que nous ne sommes capable que d'effectuer l'addition, la soustraction et la quadrature. Avec ces trois opérations, nous pouvons trouver le produit de deux nombres quelconques :
+
+
+$(a + b) = \dfrac{(a + b)^2 - a^2 - b^2}{2}$
+
+
+Lorsqu'il est possible de réduire un problème difficile en un problème que l'on sait résoudre, la difficulté demeure dans la réduction elle-même.
+
+
+\begin{enonce}
+(c) Justifier alors que 3-SAT est NP-complet (sachant que SAT est NP-complet).
+\end{enonce}
+
+
 \end{document}
