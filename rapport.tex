@@ -7,18 +7,49 @@
 \usepackage{amsmath}
 \usetikzlibrary{chains,positioning,matrix}
 
-\newenvironment{enonce}{}{}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+
+\newcounter{exocount}
+\setcounter{exocount}{0}
+
+\newcounter{enoncecount}
+\setcounter{enoncecount}{0}
+\newenvironment{enonce}
+{% This is the begin code
+\stepcounter{enoncecount}
+\bf\small \arabic{enoncecount}.
+\begin{bf}
+}
+{% This is the end code
+\end{bf}
+}
+
+
+\newcounter{sousenoncecount}
+\setcounter{sousenoncecount}{0}
+\newenvironment{sousenonce}
+{% This is the begin code
+\stepcounter{sousenoncecount}
+\bf\small (\alph{sousenoncecount})
+\begin{bf}
+}
+{% This is the end code
+\end{bf}
+}
+
 
 \begin{document}
+
+\section{Descriptif des tâches}
+Vos résultats seront présentés en procédant à la rédaction d'un mémoire dont la qualité influencera la note finale. Ce manuscrit sera rendu le jour de la soutenance. La soutenance consiste à présenter résultats pratiques (choix du langage, choix des structures de données, résultats obtenus, tests sur un grand jeu de données, analyse de ceux-ci ...) Vous aurez 15 minutes au maximum, questions comprises. Vous avez la possibilité d'utiliser des transparents.
+
 
 \section{Partie théorique}
 \subsection{Partie algorithmique}
 
-\subsubsection{Exercice 1}
-\begin{enonce}
-Modélisation et résolution d'un problème d'ordonnancement par un problème de flot maximum :
-ordonnancement avec coûts dépendants des dates de début.
-\end{enonce}
+\subsubsection*{Exercice \stepcounter{exocount}\bf\small \arabic{exocount} -- Modélisation et résolution d'un problème d'ordonnancement par un problème de flot maximum : ordonnancement avec coûté dépendants des dates de début}
+\addcontentsline{toc}{section}{Exercice \arabic{exocount} -- Modélisation et résolution d'un problème d'ordonnancement par un problème de flot maximum : ordonnancement avec coûté dépendants des dates de début}
 
 
 
@@ -39,6 +70,7 @@ ordonnancement avec coûts dépendants des dates de début.
 \begin{enonce}
 Construire le graphe $G*$ pour $n = 3$, $T = 5$, $p_1 = 1$, $p_2 = 2$, $p_3 = 1$, 
 $E = \{(1,2), (1,3), (3,2)\}$ et les coûts suivants :
+\end{enonce}
 
 \begin{figure}[h!]
   \centering
@@ -52,7 +84,6 @@ $E = \{(1,2), (1,3), (3,2)\}$ et les coûts suivants :
 	\hline
 \end{tabular}
 \end{figure}
-\end{enonce}
 
 \begin{figure}[h!]
   \centering
@@ -143,7 +174,8 @@ $E = \{(1,2), (1,3), (3,2)\}$ et les coûts suivants :
   \label{fig:graphe-g*}
 \end{figure}
 
-\subsubsection{Question 2}
+
+
 \begin{enonce}
 Montrer qu'il existe une coupe dans G* de capacité minimale de laquelle sort un et un seul arc d'affectation par job.
 \end{enonce}
@@ -163,7 +195,11 @@ On va créer une $(s-t)-\mathrm{coupe}$ minimale. Etant donné que cette coupe e
 TODO~: Montrons que s'il s'agit d'une coupe minimale, il ne sort qu'un et qu'un
 seul arc d'affectation par job. Il faut aussi montrer qu'il (il = ?) existe.
 
-\subsubsection{Question 3}
+\begin{enonce}
+Montrer que l'on peut associer un ordonnancement réalisable (qui respectent toutes les contraintes à toute 
+coupe de capacité finie minimale dans le graphe. Quel est le coût de cet ordonnancement ? 
+\end{enonce}
+
 TODO~: Attention à la phrase suivante, ce n'est pas tout à fait ce qu'on a montré dans l'exercice 2
 
 Dans l'exercice précédent, on a montré que de toute coupe minimale sort un et un seul arc d'affectation par job.
@@ -206,7 +242,9 @@ terminés et, comme nous venons de voir, que tous les jobs ont pu être
 commencés - ils ont tous pu être terminés - et, par conséquent, l'ordonancement est
 réalisable.
 
-\subsubsection{Question 4}
+\begin{enonce}
+Montrer qu'à tout ordonnancement réalisable correspond une coupe dont la capacité est égale au coût de l'ordonnancement.
+\end{enonce}
 
 On construit la coupe à partir de l'ordonancement de la même manière
 qu'on a construit l'ordonancement à partir de la coupe dans l'exercice
@@ -227,7 +265,23 @@ coût d'exécution de la tâche $i$ à l'instant $t$, on a bien égalité entre
 la somme des capacités et la somme des coûts de démarrage des jobs,
 donc la capacité de la coupe est égale au coût de l'ordonancement.
 
-\subsection{Exercice 2}
+
+\subsubsection*{Exercice \stepcounter{exocount}\bf\small \arabic{exocount} -- Coupes et chemins arc-disjoints}
+\addcontentsline{toc}{section}{Exercice \arabic{exocount} -- Coupes et chemins arc-disjoints}
+\setcounter{enoncecount}{0}
+
+\begin{enonce}
+Calculer le nombre maximum des chemins d'arcs disjoints à partir de la source jusqu'au puits dans le réseau donné par la figure 1. 
+\end{enonce}
+
+\begin{enonce}
+Enumérer tous les s-t-coupes dans le réseau donnés par la figure 1. Pour chaque s-t-coupe [S,S], énumérer les sommets, les arcs avants et les arcs arrières.
+\end{enonce}
+
+\begin{enonce}
+Vérifier que le nombre maximum de chemeins d'arcs disjoints à partir du sommet source jusqu'au puits est égal au nombre minimum d'arcs avant dans une s-t-coupe.
+\end{enonce}
+
 
 Il existe un ensemble de chemins d'arcs disjoints de cardinal 3~:
 
@@ -305,25 +359,23 @@ de chemins d'arcs disjoints de taille 4 (donc pas de taille supérieure
 Conclusion~: Le nombre maximum de chemins d'arcs disjoints est 3.
 
 
+\subsection{Partie complexité}
 
-\subsubsection{Exercice 3}
-\begin{enonce}
-Sur quelques réductions...
-\end{enonce}
+\subsubsection*{Exercice \stepcounter{exocount}\bf\small \arabic{exocount} -- Sur quelques réductions}
+\addcontentsline{toc}{section}{Exercice \arabic{exocount} -- Sur quelques réductions}
+\setcounter{enoncecount}{0}
 
-
-\subsubsection{Question 1}
 \begin{enonce}
 On vous demande de rappeler la réduction de SAT à 3-SAT.
 \end{enonce}
 
-\begin{enonce}
-(a) Enoncer SAT et 3-SAT.
-\end{enonce}
+\begin{sousenonce}
+Enoncer SAT et 3-SAT.
+\end{sousenonce}
 
 SAT est une abbrévation pour 'problème de satisfiabilité'. En logique propositionnelle, résoudre un problème SAT consiste à déterminer s'il existe une assignation des variables booléennes telle qu'une formule logique sous forme normale conjonctive s'évalue à vrai. Si tel est le cas, la formule est dite 'satisfiable', sinon elle est 'insatisfiable'. Etant donné le résultat booléen ('satisfiable' ou 'insatisfiable') de ce genre de problème, il s'agit bien d'un problème de décision.  
 
-On appelle 2-sat un problème dont chaque clause de la formule logique en question contient au plus 2 littéraux, 3-sat un problème SAT dans lequel chaque clause de la formule logique en question contient au plus 3 littéraux. Un problème 2-sat est NL-complet alors qu'un problème 3-sat est NP-complet.
+On appelle 2-sat un problème dont chaque clause de la formule logique en question contient au plus 2 littéraux, 3-sat un problème SAT dans lequel chaque clause de la formule logique en question contient au plus 3 littéraux. Un problème 2-sat est polynomial et NL-complet alors qu'un problème 3-sat est NP-complet.
 
 Un exemple d'un problème 3-SAT est le suivant :
 
@@ -331,30 +383,148 @@ $(v_{1} \vee v_{2} \vee v_{3}) \wedge (v_{4} \vee v_{5} \vee v_{6}) \wedge (v_{7
 
 où chaque v est une variable ou la négation d'une variable, chaque variable pouvant figurer plusieurs fois dans l'expression. 
 
-\begin{enonce}
-(b) Définir la réduction.
-\end{enonce}
+\begin{sousenonce}
+Définir la réduction.
+\end{sousenonce}
 
-En théorie de complexité, une 'réduction' est la transformation d'un problème en un autre problème. Selon la transformation utilisée, la réduction peut être utilisée afin de définir une classe de complexité à un ensemble de problèmes. Problème A est réductible à Problème B si les solutions au Problème B existe et donne des solutions au Problème A à chaque fois que A a des solutions. Par conséquent, la solution de A ne peut pas être plus difficile que la solution de B. 
+En théorie de complexité, une 'réduction' est la transformation d'un problème en un autre problème. Selon la transformation utilisée, la réduction peut être utilisée afin de définir une classe de complexité à un ensemble de problèmes. Problème A est réductible à Problème B si les solutions au Problème B existent et donnent des solutions au Problème A à chaque fois que A a des solutions. Par conséquent, la solution de A ne peut pas être plus difficile que la solution de B. 
 
-Il peut être utile de transformer d'autres types de problème en un type de problèmes que l'on sait résoudre et/ou de subdiviser le problème ne plusieurs problèmes que l'on sait résoudre, d'où le terme 'réduction'. De même, lorsque l'on a un problème qu'on a prouvé difficile à résoudre 
+Il peut être utile de transformer d'autres types de problème en un type de problèmes que l'on sait résoudre et/ou de subdiviser le problème en plusieurs problèmes que l'on sait résoudre, d'où le terme 'réduction'. De même, lorsque l'on a un problème qu'on a prouvé difficile à résoudre, ...
 
-Il peut être utile de résoudre un problème qui est similaire à un problème que l'on a déjà résolu. Dans ce cas, une méthodes efficace de résoudre le nouveau problème est de transformer chaque instance du nouveau problème en un instance d'un problème que l'on sait résoudre, résoudre chaque instance à l'aide de solutions existantes afin d'obtenir une solution finale.
+Il peut être utile de résoudre un problème qui est similaire à un problème que l'on a déjà résolu. Dans ce cas, une méthode efficace de résoudre le nouveau problème est de transformer chaque instance du nouveau problème en une instance d'un problème que l'on sait résoudre, résoudre chaque instance à l'aide de solutions existantes afin d'obtenir une solution finale.
 
-Une autre application des 'réduction' est aux problèmes qui sont difficiles à résoudre. Lorsque l'on a un problème qui a été prouvé difficile à résoudre et que nous avons un nouveau problème similaire, nous pouvous faire l'hypothèse que le nouveau problème, lui aussi, est difficile à résoudre. Le raisonnement est l'inverse de celui des problèmes qui peuvent être résolu aisément. 
+Une autre application des 'réductions' est son application aux problèmes qui sont difficiles à résoudre. Lorsque l'on a un problème qui a été prouvé difficile à résoudre et que nous avons un nouveau problème similaire, nous pouvous faire l'hypothèse que le nouveau problème, lui aussi, est difficile à résoudre. Le raisonnement est l'inverse de celui des problèmes qui peuvent être résolu aisément. 
 
-Un exemple simple est de passer de la multiplication à la quadrature. Supposons que nous ne sommes capable que d'effectuer l'addition, la soustraction et la quadrature. Avec ces trois opérations, nous pouvons trouver le produit de deux nombres quelconques :
+Un exemple simple est de passer de la multiplication à la quadrature. Supposons que nous ne sommes capable que d'effectuer l'addition, la soustraction la quadrature et la division. Avec ces quatre opérations, nous pouvons trouver le produit de deux nombres quelconques :
 
 
-$(a + b) = \dfrac{(a + b)^2 - a^2 - b^2}{2}$
+$$(a \times b) = \dfrac{(a + b)^2 - a^2 - b^2}{2}$$
 
 
 Lorsqu'il est possible de réduire un problème difficile en un problème que l'on sait résoudre, la difficulté demeure dans la réduction elle-même.
 
 
+\begin{sousenonce}
+Justifier alors que 3-SAT est NP-complet (sachant que SAT est NP-complet).
+\end{sousenonce}
+
+\begin{sousenonce}
+Application : si un ensemble de clauses contient n-v variables, n1 clauses à un littéral, n2 clauses à 2 littéraux, n3 clauses à 3 littéraux, n4 clauses à 4 littéraux, n5 clauses à 5 littéraux (et pas d'autres clauses), combien le système obtenu par votre réduction contient-il de variables et de clauses ? Vous devrez bien sûr justifier votre réponse.
+\end{sousenonce}
+
 \begin{enonce}
-(c) Justifier alors que 3-SAT est NP-complet (sachant que SAT est NP-complet).
+Pourquoi le principe de la réduction ne permet-il pas de réduire 3-SAT à 2-SAT et de prouver que 2-SAT est NP-complet ? (Il ne s'agit pas d'expliquer pourquoi 2-SAT n'est pas NP-complet, mais pourquoi cette réduction ne marche pas).
 \end{enonce}
 
+
+\begin{enonce}
+Il s'agit de prouver que 2-SAT est un problème polynomial. Vous avez un article en français expliquant cette preuve à http://philippe.gambette.free.fr/SCOL/Graphes
+\end{enonce}
+\setcounter{sousenoncecount}{0}
+
+\begin{sousenonce}
+Vous commencerez par fabriquer trois ensembles de deux clauses, le premier valide, le deuxième insatisfiable et le troisième contingent, et pour chacun de ces ensembles de clauses vous construirez le graphe correspondant. Vous expliquerez comment apparaît sur chacun des trois graphes la validité de l'ensemble de clauses corresponsdant.
+\end{sousenonce}
+
+
+\begin{sousenonce}
+Vous expliciterez ensuite l'algorithme de transformation et vous évlauerez sa complexité.
+\end{sousenonce}
+
+
+\begin{sousenonce}
+Vous expliciterez ensuite l'algorithme d'exploration du graphe et vous évaluerez sa complexité {\it en fonction de la taille de l'ensemble de clauses initial}.
+\end{sousenonce}
+
+
+\begin{sousenonce}
+Enfin, vous justifierez l'équivalence de la réponse au problème 2-SAT et au problème qui est posé dans le graphe.
+\end{sousenonce}
+
+
+\subsection{Partie Calculabilité}
+
+\subsubsection*{Exercice \stepcounter{exocount}\bf\small \arabic{exocount} -- Sur le problème de codage}
+\addcontentsline{toc}{section}{Exercice \arabic{exocount} -- Sur le problème de codage}
+\setcounter{enoncecount}{0}
+
+\begin{enonce}
+Comment énumérer les couples d'entiers ?
+\end{enonce}
+
+
+\begin{enonce}
+Donner les fonctions de codage et de décodage f1(z)->x et f2(z)->y.
+\end{enonce}
+
+\begin{enonce}
+Montrer que l'on peut coder les triplets. Généraliser aux k-uplets, puis aux listes de longueurs quelconques.
+\end{enonce}
+
+
+\begin{enonce}
+Peut-on énumérer les fonctions C syntaxiquements correctes ? Et les fonctions C qui ne bouclent jamais ? Justifier vos réponses le plus clairement et le plus synthétiquement possible.
+\end{enonce}
+
+
+\section{Partie pratique sur les algorithmes de flots}
+
+\subsubsection*{Exercice \stepcounter{exocount}\bf\small \arabic{exocount} -- La méthode de Edmonds-Karp et celle de Dinic}
+\addcontentsline{toc}{section}{Exercice \arabic{exocount} -- La méthode de Edmonds-Karp et celle de Dinic}
+\setcounter{enoncecount}{0}
+
+\begin{enonce}
+Programmer une procédure qui construit à partir d'un graphe orienté valué (les valuations représentent les capacités) et deux sommets $s$ et $p$ du graphe, le graphe d'écart associé (correspondant à un flot nul sur chaque arc).
+\end{enonce}
+
+
+\begin{enonce}
+Programmer un procédure qui à partir d'un graphe orienté et deux sommets $s$ et $p$ donne un plus court chemin en nombre d'arcs de $s$ à $p$ ou qui signale s'il n'y en a pas.
+\end{enonce}
+
+
+\begin{enonce}
+Etant donnés un graphe G orienté et valué et un chemin de G, écrire une fonction uqi calcule l'arc de plus petite valuation sur le chemin.
+\end{enonce}
+
+
+\begin{enonce}
+Etant donnés un graphe d'écard, un chemin et un entier $k$, donner une procédure qui met à jour le graphe d'écard si on augmente le flot de $k$ le long de la chaîne augmentante correspondant au chemin. 
+\end{enonce}
+
+
+\begin{enonce}
+Ecrire une procédure qui à partir du graphe initial et du graphe d'écard final (plus de chemins entre $s$ et $p$ donne la valeur du flot maximum ainsi que la valeur deu flot sur chaque arc lorsque le flot maximum est atteint. 
+\end{enonce}
+
+
+\begin{enonce}
+En utilisant les procédures et les fonctions précédentes, programmer l'algorithme de Edmond-Karp. 
+\end{enonce}
+
+
+\begin{enonce}
+Ecrire une procédure qui prend en compte l'ensemble des plus cours chemins en nombres d'arcs.
+\end{enonce}
+
+
+\begin{enonce}
+Ecrire une procédure qui calcule la plus petite valeur du flot dans le graphe de couche.
+\end{enonce}
+
+
+\begin{enonce}
+Ecrire une procédure qui met à jour le flot dans le graphe G. 
+\end{enonce}
+
+
+\begin{enonce}
+En déduire l'algorithme de Dinic.
+\end{enonce}
+
+
+\begin{enonce}
+Comparer les résultats (temps d'exécution, taux d'occupation mémoire) entre les deux méthodes. Vous apporterez un soin tout particulier à la génération de vos résultats et à leur présentation.
+\end{enonce}
 
 \end{document}
