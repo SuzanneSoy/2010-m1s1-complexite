@@ -7,6 +7,9 @@
 \usepackage{amsmath}
 \usetikzlibrary{chains,positioning,matrix}
 
+
+
+
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{2ex}
 
@@ -39,7 +42,15 @@
 }
 
 
+
 \begin{document}
+\title{Rapport de projet : FMIN105 -- Cours algorithmique/complexité/calculabilité}
+\author{Bertrand BRUN \\ Yohann \\ John CHARRON \\ Georges DUPERON}
+\date
+\maketitle
+
+\tableofcontents
+\newpage
 
 \section{Descriptif des tâches}
 Vos résultats seront présentés en procédant à la rédaction d'un mémoire dont la qualité influencera la note finale. Ce manuscrit sera rendu le jour de la soutenance. La soutenance consiste à présenter résultats pratiques (choix du langage, choix des structures de données, résultats obtenus, tests sur un grand jeu de données, analyse de ceux-ci ...) Vous aurez 15 minutes au maximum, questions comprises. Vous avez la possibilité d'utiliser des transparents.
@@ -426,9 +437,57 @@ Il s'agit de prouver que 2-SAT est un problème polynomial. Vous avez un article
 Vous commencerez par fabriquer trois ensembles de deux clauses, le premier valide, le deuxième insatisfiable et le troisième contingent, et pour chacun de ces ensembles de clauses vous construirez le graphe correspondant. Vous expliquerez comment apparaît sur chacun des trois graphes la validité de l'ensemble de clauses corresponsdant.
 \end{sousenonce}
 
+Philippe Gambette, dans son article intitulé \begin{quote}Un graphe pour résoudre 2-SAT\end{quote}, donne une explication succincte de l'agorithme de Aspvall, Plass et Tarjan, un algorithme en temps polynomial.
+
+Une formule logique en forme normale conjonctive contenant des clauses à deux littéraux est transformé en un problème de graphe orienté. On doit tout d'abord établir s'il existe une valuation de la graphe en question et ensuite trouvé une solution où la formule en question soit vraie.
+
+%\begin{enumerate}
+La construction du graphe : 
+%\begin{enumerate}
+On crée un graphe avec $2n$ sommets contenant tous les littéraux de la formule ainsi que sa négation.
+On prend chaque clause de la formule que l'on traduit en implication dans les deux sens : $(a \vee b)$ 
+devient, et $(\neg a \Rightarrow b)$, et $\neg b \Rightarrow a)$.
+On ajoute un arc correspondant aux deux implications dans le graphe, dans l'exemple de l'étape précédent,
+il s'agirait d'un arc de $\neg a$ à $b$ et un arc de $\neg b$ à $a$
+%\end{enumerate}
+On effectue un tri topologique en numérotant les sommets de $1$ à $n$.
+En ordre inverse, du sommet $n$ au sommet $1$, on affecte à tout noeud $a$ la valeur VRAI (et à $\neg a$ la valeur FAUX)
+%\end{enumerate}  	
+
+S'il existe un un composant fortement connexe contenant un littéral et sa négation, la formule est insatisfiable,
+sinon, la formule est satisfiable, c'est-à-dire soit contingente soit valide.
+
+
+Clause insatisfiable : $(x_{1} \vee x_{1}) \wedge (\neg x_{1} \vee \neg x_{1})$
+
+\includegraphics[height=2in, width = 3in]{img/insatisfiable.png}
+
+%Losque l'on appiqua
+%On transforme la clause $(x_{1} \vee x_{1})$ en $(\neg x_{1} \Rightarrow x_{1})$ et en 
+%$(\neg x_{2} \Rightarrow x_{2})$. 
+
+Ce graphe contient un composant fortement connexe contenant un littéral et sa négation.
+La formule associée est, par conséquent, insatisfiable.
+
+Clause contingente :  $(x_{1} \vee x_{2}) \wedge (x_{3} \vee x_{4})$	
+
+\includegraphics[height=2in, width = 3in]{img/contingente.png}
+
+Ce graphe ne contient aucun composant fortement connexe contenant un littéral et sa négation.
+Selon ces informations, la formule ci-dessus pourrait être soit contingente soit valide.
+
+... ?? pourquoi contingente et non pas valide ??
+
+
+
+Clause valide :  $(x_{1} \vee \neg x_{1}) \wedge (x_{2} \vee \neg x_{2})$	
+
+\includegraphics[height=2in, width = 3in]{img/contingente.png}
+
+
 
 \begin{sousenonce}
-Vous expliciterez ensuite l'algorithme de transformation et vous évlauerez sa complexité.
+Vous expliciterez ensuite l'algorithme de transformation et vous évaluerez sa complexité.
 \end{sousenonce}
 
 
