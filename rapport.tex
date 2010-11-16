@@ -437,68 +437,95 @@ Il s'agit de prouver que 2-SAT est un problème polynomial. Vous avez un article
 Vous commencerez par fabriquer trois ensembles de deux clauses, le premier valide, le deuxième insatisfiable et le troisième contingent, et pour chacun de ces ensembles de clauses vous construirez le graphe correspondant. Vous expliquerez comment apparaît sur chacun des trois graphes la validité de l'ensemble de clauses corresponsdant.
 \end{sousenonce}
 
-Philippe Gambette, dans son article intitulé \begin{quote}Un graphe pour résoudre 2-SAT\end{quote}, donne une explication succincte de l'agorithme de Aspvall, Plass et Tarjan, un algorithme en temps polynomial.
+Philippe Gambette, dans son article intitulé \begin{quote}Un graphe pour résoudre 2-SAT\end{quote}, donne une explication succincte de l'agorithme de Aspvall, Plass et Tarjan.
 
-Une formule logique en forme normale conjonctive contenant des clauses à deux littéraux est transformé en un problème de graphe orienté. On doit tout d'abord établir s'il existe une valuation de la graphe en question et ensuite trouvé une solution où la formule en question soit vraie.
+Une formule logique en forme normale conjonctive contenant des clauses à deux littéraux est transformé en un problème de graphe orienté. On doit tout d'abord établir si la formule admet un modèle, et, et ensuite, si oui, donné un modèle quelconque.
 
-%\begin{enumerate}
-La construction du graphe : 
-%\begin{enumerate}
-On crée un graphe avec $2n$ sommets contenant tous les littéraux de la formule ainsi que sa négation.
-On prend chaque clause de la formule que l'on traduit en implication dans les deux sens : $(a \vee b)$ 
-devient, et $(\neg a \Rightarrow b)$, et $\neg b \Rightarrow a)$.
-On ajoute un arc correspondant aux deux implications dans le graphe, dans l'exemple de l'étape précédent,
-il s'agirait d'un arc de $\neg a$ à $b$ et un arc de $\neg b$ à $a$
-%\end{enumerate}
-On effectue un tri topologique en numérotant les sommets de $1$ à $n$.
-En ordre inverse, du sommet $n$ au sommet $1$, on affecte à tout noeud $a$ la valeur VRAI (et à $\neg a$ la valeur FAUX)
-%\end{enumerate}  	
+\begin{enumerate}
+\item L'algorithme de construction de graphe : 
+\begin{enumerate}
+\item On crée un graphe avec $2n$ sommets ($n$ étant ici le nombre littéraux distincts de la formule) contenant tous les littéraux de la formule ainsi que les négations de ces littéraux.
+\item On prend chaque clause de la formule que l'on traduit en implication dans les deux sens : $(a \vee b)$ 
+se transforme en deux clauses : $(\neg a \Rightarrow b)$ et $\neg b \Rightarrow a)$.
+\item On crée des arcs correspondant aux implications créées à l'étape précédent (arc $\neg a 
+\rightarrow b$ et $\neg b \rightarrow a$
+\end{enumerate}
+\item On effectue un tri topologique en numérotant les sommets de $1$ à $n$.
+\item En ordre inverse, du sommet $n$ au sommet $1$ du graphe, on affecte à tout noeud $a$ la valeur VRAI (et à $\neg a$ la valeur FAUX), c'est-à-dire dans l'ordre inverse du tri topologique.
+\end{enumerate}  	
 
-S'il existe un un composant fortement connexe contenant un littéral et sa négation, la formule est insatisfiable,
-sinon, la formule est satisfiable, c'est-à-dire soit contingente soit valide.
+S'il existe un composant fortement connexe contenant un littéral et sa négation, la formule est insatisfiable étant donné qu'on a $x_{i} \Leftrightarrow \neg £x_{i}$ sinon, la formule est satisfiable, c'est-à-dire soit contingente soit valide. L'algorithme ne nous donne aucune information pour distinguer une formule contingente et une formule valide, il nous donne une ou deux informations : (1) il nous dit si la formule admet un modèle, et (2) si oui, il nous donne un modèle. Le modèle est assuré car le graphe en question ne contient aucun arc $VRAI \rightarrow FAUX$.
 
+Prenons trois exemples, une formule insatisfiable, une formule contingente et une formule valide.
 
 Clause insatisfiable : $(x_{1} \vee x_{1}) \wedge (\neg x_{1} \vee \neg x_{1})$
 
 \includegraphics[height=2in, width = 3in]{img/insatisfiable.png}
 
-%Losque l'on appiqua
-%On transforme la clause $(x_{1} \vee x_{1})$ en $(\neg x_{1} \Rightarrow x_{1})$ et en 
-%$(\neg x_{2} \Rightarrow x_{2})$. 
+Le résultat de l'application de l'algorithme décrit ci-dessus est un graphe orienté cyclique. Il est impossible d'effectuer un tri topologique étant donné qu'un tri topologique ne peut être effectuer que sur un graphe acyclique orienté. Ce graphe contient un composant fortement connexe contenant un littéral et sa négation, et la formule associée est, par conséquent, insatisfiable. Il est impossible d'attribuer un ordre aux sommets pour ensuite affecter des valeurs aux littéraux correspondant aux sommets car la formule admet aucun modèle. Pour cette raison, les arcs de ce graphe n'ont pas été numérotés ni affecté des valeurs $VRAI$ ou $FAUX$. En somme, l'algorithme nous dit simplement que ce graphe n'admet aucun modèle.  
 
-Ce graphe contient un composant fortement connexe contenant un littéral et sa négation.
-La formule associée est, par conséquent, insatisfiable.
 
 Clause contingente :  $(x_{1} \vee x_{2}) \wedge (x_{3} \vee x_{4})$	
 
 \includegraphics[height=2in, width = 3in]{img/contingente.png}
 
-Ce graphe ne contient aucun composant fortement connexe contenant un littéral et sa négation.
-Selon ces informations, la formule ci-dessus pourrait être soit contingente soit valide.
-
-... ?? pourquoi contingente et non pas valide ??
-
+Ce graphe ne contient aucun composant fortement connexe contenant un littéral et sa négation, donc la formule associée admet bien un modèle. Ce modèle est le résultat du tri topologique effectué et les valeurs $VRAI$ et $FAUX$ affectées par notre algorithme. Il existe aucun arc qui part d'un sommet étiqueté $VRAI$ vers un sommet étiqueté $FAUX$ et, en effet, les valeurs attribuées aux arcs donnent bien un modèle. 
 
 
 Clause valide :  $(x_{1} \vee \neg x_{1}) \wedge (x_{2} \vee \neg x_{2})$	
 
-\includegraphics[height=2in, width = 3in]{img/contingente.png}
+\includegraphics[height=2in, width = 3in]{img/valide.png}
 
+L'application de l'algorithme de transformation en graphe d'une formule valide nous donne un graphe ne contenant que des boucles à chaque sommet. Nous pouvons donc numéroter les arcs de n'importe quel façon. Ce étant, nous pouvous aussi effectuer n'importe quelles valeurs aux sommets (hormis la même valeur à un littéral et sa négation, bien entendu) et la formule sera toujours vrai. 
 
+L'objectif de cet algorithme n'est pas de dire si une formule satisfiable est contingente ou valide. Toutefois, si le résultat de l'algorithme est un graphe ne comportant que des boucles à chaque sommet, la formule associée est satisfiable et valide. Autrement, et si le graphe ne contient aucun composant fortement connexe contenant un littéral et sa négation, la formule est contingente.
 
 \begin{sousenonce}
 Vous expliciterez ensuite l'algorithme de transformation et vous évaluerez sa complexité.
 \end{sousenonce}
 
+Tout d'abord, il faut transformer une formule en forme normale conjonctive en une série d'implications. Cela ce fait en temps linéaire, en $O(n)$. Ensuite, il faut créer le graphe associé -- numérotation et attribution des valeurs $VRAI$ et $FAUX$, ce qui se fait également en 0(n). 
+
+
+CORMEN:
+
+We can perform a topological sort in time , since depth-first search takes $\theta(V + E)$
+time and it takes O(1) time to insert each of the |V| vertices onto the front of the linked list.
+
+
+Our algorithm for finding strongly connected components of a graph G = (V, E) uses the
+transpose of G, which is defined in Exercise 22.1-3 to be the graph GT = (V, ET), where ET =
+{(u, v) : (v, u) E}. That is, ET consists of the edges of G with their directions reversed. Given
+an adjacency-list representation of G, the time to create GT is O(V + E). It is interesting to
+observe that G and GT have exactly the same strongly connected components: u and v are
+reachable from each other in G if and only if they are reachable from each other in GT. Figure
+22.9(b) shows the transpose of the graph in Figure 22.9(a), with the strongly connected
+components shaded.
+The following linear-time (i.e., $\theta(V + E)$-time) algorithm computes the strongly connected
+components of a directed graph G = (V, E) using two depth-first searches, one on G and one
+on GT.
+STRONGLY-CONNECTED-COMPONENTS (G)
+1 call DFS (G) to compute finishing times f[u] for each vertex u
+2 compute GT
+3 call DFS (GT), but in the main loop of DFS, consider the vertices
+in order of decreasing f[u] (as computed in line 1)
+4 output the vertices of each tree in the depth-first forest formed in
+line 3 as a
+separate strongly connected component
 
 \begin{sousenonce}
 Vous expliciterez ensuite l'algorithme d'exploration du graphe et vous évaluerez sa complexité {\it en fonction de la taille de l'ensemble de clauses initial}.
 \end{sousenonce}
 
+Le tri topologique se fait $en \theta(V + E)$ en faisant un parcours en profondeur. Etablir s'il existe un composant connexe (sans prendre en compte, pour l'instant, si ce composant contient un sommet ainsi que sa négation) se fait en $O(V + E)$. Etablir s'il existe un littéral et sa négation se fait en temps linéaire $O(n)$. 
+
+Tout l'algorithme se fait donc en temps linéaire, en $theta(V + E)$
 
 \begin{sousenonce}
 Enfin, vous justifierez l'équivalence de la réponse au problème 2-SAT et au problème qui est posé dans le graphe.
 \end{sousenonce}
+
+Help Georges !!
 
 
 \subsection{Partie Calculabilité}
