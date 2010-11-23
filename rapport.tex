@@ -5,10 +5,12 @@
 \usepackage[frenchb]{babel}
 \usepackage{tikz}
 \usepackage{amsmath}
-\usetikzlibrary{chains,positioning,matrix}
+\usepackage{amssymb}
+\usetikzlibrary{chains,positioning,matrix,arrows}
 
-
-
+\title{Rapport de projet : FMIN105\\ Cours algorithmique / complexité / calculabilité}
+\author{\textsc{Bonavero} Yoann \\ \textsc{Brun} Bertrand \\ \textsc{Charron} John \\ \textsc{Dupéron} Georges}
+\date{}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{2ex}
@@ -44,9 +46,6 @@
 
 
 \begin{document}
-\title{Rapport de projet : FMIN105 -- Cours algorithmique/complexité/calculabilité}
-\author{Bertrand BRUN \\ Yohann \\ John CHARRON \\ Georges DUPERON}
-\date
 \maketitle
 
 \tableofcontents
@@ -59,8 +58,8 @@ Vos résultats seront présentés en procédant à la rédaction d'un mémoire d
 \section{Partie théorique}
 \subsection{Partie algorithmique}
 
-\subsubsection*{Exercice \stepcounter{exocount}\bf\small \arabic{exocount} -- Modélisation et résolution d'un problème d'ordonnancement par un problème de flot maximum : ordonnancement avec coûté dépendants des dates de début}
-\addcontentsline{toc}{section}{Exercice \arabic{exocount} -- Modélisation et résolution d'un problème d'ordonnancement par un problème de flot maximum : ordonnancement avec coûté dépendants des dates de début}
+\subsubsection*{Exercice \stepcounter{exocount}\bf\small \arabic{exocount} -- Modélisation et résolution d'un problème d'ordonnancement par un problème de flot maximum : ordonnancement avec coûts dépendants des dates de début}
+\addcontentsline{toc}{section}{Exercice \arabic{exocount} -- Modélisation et résolution d'un problème d'ordonnancement par un problème de flot maximum : ordonnancement avec coûts dépendants des dates de début}
 
 
 
@@ -98,7 +97,7 @@ $E = \{(1,2), (1,3), (3,2)\}$ et les coûts suivants :
 
 \begin{figure}[h!]
   \centering
-  \colorlet{affectation}{green!50!black}
+  \colorlet{affectation}{green!75!black}
   \colorlet{auxiliaire}{black}
   \colorlet{précédence}{blue}
   \begin{tikzpicture}[
@@ -193,7 +192,7 @@ Montrer qu'il existe une coupe dans G* de capacité minimale de laquelle sort un
 
 Démonstration par construction~: 
 On effectue un tri topologique sur le graphe des contraintes de précédence $G(\{J_1, \dots, J_n\}, E)$. Ce tri topologique nous donne un ensemble ordonné de n\oe uds $(J_{a1}, \dots, J_{an})$. On a donc~:
-$$\forall J_{ai} \quad \not\exists \ j < i \quad | \quad \exists (J_{aj}, J_{ai}) \in E$$
+$$\forall J_{ai} \quad \nexists \ j < i \quad | \quad \exists (J_{aj}, J_{ai}) \in E$$
 On transforme ensuite $G$ en un graphe de flots à l'aide de l'algorithme fourni dans le sujet. 
 Considérons les arcs entre les $v_{ai,t}$~: 
 \begin{itemize}
@@ -458,23 +457,135 @@ S'il existe un composant fortement connexe contenant un littéral et sa négatio
 
 Prenons trois exemples, une formule insatisfiable, une formule contingente et une formule valide.
 
-Clause insatisfiable : $(x_{1} \vee x_{1}) \wedge (\neg x_{1} \vee \neg x_{1})$
+Clause insatisfiable : $(x_{1} \vee x_{1}) \wedge (\neg x_{1} \vee \neg x_{1})$ (figure \ref{fig:clause-insat}).
 
-\includegraphics[height=2in, width = 3in]{img/insatisfiable.png}
+\begin{figure}[h!]
+  \centering
+  \begin{tikzpicture}[node distance=1.5cm]
+    \node (nx1) {$\lnot x_1$} ;
+    \node[below of=nx1] (x1) {$x_1$} ;
+    \node[coordinate,xshift=0.1cm] (x1r) at (x1.north) {};
+    \node[coordinate,xshift=-0.1cm] (x1l) at (x1.north) {};
+    \node[coordinate,xshift=0.1cm] (nx1r) at (nx1.south) {};
+    \node[coordinate,xshift=-0.1cm] (nx1l) at (nx1.south) {};
+    \draw[->] (x1r) -- (nx1r);
+    \draw[->] (nx1l) -- (x1l);
+    \path
+      (x1) edge[loop below] (x1)
+      (nx1) edge[loop above] (nx1) ;
+  \end{tikzpicture}
+  \caption{Clause insatisfiable : $(x_{1} \vee x_{1}) \wedge (\neg x_{1} \vee \neg x_{1})$}
+  \label{fig:clause-insat}
+\end{figure}
 
-Le résultat de l'application de l'algorithme décrit ci-dessus est un graphe orienté cyclique. Il est impossible d'effectuer un tri topologique étant donné qu'un tri topologique ne peut être effectuer que sur un graphe acyclique orienté. Ce graphe contient un composant fortement connexe contenant un littéral et sa négation, et la formule associée est, par conséquent, insatisfiable. Il est impossible d'attribuer un ordre aux sommets pour ensuite affecter des valeurs aux littéraux correspondant aux sommets car la formule admet aucun modèle. Pour cette raison, les arcs de ce graphe n'ont pas été numérotés ni affecté des valeurs $VRAI$ ou $FAUX$. En somme, l'algorithme nous dit simplement que ce graphe n'admet aucun modèle.  
+Le résultat de l'application de l'algorithme décrit ci-dessus est un graphe orienté cyclique. Il est impossible d'effectuer un tri topologique étant donné qu'un tri topologique ne peut être effectuer que sur un graphe acyclique orienté. Ce graphe contient un composant fortement connexe contenant un littéral et sa négation, et la formule associée est, par conséquent, insatisfiable. Il est impossible d'attribuer un ordre aux sommets pour ensuite affecter des valeurs aux littéraux correspondant aux sommets car la formule admet aucun modèle. Pour cette raison, les arcs de ce graphe n'ont pas été numérotés ni affecté des valeurs $VRAI$ ou $FAUX$. En somme, l'algorithme nous dit simplement que ce graphe n'admet aucun modèle.
 
+Clause contingente : $(x_{1} \vee x_{2}) \wedge (x_{3} \vee x_{4})$	(figure \ref{fig:clause-conting}).
 
-Clause contingente :  $(x_{1} \vee x_{2}) \wedge (x_{3} \vee x_{4})$	
+\begin{figure}[h!]
+  \centering
+  \begin{tikzpicture}[
+      start chain=circle placed {at=(\tikzchaincount*-45+22.5+90:2.5)},
+      lettre/.style={
+        on chain,
+        draw,
+        circle,
+        minimum size=1cm
+      },
+      chiffre/.style={
+        node distance = 0.75cm
+      },
+      arr/.style={
+        ->,
+        >=triangle 90
+      }
+    ]
+    \node[lettre] (1) {$\lnot x1$} ;
+    \node[lettre] (5) {$x2$} ;
+    \node[lettre] (3) {$\lnot x2$} ;
+    \node[lettre] (6) {$x3$} ;
+    \node[lettre] (4) {$\lnot x3$} ;
+    \node[lettre] (7) {$x4$} ;
+    \node[lettre] (2) {$\lnot x4$} ;
+    \node[lettre] (8) {$x1$} ;
+    
+    \node[right of=1] {\textcolor{red}{faux}} ;
+    \node[right of=5] {\textcolor{green!75!black}{vrai}} ;
+    \node[right of=3] {\textcolor{red}{faux}} ;
+    \node[right of=6] {\textcolor{green!75!black}{vrai}} ;
+    \node[left  of=4] {\textcolor{red}{faux}} ;
+    \node[left  of=7] {\textcolor{green!75!black}{vrai}} ;
+    \node[left  of=2] {\textcolor{red}{faux}} ;
+    \node[left  of=8] {\textcolor{green!75!black}{vrai}} ;
+    
+    \node[chiffre, above right of=1] {1} ;
+    \node[chiffre, above right of=5] {5} ;
+    \node[chiffre, below right of=3] {3} ;
+    \node[chiffre, below right of=6] {6} ;
+    \node[chiffre, below left of=4]  {4} ;
+    \node[chiffre, below left of=7]  {7} ;
+    \node[chiffre, above left of=2]  {2} ;
+    \node[chiffre, above left of=8]  {8} ;
 
-\includegraphics[height=2in, width = 3in]{img/contingente.png}
+    \draw[arr] (1) -- (5) ;
+    \draw[arr] (3) -- (8) ;
+    \draw[arr] (2) -- (6) ;
+    \draw[arr] (4) -- (7) ;
+  \end{tikzpicture}
+  \caption{Clause contingente : $(x_{1} \vee x_{2}) \wedge (x_{3} \vee x_{4})$}
+  \label{fig:clause-conting}
+\end{figure}
+
+% \includegraphics[height=2in, width = 3in]{img/contingente.png}
 
 Ce graphe ne contient aucun composant fortement connexe contenant un littéral et sa négation, donc la formule associée admet bien un modèle. Ce modèle est le résultat du tri topologique effectué et les valeurs $VRAI$ et $FAUX$ affectées par notre algorithme. Il existe aucun arc qui part d'un sommet étiqueté $VRAI$ vers un sommet étiqueté $FAUX$ et, en effet, les valeurs attribuées aux arcs donnent bien un modèle. 
 
+Clause valide :  $(x_{1} \vee \neg x_{1}) \wedge (x_{2} \vee \neg x_{2})$ (figure \ref{fig:clause-valide})
 
-Clause valide :  $(x_{1} \vee \neg x_{1}) \wedge (x_{2} \vee \neg x_{2})$	
+\begin{figure}[h!]
+  \centering
+  \begin{tikzpicture}[
+      start chain=circle placed {at=(\tikzchaincount*-90+180:1.6)},
+      lettre/.style={
+        on chain,
+        draw,
+        circle,
+        minimum size=1cm
+      },
+      chiffre/.style={
+        node distance = 0.75cm
+      },
+      arr/.style={
+        ->,
+        >=triangle 90
+      }
+    ]
+    \node[lettre] (1) {$\lnot x1$} ;
+    \node[lettre] (2) {$\lnot x4$} ;
+    \node[lettre] (3) {$\lnot x2$} ;
+    \node[lettre] (4) {$\lnot x3$} ;
+    
+    \node[right of=1] {\textcolor{green!75!black}{vrai}} ;
+    \node[right of=2] {\textcolor{red}{faux}} ;
+    \node[right of=3] {\textcolor{green!75!black}{vrai}} ;
+    \node[left  of=4] {\textcolor{red}{faux}} ;
+    
+    \node[chiffre, above right of=1] {1} ;
+    \node[chiffre, below right of=2] {2} ;
+    \node[chiffre, below right of=3]  {3} ;
+    \node[chiffre, below left of=4]  {4} ;
 
-\includegraphics[height=2in, width = 3in]{img/valide.png}
+	\path
+       (1) edge[loop above] (1)
+       (2) edge[loop above]  (2)
+       (3) edge[loop below] (3)
+       (4) edge[loop above] (4) ;
+  \end{tikzpicture}
+  \caption{Clause valide :  $(x_{1} \vee \neg x_{1}) \wedge (x_{2} \vee \neg x_{2})$}
+  \label{fig:clause-valide}
+\end{figure}
+
+% \includegraphics[height=2in, width = 3in]{img/valide.png}
 
 L'application de l'algorithme de transformation en graphe d'une formule valide nous donne un graphe ne contenant que des boucles à chaque sommet. Nous pouvons donc numéroter les arcs de n'importe quel façon. Ce étant, nous pouvous aussi effectuer n'importe quelles valeurs aux sommets (hormis la même valeur à un littéral et sa négation, bien entendu) et la formule sera toujours vrai. 
 
