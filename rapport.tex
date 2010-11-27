@@ -5,7 +5,7 @@
 \usepackage[frenchb]{babel}
 \usepackage{tikz}
 \usepackage{amsmath}
-\usetikzlibrary{chains,positioning,matrix}
+\usetikzlibrary{chains,positioning,matrix,arrows,decorations,calc}
 
 
 
@@ -511,18 +511,289 @@ Enfin, vous justifierez l'équivalence de la réponse au problème 2-SAT et au p
 Comment énumérer les couples d'entiers ?
 \end{enonce}
 
+\begin{figure}[h!]
+  \centering
+  \begin{tikzpicture}[
+      dot/.style = {
+        circle,
+        fill=black,
+        inner sep=0.5pt
+      },
+      arc/.style = {
+        ->,
+        >=stealth
+      }
+    ]
+    \foreach \xpos in {0, ..., 4} {
+      \foreach \ypos in {0, ..., 4} {
+        \node[dot] at (\xpos,-\ypos) {};
+      }
+    }
+    
+    \draw[arc] (0,-0) -- (1,-0);
+    
+    \draw[arc] (1,-0) -- (0,-1);
+    \draw[arc] (0,-1) -- (0,-2);
+    
+    \draw[arc] (0,-2) -- (1,-1);
+    \draw[arc] (1,-1) -- (2,-0);
+    \draw[arc] (2,-0) -- (3,-0);
+    
+    \draw[arc] (3,-0) -- (2,-1);
+    \draw[arc] (2,-1) -- (1,-2);
+    \draw[arc] (1,-2) -- (0,-3);
+    \draw[arc] (0,-3) -- (0,-4);
+    
+    \draw[arc] (0,-4) -- (1,-3);
+    \draw[arc,dashed] (1,-3) -- (2,-2);
+  \end{tikzpicture}
+  \caption{Graphe G}
+  \label{fig:codage-zigzag}
+\end{figure}
 
 \begin{enonce}
 Donner les fonctions de codage et de décodage f1(z)->x et f2(z)->y.
 \end{enonce}
 
+% TODO : John
+
 \begin{enonce}
 Montrer que l'on peut coder les triplets. Généraliser aux k-uplets, puis aux listes de longueurs quelconques.
 \end{enonce}
 
+Pour coder un triplet $(x_1, x_2, x_3)$, on code d'abord le couple $(x_1, x_2)$, puis, soit $x^*$ le résultat intermédiaire, on code le couple $(x^*, x_3)$.
+
+\begin{figure}[h!]
+  \centering
+  \begin{tikzpicture}
+    \node (x11) {$x_1$};
+    \node[right of=x11] (x21) {$x_2$};
+    \node[right of=x21] (x31) {$x_3$};
+    \node[coordinate] (xmark) at ($ .5*(x11) + .5*(x21) $) {};
+    \node[below of=xmark] (x*2) {$x^*$};
+    \node[coordinate] (xmark2) at ($ .5*(xmark) + .5*(x*2) $) {};
+    
+    \node[anchor=base] (x32) at (x*2.base -| x31) {$x_3$};
+    
+    \node[coordinate] (xmark4) at ($ .5*(x*2) + .5*(x32) $) {};
+    \node[below of=xmark4] (x*3) {résultat};
+    \node[coordinate] (xmark5) at ($ .5*(xmark4) + .5*(x*3) $) {};
+    
+    \draw (x11) -- (xmark2);
+    \draw[->] (x21) -- (xmark2) -- (x*2);
+    \draw[->] (x31) -- (x32 |- x*2.north);
+    \draw (x*2) -- (xmark5);
+    \draw[->] (x32) -- (xmark5) -- (x*3);
+  \end{tikzpicture}
+  \caption{Graphe G}
+  \label{fig:codage-couple}
+\end{figure}
+
+Le décodage suit tout simplement le chemin inverse (on décode ne nombre en $(x^*, x_3)$, puis on décode $x^*$ en $(x_1, x_2)$ et on recompose en $(x_1, x_2, x_3)$.
+
+La généralisation aux k-uplets suit le même principe : On code les deux premiers nombres de la paire en nommant le résultat $x^*$, puis, on
+code successivement chaque paire $(x^*, x_i)$, avec $x_i$ qui vaut successivement chaque élément du k-uplet, et $x^*$ qui vaut à chaque fois
+le résultat précédent.
+
+Le décodage d'un k-uplet de longueur k décodera le nombre en une paire $(x^*, x_i)$ $k-1$ fois, et la dernière paire ainsi générée sera
+$(x_1, x_2)$. Il suffira alors de recomposer le k-uplet à partir de $x_1$, $x_2$ et tous les $x_i$.
+
+Le codage et le décodage d'un singleton sont triviaux : $(x_1) \leftrightarrow x_1$.
+
+Pour les listes de longueur quelconque, le problème est de savoir combien de fois faudra-t-il décoder le résultat. En effet, $(0)$, $(0,0)$
+et $(0,0,0)$ ont le même code, $0$, donc il n'y a plus de bijection entre la liste et les entiers naturels, donc ambigüité lors du décodage.
+
+Étant donné que pour un k donné, il y a une bijection entre les k-uplets et les entiers naturels, il nous suffit d'ajouter une information
+permettant de déterminer de manière unique la valeur de k. On code donc d'abbord le k-uplet correspondant à la liste, en nommant le résultat
+$x^*$, puis on code le couple $(x^*, k)$. Au décodage, on décodera le nombre pour obtenir $x^*$ et $k$, et on décodera $x^*$ avec la méthode
+de décodage des k-uplets donnés ci-dessus.
+
+Reste un dernier problème, celui de pouvoir encoder des listes d'entiers relatifs (et non pas juste des entiers naturels). Pour cela, on
+fera une transformation préalable sur chaque élément des k-uplets :
+
+Soit $n$ le $i$-ième élément du k-uplet, si $n$ est positif, on le transforme en le $n$-ième nombre pair, sinon, il est strictement négatif et on le transforme en le $|n|-1$ ième nombre impair. Ainsi, $0 \mapsto 0$, $1 \mapsto 2$, $2 \mapsto 4$, $-1 \mapsto 1$, $-2 \mapsto 3$, \dots
+
+\begin{equation}
+  \begin{array}{r l}
+    \mathrm{transformation} : Z & \longrightarrow N \\
+    n & \mapsto
+    \left \{
+      \begin{array}{r l}
+        2n       & \text{si $n$ est pair} \\
+        2(|n|-1) & \text{si $n$ est impair}
+      \end{array}
+    \right .
+  \end{array}
+\end{equation}
+
+Le codage d'une liste d'entiers relatifs peut donc être résumé par la figure \ref{fig:codage-all}
+
+\begin{figure}[h!]
+  \centering
+  \begin{tikzpicture}[
+    level distance=0.7cm,
+    circle,
+    inner sep=0.1pt,
+    ]
+    \node[rectangle, inner sep=1pt] (res) {$\text{résultat}$} [grow=up]
+    child[draw=red] {
+      node[coordinate] (catch-k) {} edge from parent[<-]
+    }
+    child {
+      node {x*}
+      child {
+        child {
+          child {
+            child {
+              child {
+                child {
+                  node (xk) {$x_{\phantom{k}}$}
+                  % node[anchor=base] at (xk.base) {$\vphantom{x}_{k}$}
+                  % node[anchor=east] at (xk.east) {$\hphantom{x}_{k}$}
+                  node[anchor=base] (get-k-v) at (xk.base) {$\vphantom{x}_{\phantom{k}}$}
+                  node[anchor=east] (get-k-h) at (xk.east) {$\hphantom{x}_{\phantom{k}}$}
+                  node[coordinate] (get-k-se) at (get-k-v.south -| get-k-h.east) {}
+                  node[coordinate] (get-k-nw) at (get-k-v.north -| get-k-h.west) {}
+                  node[anchor=base east, draw=red, inner sep=0.15pt] (the-k)
+                  at (get-k-v.base -| get-k-h.east) {$\vphantom{.}_{k}$}
+                }
+              }
+            }
+          }
+        } edge from parent[<-]
+      }
+      child {
+        node {x*}
+        child {
+          child {
+            child {
+              child {
+                child {node {...} edge from parent[dashed]}
+                edge from parent[dashed]
+              }
+              edge from parent[dashed]
+            }
+            edge from parent[dashed]
+          }
+          edge from parent[dashed,<-]
+        }
+        child {
+          node{x*}
+          child {
+            child {
+              child {
+                child {node {$x_5$}}
+              }
+            } edge from parent[<-]
+          }
+          child {
+            node{x*}
+            child {
+              child {
+                child {node {$x_4$}}
+              } edge from parent[<-]
+            }
+            child {
+              node{x*}
+              child {
+                child {node {$x_3$}} edge from parent[<-]
+              }
+              child {
+                node{x*} [sibling distance=7.5mm] edge from parent[<-]
+                child {node {$x_2$} edge from parent[<-]}
+                child {node {$x_1$} edge from parent[<-]}
+                child[missing] {}
+              } edge from parent[<-]
+            } edge from parent[<-]
+          } edge from parent[<-]
+        } edge from parent[<-]
+      } edge from parent[<-]
+    };
+    
+    \draw[red] (the-k) -| (catch-k);
+    
+    \node[xshift=0cm, anchor=base west] at (res.base east) {$\vphantom{\text{résultat}} = \operatorname{code}(x^*,k)$};
+    
+    % \node (e11) {$x_1$}; 
+    % \node[right of=e11] (e21) {$x_2$};
+    % \node[right of=e21] (e31) {$x_3$};
+    % \node[right of=e31] (e41) {$x_4$};
+    % \node[right of=e41] (e51) {$x_5$};
+    % \node[right of=e51] (ed1) {\dots};
+    % \node[right of=ed1] (ek1) {$x_k$};
+
+
+    % \matrix[column sep=2mm, row sep=7mm]{
+    %   \node (e11) {$x_1$}; & \node[coordinate] (o11) {}; &
+    %   \node (e21) {$x_2$}; & \node[coordinate] (o21) {}; &
+    %   \node (e31) {$x_3$}; & \node[coordinate] (o31) {}; &
+    %   \node (e41) {$x_4$}; & \node[coordinate] (o41) {}; &
+    %   \node (e51) {$x_5$}; & \node[coordinate] (o51) {}; &
+    %   \node (ed1) {\dots}; & \node[coordinate] (o61) {}; &
+    %   \node (ek1) {$x_k$}; & \node[coordinate] (o71) {}; \\
+      
+    %   \node[coordinate] (e12) {}; & \node (o11) {$x^*$}; &
+    %   \node (e22) {$x_2$}; & \node[coordinate] (o22) {}; &
+    %   \node (e32) {$x_3$}; & \node[coordinate] (o32) {}; &
+    %   \node (e42) {$x_4$}; & \node[coordinate] (o42) {}; &
+    %   \node (e52) {$x_5$}; & \node[coordinate] (o52) {}; &
+    %   \node (ed2) {\dots}; & \node[coordinate] (o62) {}; &
+    %   \node (ek2) {$x_k$}; & \node[coordinate] (o72) {}; \\
+      
+    %   \node[coordinate] (e12) {}; & \node[coordinate] (o12) {}; &
+    %   \node[coordinate] (e22) {}; & \node (o22) {$x^*$}; & 
+    %   \node (e32) {$x_3$}; & \node[coordinate] (o32) {}; &
+    %   \node (e42) {$x_4$}; & \node[coordinate] (o42) {}; &
+    %   \node (e52) {$x_5$}; & \node[coordinate] (o52) {}; &
+    %   \node (ed2) {\dots}; & \node[coordinate] (o62) {}; &
+    %   \node (ek2) {$x_k$}; & \node[coordinate] (o72) {}; \\
+      
+    %   \node[coordinate] (e12) {}; & \node[coordinate] (o12) {}; &
+    %   \node[coordinate] (e22) {}; & \node[coordinate] (o22) {}; & 
+    %   \node[coordinate] (e32) {}; & \node (o32) {$x^*$}; &
+    %   \node (e42) {$x_4$}; & \node[coordinate] (o42) {}; &
+    %   \node (e52) {$x_5$}; & \node[coordinate] (o52) {}; &
+    %   \node (ed2) {\dots}; & \node[coordinate] (o62) {}; &
+    %   \node (ek2) {$x_k$}; & \node[coordinate] (o72) {}; \\
+      
+    %   \node[coordinate] (e12) {}; & \node[coordinate] (o12) {}; &
+    %   \node[coordinate] (e22) {}; & \node[coordinate] (o22) {}; & 
+    %   \node[coordinate] (e32) {}; & \node[coordinate] (o32) {}; &
+    %   \node[coordinate] (e42) {}; & \node (o42) {$x^*$}; &
+    %   \node (e52) {$x_5$}; & \node[coordinate] (o52) {}; &
+    %   \node (ed2) {\dots}; & \node[coordinate] (o62) {}; &
+    %   \node (ek2) {$x_k$}; & \node[coordinate] (o72) {}; \\
+    % };
+    
+    % \node[coordinate] (x11-21) at ($ .5*(x11) + .5*(x21) $) {};
+    % \node[coordinate] (x21-31) at ($ .5*(x11) + .5*(x21) $) {};
+    % \node[coordinate] (x31-41) at ($ .5*(x11) + .5*(x21) $) {};
+    % \node[coordinate] (x41-51) at ($ .5*(x11) + .5*(x21) $) {};
+    % \node[coordinate] (x51-d1) at ($ .5*(x11) + .5*(x21) $) {};
+    % \node[coordinate] (xd1-k1) at ($ .5*(x11) + .5*(x21) $) {};
+    
+    % \node[below of=xmark] (x*2) {$x^*$};
+    % \node[coordinate] (xmark2) at ($ .5*(xmark) + .5*(x*2) $) {};
+    
+    % \node[anchor=base] (x32) at (x*2.base -| x31) {$x_3$};
+    
+    % \node[coordinate] (xmark4) at ($ .5*(x*2) + .5*(x32) $) {};
+    % \node[below of=xmark4] (x*3) {résultat};
+    % \node[coordinate] (xmark5) at ($ .5*(xmark4) + .5*(x*3) $) {};
+    
+    % \draw (x11) -- (xmark2);
+    % \draw[->] (x21) -- (xmark2) -- (x*2);
+    % \draw[->] (x31) -- (x32 |- x*2.north);
+    % \draw (x*2) -- (xmark5);
+    % \draw[->] (x32) -- (xmark5) -- (x*3);
+  \end{tikzpicture}
+  \caption{Graphe G}
+  \label{fig:codage-all}
+\end{figure}
 
 \begin{enonce}
-Peut-on énumérer les fonctions C syntaxiquements correctes ? Et les fonctions C qui ne bouclent jamais ? Justifier vos réponses le plus clairement et le plus synthétiquement possible.
+  Peut-on énumérer les fonctions C syntaxiquements correctes ? Et les fonctions C qui ne bouclent jamais ? Justifier vos réponses le plus
+  clairement et le plus synthétiquement possible.
 \end{enonce}
 
 
