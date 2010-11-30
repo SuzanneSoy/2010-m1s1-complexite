@@ -461,9 +461,16 @@ Clause insatisfiable : $(x_{1} \vee x_{1}) \wedge (\neg x_{1} \vee \neg x_{1})$ 
 
 \begin{figure}[h!]
   \centering
-  \begin{tikzpicture}[node distance=1.5cm]
-    \node (nx1) {$\lnot x_1$} ;
-    \node[below of=nx1] (x1) {$x_1$} ;
+  \begin{tikzpicture}[
+      node distance=2.5cm,
+      lettre/.style={
+        draw,
+        circle,
+        minimum size=1cm
+      }
+    ]
+    \node[lettre] (nx1) {$\lnot x_1$} ;
+    \node[lettre, below of=nx1] (x1) {$x_1$} ;
     \node[coordinate,xshift=0.1cm] (x1r) at (x1.north) {};
     \node[coordinate,xshift=-0.1cm] (x1l) at (x1.north) {};
     \node[coordinate,xshift=0.1cm] (nx1r) at (nx1.south) {};
