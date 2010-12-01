@@ -5,6 +5,7 @@
 \usepackage[frenchb]{babel}
 \usepackage{tikz}
 \usepackage{amsmath}
+\usepackage{listings}
 %<<<<<<< HEAD
 \usepackage{amssymb}
 \usetikzlibrary{chains,positioning,matrix,arrows}
@@ -422,7 +423,7 @@ Un exemple simple est de passer de la multiplication à la quadrature. Supposons
 $$(a \times b) = \dfrac{(a + b)^2 - a^2 - b^2}{2}$$
 
 
-Lorsqu'il est possible de réduire un problème difficile en un problème que l'on sait résoudre, la difficulté demeure dans la réduction elle-même.
+Lorsqu'il est possible de réduire un problème difficile en un problème que l'on sait résoudre, la difficulté demeure souvent dans la réduction elle-même.
 
 
 \begin{sousenonce}
@@ -457,19 +458,19 @@ Philippe Gambette, dans son article intitulé 'Un graphe pour résoudre 2-SAT', 
 Une formule logique en forme normale conjonctive contenant des clauses à deux littéraux est transformé en un problème de graphe orienté. On doit tout d'abord établir si la formule admet un modèle, et ensuite, si tel est le cas, donner un modèle quelconque.
 
 \begin{enumerate}
-\item L'algorithme de construction de graphe : 
+\item L'algorithme du construction de graphe : 
 \begin{enumerate}
 \item On crée un graphe avec $2n$ sommets ($n$ étant ici le nombre littéraux distincts de la formule) contenant tous les littéraux de la formule ainsi que les négations de ces littéraux.
 \item On prend chaque clause de la formule que l'on traduit en implications dans les deux sens : $(a \vee b)$ 
-se transforme en deux clauses : $(\neg a \Rightarrow b)$ et $\neg b \Rightarrow a)$.
-\item On crée des arcs correspondant aux implications créées à l'étape précédent (arc $\neg a 
-\rightarrow b$ et $\neg b \rightarrow a$
+se transforme en deux clauses : $(\neg a \Rightarrow b)$ et ($\neg b \Rightarrow a)$.
+\item On crée des arcs correspondant aux implications créées à l'étape précédente (arc ($\neg a 
+\rightarrow b$) et ($\neg b \rightarrow a$))
 \end{enumerate}
 \item On effectue un tri topologique en numérotant les sommets de $1$ à $n$.
-\item En ordre inverse, du sommet $n$ au sommet $1$ du graphe, on affecte à tout noeud $a$ la valeur VRAI (et à $\neg a$ la valeur FAUX), c'est-à-dire dans l'ordre inverse du tri topologique.
+\item En ordre inverse, du sommet $n$ au sommet $1$ du graphe, on affecte à tout noeud $x$ la valeur VRAI et au noeud $\neg x$ la valeur FAUX, c'est-à-dire dans l'ordre inverse du tri topologique.
 \end{enumerate}  	
 
-S'il existe un composant fortement connexe contenant un littéral et sa négation, la formule est insatisfiable étant donné qu'on a $x_{i} \Leftrightarrow \neg £x_{i}$ sinon, la formule est satisfiable, c'est-à-dire soit contingente soit valide. L'algorithme ne nous donne aucune information pour distinguer une formule contingente et une formule valide, il nous donne une ou deux informations : (1) il nous dit si la formule admet un modèle, et (2) si oui, il nous donne un modèle~: le modèle est assuré car le graphe en question ne contient aucun arc $VRAI \rightarrow FAUX$.
+S'il existe une composante fortement connexe contenant un littéral et sa négation, la formule est insatisfiable étant donné qu'on a $x_{i} \Leftrightarrow \neg £x_{i}$ sinon, la formule est satisfiable, c'est-à-dire soit contingente soit valide. L'algorithme ne nous donne aucune information pour distinguer une formule contingente et une formule valide, il nous donne une ou deux informations : (1) il nous dit si la formule admet un modèle, et (2) si oui, il nous donne un modèle~: le modèle est assuré car le graphe en question ne contient aucun arc $VRAI \rightarrow FAUX$.
 
 Prenons trois exemples~: une formule insatisfiable, une formule contingente et une formule valide.
 
@@ -498,6 +499,8 @@ Prenons trois exemples~: une formule insatisfiable, une formule contingente et u
   \caption{Clause insatisfiable : $(x_{1} \vee x_{1}) \wedge (\neg x_{1} \vee \neg x_{1})$}
   \label{fig:clause-insat}
 \end{figure}
+
+\paragraph*{Clause insatisfiable $(x_{1} \vee x_{1}) \wedge (\neg x_{1} \vee \neg x_{1})$~:}
 
 Le résultat de l'application de l'algorithme décrit ci-dessus est un graphe orienté cyclique. Il est impossible d'effectuer un tri topologique étant donné qu'un tri topologique ne peut être effectué que sur un graphe acyclique orienté. Ce graphe contient un composant fortement connexe contenant un littéral et sa négation, et la formule associée est, par conséquent, insatisfiable. Il est impossible d'attribuer un ordre aux sommets pour ensuite affecter des valeurs aux littéraux correspondant aux sommets car la formule admet aucun modèle. Pour cette raison, les arcs de ce graphe n'ont pas été numérotés ni affectés des valeurs $VRAI$ ou $FAUX$. En somme, l'algorithme nous dit simplement que ce graphe n'admet aucun modèle.
 
@@ -555,11 +558,10 @@ Le résultat de l'application de l'algorithme décrit ci-dessus est un graphe or
   \label{fig:clause-conting}
 \end{figure}
 
-% \includegraphics[height=2in, width = 3in]{img/contingente.png}
+% \includegraphics[height=2in, width = 3in]{img/contingente.png
 
-TODO: Je ne sais pas pourquoi le graphe apparaît APRES ce paragraphe, il est avant dans le code .tex !!
-
-Le graphe de la figure ci-dessus ne contient aucun composant fortement connexe contenant un littéral et sa négation, donc la formule associée admet bien un modèle. Ce modèle est le résultat du tri topologique effectué et les valeurs $VRAI$ et $FAUX$ affectées à des sommets par notre algorithme. Il existe aucun arc qui part d'un sommet étiqueté $VRAI$ vers un sommet étiqueté $FAUX$ et, en effet, les valeurs attribuées aux arcs donnent bien un modèle. 
+\paragraph*{Clause contingente $(x_{1} \vee x_{2}) \wedge (x_{3} \vee x_{4})$~:}
+Le graphe de la figure \ref{fig:clause-conting} ne contient aucune composante fortement connexe contenant un littéral et sa négation, donc la formule associée admet bien un modèle. Ce modèle est le résultat du tri topologique effectué et les valeurs $VRAI$ et $FAUX$ affectées à des sommets par notre algorithme. Il existe aucun arc qui part d'un sommet étiqueté $VRAI$ vers un sommet étiqueté $FAUX$ et, en effet, les valeurs attribuées aux arcs donnent bien un modèle. 
 
 
 
@@ -608,15 +610,18 @@ Le graphe de la figure ci-dessus ne contient aucun composant fortement connexe c
 
 % \includegraphics[height=2in, width = 3in]{img/valide.png}
 
-L'application de l'algorithme de transformation en graphe d'une formule valide nous donne un graphe ne contenant que des boucles à chaque sommet. Nous pouvons donc numéroter les arcs de n'importe quel façon. Ce étant, nous pouvous aussi effectuer n'importe quelles valeurs aux sommets (hormis la même valeur à un littéral et sa négation, bien entendu) et la formule sera toujours vrai. 
+\paragraph*{Clause valide $(x_{1} \vee \neg x_{1}) \wedge (x_{2} \vee \neg x_{2})$~:}
+L'application de l'algorithme de transformation en graphe d'une formule valide nous donne un graphe ne contenant que des boucles à chaque sommet. Nous pouvons donc numéroter les arcs de n'importe quel façon. Ce étant, nous pouvous aussi affecter n'importe quelles valeurs aux sommets (hormis la même valeur à un littéral et sa négation, bien entendu) et la formule sera toujours vraie. 
 
-L'objectif de cet algorithme n'est pas de dire si une formule satisfiable est contingente ou valide. Toutefois, si le résultat de l'algorithme est un graphe ne comportant que des boucles à chaque sommet, la formule associée est satisfiable et valide. Autrement, et si le graphe ne contient aucun composant fortement connexe contenant un littéral et sa négation, la formule est contingente. 
+L'objectif de cet algorithme n'est pas de dire si une formule satisfiable est contingente ou valide. Toutefois, si le résultat de l'algorithme est un graphe ne comportant que des boucles à chaque sommet, la formule associée est satisfiable et valide. Autrement, et si le graphe ne contient aucune composante fortement connexe contenant un littéral et sa négation, la formule est contingente.
+
+TODO: VERIFIER CES DEUX DERNIERS PHRASES (PRECEDENTES), EST-CE QUE C'EST JUSTE ? C'EST MOI QUI A FAIT CES CONSTATATIONS 
 
 \begin{sousenonce}
 Vous expliciterez ensuite l'algorithme de transformation et vous évaluerez sa complexité.
 \end{sousenonce}
 
-TODO: J'ai trouvé la citation de CORMEN que j'ai mis ici, mais je ne sais pas comment répondre à cette question avec justesse. Donc, j'ai trouvé toutes les infos, peut-être que quelqu'un pourrait finir cette question. On supprime, bien entendu, cette sitation de CORMEN. Merci, JC.
+TODO: GEORGES -> J'ai trouvé la citation du CORMEN que j'ai mis ici, mais je ne sais pas comment répondre à cette question avec justesse. Donc, j'ai trouvé toutes les infos, peut-être que quelqu'un pourrait finir cette question. On supprime, bien entendu, cette sitation de CORMEN. Merci, JC.
 JE NE SUIS PAS DU TOUT SUR DE LA REPONSE A CETTE QUESTION... J'AI COMMENCE A REDIGER, MAIS...
 
 Tout d'abord, il faut transformer une formule en forme normale conjonctive en une série d'implications. Cela ce fait en temps linéaire, en $O(n)$. Ensuite, il faut créer le graphe associé -- numérotation et attribution des valeurs $VRAI$ et $FAUX$, ce qui se fait également en 0(n). 
@@ -648,36 +653,8 @@ line 3 as a
 separate strongly connected component
 
 \begin{sousenonce}
-Vous expliciterez ensuite l'algorithme d'exploration du graphe et vous évaluerez sa complexité {\it
-En reprenant les trois informations constatées à partir du diagramme ??? et les algorithmes décrits ci-dessus, il est relativement facile de calculer n'importe quel couple d'entiers naturels à partir d'un code. En voici l'algorithme en C~:
-
-\begin{verbatim}
-int* codeToOrderedPairNat(long int code){
-	int *couple = malloc(2*sizeof(int));
-	int n = sqrt(code * 2);
-	long int axis = (n * (n + 1))/2;
-	int diff = 0;
-	if(axis > code){
-			n = n - 1;
-			axis = (n * (n + 1))/2;
-	}
-	diff = code - axis;
-	if(even(n)){
-		couple[0] = diff;
-		couple[1] = n - diff;
-	}
-	else{
-		couple[0] = n - diff;
-		couple[1] = diff;
-	}
-	return couple;
-}
-\end{verbatim}
-
-On trouve d'abord une valeur approximative du code correspondant aux valeurs de la formule de Gauss (la variable $axis$ dans la fonction ci-dessus), puis on modifie cette valeur afin qu'elle soit une valeur plus petite que le vrai code passé en paramètre. La valeur $n$ est égale soit à la valeur de $x$ soit à la valeur de $y$ d'un point extrêmal de la ligne diagonale en question (selon le point en question). On modifie les valeurs de $x$ et d'$y$ en calculant la différence entre le code et le code approximatif (la variable $axis$), ce qui nous donne les valeurs de $x$ et d'$y$ correspondant au code passé en paramètre.
-
-Prenons un simple example. Mettons qu'on voulait connaitre le couple correspondant au code $19$. La valeur 'floor' correspondant au point extrêmal de la ligne diagonale en question est $15$ ($axis = 15$, $n = 5$). La différence entre ces deux points est $19 - 15 = 4$ ($diff = code - axis$). On soustrait $4$ de $5$ ($couple[0] = n - diff$ pour avoir la valeur de $x$ (ce qui nous donne $1$) et $4$ ($diff$) est la valeur de $y$. On retourne $x$ et $y$ (à savoir ($(1,4)$).
- en fonction de la taille de l'ensemble de clauses initial}.
+Vous expliciterez ensuite l'algorithme d'exploration du graphe et vous évaluerez sa complexité
+ en fonction de la taille de l'ensemble de clauses initial.
 \end{sousenonce}
 
 TODO: J'ai répondu en quelques lignes ci-dessous, mais je ne sais pas du tout si ce que j'ai dit est juste. Quelqu'un pourrait le compléter ou le refaire, cette partie ? Merci, JC.
@@ -705,7 +682,7 @@ Comment énumérer les couples d'entiers ?
 
 L'énumération des couples de manière relativement homogène nous donnerait un codage qui nous permettrait d'identifier chaque couple par un nombre unique. 
 
-Il ne serait pas du tout utile de commencer par tous les couples $(0,y_{i})$  tel que $i$ EST UN ELEMENT DE $Z$ car il s'agit, là, d'un ensemble infini de couples et on ne passerait jamais aux couples $(1, y_{i})$. 
+Il ne serait pas du tout utile de commencer par tous les couples $(0,y_{i})$  tel que $i \in \mathbb{Z}$ car il s'agirait, là, d'un ensemble infini de couples et on ne passerait jamais aux couples $(1, y_{i})$. 
 
 Une solution, pour tous les nombres naturels, serait de parcourir un graphe comme suit:
 
@@ -753,33 +730,34 @@ Une solution, pour tous les nombres naturels, serait de parcourir un graphe comm
 
 
 
-TODO: Il faudrait ajouter les coordonnées (0,0), (1,0), (0,1), etc.
+TODO: Il faudrait ajouter les coordonnées (0,0), (1,0), (0,1), et les codes correspondants au graphe ci-dessus, etc. VOIR LES DIAGRAMMES QUE J'AI DONNE A BERTRAND
 
-Dans la figure ci-dessous, on commence par le couple $(0,0)$, puis on procède aux couples $(1,0)$, $(0,1)$, $(0,2)$, $(1,1)$, $(2,0)$, $(3,0)$, $(2,1)$, $(1,2)$, $(0,3)$, $(0,4)$, etc. L'algorithme pour simplement parcourir les couples de cette façon consisterait tout d'abord de déclarer et d'intialiser trois variables globales~: le point de départ, $*current*$, et les valeurs maximales courantes de $x$ et d'$y$, c'est-à-dire $*max-x*$ et $*max-y*$. En LISP, ceci pourrait être codé comme suit~:
+Dans la figure \ref{fig:codage-zigzag}, on commence par le couple $(0,0)$, puis on procède aux couples $(1,0)$, $(0,1)$, $(0,2)$, $(1,1)$, $(2,0)$, $(3,0)$, $(2,1)$, $(1,2)$, $(0,3)$, $(0,4)$\ldots L'algorithme pour simplement parcourir les couples de cette façon consisterait tout d'abord de déclarer et d'intialiser trois variables globales~: le point de départ, \lstinline!*current*!, et les valeurs maximales courantes de $x$ et de $y$, c'est-à-dire \lstinline!*max-x*! et \lstinline!*max-y*!. En LISP, ceci pourrait être codé comme suit~:
 
-\begin{verbatim}
+\begin{lstlisting}[language=Lisp]
 (defvar *current* (list 0 0 0)) ;; liste courante (code x y)
 (setf *current* (list 0 0 0)) 
 (defvar *max-x* 0) ;; valeur maximal courante de x
 (setf *max-x* 0)
 (defvar *max-y* 0) ;; valeur maximal courante de y
 (setf *max-y* 0)
-\end{verbatim}
+\end{lstlisting}
 
-On pourrait stocker toutes les valeurs de $*current*$ dans un tableau $*db*$ (base de données) comme suit~:
+On pourrait stocker toutes les valeurs de \lstinline!*current*! dans un tableau \lstinline!*db*! (base de données) comme suit~:
 
-\begin{verbatim}
-(defvar *db* nil) ;; 'base de données' qui stocke tous les "(code x y)"
+\begin{lstlisting}[language=Lisp]
+(defvar *db* nil) 
 (setf *db* nil)
 (push *current* *db*)
-\end{verbatim}
+\end{lstlisting}
 
 Puis, les conditions pour déterminer la direction à prendre afin de parcourir le graphe pourrait être implémentées comme suit (toujours en LISP)~:
 
-\begin{verbatim}
+\begin{lstlisting}[language=Lisp]
 (defun move (L)
   (cond
-    ((and (zerop (third L)) (= *max-x* *max-y*)) ;; RIGHT takes precedence over LEFT becuase it occurs first
+    ((and (zerop (third L)) (= *max-x* *max-y*)) 
+		;; RIGHT takes precedence over LEFT becuase it occurs first
       (print "in RIGHT") ;; 
          (right L))
     ((and (zerop (second L)) (= *max-x* *max-y*)) ;; DOWN
@@ -791,13 +769,13 @@ Puis, les conditions pour déterminer la direction à prendre afin de parcourir 
     ((< *max-x* *max-y*) ;; UP-RIGHT
       (print "in UP-RIGHT") 
          (up-right L))))
-\end{verbatim}
+\end{lstlisting}
  
-La liste $*current*$ est passée en paramètre lorsque l'on appelle ces fonctions~: L correspond toujours à *current*. Les fonctions 'right', 'down', 'down-left' et 'up-right', qui correspondent au parcours dans la figure ???, incrémente la première valeur de L (le codage), qui est une liste de la forme "(code x y)". Par ailleurs, la fonction 'right' incrémente la valeur courante de $x$ (le deuxième élément de la liste), la fonction 'down' incrémente la valeur courante de $y$ (la troisième élément de la liste), la fonction 'down-left' décrémente la valeur de $x$ et incrémente la valeur $y$ et la fonction 'up-right', elle, fait le contraire, elle incrémente la valeur de $x$ et décrémente la valeur d'$y$. 
+La liste \lstinline!*current*! est passée en paramètre lorsque l'on appelle ces fonctions~: L correspond toujours à *current*. Les fonctions 'right', 'down', 'down-left' et 'up-right', qui correspondent au parcours dans la figure ???, incrémente la première valeur de L (le codage), qui est une liste de la forme \lstinline!(code x y)!. Par ailleurs, la fonction 'right' incrémente la valeur courante de $x$ (le deuxième élément de la liste), la fonction 'down' incrémente la valeur courante de $y$ (la troisième élément de la liste), la fonction 'down-left' décrémente la valeur de $x$ et incrémente la valeur $y$ et la fonction 'up-right', elle, fait le contraire, elle incrémente la valeur de $x$ et décrémente la valeur de $y$. 
 
 On peut parcourir le graphe à l'aide de la fonction 'zig-zag' qui, elle, se sert de la fonction move-and-update afin de mettre à jour les variables globales *max-x* et *max-y*. 'move-and-update' se sert de 'move' qui choisit la bonne direction à prendre pour parcourir le graphe, c'est-à-dire 'right', 'down', 'down-left' ou 'up-right'~:
 
-\begin{verbatim}
+\begin{lstlisting}[language=Lisp]
 (defun move-and-update (L)
   (progn
     (setf L (move L))
@@ -810,14 +788,14 @@ On peut parcourir le graphe à l'aide de la fonction 'zig-zag' qui, elle, se ser
       (progn
         (move-and-update *current*)
         (zig-zag L (- n 1)))))
-\end{verbatim}
+\end{lstlisting}
 
 
-L'intégralité du programme est en annexe à la page ???. Il existe également une version en C à la page ? (voir les fonctions .. .. .. ..).
+L'intégralité du programme est en annexe à la page ???. Il existe également une version en C à la page ??.
 
-Voici une trace de cette fonction en passant $*current*$ égal à $(0~0~0)$ en paramètre et avec $n = 100$ :
+Voici une trace de cette fonction en passant \lstinline!*current*! égal à \lstinline!(0 0 0)! en paramètre et avec $n = 100$ :
 
-\begin{verbatim}
+\begin{lstlisting}[language=Lisp]
 > (zig-zag *current* 100)
 "in RIGHT" 
 "in DOWN-LEFT" 
@@ -845,28 +823,28 @@ Voici une trace de cette fonction en passant $*current*$ égal à $(0~0~0)$ en p
 (17 3 2) (16 4 1) (15 5 0) (14 4 0) (13 3 1) (12 2 2) 
 (11 1 3) (10 0 4) (9 0 3) (8 1 2) (7 2 1) (6 3 0) (5 2 0) 
 (4 1 1) (3 0 2) (2 0 1) (1 1 0) (0 0 0))
-\end{verbatim}
+\end{lstlisting}
 
 
 \begin{enonce}
 Donner les fonctions de codage et de décodage f1(z)->x et f2(z)->y.
 \end{enonce}
 
+TODO: Même figure que la précédente, mais avec les 'constations' ajoutées (je ferai un diagramme papier pour qu'on sache ce que je veux ici)
+
 En reprenant la figure ??? ci-dessus, on peut faire plusieurs constatations~:
 
-TODO: Même figure la précédente, mais avec les 'constations' ajoutées (je ferai un diagramme papier pour qu'on sache ce que je veux ici)
-
 \begin{itemize}
-\item La somme de la valeur de $x$ et de $y$ de chaque point d'une ligne diagonale est toujours égal
-\item La longueur de chaque ligne diagonale successive s'incrémente à chaque fois et nous donne par conséquent toujours une longueur impaire suivie d'une longueur paire.
-\item Le point à partir duquel on commence à incrémenter le code au long d'une ligne diagonale correspond aux codes $1$, $3$, $6$, $10$, $15$, $21$, etc. (voir la figure ???), ce qui correspond à la formule de Gauss, à savoir~:
+\item La somme de $x$ et $y$ de chaque sommet du graphe d'une diagonale dans le sens du parcours est toujours la même.
+\item La longueur de chaque diagonale successive s'incrémente à chaque fois et nous donne par conséquent toujours une longueur impaire suivie d'une longueur paire.
+\item Le point à partir duquel on commence à incrémenter le code au long d'une diagonale correspond aux codes $1$, $3$, $6$, $10$, $15$, $21$\ldots (voir la figure ???), ce qui correspond à la formule de Gauss, à savoir~:
 
 $$\dfrac{(n \times (n + 1))}{2}$$
 \end{itemize}
 
 Ces trois informations nous permettront de coder un couple de nombres naturels sans parcourir le graphe. En voici l'algorithme en C~:
 
-\begin{verbatim}
+\begin{lstlisting}[language=C]
 long int orderedPairToCodeNat(int x, int y){
 	long code;
 	int sumxy; 
@@ -881,12 +859,12 @@ long int orderedPairToCodeNat(int x, int y){
 	}
 	return code;
 }
-\end{verbatim}
+\end{lstlisting}
 
 
-En reprenant les trois informations constatées à partir du diagramme ??? et les algorithmes décrits ci-dessus, il est relativement facile de calculer n'importe quel couple d'entiers naturels à partir d'un code. En voici l'algorithme en C~:
+En reprenant les trois informations constatées à partir du diagramme ??? et les algorithmes décrits ci-dessus, il est également relativement facile de calculer n'importe quel couple d'entiers naturels à partir d'un code. En voici l'algorithme en C~:
 
-\begin{verbatim}
+\begin{lstlisting}[language=C]
 int* codeToOrderedPairNat(long int code){
 	int *couple = malloc(2*sizeof(int));
 	int n = sqrt(code * 2);
@@ -907,17 +885,15 @@ int* codeToOrderedPairNat(long int code){
 	}
 	return couple;
 }
-\end{verbatim}
+\end{lstlisting}
 
-On trouve d'abord une valeur approximative du code correspondant aux valeurs de la formule de Gauss (la variable $axis$ dans la fonction ci-dessus), puis on modifie cette valeur afin qu'elle soit une valeur plus petite que le vrai code passé en paramètre. La valeur $n$ est égale soit à la valeur de $x$ soit à la valeur de $y$ d'un point extrêmal de la ligne diagonale en question (selon le point en question). On modifie les valeurs de $x$ et d'$y$ en calculant la différence entre le code et le code approximatif (la variable $axis$), ce qui nous donne les valeurs de $x$ et d'$y$ correspondant au code passé en paramètre.
+On trouve d'abord une valeur approximative du code correspondant aux valeurs de la formule de Gauss (la variable \lstinline!axis! dans la fonction ci-dessus), puis on modifie cette valeur afin qu'elle soit une valeur plus petite que le vrai code passé en paramètre. La valeur \lstinline!n! est égale soit à la valeur de \lstinline!x! soit à la valeur de \lstinline!y! d'un point extrêmal de la ligne diagonale en question (selon le point en question). On modifie les valeurs de \lstinline!x! et de \lstinline!y! en calculant la différence entre le code et le code approximatif (la variable $axis$), ce qui nous donne les valeurs de \lstinline!x! et de \lstinline!y! correspondant au code passé en paramètre.
 
-Prenons un simple example. Mettons qu'on voulait connaitre le couple correspondant au code $19$. La valeur 'floor' ??? OMMENT DIT-ON ?? correspondant au point extrêmal de la ligne diagonale en question est $15$ ($axis = 15$, $n = 5$). La différence entre ces deux points est $19 - 15 = 4$ POURQUOI LES DEUX F DE DIFF SONT SEPARES !? ($diff = code - axis$). On soustrait $4$ de $5$ ($couple[0] = n - diff$ pour avoir la valeur de $x$ (ce qui nous donne $1$) et $4$ ($diff$) est la valeur de $y$. On retourne $x$ et $y$ (à savoir ($(1,4)$).
-
-
+Prenons un simple example. Mettons qu'on voulait connaitre le couple correspondant au code $19$. La valeur entière  correspondant au point extrêmal de la diagonale est $15$ ($axis = 15$, $n = 5$). La différence entre ces deux points est $19 - 15 = 4$ ($diff = code - axis$). On soustrait $4$ à $5$ ($couple[0] = n - diff$) pour avoir la valeur de $x$ (ce qui nous donne $1$) et $4$ ($diff$) est la valeur de $y$. On retourne $x$ et $y$ (à savoir ($(1,4)$).
 
 On peut étendre ce codage pour comprendre tous les nombres entiers en réutilisant la fonction ci-dessus. Voici l'algorithme implémenté en C de la fonction du codage des entiers~:
 
-\begin{verbatim}
+\begin{lstlisting}[language=C]
 long int orderedPairToCodeInt(int x, int y){
 	long int code = 0;	
 
@@ -938,16 +914,15 @@ long int orderedPairToCodeInt(int x, int y){
 	code = orderedPairToCodeNat(x, y);
 	return code;
 }
-\end{verbatim}
+\end{lstlisting}
 
 
-On n'utilise que des valeurs positive pour ce codage. Si x est négative, on l'attribut une valeur impaire. Si x est 
-positif, on l'attribut une valeur paire, et il en va de même des valeurs de y. Ensuite, on passe le nouveau couple ainsi créé en paramètre en se servant la fonction initialement créée pour coder les nombres naturels. 
+On n'utilise que des valeurs positive pour ce codage. Si x est négative, on l'attribut une valeur impaire. Si \lstinline!x! est positif, on l'attribut une valeur paire, et il en va de même des valeurs de y. Ensuite, on passe le nouveau couple ainsi créé en paramètre en se servant de la fonction initialement créée pour coder les nombres naturels. 
 
 
 Pour trouver un couple à partir d'un code, on fait l'inverse~:
 
-\begin{verbatim}
+\begin{lstlisting}[language=C]
 int* codeToOrderedPairInt(long int code){
 	int *pair = codeToOrderedPairNat(code);
 
@@ -967,29 +942,31 @@ int* codeToOrderedPairInt(long int code){
 
 	return pair;
 }
-\end{verbatim}  
+\end{lstlisting}  
 
 
-Une autre système de codage pourrait être utilisé en parcourant un graphe comme suit~:
+Un autre système de codage pourrait être utilisé en parcourant un graphe comme suit~:
 
 TODO: DIAGRAMME DE CODAGE DES ENTIERS METHODE 2 (JE VOUS DONNERAI LE DIAGRAMME EN FORME PAPIER) 
 
-Bien que les algorithmes d'encodage et de décodage ne soient pas les mêmes, le principe reste pareil. 
+Bien que les algorithmes d'encodage et de décodage ne soient pas les mêmes, le principe reste identique. 
 
 On peut faire plusieurs constations~:
 
+
+
 \begin{itemize}
-\item Le code correspondant aux points (1,1), (2,2), (3,3), (4,4), etc. sont respectivement 1, 2, 12, 30, etc., ce qui correspond à $(1 \times 2)$, $(3 \times 4)$, $(5 \times 6)$, $(7 \times 8)$, etc. UNE FACON DE METTRE CA EN NOTATION MATHEMATIQUE ??
-\item Le code correspondant aux points (0,0), (-1,-1), (-2,-2), (-3,-3), etc. sont respectivement 0, 6, 20, 42, etc., ce qui correspond à $(0 \times 1)$, $(2 \times 3)$, $(4 \times 5)$, $(6 \times 7)$, etc. UNE FACON DE METTRE CA EN NOTATION MATHEMATIQUE ??
-\item Le code des valeurs (1,0), (2,-1), (3,-2), (4,-3) sont respectivement 1, 9, 25, 49, etc., ce qui correspond à la valeur de $(x + abs(y))^{2}$, ce sont les carrés des entiers impairs.
-\item Le code des valeurs (-1,-1), (-2,-2), (-3,-3), (-4,-4) sont respectivement 4, 16, 36, 64, etc., ce qui correspond à la valeur de $(abs(x) + abs(y))^{2}$, ce sont les carrés des entiers pairs.
+\item Le code correspondant aux couples (1,1), (2,2), (3,3), (4,4)\ldots sont respectivement 1, 2, 12, 30\ldots, ce qui correspond à $(1 \times 2)$, $(3 \times 4)$, $(5 \times 6)$, $(7 \times 8)$\ldots
+\item Le code correspondant aux couples (0,0), (-1,-1), (-2,-2), (-3,-3)\ldots sont respectivement 0, 6, 20, 42\ldots, ce qui correspond à $(0 \times 1)$, $(2 \times 3)$, $(4 \times 5)$, $(6 \times 7)$\ldots
+\item Le code des couples $(1,0)$, $(2,-1)$, $(3,-2)$, $(4,-3)$ sont respectivement $1$, $9$, $25$, $49$\ldots ce qui correspond à la valeur de $(x + \|y\|))^{2}$, ce sont les carrés des entiers impairs.
+\item Le code des couples $(-1,-1)$, $(-2,-2)$, $(-3,-3)$, $(-4,-4)$ sont respectivement $4$, $16$, $36$, $64$\ldots,  ce qui correspond à la valeur de $(\|x\| + \|y\|))^{2}$, ce sont les carrés des entiers pairs.
 \end{itemize}
 
 
 A l'aide de ces constations, on peut coder n'importe quel couple d'entiers. En voici un exemple en C~:
 
 
-\begin{verbatim}
+\begin{lstlisting}[language=C]
 long int orderedPairToCodeIntAlgo2(int x, int y){
 	long int code = 0;
 	int _x, _y, diff;
@@ -1046,13 +1023,15 @@ long int orderedPairToCodeIntAlgo2(int x, int y){
 	}
 	return code;
 }
-\end{verbatim}
+\end{lstlisting}
 
-On commence par trouver, en valeur absolue, le max de $x$ et $y$~: $(-3,1)$ nous donnerait comme $absmax$ la valeur $3$. Ensuite on détermine si cette valeur correspond à la valeur de $x$ ou la valeur de $y$. Si cette valeur correspond à la valeur de $x$ (resp. $y$), on affecte la valeur de $x$ (resp. $y$) aux variables temporaires $_x$ et $_y$. Ensuite, on se sert de la propriété des carrés décrite précédemment selon les quatre cas de figures possibles, à savoir, le cas où $x$ et $y$ sont positives, le cas où $x$ et $y$ sont négatives, celui où $x$ est positive et $y$ est négative, ou bien le cas où $x$ est négative et $y$ est positive. On affecte une valeur provisoire à la variable $code$, qui est soit $temp$ (la valeur absolue de la max des deux coordonnées) multiplié par $temp + 1$ ou bien $temp$ multiplié par $temp - 1$ selon que la valeur de la coordonnée $absmax$ est négative ou positive respectivement. Nous avons à ce point un code approximatif. On peut facilement trouver la coordonnée correspondant à $absmax$, et pour trouver l'autre coordonnée on calcule la différence entre la valeur absolue de la coordonnée qu'on connaît et l'autre coordonnée afin d'ajuster le code. Puis, enfin, on retourne le code exact.
+TODO: A REVERIFIER CE QUI SUIT !! (jc)
+
+On commence par trouver le max de $\|x\|$ et $\|y\|$~: $(-3,1)$ nous donnerait comme $absmax$ la valeur $3$. Ensuite on détermine si cette valeur correspond à la valeur de $x$ ou la valeur de $y$. Si cette valeur correspond à la valeur de $x$ (resp. $y$), on affecte la valeur de $x$ (resp. $y$) aux variables temporaires $_x$ et $_y$. Ensuite, on se sert de la propriété des multiplications décrite précédemment selon les quatre cas de figures possibles, à savoir, le cas où $x$ et $y$ sont positives, le cas où $x$ et $y$ sont négatives, celui où $x$ est positive et $y$ est négative, et inversement. On affecte une valeur provisoire à la variable $code$, qui est soit $temp$ (la valeur absolue de la max des deux coordonnées) multiplié par $temp + 1$ ou bien $temp$ multiplié par $temp - 1$ selon que la valeur de la coordonnée $absmax$ est négative ou positive respectivement. Nous avons à ce point un code approximatif. On peut facilement trouver la coordonnée correspondant à $absmax$, et pour trouver l'autre coordonnée on calcule la différence entre la valeur absolue de la coordonnée qu'on connaît et l'autre coordonnée afin d'ajuster le code. Puis, enfin, on retourne le code exact.
 
 Le décodage utilise le même principe mais dans le sens inverse~:
 
-\begin{verbatim}
+\begin{lstlisting}[language=C]
 int* codeToOrderedPairIntAlgo2(long int code){
 	int* pair = malloc(2*sizeof(int));
 	int isqrtcode = (int) sqrt(code);
@@ -1082,7 +1061,7 @@ int* codeToOrderedPairIntAlgo2(long int code){
 	pair[1] = y; 
 	return pair;
 }
-\end{verbatim}
+\end{lstlisting}
 
 
 
@@ -1130,7 +1109,7 @@ $(x_1, x_2)$. Il suffira alors de recomposer le k-uplet à partir de $x_1$, $x_2
 Le codage et le décodage d'un singleton sont triviaux : $(x_1) \leftrightarrow x_1$.
 
 Pour les listes de longueur quelconque, le problème est de savoir combien de fois faudra-t-il décoder le résultat. En effet, $(0)$, $(0,0)$
-et $(0,0,0)$ ont le même code, $0$, donc il n'y a plus de bijection entre la liste et les entiers naturels, donc ambigüité lors du décodage.
+et $(0,0,0)$ ont le même code, $0$, donc il n'y a plus de bijection entre la liste et les entiers naturels, donc ambiguïté lors du décodage.
 
 Étant donné que pour un k donné, il y a une bijection entre les k-uplets et les entiers naturels, il nous suffit d'ajouter une information
 permettant de déterminer de manière unique la valeur de k. On code donc d'abbord le k-uplet correspondant à la liste, en nommant le résultat
@@ -1321,11 +1300,11 @@ Le codage d'une liste d'entiers relatifs peut donc être résumé par la figure 
 \end{figure}
 
 
-Pour coder les triplets, on considère un triplet, (3,1,2) par exemple, comme un couple (3,(1,2)). On calcule le code du couple imbriqué, c'est-à-dire du couple (1,2), ce qui nous donne 8. On refait le même codage en substituant 8 à (1,2), ce qui nous donne (3,8). On code ensuite (3,8) et notre résultat est 74. L'algorithme est récursif, tant qu'on n'a pas un couple à deux éléments atomiques, on continue à coder les 'sous-couples', ce qui nous permet non seulement de coder les triplets, mais de coder n'importe quel k-uplet. Donc, pour ce faire, il nous faut deux informations, le code et la taille du k-uplet, qui est implicite lorsque l'on code, mais qui doit être explicitée lorsque l'on doit trouver le k-uplet à partir d'un code. 
+Pour coder les triplets, on considère un triplet, (3,1,2) par exemple, comme un couple (3,(1,2)). On calcule le code du couple imbriqué, c'est-à-dire du couple (1,2), ce qui nous donne 8. On refait le même codage en substituant 8 à (1,2), ce qui nous donne (3,8). On code ensuite (3,8) et notre résultat est 74. L'algorithme est récursif, tant qu'on n'a pas un couple à deux éléments atomiques, on continue à coder les \og{}sous-couples\fg{}, ce qui nous permet non seulement de coder les triplets, mais de coder n'importe quel k-uplet. Donc, pour ce faire, il nous faut deux informations, le code et la taille du k-uplet, qui est implicite lorsque l'on code, mais qui doit être explicitée lorsque l'on doit trouver le k-uplet à partir d'un code. 
 
 Voici le code en C pour coder et décoder respectivement n'importe quel k-uplet de nombres entiers en reprenant les fonctions déjà décrites dans la réponse de la question précédente~:
 
-\begin{verbatim}
+\begin{lstlisting}[language=C]
 
 long int orderedMultipleToCodeInt(int *arr, int size){
 	long int code;	
@@ -1334,7 +1313,7 @@ long int orderedMultipleToCodeInt(int *arr, int size){
 		arr[size - 2] = code;
 		arr = realloc(arr, (size - 1));
 		if(size > 2){		
-			code = orderedMultipleToCodeInt(??AMPERSAND??arr[0], (size - 1));
+			code = orderedMultipleToCodeInt(&arr[0], (size - 1));
 		}
 	}
 	return code;
@@ -1353,7 +1332,7 @@ int* codeToOrderedMultipleInt(long int code, int size){
 	return multiple;
 }
 
-\end{verbatim}
+\end{lstlisting}
 
 
 Plusieurs programmes permettant de coder et de décoder des couples et des k-uplets en LISP et en C sont fournis en annexe de ce document, y compris les fonctions 'int* codeToOrderedMultipleIntAlgo2(long int code, int size)' et 'long int orderedMultipleToCodeIntAlgo2(int *arr, int size)' qui se servent du deuxième algorithme pour coder et pour décoder les k-uplets de nombres entiers.  
