@@ -6,12 +6,8 @@
 \usepackage{tikz}
 \usepackage{amsmath}
 \usepackage{listings}
-%<<<<<<< HEAD
 \usepackage{amssymb}
-\usetikzlibrary{chains,positioning,matrix,arrows}
-%=======
 \usetikzlibrary{chains,positioning,matrix,arrows,decorations,calc}
-%>>>>>>> 18abb12ab0bf6ebeb233e171de5c6fb134de5c00
 \title{Rapport de projet : FMIN105\\ Cours algorithmique / complexité / calculabilité}
 \author{\textsc{Bonavero} Yoann \\ \textsc{Brun} Bertrand \\ \textsc{Charron} John \\ \textsc{Dupéron} Georges}
 \date{}
@@ -293,20 +289,6 @@ donc la capacité de la coupe est égale au coût de l'ordonancement.
 Calculer le nombre maximum des chemins d'arcs disjoints à partir de la source jusqu'au puits dans le réseau donné par la figure 1. 
 \end{enonce}
 
-TODO: Il faut mettre la réponse correspondante ici
-
-\begin{enonce}
-Enumérer tous les s-t-coupes dans le réseau donnés par la figure 1. Pour chaque s-t-coupe [S,S], énumérer les sommets, les arcs avants et les arcs arrières.
-\end{enonce}
-
-TODO: Il faut mettre la réponse correspondante ici
-
-\begin{enonce}
-Vérifier que le nombre maximum de chemeins d'arcs disjoints à partir du sommet source jusqu'au puits est égal au nombre minimum d'arcs avant dans une s-t-coupe.
-\end{enonce}
-
-
-
 Il existe un ensemble de chemins d'arcs disjoints de cardinal 3~:
 
 $$
@@ -382,6 +364,111 @@ de chemins d'arcs disjoints de taille 4 (donc pas de taille supérieure
 
 Conclusion~: Le nombre maximum de chemins d'arcs disjoints est 3.
 
+\begin{enonce}
+Enumérer tous les s-t-coupes dans le réseau donnés par la figure 1. Pour chaque s-t-coupe $[S,\overline{S}]$, énumérer les sommets, les arcs avants et les arcs arrières.
+\end{enonce}
+
+% Code LISP pour générer le tableau ci-après :
+
+% (defun S (n p)
+%   (if p
+%       (format t "         ~a  " n)
+%       (format t "\\phantom{~a} " n)))
+
+% (defun Sbar (n p)
+%   (S-n-p n (not p)))
+
+% (defun print-arcs (arcs)
+%   (when arcs
+%     (when (car arcs)
+%       (format t "(~a,~a)" (caar arcs) (cdar arcs))
+%       (unless (endp (cdr arcs))
+%         (format t ", ")))
+%     (print-arcs (cdr arcs))))
+
+% (defun print-arcs-if-not-nil (arcs)
+%   (print-arcs (remove-if-not #'identity arcs)))
+
+% (defun print-line (l nodes edges)
+%   (let ((num-and-pred (pairlis nodes (mapcar #'list l))))
+%     ;; (cdr (butlast)) pour ne pas imprimer les 1ers et derniers qui sont fixes.
+%     (format t "~a " (car nodes))
+%     (mapcar #'S (cdr (butlast nodes)) (cdr (butlast l)))
+%     (format t "& ")
+%     (mapcar #'Sbar (cdr (butlast nodes)) (cdr (butlast l)))
+%     (format t "~a " (car (last nodes)))
+%     (format t "& ${")
+%     (print-arcs-if-not-nil
+%      (mapcar (lambda (arc)
+%                (and (cadr (assoc (car arc) num-and-pred))
+%                     (not (cadr (assoc (cdr arc) num-and-pred)))
+%                     arc))
+%              edges))
+%     (format t "}$ & ${")
+%     (print-arcs-if-not-nil
+%      (mapcar (lambda (arc)
+%                (and (cadr (assoc (cdr arc) num-and-pred))
+%                     (not (cadr (assoc (car arc) num-and-pred)))
+%                     arc))
+%              edges))
+%     (format t "}$ \\\\~%")))
+
+% (defun range (n)
+%   (loop for i from 0 below n collect i))
+
+% (defun print-s-t-cuts (nodes edges)
+%   (loop
+%      for i from 0 below (expt 2 (- (length nodes) 2))
+%      do (print-line (append
+%                      '(t) ;; Source : toujours t
+%                      (mapcar (lambda (n)
+%                                (/= 0 (logand i (expt 2 n))))
+%                              (range (- (length nodes) 2)))
+%                      '(nil)) ;; Target : toujours nil
+%                     nodes
+%                     edges)))
+
+% (print-s-t-cuts
+%  '(1 2 3 4 5 6)
+% '((1 . 2)
+%   (1 . 3)
+%   (1 . 4)
+%   (2 . 3)
+%   (3 . 4)
+%   (3 . 6)
+%   (4 . 5)
+%   (4 . 6)
+%   (5 . 6)))
+
+\begin{tabular}{|l|l|l|l|}
+  \hline
+  $S$ & $\overline{S}$ & Arcs avants & Arcs arrières \\
+  \hline
+  \hline
+  1 \phantom{2} \phantom{3} \phantom{4} \phantom{5} &          2           3           4           5  6 & ${(1,2), (1,3), (1,4)}$               & ${}$             \\
+  1          2  \phantom{3} \phantom{4} \phantom{5} & \phantom{2}          3           4           5  6 & ${(1,3), (1,4), (2,3)}$               & ${}$             \\
+  1 \phantom{2}          3  \phantom{4} \phantom{5} &          2  \phantom{3}          4           5  6 & ${(1,2), (1,4), (3,4), (3,6)}$        & ${(2,3)}$        \\
+  1          2           3  \phantom{4} \phantom{5} & \phantom{2} \phantom{3}          4           5  6 & ${(1,4), (3,4), (3,6)}$               & ${}$             \\
+  1 \phantom{2} \phantom{3}          4  \phantom{5} &          2           3  \phantom{4}          5  6 & ${(1,2), (1,3), (4,5), (4,6)}$        & ${(3,4)}$        \\
+  1          2  \phantom{3}          4  \phantom{5} & \phantom{2}          3  \phantom{4}          5  6 & ${(1,3), (2,3), (4,5), (4,6)}$        & ${(3,4)}$        \\
+  1 \phantom{2}          3           4  \phantom{5} &          2  \phantom{3} \phantom{4}          5  6 & ${(1,2), (3,6), (4,5), (4,6)}$        & ${(2,3)}$        \\
+  1          2           3           4  \phantom{5} & \phantom{2} \phantom{3} \phantom{4}          5  6 & ${(3,6), (4,5), (4,6)}$               & ${}$             \\
+  1 \phantom{2} \phantom{3} \phantom{4}          5  &          2           3           4  \phantom{5} 6 & ${(1,2), (1,3), (1,4), (5,6)}$        & ${(4,5)}$        \\
+  1          2  \phantom{3} \phantom{4}          5  & \phantom{2}          3           4  \phantom{5} 6 & ${(1,3), (1,4), (2,3), (5,6)}$        & ${(4,5)}$        \\
+  1 \phantom{2}          3  \phantom{4}          5  &          2  \phantom{3}          4  \phantom{5} 6 & ${(1,2), (1,4), (3,4), (3,6), (5,6)}$ & ${(2,3), (4,5)}$ \\
+  1          2           3  \phantom{4}          5  & \phantom{2} \phantom{3}          4  \phantom{5} 6 & ${(1,4), (3,4), (3,6), (5,6)}$        & ${(4,5)}$        \\
+  1 \phantom{2} \phantom{3}          4           5  &          2           3  \phantom{4} \phantom{5} 6 & ${(1,2), (1,3), (4,6), (5,6)}$        & ${(3,4)}$        \\
+  1          2  \phantom{3}          4           5  & \phantom{2}          3  \phantom{4} \phantom{5} 6 & ${(1,3), (2,3), (4,6), (5,6)}$        & ${(3,4)}$        \\
+  1 \phantom{2}          3           4           5  &          2  \phantom{3} \phantom{4} \phantom{5} 6 & ${(1,2), (3,6), (4,6), (5,6)}$        & ${(2,3)}$        \\
+  1          2           3           4           5  & \phantom{2} \phantom{3} \phantom{4} \phantom{5} 6 & ${(3,6), (4,6), (5,6)}$               & ${}$             \\
+  \hline
+\end{tabular}
+
+\begin{enonce}
+Vérifier que le nombre maximum de chemeins d'arcs disjoints à partir du sommet source jusqu'au puits est égal au nombre minimum d'arcs avant dans une s-t-coupe.
+\end{enonce}
+
+%% TODO
 
 \subsection{Partie complexité}
 
