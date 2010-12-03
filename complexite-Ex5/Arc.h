@@ -9,10 +9,11 @@ using namespace std;
 class Arc
 {
     private :
-    unsigned int a;                          // Somment de départ
-    unsigned int b;                          // Sommet d'arrivé.
-    unsigned int capacite;                   // Capacité de l'arc.
-    unsigned int flot;                       // Flot circulant dans l'arc.
+    unsigned int a;                         // Somment de départ
+    unsigned int b;                         // Sommet d'arrivé.
+    unsigned int capacite;                  // Capacité de l'arc.
+    unsigned int flot;                      // Flot circulant dans l'arc.
+    bool arcRetour;                         // Vrai si arc retour, faux sinon
 
     public :
     Arc(unsigned int a, unsigned int b, unsigned int c, unsigned int f);
@@ -26,6 +27,8 @@ class Arc
     unsigned int getFlot() const;
     void setCapacite(unsigned int val);
     unsigned int getCapacite() const;
+    bool getArcRetour();
+    void setArcRetour(bool);
     void afficheArc();
 
 };

@@ -112,6 +112,27 @@ unsigned int Graphe::capaciteMinDuChemin(listeArcs_t chemin) const
 
     return c;
 }
+
+
+/* Q5 | Met à jour à partir du graphe d'écart final le graphe et retourne le flot maximum.
+*/
+int Graphe::miseAJour(GrapheEcart *ge)
+{
+    arcs_t la = ge->getListeArcs();
+    int flotMax = 0;
+
+    for(unsigned int k = 0; k < la.size(); k++)
+        for(unsigned int l = 0; l < la[k].size(); l++)
+        {
+            this->arcDansGraphe(la[k][l])->setFlot(la[k][l]->getFlot());
+
+            if(la[k][l]->getS2() == this->p)
+                flotMax += la[k][l]->getFlot();
+        }
+
+    return flotMax;
+}
+
 //================================//
 
 
@@ -217,6 +238,15 @@ Arc* Graphe::arcInverse(Arc *arc)
     for(unsigned int s = 0; s < this->arcs[arc->getS2()].size(); s++)
         if(this->arcs[arc->getS2()][s]->getS2() == arc->getS1())
             return this->arcs[arc->getS2()][s];
+
+    return NULL;
+}
+
+Arc* Graphe::arcDansGraphe(Arc *a)
+{
+    for(unsigned int s = 0; s < this->arcs[a->getS1()].size(); s++)
+        if(this->arcs[a->getS1()][s]->getS2() == a->getS2())
+            return this->arcs[a->getS1()][s];
 
     return NULL;
 }

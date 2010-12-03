@@ -25,6 +25,7 @@ GrapheEcart::GrapheEcart(string nom, const Graphe *g) :  Graphe(nom,g)
             arc = g->getArcs()[i][j];
 
             arcInv = new Arc(arc->getS2(),arc->getS1(),0,0);
+            arcInv->setArcRetour(true);
 
             this->ajouteArc(arcInv);
         }
@@ -48,3 +49,8 @@ void GrapheEcart::miseAJour(listeArcs_t l,int k)
 }
 
 //================================//
+
+arcs_t GrapheEcart::getListeArcs()
+{
+    return this->arcs;
+}

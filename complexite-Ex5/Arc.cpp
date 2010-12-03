@@ -56,6 +56,16 @@ unsigned int Arc::getCapacite() const
     return this->capacite;
 }
 
+bool Arc::getArcRetour()
+{
+    return this->arcRetour;
+}
+
+void Arc::setArcRetour(bool v)
+{
+    this->arcRetour = v;
+}
+
 void Arc::afficheArc()
 {
     cout << " " << this->a << "  " << this->b << "     c : "            // Affichage des noms des sommets.

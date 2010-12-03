@@ -14,6 +14,7 @@ class GrapheEcart : public Graphe
     ~GrapheEcart();
 
     void miseAJour(listeArcs_t chemin, int k);
+    arcs_t getListeArcs();
 };
 
 #endif // GRAPHEECART_H_INCLUDED
