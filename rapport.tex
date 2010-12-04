@@ -512,27 +512,75 @@ $$(a \times b) = \dfrac{(a + b)^2 - a^2 - b^2}{2}$$
 
 Lorsqu'il est possible de réduire un problème difficile en un problème que l'on sait résoudre, la difficulté demeure souvent dans la réduction elle-même.
 
+GEORGES : Définition de la réduction de SAT à 3-SAT :
+
+On prend chaque clause de littéraux du problème SAT, et on la transforme en une ou plusieurs clauses de la manière suivante :
+
+Si la clause possède 3 littéraux (ou moins), on la laisse telle qu'elle (elle est déjà sous «forme» SAT-3).
+
+Sinon, soient $l_1, \dots, l_n$ les littéraux de la clause, on construit plusieurs clauses ainsi :
+$$
+{l_1, l_2, z_1}, {\lnot z_1, l_3, z_2}, {\lnot z_2, l_4, z_3}, \dots, {\lnot z_{i-2}, l_{i}, z_{i-1}}, \dots, {\lnot z_{n-3}, l_{n-1}, l_{n}}
+$$
+Les $z_i$ sont des variables % TODO JOHN !!!! : corrige le nom "variable", je ne sais pas comment on dit.
+qu'on crée pour relier les clauses entre elles, et qui n'existent pas dans la formule.
+
+Par exemple, la clause ${a, \lnot b, c d}$ sera transformée en deux clauses : ${a, \lnot b, z_1}$ et ${\lnot z_1, c, d}$, et la clause
+${\lnot a, b, \lnot c, d, e}$ sera transformée en trois clauses : ${\lnot a, b, z_1}$ et ${\lnot z_1, \lnot c, z_2}$ et ${\lnot z_2, d, e}$.
+
+Les clauses créées sont équivalentes à la clause d'origine car, à chaque fois, soit un des littéraux d'origine vérifie la clause, et $z_i$
+peut être faux, ce qui permet au $\lnot z_i$ de valider la clause suivante, de proche en proche, soit aucun des littéraux d'origine ne
+vérifie la clause, auquel cas, si on prend un $z_i$ faux, la clause est fausse, et si on prend un $z_i$ vrai, la clause suivante contiendra
+$\lnot z_i$ qui sera faux, et le résultat dépendra des variables de la clause suivante (ou des suivantes). % TODO BERTRAND : éclaircir ça, c'est mal expliqué.
+
+Si on souhaite que le résultat soit strictement 3-SAT (toutes les clauses contiennent 3 littéraux, pas plus, pas moins), on applique les transformations suivantes :
+\begin{itemize}
+\item Les clauses qui contienntent un seul littéral, ${l_1}$, sont transformées en ${l_1, l_1, l_1}$.
+\item Les clauses qui contiennent exactement deux littéraux, ${l_1, l_2}$ sont transformées en ${l_1, l_2, l_1}$.
+\end{itemize}
+
+Cette transformation est linéaire en complexité (on ne considère chaque littéral qu'une fois, et on ajoute $n-3$ littéraux pour chaque clause), donc de complexité polynomiale.
 
 \begin{sousenonce}
 Justifier alors que 3-SAT est NP-complet (sachant que SAT est NP-complet).
 \end{sousenonce}
 
-TODO: Georges ? Bertrand ? Yoann ? Je ne sais pas comment répondre à cette question ! (jc)
+Vu que SAT est np-complet, et que 3-SAT sait faire ce que sait faire SAT, avec une transformation polynomiale, du coup 3-SAT (+ la
+transformation) est au moins aussi dur que SAT. La difficulté peut résiter dans la transformation, 3-SAT ou les deux.
+
+Vu que la difficulté ne s'est pas cachée dans la transformation (qui est polynomiale, alors que SAT est np-complet), bah 3-SAT est
+np-complet lui aussi.  TODO: Georges ? Bertrand ? Yoann ? Je ne sais pas comment répondre à cette question ! (jc)
 
 \begin{sousenonce}
-Application : si un ensemble de clauses contient n-v variables, n1 clauses à un littéral, n2 clauses à 2 littéraux, n3 clauses à 3 littéraux, n4 clauses à 4 littéraux, n5 clauses à 5 littéraux (et pas d'autres clauses), combien le système obtenu par votre réduction contient-il de variables et de clauses ? Vous devrez bien sûr justifier votre réponse.
+Application : si un ensemble de clauses contient $n_v$ variables, $n_1$ clauses à un littéral, $n_2$ clauses à 2 littéraux, $n_3$ clauses à 3 littéraux, $n_4$ clauses à 4 littéraux, $n_5$ clauses à 5 littéraux (et pas d'autres clauses), combien le système obtenu par votre réduction contient-il de variables et de clauses ? Vous devrez bien sûr justifier votre réponse.
 \end{sousenonce}
 
-TODO: Georges ? Bertrand ? Yoann ? Je ne sais pas comment répondre à cette question ! (jc)
+Le système obtenu par la réduction contient :
+\begin{itemize}
+\item Une variable supplémentaire pour chaque clause à 4 littéraux.
+\item Deux variables supplémentaires pour chaque clause à 5 littéraux.
+\item Soit au total $n_v + n_4 + 2n_5$ variables.
+\end{itemize}
+
+De plus, les expansions sont les suivantes :
+\begin{itemize}
+\item Un littéral : 1 clause
+\item Deux littéraux : 1 clause
+\item Trois littéraux : 1 clause
+\item Quatre littéraux : 2 clauses
+\item Cinq littéraux : 3 clause
+\item Soit au total $n_1 + n_2 + n_3 + 2n_4 + 3n_5$ clauses.
+\end{itemize}
 
 \begin{enonce}
 Pourquoi le principe de la réduction ne permet-il pas de réduire 3-SAT à 2-SAT et de prouver que 2-SAT est NP-complet ? (Il ne s'agit pas d'expliquer pourquoi 2-SAT n'est pas NP-complet, mais pourquoi cette réduction ne marche pas).
 \end{enonce}
 
-TODO: Georges ? Bertrand ? Yoann ? Je ne sais pas comment répondre à cette question ! (jc)
+Tentons de réduire la clause ${a, b, c}$ de manière similaire à l'algorithme donné pour la réduction de SAT à 3-SAT :
+On a ${a, z_1}$, puis ${\lnot z_1, b}$. Et à ce moment-là, on ne peut pas insérer de variable permettant de faire la liaison entre la clause qui contient $b$ et celle qui contient $c$.
 
 \begin{enonce}
-Il s'agit de prouver que 2-SAT est un problème polynomial. Vous avez un article en français expliquant cette preuve à http://philippe.gambette.free.fr/SCOL/Graphes
+Il s'agit de prouver que 2-SAT est un problème polynomial. Vous avez un article en français expliquant cette preuve à \\ http://philippe.gambette.free.fr/SCOL/Graphes
 \end{enonce}
 \setcounter{sousenoncecount}{0}
 
@@ -773,7 +821,6 @@ Il ne serait pas du tout utile de commencer par tous les couples $(0,y_{i})$  te
 
 Une solution, pour tous les nombres naturels, serait de parcourir un graphe comme suit:
 
-
 \begin{figure}[h!]
   \centering
   \begin{tikzpicture}[
@@ -813,9 +860,6 @@ Une solution, pour tous les nombres naturels, serait de parcourir un graphe comm
   \caption{Graphe G}
   \label{fig:codage-zigzag}
 \end{figure}
-
-
-
 
 TODO: Il faudrait ajouter les coordonnées (0,0), (1,0), (0,1), et les codes correspondants au graphe ci-dessus, etc. VOIR LES DIAGRAMMES QUE J'AI DONNE A BERTRAND
 
@@ -878,6 +922,17 @@ On peut parcourir le graphe à l'aide de la fonction 'zig-zag' qui, elle, se ser
 \end{lstlisting}
 
 
+%% TODO : JOHN :
+%% Pour définir un label pour une section / sous-section / …, il faut mettre ceci juste après le \section{…}
+%% \label{foobar}
+%%
+%% Pour avoir le numéro de page correspondant :
+%% \pageref{foobar}
+%%
+%% Pour le numéro de section / sous-section / … :
+%% \ref{foobar}
+%%
+%% Tu changes foobar par un nom de ton choix.
 L'intégralité du programme est en annexe à la page ???. Il existe également une version en C à la page ??.
 
 Voici une trace de cette fonction en passant \lstinline!*current*! égal à \lstinline!(0 0 0)! en paramètre et avec $n = 100$ :
@@ -1429,6 +1484,24 @@ Plusieurs programmes permettant de coder et de décoder des couples et des k-upl
   Peut-on énumérer les fonctions C syntaxiquements correctes ? Et les fonctions C qui ne bouclent jamais ? Justifier vos réponses le plus
   clairement et le plus synthétiquement possible.
 \end{enonce}
+
+GEORGES : quick answer, TODO BERTRAND
+
+On sait énumérer récursivement toutes les séquences d'octets~:
+
+Pour passer d'une séquence à la ``suivante'', On prend le dernier octet, s'il est inférieur à 255, on incrémente sa valeur de un, sinon on
+fait ça sur l'octet précédent, et ainsi de suite. Si on arrive au premier octet de la séquence sans avoir pu en incrémenter un, on crée une
+séquence d'octets de longueur $n+1$ (avec $n$ la longueur de la séquence courante), dans laquelle chaque octet vaut zéro.
+
+Pour énumérer les fonctions C syntaxiquement correctes, on passe successivement chaque séquence d'octets, et on vérifie si elle correspond à
+une fonction C syntaxiquement correcte (La reconaissance de la syntaxe C peut être faite grâce à un automate, qui termine toujours dans un
+temps fini). Si c'est une fonction C syntaxiquement correcte, on l'affiche, et dans tous les cas on passe à la suivante et on recommance.
+
+Pour les fonctions C qui ne bouclent jamais, c'est impossible : halting problem.
+
+TODO: Mettre l'explication du prof en cours pour le halting problem. Mots-clés : ensemble récursivement énumérable, ensemble effectivement
+énumérable, ensemble calculable (dénombrable ?). Je ne me souviens plus des détails de la démo, mais je peux la retrouver si personne
+d'autre n'y arrive. (Georges)
 
 TODO: Je ne sais pas comment répondre à cette question (jc)
 
