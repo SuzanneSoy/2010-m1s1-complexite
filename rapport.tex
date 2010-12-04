@@ -1497,15 +1497,9 @@ Pour énumérer les fonctions C syntaxiquement correctes, on passe successivemen
 une fonction C syntaxiquement correcte (La reconaissance de la syntaxe C peut être faite grâce à un automate, qui termine toujours dans un
 temps fini). Si c'est une fonction C syntaxiquement correcte, on l'affiche, et dans tous les cas on passe à la suivante et on recommance.
 
-Pour les fonctions C qui ne bouclent jamais, c'est impossible : halting problem.
-
-TODO: Mettre l'explication du prof en cours pour le halting problem. Mots-clés : ensemble récursivement énumérable, ensemble effectivement
-énumérable, ensemble calculable (dénombrable ?). Je ne me souviens plus des détails de la démo, mais je peux la retrouver si personne
-d'autre n'y arrive. (Georges)
-
 TODO : Ajouter par BERTRAND
-On ne peut pas enumerer toutes les fonctions C qui ne bouclent jamais.
-En effet, supposons qu'il existe un programme $h(p, x)$ tel que :
+
+Pour les fonctions C qui ne bouclent jamais, c'est impossible. En effet, supposons qu'il existe un programme $h(p, x)$ tel que :
 \[
 h(p, x) = \left\{
 \begin{array}{ll}
@@ -1514,6 +1508,7 @@ h(p, x) = \left\{
 \end{array}
 \right.
 \]
+
 On pourrais alors construire le programme $gamma(n)$ suivant :
 \begin{lstlisting}[language=C]
   int gamma(int x) {
@@ -1523,7 +1518,7 @@ On pourrais alors construire le programme $gamma(n)$ suivant :
      return (0);
   }
 \end{lstlisting}
-Si $\gamma(n)$ est defini alors $\gamma(n)$ boucle et donc n'est pas defini. Si $\gamma(n)$ est non defini alors $\gamma(n)$ retourne 0 donc est defini.
+Si $gamma(n)$ est defini alors $gamma(n)$ boucle et donc n'est pas defini. Si $gamma(n)$ est non defini alors $gamma(n)$ retourne 0 donc est defini.
 Dans les deux cas, il y a contradiction, et donc on ne peut pas enumerer toutes les fonctions C qui ne bouclent jamais.
 
 TODO: Je ne sais pas comment répondre à cette question (jc)
