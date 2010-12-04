@@ -525,13 +525,13 @@ $$
 Les $z_i$ sont des variables % TODO JOHN !!!! : corrige le nom "variable", je ne sais pas comment on dit.
 qu'on crée pour relier les clauses entre elles, et qui n'existent pas dans la formule.
 
-Par exemple, la clause ${a, \lnot b, c d}$ sera transformée en deux clauses : ${a, \lnot b, z_1}$ et ${\lnot z_1, c, d}$, et la clause
+Par exemple, la clause ${a, \lnot b, c, d}$ sera transformée en deux clauses : ${a, \lnot b, z_1}$ et ${\lnot z_1, c, d}$, et la clause
 ${\lnot a, b, \lnot c, d, e}$ sera transformée en trois clauses : ${\lnot a, b, z_1}$ et ${\lnot z_1, \lnot c, z_2}$ et ${\lnot z_2, d, e}$.
 
 Les clauses créées sont équivalentes à la clause d'origine car, à chaque fois, soit un des littéraux d'origine vérifie la clause, et $z_i$
 peut être faux, ce qui permet au $\lnot z_i$ de valider la clause suivante, de proche en proche, soit aucun des littéraux d'origine ne
 vérifie la clause, auquel cas, si on prend un $z_i$ faux, la clause est fausse, et si on prend un $z_i$ vrai, la clause suivante contiendra
-$\lnot z_i$ qui sera faux, et le résultat dépendra des variables de la clause suivante (ou des suivantes). % TODO BERTRAND : éclaircir ça, c'est mal expliqué.
+$\lnot z_i$ qui sera faux, et le résultat dépendra des variables de la clause suivante (ou des suivantes). % TODO BERTRAND: éclaircir ça, c'est mal expliqué.
 
 Si on souhaite que le résultat soit strictement 3-SAT (toutes les clauses contiennent 3 littéraux, pas plus, pas moins), on applique les transformations suivantes :
 \begin{itemize}
@@ -1502,6 +1502,29 @@ Pour les fonctions C qui ne bouclent jamais, c'est impossible : halting problem.
 TODO: Mettre l'explication du prof en cours pour le halting problem. Mots-clés : ensemble récursivement énumérable, ensemble effectivement
 énumérable, ensemble calculable (dénombrable ?). Je ne me souviens plus des détails de la démo, mais je peux la retrouver si personne
 d'autre n'y arrive. (Georges)
+
+TODO : Ajouter par BERTRAND
+On ne peut pas enumerer toutes les fonctions C qui ne bouclent jamais.
+En effet, supposons qu'il existe un programme $h(p, x)$ tel que :
+\[
+h(p, x) = \left\{
+\begin{array}{ll}
+  1 & \qquad \mathrm{si}\ p(x)\ est\ defini \\
+  0 & \qquad \mathrm{sinon} \\
+\end{array}
+\right.
+\]
+On pourrais alors construire le programme $gamma(n)$ suivant :
+\begin{lstlisting}[language=C]
+  int gamma(int x) {
+    if (h(gamma, x))
+     while (1);
+    else
+     return (0);
+  }
+\end{lstlisting}
+Si $\gamma(n)$ est defini alors $\gamma(n)$ boucle et donc n'est pas defini. Si $\gamma(n)$ est non defini alors $\gamma(n)$ retourne 0 donc est defini.
+Dans les deux cas, il y a contradiction, et donc on ne peut pas enumerer toutes les fonctions C qui ne bouclent jamais.
 
 TODO: Je ne sais pas comment répondre à cette question (jc)
 
