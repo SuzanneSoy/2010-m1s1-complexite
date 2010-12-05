@@ -1499,16 +1499,16 @@ Pour les fonctions C qui ne bouclent jamais, cela n'est pas possible. En effet, 
 \[
 h(p, x) = \left\{
 \begin{array}{ll}
-  1 & \qquad \mathrm{si}\ p(x)\ est\ defini \\
+  1 & \qquad \mathrm{si}\ \mathrm{p(x)\ est\ defini} \\
   0 & \qquad \mathrm{sinon} \\
 \end{array}
 \right.
 \]
 
-... on pourrait alors construire le programme $gamma(n)$ suivant~:
+\ldots on pourrait alors construire le programme $gamma(n)$ suivant~:
 \begin{lstlisting}[language=C]
-  int gamma(int x) {
-    if (h(gamma, x))
+  int gamma(int n) {
+    if (h(gamma, n))
      while (1);
     else
      return (0);
