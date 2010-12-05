@@ -1489,17 +1489,13 @@ GEORGES : quick answer, TODO BERTRAND
 
 On sait énumérer récursivement toutes les séquences d'octets~:
 
-Pour passer d'une séquence à la ``suivante'', On prend le dernier octet, s'il est inférieur à 255, on incrémente sa valeur de un, sinon on
-fait ça sur l'octet précédent, et ainsi de suite. Si on arrive au premier octet de la séquence sans avoir pu en incrémenter un, on crée une
-séquence d'octets de longueur $n+1$ (avec $n$ la longueur de la séquence courante), dans laquelle chaque octet vaut zéro.
+Pour passer d'une séquence à la suivante, on commence par le dernier octet. S'il est inférieur à 255, on incrémente sa valeur de 1, sinon on passe à l'octet d'avant, et continue la même démarche. Si on arrive au premier octet de la séquence sans avoir pu en incrémenter de 1, on crée une séquence d'octets de longueur $n + 1$ (où $n$ est la longueur de la séquence courante) dans laquelle chaque octet vaut zéro.
 
-Pour énumérer les fonctions C syntaxiquement correctes, on passe successivement chaque séquence d'octets, et on vérifie si elle correspond à
-une fonction C syntaxiquement correcte (La reconaissance de la syntaxe C peut être faite grâce à un automate, qui termine toujours dans un
-temps fini). Si c'est une fonction C syntaxiquement correcte, on l'affiche, et dans tous les cas on passe à la suivante et on recommance.
+Pour énumérer les fonctions C syntaxiquement correctes, on passe successivement chaque séquence d'octets et on vérifie si elle correspond à une fonction C syntaxiquement correcte (La reconaissance de la syntaxe C peut être faite grâce à un automate, qui se termine toujours dans un temps fini). S'il s'agit d'une fonction C syntaxiquement correcte, on l'affiche, et dans tous les cas on passe à la suivante et on recommence.
 
 TODO : Ajouter par BERTRAND
 
-Pour les fonctions C qui ne bouclent jamais, c'est impossible. En effet, supposons qu'il existe un programme $h(p, x)$ tel que :
+Pour les fonctions C qui ne bouclent jamais, cela n'est pas possible. En effet, supposons qu'il existe un programme $h(p, x)$ tel que :
 \[
 h(p, x) = \left\{
 \begin{array}{ll}
@@ -1509,7 +1505,7 @@ h(p, x) = \left\{
 \right.
 \]
 
-On pourrais alors construire le programme $gamma(n)$ suivant :
+... on pourrait alors construire le programme $gamma(n)$ suivant~:
 \begin{lstlisting}[language=C]
   int gamma(int x) {
     if (h(gamma, x))
@@ -1518,12 +1514,15 @@ On pourrais alors construire le programme $gamma(n)$ suivant :
      return (0);
   }
 \end{lstlisting}
-Si $gamma(n)$ est defini alors $gamma(n)$ boucle et donc n'est pas defini. Si $gamma(n)$ est non defini alors $gamma(n)$ retourne 0 donc est defini.
-Dans les deux cas, il y a contradiction, et donc on ne peut pas enumerer toutes les fonctions C qui ne bouclent jamais.
+Si $gamma(n)$ est défini, alors $gamma(n)$ boucle et donc n'est pas défini. Si $gamma(n)$ est non défini, alors $gamma(n)$ retourne 0, donc $gamma(n)$ est défini.
+Dans les deux cas, il y a contradiction. Par conséquent, il n'est pas possible d'énumerer toutes les fonctions C qui ne bouclent jamais.
 
 TODO: Je ne sais pas comment répondre à cette question (jc)
 
 \section{Partie pratique sur les algorithmes de flots}
+
+TODO: ajouter tout simplement dans la partie qui suit la page correspondante dans l'annexe (qui contiendra tout le code de Yoann. On s'est mis d'accord sur ça lors de notre séance de travail de mercredi 1 décembre)
+
 
 \subsubsection*{Exercice \stepcounter{exocount}\bf\small \arabic{exocount} -- La méthode de Edmonds-Karp et celle de Dinic}
 \addcontentsline{toc}{subsubsection}{Exercice \arabic{exocount} -- La méthode de Edmonds-Karp et celle de Dinic}
