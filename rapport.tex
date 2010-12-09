@@ -514,42 +514,39 @@ Lorsqu'il est possible de réduire un problème difficile en un problème que l'
 
 GEORGES : Définition de la réduction de SAT à 3-SAT :
 
-On prend chaque clause de littéraux du problème SAT, et on la transforme en une ou plusieurs clauses de la manière suivante :
+Pour la réduction de SAT à 3-SAT, on prend chaque clause de littéraux du problème SAT et on la transforme en une ou plusieurs clauses de la manière suivante~:
 
-Si la clause possède 3 littéraux (ou moins), on la laisse telle qu'elle (elle est déjà sous «forme» SAT-3).
-
-Sinon, soient $l_1, \dots, l_n$ les littéraux de la clause, on construit plusieurs clauses ainsi :
+\begin{itemize}
+\item Si la clause possède 3 littéraux ou moins, on la laisse telle quelle. Elle est déjà sous forme 3-SAT.
+\item Sinon, soient $l_1, \dots, l_n$ les littéraux de la clause, on construit plusieurs clauses ainsi~:
 $$
 {l_1, l_2, z_1}, {\lnot z_1, l_3, z_2}, {\lnot z_2, l_4, z_3}, \dots, {\lnot z_{i-2}, l_{i}, z_{i-1}}, \dots, {\lnot z_{n-3}, l_{n-1}, l_{n}}
 $$
-Les $z_i$ sont des variables % TODO JOHN !!!! : corrige le nom "variable", je ne sais pas comment on dit.
-qu'on crée pour relier les clauses entre elles, et qui n'existent pas dans la formule.
+\end{itemize}
 
-Par exemple, la clause ${a, \lnot b, c, d}$ sera transformée en deux clauses : ${a, \lnot b, z_1}$ et ${\lnot z_1, c, d}$, et la clause
-${\lnot a, b, \lnot c, d, e}$ sera transformée en trois clauses : ${\lnot a, b, z_1}$ et ${\lnot z_1, \lnot c, z_2}$ et ${\lnot z_2, d, e}$.
+Les littéraux $z_i$, qui n'était pas présents dans la clause d'origine, sont ajoutés afin de pouvoir subdiviser une clause en deux ou plusieurs les clauses et afin de les relier. Par exemple, la clause $(a \vee \lnot b \vee c \vee d)$ sera transformée en deux clauses~: $(a \vee \lnot b \vee z_1) \wedge (\lnot z_1 \vee c \vee d)$ ; la clause
+${\lnot a \vee b \vee \lnot c \vee d \vee e}$ sera transformée en trois clauses, à savoir $(\lnot a \vee b \vee z_1) \wedge (\lnot z_1 \vee \lnot c \vee z_2) \wedge (\lnot z_2 \vee d \vee e)$.
 
-Les clauses créées sont équivalentes à la clause d'origine car, à chaque fois, soit un des littéraux d'origine vérifie la clause, et $z_i$
-peut être faux, ce qui permet au $\lnot z_i$ de valider la clause suivante, de proche en proche, soit aucun des littéraux d'origine ne
-vérifie la clause, auquel cas, si on prend un $z_i$ faux, la clause est fausse, et si on prend un $z_i$ vrai, la clause suivante contiendra
-$\lnot z_i$ qui sera faux, et le résultat dépendra des variables de la clause suivante (ou des suivantes). % TODO BERTRAND: éclaircir ça, c'est mal expliqué.
+L'ensemble des clauses ainsi créées sont équivalentes aux clauses d'origines correspondante car, à chaque fois, soit un des littéraux d'origine vérifie la clause, et $z_i$ peut être faux, ce qui permet au $\lnot z_i$ de valider la clause suivante, de proche en proche, soit aucun des littéraux d'origine ne vérifie la clause, auquel cas, si on prend un $z_i$ faux, la clause est fausse, et si on prend un $z_i$ vrai, la clause suivante contiendra
+$\lnot z_i$ qui sera faux, et le résultat dépendra des littéraux de la ou des clause(s) suivante(s). 
 
-Si on souhaite que le résultat soit strictement 3-SAT (toutes les clauses contiennent 3 littéraux, pas plus, pas moins), on applique les transformations suivantes :
+% TODO BERTRAND: éclaircir ça, c'est mal expliqué.
+
+Si l'on souhaite que le résultat soit strictement 3-SAT (toutes les clauses contenant exactement 3 littéraux, on applique les transformations suivantes~:
 \begin{itemize}
-\item Les clauses qui contienntent un seul littéral, ${l_1}$, sont transformées en ${l_1, l_1, l_1}$.
+\item Les clauses qui contiennent un seul littéral, ${l_1}$, sont transformées en ${l_1, l_1, l_1}$.
 \item Les clauses qui contiennent exactement deux littéraux, ${l_1, l_2}$ sont transformées en ${l_1, l_2, l_1}$.
 \end{itemize}
 
-Cette transformation est linéaire en complexité (on ne considère chaque littéral qu'une fois, et on ajoute $n-3$ littéraux pour chaque clause), donc de complexité polynomiale.
+Cette transformation est linéaire en complexité. En effet, on ne considère chaque littéral qu'une fois et on ajoute $n-3$ littéraux pour chaque clause. Il s'agit de complexité polynomiale.
 
 \begin{sousenonce}
 Justifier alors que 3-SAT est NP-complet (sachant que SAT est NP-complet).
 \end{sousenonce}
 
-Vu que SAT est np-complet, et que 3-SAT sait faire ce que sait faire SAT, avec une transformation polynomiale, du coup 3-SAT (+ la
-transformation) est au moins aussi dur que SAT. La difficulté peut résiter dans la transformation, 3-SAT ou les deux.
+Vu que SAT est np-complet et que 3-SAT sait faire ce que sait faire SAT, avec une transformation polynomiale, 3-SAT (y compris la transformation) est au moins aussi dur que SAT. La difficulté peut résiter(??) dans la transformation, 3-SAT ou les deux.(??)
 
-Vu que la difficulté ne s'est pas cachée dans la transformation (qui est polynomiale, alors que SAT est np-complet), bah 3-SAT est
-np-complet lui aussi.  TODO: Georges ? Bertrand ? Yoann ? Je ne sais pas comment répondre à cette question ! (jc)
+Vu que la difficulté ne s'est pas cachée dans la transformation, qui est polynomiale alors que SAT est np-complet, 3-SAT est np-complet lui aussi.  
 
 \begin{sousenonce}
 Application : si un ensemble de clauses contient $n_v$ variables, $n_1$ clauses à un littéral, $n_2$ clauses à 2 littéraux, $n_3$ clauses à 3 littéraux, $n_4$ clauses à 4 littéraux, $n_5$ clauses à 5 littéraux (et pas d'autres clauses), combien le système obtenu par votre réduction contient-il de variables et de clauses ? Vous devrez bien sûr justifier votre réponse.
@@ -572,12 +569,16 @@ De plus, les expansions sont les suivantes :
 \item Soit au total $n_1 + n_2 + n_3 + 2n_4 + 3n_5$ clauses.
 \end{itemize}
 
+
 \begin{enonce}
 Pourquoi le principe de la réduction ne permet-il pas de réduire 3-SAT à 2-SAT et de prouver que 2-SAT est NP-complet ? (Il ne s'agit pas d'expliquer pourquoi 2-SAT n'est pas NP-complet, mais pourquoi cette réduction ne marche pas).
 \end{enonce}
 
-Tentons de réduire la clause ${a, b, c}$ de manière similaire à l'algorithme donné pour la réduction de SAT à 3-SAT :
-On a ${a, z_1}$, puis ${\lnot z_1, b}$. Et à ce moment-là, on ne peut pas insérer de variable permettant de faire la liaison entre la clause qui contient $b$ et celle qui contient $c$.
+Tentons de réduire la clause $(a \vee b \vee c)$ de manière similaire à l'algorithme donné pour la réduction de SAT à 3-SAT~. 
+
+On a $(a \vee z_1) \wedge (\lnot z_1 \vee b)$. A partir de là, on ne peut insérer de variable permettant de faire la liaison entre la clause qui contient $b$ et celle qui contient $c$.
+
+TODO: Cette question, est-elle répondue ? 
 
 \begin{enonce}
 Il s'agit de prouver que 2-SAT est un problème polynomial. Vous avez un article en français expliquant cette preuve à \\ http://philippe.gambette.free.fr/SCOL/Graphes
@@ -759,7 +760,7 @@ Vous expliciterez ensuite l'algorithme de transformation et vous évaluerez sa c
 TODO: GEORGES -> J'ai trouvé la citation du CORMEN que j'ai mis ici, mais je ne sais pas comment répondre à cette question avec justesse. Donc, j'ai trouvé toutes les infos, peut-être que quelqu'un pourrait finir cette question. On supprime, bien entendu, cette sitation de CORMEN. Merci, JC.
 JE NE SUIS PAS DU TOUT SUR DE LA REPONSE A CETTE QUESTION... J'AI COMMENCE A REDIGER, MAIS...
 
-Tout d'abord, il faut transformer une formule en forme normale conjonctive en une série d'implications. Cela ce fait en temps linéaire, en $O(n)$. Ensuite, il faut créer le graphe associé -- numérotation et attribution des valeurs $VRAI$ et $FAUX$, ce qui se fait également en 0(n). 
+Tout d'abord, il faut transformer une formule en forme normale conjonctive en une série d'implications. Cela se fait en temps linéaire, en $O(n)$. Ensuite, il faut créer le graphe associé -- numérotation et attribution des valeurs $VRAI$ et $FAUX$, ce qui se fait également en 0(n). 
 
 
 CORMEN:
@@ -794,7 +795,7 @@ Vous expliciterez ensuite l'algorithme d'exploration du graphe et vous évaluere
 
 TODO: J'ai répondu en quelques lignes ci-dessous, mais je ne sais pas du tout si ce que j'ai dit est juste. Quelqu'un pourrait le compléter ou le refaire, cette partie ? Merci, JC.
 
-Le tri topologique se fait $en \theta(V + E)$ en faisant un parcours en profondeur. Etablir s'il existe un composant connexe (sans prendre en compte, pour l'instant, si ce composant contient un sommet ainsi que sa négation) se fait en $O(V + E)$. Etablir s'il existe un littéral et sa négation se fait en temps linéaire $O(n)$. 
+Le tri topologique se fait en $\theta(V + E)$ en faisant un parcours en profondeur. Etablir s'il existe une composante connexe (sans prendre en compte, pour l'instant, si ce composant contient un sommet ainsi que sa négation) se fait en $O(V + E)$. Etablir s'il existe un littéral et sa négation se fait en temps linéaire $O(n)$. 
 
 Tout l'algorithme se fait donc en temps linéaire, en $theta(V + E)$
 
