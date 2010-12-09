@@ -594,7 +594,7 @@ Philippe Gambette, dans son article intitulé 'Un graphe pour résoudre 2-SAT', 
 Une formule logique en forme normale conjonctive contenant des clauses à deux littéraux est transformé en un problème de graphe orienté. On doit tout d'abord établir si la formule admet un modèle, et ensuite, si tel est le cas, donner un modèle quelconque.
 
 \begin{enumerate}
-\item L'algorithme du construction de graphe : 
+\item L'algorithme de construction de graphe : 
 \begin{enumerate}
 \item On crée un graphe avec $2n$ sommets ($n$ étant ici le nombre littéraux distincts de la formule) contenant tous les littéraux de la formule ainsi que les négations de ces littéraux.
 \item On prend chaque clause de la formule que l'on traduit en implications dans les deux sens : $(a \vee b)$ 
@@ -751,7 +751,9 @@ L'application de l'algorithme de transformation en graphe d'une formule valide n
 
 L'objectif de cet algorithme n'est pas de dire si une formule satisfiable est contingente ou valide. Toutefois, si le résultat de l'algorithme est un graphe ne comportant que des boucles à chaque sommet, la formule associée est satisfiable et valide. Autrement, et si le graphe ne contient aucune composante fortement connexe contenant un littéral et sa négation, la formule est contingente.
 
-TODO: VERIFIER CES DEUX DERNIERS PHRASES (PRECEDENTES), EST-CE QUE C'EST JUSTE ? C'EST MOI QUI A FAIT CES CONSTATATIONS 
+TODO: VERIFIER CES DEUX DERNIERS PHRASES (PRECEDENTES), EST-CE QUE C'EST JUSTE ? C'EST MOI QUI A FAIT CES CONSTATATIONS
+
+%% TODO : Georges : Oui, c'est bon. Mettre un contre-modèle trivial à trouver dans le cas où une des clauses ne contient pas un littéral et sa négation : (a \/ b) /\ ..., il suffit d'avoir a faux ou bien b faux, la clasuse sera fausse, le reste est connecté par des /\, donc toute la formule sera fausse, c'est un contre-modèle.
 
 \begin{sousenonce}
 Vous expliciterez ensuite l'algorithme de transformation et vous évaluerez sa complexité.
@@ -760,11 +762,52 @@ Vous expliciterez ensuite l'algorithme de transformation et vous évaluerez sa c
 TODO: GEORGES -> J'ai trouvé la citation du CORMEN que j'ai mis ici, mais je ne sais pas comment répondre à cette question avec justesse. Donc, j'ai trouvé toutes les infos, peut-être que quelqu'un pourrait finir cette question. On supprime, bien entendu, cette sitation de CORMEN. Merci, JC.
 JE NE SUIS PAS DU TOUT SUR DE LA REPONSE A CETTE QUESTION... J'AI COMMENCE A REDIGER, MAIS...
 
-Tout d'abord, il faut transformer une formule en forme normale conjonctive en une série d'implications. Cela se fait en temps linéaire, en $O(n)$. Ensuite, il faut créer le graphe associé -- numérotation et attribution des valeurs $VRAI$ et $FAUX$, ce qui se fait également en 0(n). 
+TODO : Début Coût ala georges
 
+Note : en triant la liste des sommets du graphe (coût nlogn pour le tri), on peut effectuer les opérations de recherche d'un littéral (ou de sa négation) par dichotomie (coût logn), donc les $c \times l$ et $O(l \times l)$ (1.a, 1.c, 3.) ci-dessous deviennent respectivement $O(c \log l)$ et $O(l \log l)$
+
+c = nb clauses
+l = nb littéraux
+
+\begin{itemize}
+\item 1.a : $O(c \times l)$ car pour chaque littéral qu'on insère, il faut chercher s'il existe déjà.
+\item 1.b : $O(c)$ une opération pour chaque clause
+\item 1.c : $O(c \times l)$ pour chaque clause, on cherche ses 2 littéraux et leur négation dans le graphe
+\item 2. : $O(card(V) + card(E))$, comme $card(V) = 2l$ et $card(E) <= 2c$ (inférieur ou égal à cause des doublons potentiels qui n'ajoutent rien au graphe)., donc $O(l+c)$
+\item 3. : $O(l \times l)$, car pour chaque littéral qu'on rencontre, on devra chercher sa négation dans tout le graphe.
+\end{itemize}
+
+Comme $l <= 2c$, tous les l ci-dessus peuvent être transformés en c.
+
+Donc, on prend le coût le plus élevé :
+$$
+O(c^2 + c + c^2 + 2c + c^2) = O(c^2)
+$$
+
+On a donc bien un coût polynomial.
+
+De plus, si on trie le graphe, on a (le premier $c \log c$ est la création du graphe en maintenant sa liste de sommets triés (tri par insertion)):
+$$
+O(c \log c + c + c \log c + 2c + c \log c) = O(c \log c)
+$$
+
+
+TODO : Fin coût ala georges
+
+
+
+
+TODO : L'algo de transformation est explicité plus haut, sous le nom ``L'algorithme de construction de graphe''
+
+
+TODO : Préciser que $O(n)$ $O(nombre-clauses)$
+
+Tout d'abord, il faut transformer une formule en forme normale conjonctive en une série d'implications. Cela se fait en temps linéaire, en $O(n)$. Ensuite, il faut créer le graphe associé -- numérotation et attribution des valeurs $VRAI$ et $FAUX$, ce qui se fait également en $O(n)$.
+
+TODO : ci-dessus : $O(n^2)$ normalement (pour chaque noeud x, on va chercher ``non x''. On peut l'optimiser en $O(n \log n)$.
 
 CORMEN:
-We can perform a topological sort in time , since depth-first search takes $\theta(V + E)$
+We can perform a topological sort in polynomial time , since depth-first search takes $\theta(V + E)$
 time and it takes O(1) time to insert each of the |V| vertices onto the front of the linked list.
 
 
@@ -1496,12 +1539,23 @@ Pour énumérer les fonctions C syntaxiquement correctes, on passe successivemen
 
 TODO : Ajouter par BERTRAND
 
-Pour les fonctions C qui ne bouclent jamais, cela n'est pas possible. En effet, supposons qu'il existe un programme $h(p, x)$ tel que :
+TODO : mettre l'énoncé + phrase intro
+
+TODO : Georges a dit (jacques aussi) : Énumérer les fonctions consiste à fournir un algorithme (donc un programme) permettant de donner l'élément suivant à partir de l'élément courant (ou de les donner un à un, ce qui revient à la même chose).
+
+Dans ce cas-ci, il faudrait donc faire un programme (algorithme) qui énumère toutes les fonctions C (ce qu'on sait faire), et soit capable de ne pas lister celles qui bouclent indéfiniment.
+
+Or, cela signifierait que ce programme (algorithme) serait capable de résoudre le problème de l'arrêt, ce qui n'est pas possible.
+
+% TODO : faire un titre de la ligne suivante
+Démonstration de l'impossibilité de résoudre algorithmiquement le problème de l'arrêt.
+
+Supposons qu'il existe un programme $h(p, x)$ prennant en paramètre un programme et une donnée tel que :
 \[
 h(p, x) = \left\{
 \begin{array}{ll}
-  1 & \qquad \mathrm{si}\ \mathrm{p(x)\ est\ defini} \\
-  0 & \qquad \mathrm{sinon} \\
+  1 & \qquad \mathrm{si\ $p(x)$\ se termine} \\
+  0 & \qquad \mathrm{sinon\ ($p(x)$ boucle indéfiniment} \\
 \end{array}
 \right.
 \]
@@ -1515,10 +1569,9 @@ h(p, x) = \left\{
      return (0);
   }
 \end{lstlisting}
-Si $gamma(n)$ est défini, alors $gamma(n)$ boucle et donc n'est pas défini. Si $gamma(n)$ est non défini, alors $gamma(n)$ retourne 0, donc $gamma(n)$ est défini.
-Dans les deux cas, il y a contradiction. Par conséquent, il n'est pas possible d'énumerer toutes les fonctions C qui ne bouclent jamais.
+Si $gamma(n)$ se termine, alors $gamma(n)$ boucle et donc ne se termine pas. Si $gamma(n)$ ne se termine pas, alors $gamma(n)$ retourne 0, donc $gamma(n)$ se termine.
 
-TODO: Je ne sais pas comment répondre à cette question (jc)
+Dans les deux cas, il y a contradiction. Par conséquent, il n'est pas possible de déterminer algorithmiquement si un programme s'arrête ou boucle indéfiniment, et donc il est impossible d'énumerer toutes les fonctions C qui ne bouclent jamais (puisqu'on ne peut pas savoir si la fonction en question boucle ou non, on ne peut pas savoir si elle fait partie de l'énumération ou non).
 
 \section{Partie pratique sur les algorithmes de flots}
 
