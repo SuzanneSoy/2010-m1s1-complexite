@@ -46,6 +46,8 @@
      do (setf (aref c index2) 0)
      finally (return ge)))
 
+(transport->ecart (build-transport-list 0 8 '((1 8 9) (2 8 1) (3 5 2) (3 4 4) (3 2 4) (4 8 2) (5 8 2) (4 6 3) (6 7 5) (7 1 6))))
+
 (defun transport->couche (gt)
   (let ((ge (transport->ecart gt)))
     (make-couche :nb-noeuds (transport-nb-noeuds ge)
@@ -130,9 +132,8 @@
      (loop
         with source = source
         and puits = puits
-        and noeuds = (remove-duplicates (append (map 'list #'car arcs+capa)
-                                                (map 'list #'cadr arcs+capa)))
-        with nb-noeuds = (length noeuds)
+        and nb-noeuds = (1+ (max (loop for i ,across/in arcs+capa maximize (car i))
+                                 (loop for i ,across/in arcs+capa maximize (cadr i))))
         and nb-arcs = (length arcs+capa)
         with arcs-sortants = (make-array nb-noeuds :initial-element nil)
         and arcs = (make-array nb-arcs)
@@ -221,6 +222,7 @@
                 do (decf (aref (couche-capacites gc) arcnumpair) delta)
                 do (incf (aref (couche-capacites gc) (+ arcnumpair 1)) delta)
                 ;; pop de la pile
+                finally (push delta pile-delta)
                 finally (push liste-arcs-sortants pile-arcs-sortants)
                 finally (go pop)))
            (progn
@@ -247,6 +249,8 @@
      do (maj-ecart-couche gc)))
 
 (defun build-graphe-exemple (n &optional (density 10) (maxcapa 10))
+  (when (<= n 2)
+    (error "build-graphe-exemple : n est trop petit !"))
   (loop
      with arcs = nil
      with dejafait = (make-array n :initial-element nil)
@@ -276,12 +280,13 @@
 
 ;; TODO :
 
-;; (defun test-under (maxn)
-;;   (loop
-;;      for n from 2 to maxn
-;;      collect (loop
-;;                 for i from 0 to 4
-;;                 for gt = (build-graphe-exemple 20)
-;;                 collect (time (edmonds-karp gt)) into t-ek
-;;                 collect (time (dinic gt)) into t-d
-;;                 finally (return (list n t-ek t-d)))))
+(defun test-between (maxn &optional (minn 3) (nb-average 5))
+  (loop
+     for n from (max minn 3) to maxn
+     do (loop
+           for repeat from 1 to nb-average
+           for gt = (build-graphe-exemple n)
+           for ek = (car (progn (format t "~&ek ~a ~a~&" n repeat) (time (edmonds-karp gt))))
+           for d  = (car (progn (format t "~&di ~a ~a~&" n repeat) (time (dinic gt))))
+           unless (= ek d)
+             do (error "edmonds-karp et dinic ont des résultats différents ! Le graphe :~&~a" gt))))
