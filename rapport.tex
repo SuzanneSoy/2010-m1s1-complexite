@@ -196,26 +196,46 @@ Montrer qu'il existe une coupe dans G* de capacité minimale de laquelle sort un
 \end{enonce}
 
 Démonstration par construction~: 
-On effectue un tri topologique sur le graphe des contraintes de précédence $G(\{J_1, \dots, J_n\}, E)$. Ce tri topologique nous donne un ensemble ordonné de n\oe uds $(J_{a1}, \dots, J_{an})$. On a donc~:
+On effectue un tri topologique sur le graphe des contraintes de précédence $G(\{J_1, \dots, J_n\}, E)$. Ce tri topologique nous donne un
+ensemble ordonné de n\oe uds $(J_{a1}, \dots, J_{an})$. On a donc~:
 $$\forall J_{ai} \quad \nexists \ j < i \quad | \quad \exists (J_{aj}, J_{ai}) \in E$$
 On transforme ensuite $G$ en un graphe de flots à l'aide de l'algorithme fourni dans le sujet. 
 Considérons les arcs entre les $v_{ai,t}$~: 
 \begin{itemize}
 	\item Arcs d'affectation~: ces arcs sont entre des sommets $v_{ai,t}$ et $v_{aj,t'}$ avec $ai = aj$
-	\item Arcs de précédences~: ces arcs sont entre des sommets $v_{ai,t}$ et $v_{aj,t'}$ avec $ai < aj$, car grâce au tri topologique, il n'existe pas d'arcs entre des sommets $J_{ai}$ et $J_{aj}$ avec $aj < ai$, et de plus il n'y a pas de boucle (donc pas d'arc $(J_{ai},J_{ai})$ dans $G$, donc pas d'arc $(v_{ai,t}, v_{ai,t'})$ dans $G*$).
+	\item Arcs de précédences~: ces arcs sont entre des sommets $v_{ai,t}$ et $v_{aj,t'}$ avec $ai < aj$, car grâce au tri topologique, il
+      n'existe pas d'arcs entre des sommets $J_{ai}$ et $J_{aj}$ avec $aj < ai$, et de plus il n'y a pas de boucle (donc pas d'arc
+      $(J_{ai},J_{ai})$ dans $G$, donc pas d'arc $(v_{ai,t}, v_{ai,t'})$ dans $G*$).
 	\item Arcs auxiliaires~: ces arcs ne sont pas entre des sommets $v_{ai,t}$.
 \end{itemize}
-Soit un $(s-t)-\mathrm{coupe}$ minimale, entre les ensembles de noeuds $S$ et $T$. Etant donné que cette coupe est minimale, aucun arc de capacité infinie n'a son origine dans $S$ et son extremité dans $\overline{S}$. Autrement dit, en fonction des noeuds présents dans S, on est donc \og obligé\fg d'inclure dans $S$ toutes les extrémités des arcs de capacité infinie et dont l'origine est dans $S$. On va donc construire $S$ itérativement en suivant cette règle.
+
+Soit un $(s-t)-\mathrm{coupe}$ minimale, entre les ensembles de noeuds $S$ et $T$. Etant donné que cette coupe est minimale, aucun arc de
+capacité infinie n'a son origine dans $S$ et son extremité dans $\overline{S}$. Autrement dit, en fonction des noeuds présents dans S, on
+est donc \og obligé\fg d'inclure dans $S$ toutes les extrémités des arcs de capacité infinie et dont l'origine est dans $S$. On va donc
+construire $S$ itérativement en suivant cette règle.
 
 \begin{itemize}
-\item $s \in S$, et tous les arcs sortant de $s$ sont les arcs auxiliaires, de capacité infinie, qui pointent
-sur tous les $v_{ai,0}$. On les inclut donc dans $S$.
-\item Pour chaque $v_{ai,t}$ dans $S$, on n'a pas besoin de suivre les arcs d'affectation, car ils sont de capacité finie. Comme ces arcs d'affectation \og restent sur la même ligne\fg, à partir du moment où un $v_{ai,t}$ est présent dans $S$, les arcs d'affectation ne nous obligent pas à inclure les $v_{ai,t'}$ avec $t' > t$.
-\item Par contre les arcs de précédence nous obligent, lorsqu'on inclut un $v_{ai,t}$, d'inclure tous les $v_{aj,t'}$ qui sont à l'extrémité d'un arc de précédence partant de 
+\item $s \in S$, et tous les arcs sortant de $s$ sont les arcs auxiliaires, de capacité infinie, qui pointent sur tous les $v_{ai,0}$. On
+  les inclut donc dans $S$.
+\item Pour chaque $v_{ai,t}$ dans $S$, on n'a pas besoin de suivre les arcs d'affectation, car ils sont de capacité finie. Comme ces arcs
+  d'affectation \og restent sur la même ligne\fg, à partir du moment où un $v_{ai,t}$ est présent dans $S$, les arcs d'affectation ne nous
+  obligent pas à inclure les $v_{ai,t'}$ avec $t' > t$.
+\item Par contre les arcs de précédence nous obligent, lorsqu'on inclut un $v_{ai,t}$, d'inclure tous les $v_{aj,t'}$ qui sont à l'extrémité
+  d'un arc de précédence partant de ce $v_{ai,t}$.
 \end{itemize}
 
-TODO~: Montrons que s'il s'agit d'une coupe minimale, il ne sort qu'un et qu'un
-seul arc d'affectation par job. Il faut aussi montrer qu'il (il = l'arc d'affectation) existe.
+Puisque la coupe est minimale et que tous les $v_{ai,0}$ font partie de $S$, lorsqu'un $v_{ai,t}$ fait partie de S, alors tous les
+$v_{ai,t'}$ avec $0 <= t' <= t$ font aussi partie de $S$ (car sinon on ajoute le coût des arcs d'affectation intermédiaires).
+
+On a donc $s \in S$ et
+$$\forall ai \quad \exists t \quad (0 <= t' <= t) \Leftrightarrow (v_{ai,t} \in S)$$
+
+Il ne sort donc qu'un et un seul arc d'affectation par job.
+
+Évidemment, cette coupe minimale ne peut exister que s'il y a «suffisement de temps pour tout faire», autrement dit, si la somme des durées
+d'exécution des tâches est supérieure au temps disponible, on ne pourra pas effectuer toutes les tâches.
+
+TODO : Georges, ça continue ici…
 
 \begin{enonce}
 Montrer que l'on peut associer un ordonnancement réalisable (qui respectent toutes les contraintes à toute 
@@ -1561,8 +1581,8 @@ Supposons qu'il existe un programme $h(p, x)$ prennant en paramètre un programm
 \[
 h(p, x) = \left\{
 \begin{array}{ll}
-  1 & \qquad \mathrm{si\ $p(x)$\ se termine} \\
-  0 & \qquad \mathrm{sinon\ ($p(x)$ boucle indéfiniment} \\
+  1 & \qquad \text{si $p(x)$ se termine} \\
+  0 & \qquad \text{sinon $p(x)$ boucle indéfiniment} \\
 \end{array}
 \right.
 \]
