@@ -1,5 +1,6 @@
 (defstruct (transport) nb-noeuds source puits arcs-sortants arcs capacites)
 (defstruct (flot (:include transport)) flots)
+(defstruct (couche (:include transport)) present)
 (defstruct (file) (tete nil) (queue nil))
 (defun list->file (l)
   (make-file l (last l)))
@@ -45,7 +46,15 @@
      do (setf (aref c index2) 0)
      finally (return ge)))
 
-;; TODO : kdo
+(defun transport->couche (gt)
+  (let ((ge (transport->ecart gt)))
+    (make-transport :nb-noeuds (transport-nb-noeuds ge)
+                    :source (transport-source ge)
+                    :puits (transport-puits ge)
+                    :arcs-sortants (transport-arcs-sortants ge)
+                    :arcs (transport-arcs ge)
+                    :capacites (transport-capacites ge)
+                    :present (make-array (length (transport-arcs ge))))))
 
 (defun plus-court-chemin (gt)
   "Renvoie le plus court chemin de s à t dans un graphe d'écart.
@@ -146,30 +155,35 @@
 (defvar exemple-gt (build-transport-array 0 3 #((0 1 3) (0 2 2) (1 3 4) (2 3 1) (2 1 1))))
 (edmonds-karp exemple-gt)
 
-(defun liste-plus-courts-chemins (gt)
-  "Renvoie la liste des plus courts chemins de s à t dans un graphe d'écart.
-   Chaque chemin est représenté par les numéros des :arcs qui le composent, du puits à la source."
+(defun liste-plus-courts-chemins (gc)
+  "Modifie les arcs présents dans un graphe de couche (seuls les arcs qui font partie d'un plus court chemin de s à t sont conservés)."
   (loop named pcc
+     with len = (length (couche-arcs gc))
      with file = (make-file)
-     and chemins = (make-array (transport-nb-noeuds gt) :element-type t :initial-element nil) ;; TODO
-     and puits = (transport-puits gt)
+     and file2 = (make-file)
+     and dejavu = (make-array len :initial-element -1)
+     and niveau = 0
+     and puits = (couche-puits gc)
      and noeud-fils
-     and retchemins = nil
-     for noeud = (transport-source gt) then (file-dequeue file)
+     for noeud = (couche-source gc) then (file-dequeue file)
+     initially (setf (couche-present gc) (make-array (length (couche-present gc)) :initial-element -1))
      when (eql noeud puits)
-       return retchemins
-     do (dolist (arcnum (aref (transport-arcs-sortants gt) noeud))
-          (setq noeud-fils (cdr (aref (transport-arcs gt) arcnum)))
-          (unless (= 0 (aref (transport-capacites gt) arcnum))
-            (if (eql noeud-fils puits)
-                (progn
-                  (push (cons arcnum (aref chemins noeud)) retchemins)
-                  (file-enqueue file noeud-fils))
-                (unless (aref chemins noeud-fils)
-                  (setf (aref chemins noeud-fils) (cons arcnum (aref chemins noeud)))
-                  (file-enqueue file noeud-fils)))))
+       return gc ;; TODO
+     do (dolist (arcnum (aref (couche-arcs-sortants gc) noeud))
+          (setq noeud-fils (cdr (aref (couche-arcs gc) arcnum)))
+          (unless (= 0 (aref (couche-capacites gc) arcnum))
+            (unless (>= 0 (aref dejavu noeud))
+              (unless (= niveau (aref dejavu noeud))
+                (file-enqueue file2 noeud-fils)
+                (setf (aref dejavu noeud) niveau))
+              (setf (aref (couche-present gc) arcnum) t)))) ;; Fait partie de la couche
      when (end-file file)
-       return nil
+       do (setq file file2)
+       and when (end-file file)
+         return nil
+       end
+       and do (incf niveau)
+       and do (setq file2 (make-file))
      end))
 
 (defun build-graphe-exemple (n &optional (density 10) (maxcapa 10))
