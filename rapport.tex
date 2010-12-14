@@ -83,7 +83,7 @@ Vos résultats seront présentés en procédant à la rédaction d'un mémoire d
 \end{figure}
 
 \begin{enonce}
-Construire le graphe $G*$ pour $n = 3$, $T = 5$, $p_1 = 1$, $p_2 = 2$, $p_3 = 1$, 
+Construire le graphe $G^*$ pour $n = 3$, $T = 5$, $p_1 = 1$, $p_2 = 2$, $p_3 = 1$, 
 $E = \{(1,2), (1,3), (3,2)\}$ et les coûts suivants :
 \end{enonce}
 
@@ -185,33 +185,33 @@ $E = \{(1,2), (1,3), (3,2)\}$ et les coûts suivants :
 	\draw[précédence] (m-1-5)-- node[capacité précédence,pos=0.3]{$\infty$} (m-3-6);
 
   \end{tikzpicture}
-  \caption{Graphe G*}
+  \caption{Graphe $G^*(X^*, E^*)$}
   \label{fig:graphe-g*}
 \end{figure}
 
 
 
 \begin{enonce}
-Montrer qu'il existe une coupe dans G* de capacité minimale de laquelle sort un et un seul arc d'affectation par job.
+Montrer qu'il existe une coupe dans $G^*$ de capacité minimale de laquelle sort un et un seul arc d'affectation par job.
 \end{enonce}
 
 Démonstration par construction~: 
 On effectue un tri topologique sur le graphe des contraintes de précédence $G(\{J_1, \dots, J_n\}, E)$. Ce tri topologique nous donne un
 ensemble ordonné de n\oe uds $(J_{a1}, \dots, J_{an})$. On a donc~:
-$$\forall J_{ai} \quad \nexists \ j < i \quad | \quad \exists (J_{aj}, J_{ai}) \in E$$
-On transforme ensuite $G$ en un graphe de flots à l'aide de l'algorithme fourni dans le sujet. 
+$$\forall j < i \quad (J_{aj}, J_{ai}) \not\in E$$
+On transforme ensuite $G$ en un graphe de flots $G^*(X^*,E^*)$ à l'aide de l'algorithme fourni dans le sujet. 
 Considérons les arcs entre les $v_{ai,t}$~: 
 \begin{itemize}
 	\item Arcs d'affectation~: ces arcs sont entre des sommets $v_{ai,t}$ et $v_{aj,t'}$ avec $ai = aj$
 	\item Arcs de précédences~: ces arcs sont entre des sommets $v_{ai,t}$ et $v_{aj,t'}$ avec $ai < aj$, car grâce au tri topologique, il
       n'existe pas d'arcs entre des sommets $J_{ai}$ et $J_{aj}$ avec $aj < ai$, et de plus il n'y a pas de boucle (donc pas d'arc
-      $(J_{ai},J_{ai})$ dans $G$, donc pas d'arc $(v_{ai,t}, v_{ai,t'})$ dans $G*$).
+      $(J_{ai},J_{ai})$ dans $E$, donc pas d'arc $(v_{ai,t}, v_{ai,t'})$ dans $E^*$).
 	\item Arcs auxiliaires~: ces arcs ne sont pas entre des sommets $v_{ai,t}$.
 \end{itemize}
 
 Soit un $(s-t)-\mathrm{coupe}$ minimale, entre les ensembles de noeuds $S$ et $T$. Etant donné que cette coupe est minimale, aucun arc de
 capacité infinie n'a son origine dans $S$ et son extremité dans $\overline{S}$. Autrement dit, en fonction des noeuds présents dans S, on
-est donc \og obligé\fg d'inclure dans $S$ toutes les extrémités des arcs de capacité infinie et dont l'origine est dans $S$. On va donc
+est donc \og obligé\fg{} d'inclure dans $S$ toutes les extrémités des arcs de capacité infinie et dont l'origine est dans $S$. On va donc
 construire $S$ itérativement en suivant cette règle.
 
 \begin{itemize}
@@ -228,61 +228,69 @@ Puisque la coupe est minimale et que tous les $v_{ai,0}$ font partie de $S$, lor
 $v_{ai,t'}$ avec $0 <= t' <= t$ font aussi partie de $S$ (car sinon on ajoute le coût des arcs d'affectation intermédiaires).
 
 On a donc $s \in S$ et
-$$\forall ai \quad \exists t \quad (0 <= t' <= t) \Leftrightarrow (v_{ai,t} \in S)$$
+\begin{equation}
+\forall ai \quad \exists t \quad (0 <= t' <= t) \Leftrightarrow (v_{ai,t} \in S)
+\label{eq:tous-t-debut-ligne}
+\end{equation}
 
-Il ne sort donc qu'un et un seul arc d'affectation par job.
+Il ne sort donc qu'un et un seul arc d'affectation par job dans toute coupe minimale.
 
 Évidemment, cette coupe minimale ne peut exister que s'il y a «suffisement de temps pour tout faire», autrement dit, si la somme des durées
 d'exécution des tâches est supérieure au temps disponible, on ne pourra pas effectuer toutes les tâches.
 
-TODO : Georges, ça continue ici…
-
 \begin{enonce}
-Montrer que l'on peut associer un ordonnancement réalisable (qui respectent toutes les contraintes à toute 
+Montrer que l'on peut associer un ordonnancement réalisable (qui respecte toutes les contraintes) à toute 
 coupe de capacité finie minimale dans le graphe. Quel est le coût de cet ordonnancement ? 
 \end{enonce}
-
-TODO~: Attention à la phrase suivante, ce n'est pas tout à fait ce qu'on a montré dans l'exercice 2
 
 Dans l'exercice précédent, on a montré que de toute coupe minimale sort un et un seul arc d'affectation par job.
 
 On cherche à associer un ordonancement réalisable à toute coupe minimale.
 
 On va construire cet ordonancement de la manière suivante~: à chaque
-fois qu'un arc d'affectation $v_{i,t}, v_{i,t+1}$ traverse la coupe,
-on exécute le job $i$ à l'instant $t$ dans l'ordonancement.
+fois qu'un arc d'affectation $v_{ai,t}, v_{ai,t+1}$ traverse la coupe,
+on exécute le job $ai$ à l'instant $t$ dans l'ordonancement. 
 
-On cherche un ordonancement, une suite de paires
-$(\text{tâche},\text{date de début})$ respectant les dépendances. 
+\textbf{On cherche un ordonancement, une suite de paires
+$(\text{tâche},\text{date de début})$ respectant les dépendances.}
 Autrement dit, chaque tâche apparaît après ses dépendances dans la
 suite.
 
-Comme chaque arc de précédence a une capacité finie, pour que la coupe
-soit minimale, aucun arc de précédence ne doit sortir de la
-coupe. Cela signifie qu'à chaque fois qu'on exécute un job (à
-chaque fois qu'un arc d'affectation sort de la coupe), tous les arcs
-de précédence entrants dans ce noeud ont leur extrémité déjà présente
-dans la partie \og gauche \fg de la coupe 
+Soit $te(ai) = t$ la fonction qui à un job $ai$ associe son temps de début d'exécution $t$.
+Nous allons montrer que~:
+$$(\exists ai,t,aj,t' \quad (v_{ai,t},v_{aj,t'}) \in E^*) \qquad \Rightarrow \qquad (te(ai) > te(aj) \quad \Leftrightarrow \quad ai > aj)$$
+Autrement dit, s'il existe un arc de précédence entre deux noeuds, alors le job qui
+correspond au noeud «le plus haut» s'exécute avant le job qui correspond au
+noeud «le plus bas».
 
-TODO~: on n'a pas prouvé
-cela, on l'a prouvé pour tous les arcs sortants, mais pas les arcs entrants. Il faut
-montrer qu'en partant de la source, on est obligié d'avoir tous les
-arcs de précédence entrants et donc que toutes les tâches dont dépend
-celle-là (?) ont été exécutées à un temps antérieur (antérieurement ?).
+En effet, si $t = te(ai)$ est le temps de début d'exécution du job $ai$, alors c'est que $v_{ai,t}, v_{ai,t+1}$
+traverse la coupe, et donc :
+\begin{equation}
+  \forall tt \quad v_{ai,tt} \in S \Leftrightarrow tt <= t
+  \label{eq:tous-t-avant-exec}
+\end{equation}
 
-On cherche un ordonancement réalisable, c'est-à-dire pour lequel
+On a la même chose pour $\forall tt' <= t' \quad v_{aj,tt'} \in S$.
+
+Comme il y a un arc d'affectation du job $ai$ vers le job $aj$, $\exists tdest > t \quad (v_{ai,t},v_{aj,tdest}) \in E^*$, et vu que la
+capacité de cet arc de précédence est infinie, $tdest \in S$. En utilisant les équations \ref{eq:tous-t-debut-ligne} et
+\ref{eq:tous-t-avant-exec}, on peut affirmer que $tdest <= t$. Nous avons donc bien montré que l'arc d'affectation entre la tâche $ai$ et la
+tâche $aj$ «forçait» $aj$ à s'exécuter après $ai$.
+
+Grâce au tri topoligique, nous pouvons affirmer que tous les arcs de précédence entrants dans le noeud $v_{ai,te(ai)}$ viennent d'une ligne
+«plus haut», autrement dit d'un noeud $v_{aj,t'}$ avec $aj < ai$. Et grâce à ce que nous avons prouvé précédemment,
+on sait que $te(aj) < te(ai)$.
+
+\textbf{On cherche un ordonancement réalisable}, c'est-à-dire pour lequel
 toutes les tâches peuvent être menées à bout durant le temps
 imparti.
 
-La propriété énoncée dans l'exercice 2 nous indique que dans toute
-coupe minimale, un et un seul arc d'affectation par job sort de la
-coupe. Cela signifie que chaque job a commencé à être exécuté. Comme
-il exite un noeud pour le job $j$ à l'instant (à un instant donné ?) $t$ si et seulement s'il
-y a le temps de l'exécuter (\ogà chaque date de début possible\fg),
-cela signifie que tous les jobs commencés ont eu le temps d'être
-terminés et, comme nous venons de voir, que tous les jobs ont pu être
-commencés - ils ont tous pu être terminés - et, par conséquent, l'ordonancement est
-réalisable.
+%% TODO : pas très clair…
+La propriété énoncée dans la question 2 de l'exercice 1 nous indique que de toute coupe minimale, sort un et un seul arc d'affectation par
+job. Cela signifie que chaque job a commencé à être exécuté. Comme il exite un noeud pour le job $aj$ à l'instant $t$ si et seulement s'il y
+a le temps de l'exécuter (\ogà chaque date de début possible\fg), cela signifie que tous les jobs commencés ont eu le temps d'être terminés
+et, comme nous venons de voir, que tous les jobs ont pu être commencés -- ils ont tous pu être terminés -- et, par conséquent,
+l'ordonancement est réalisable.
 
 \begin{enonce}
 Montrer qu'à tout ordonnancement réalisable correspond une coupe dont la capacité est égale au coût de l'ordonnancement.
@@ -292,18 +300,15 @@ On construit la coupe à partir de l'ordonancement de la même manière
 qu'on a construit l'ordonancement à partir de la coupe dans l'exercice
 précédent, mais en suivant l'algorithme dans l'autre sens.
 
-Si on exécute le job $i$ à l'instant $t$ dans l'ordonancement, alors
-tous les noeuds $v_{i,t'}$ avec $t' \leq t$ sont dans la partie \og
-gauche\fg de la coupe. De plus, (sujet de verba manquante ?) s'appartient lui aussi à la partie
-gauche de la coupe.
-
-TODO~: et les arcs de précédence ? Prouver qu'aucun ne sort de la
-coupe dans notre construction.
+Si on exécute le job $ai$ à l'instant $t$ dans l'ordonancement, alors
+tous les noeuds $v_{ai,t'}$ avec $t' \leq t$ sont dans la partie \og
+gauche\fg{} de la coupe. De plus, $s$ appartient lui aussi à la partie
+gauche de la coupe, et aucun arc de précédence ne sort de la coupe.
 
 La capacité de cette coupe est la somme de la capacité de tous les
 arcs qui sortent de la coupe, c'est-à-dire la somme des capacités des
-arcs $v_{i,t}, v_{i,t+1}$. Comme la capacité de ces arcs est égale au
-coût d'exécution de la tâche $i$ à l'instant $t$, on a bien égalité entre
+arcs $v_{ai,t}, v_{ai,t+1}$. Comme la capacité de ces arcs est égale au
+coût d'exécution de la tâche $ai$ à l'instant $t$, on a bien égalité entre
 la somme des capacités et la somme des coûts de démarrage des jobs,
 donc la capacité de la coupe est égale au coût de l'ordonancement.
 
@@ -330,17 +335,18 @@ Cherchons s'il en existe un de cardinal 4. Voici la liste des chemins
 obtenue par un parcours en profondeur (en prennant toujours en premier
 les sommets voisins avec le numéro le plus petit possible)~:
 
-TODO~: numéroter les "équations"
+%% TODO~: numéroter les "équations" «proprement». Mais il semble que LaTeX ne permette pas de numéroter les lignes d'une matrice sans se casser la tête :-(
+%% Ou sinon, il faut utilise \begin{align}/\end{align}, mais On ne peut pas choisir l'espacement des colonnes (et il est beaucoup trop gros à ce moment-là.
 $$
-\begin{array}{ccccccccccc}
-  1 & \rightarrow & 2 & \rightarrow & 3 & \rightarrow & 4 & \rightarrow & 5 & \rightarrow & 6 \\
-  1 & \rightarrow & 2 & \rightarrow & 3 & \rightarrow & 4 & \rightarrow & 6 &             &   \\
-  1 & \rightarrow & 2 & \rightarrow & 3 & \rightarrow & 6 &             &   &             &   \\
-  1 & \rightarrow & 3 & \rightarrow & 4 & \rightarrow & 5 & \rightarrow & 6 &             &   \\
-  1 & \rightarrow & 3 & \rightarrow & 4 & \rightarrow & 6 &             &   &             &   \\
-  1 & \rightarrow & 3 & \rightarrow & 6 &             &   &             &   &             &   \\
-  1 & \rightarrow & 4 & \rightarrow & 5 & \rightarrow & 6 &             &   &             &   \\
-  1 & \rightarrow & 4 & \rightarrow & 6 &             &   &             &   &             &   \\
+\begin{array}{cccccccccccr}
+  1 & \rightarrow & 2 & \rightarrow & 3 & \rightarrow & 4 & \rightarrow & 5 & \rightarrow & 6 & \quad (A) \\
+  1 & \rightarrow & 2 & \rightarrow & 3 & \rightarrow & 4 & \rightarrow & 6 &             &   & \quad (B) \\
+  1 & \rightarrow & 2 & \rightarrow & 3 & \rightarrow & 6 &             &   &             &   & \quad (C) \\
+  1 & \rightarrow & 3 & \rightarrow & 4 & \rightarrow & 5 & \rightarrow & 6 &             &   & \quad (D) \\
+  1 & \rightarrow & 3 & \rightarrow & 4 & \rightarrow & 6 &             &   &             &   & \quad (E) \\
+  1 & \rightarrow & 3 & \rightarrow & 6 &             &   &             &   &             &   & \quad (F) \\
+  1 & \rightarrow & 4 & \rightarrow & 5 & \rightarrow & 6 &             &   &             &   & \quad (G) \\
+  1 & \rightarrow & 4 & \rightarrow & 6 &             &   &             &   &             &   & \quad (H) \\
 \end{array}
 $$
 
@@ -352,7 +358,7 @@ l'arc $(3,4)$. Il ne reste plus que les chemins $F$ et $H$ qu'on
 pourrait peut-être prendre si on prend $A$, mais le cardinal de
 l'ensemble serait alors 3, donc on n'améliorerait pas le résultat
 existant. En conséquence, ce n'est pas la peine de chercher si ces chemins
-sont \og compatibles\fg avec $A$.
+sont \og compatibles\fg{} avec $A$.
 
 Procédons de la même manière pour $B$ (sachant que $A$ ne peut pas
 faire partie de l'ensemble). Si on a le chemin $B$, alors on ne peut
@@ -495,7 +501,7 @@ Enumérer tous les s-t-coupes dans le réseau donnés par la figure 1. Pour chaq
 Vérifier que le nombre maximum de chemeins d'arcs disjoints à partir du sommet source jusqu'au puits est égal au nombre minimum d'arcs avant dans une s-t-coupe.
 \end{enonce}
 
-%% TODO
+%% TODO : John ou Bertrand ou Yoann, c'est FACILE
 
 \subsection{Partie complexité}
 
@@ -539,8 +545,6 @@ $$(a \times b) = \dfrac{(a + b)^2 - a^2 - b^2}{2}$$
 
 Lorsqu'il est possible de réduire un problème difficile en un problème que l'on sait résoudre, la difficulté demeure souvent dans la réduction elle-même.
 
-GEORGES : Définition de la réduction de SAT à 3-SAT :
-
 Pour la réduction de SAT à 3-SAT, on prend chaque clause de littéraux du problème SAT et on la transforme en une ou plusieurs clauses de la manière suivante~:
 
 \begin{itemize}
@@ -551,15 +555,20 @@ $$
 $$
 \end{itemize}
 
-Les littéraux $z_i$, qui n'était pas présents dans la clause d'origine, sont ajoutés afin de pouvoir subdiviser une clause en deux ou plusieurs les clauses et afin de les relier. Par exemple, la clause $(a \vee \lnot b \vee c \vee d)$ sera transformée en deux clauses~: $(a \vee \lnot b \vee z_1) \wedge (\lnot z_1 \vee c \vee d)$ ; la clause
-${\lnot a \vee b \vee \lnot c \vee d \vee e}$ sera transformée en trois clauses, à savoir $(\lnot a \vee b \vee z_1) \wedge (\lnot z_1 \vee \lnot c \vee z_2) \wedge (\lnot z_2 \vee d \vee e)$.
+Les littéraux $z_i$, qui n'était pas présents dans la clause d'origine, sont ajoutés afin de pouvoir subdiviser une clause en deux ou
+plusieurs les clauses et afin de les relier. Par exemple, la clause $(a \vee \lnot b \vee c \vee d)$ sera transformée en deux clauses~: $(a
+\vee \lnot b \vee z_1) \wedge (\lnot z_1 \vee c \vee d)$ ; la clause ${\lnot a \vee b \vee \lnot c \vee d \vee e}$ sera transformée en trois
+clauses, à savoir $(\lnot a \vee b \vee z_1) \wedge (\lnot z_1 \vee \lnot c \vee z_2) \wedge (\lnot z_2 \vee d \vee e)$.
 
-L'ensemble des clauses ainsi créées sont équivalentes aux clauses d'origines correspondante car, à chaque fois, soit un des littéraux d'origine vérifie la clause, et $z_i$ peut être faux, ce qui permet au $\lnot z_i$ de valider la clause suivante, de proche en proche, soit aucun des littéraux d'origine ne vérifie la clause, auquel cas, si on prend un $z_i$ faux, la clause est fausse, et si on prend un $z_i$ vrai, la clause suivante contiendra
-$\lnot z_i$ qui sera faux, et le résultat dépendra des littéraux de la ou des clause(s) suivante(s). 
+L'ensemble des clauses ainsi créées sont équivalentes aux clauses d'origines correspondante car, à chaque fois, soit un des littéraux
+d'origine vérifie la clause, et $z_i$ peut être faux, ce qui permet au $\lnot z_i$ de valider la clause suivante, de proche en proche, soit
+aucun des littéraux d'origine ne vérifie la clause, auquel cas, si on prend un $z_i$ faux, la clause est fausse, et si on prend un $z_i$
+vrai, la clause suivante contiendra $\lnot z_i$ qui sera faux, et le résultat dépendra des littéraux de la ou des clause(s) suivante(s).
 
 % TODO BERTRAND: éclaircir ça, c'est mal expliqué.
 
-Si l'on souhaite que le résultat soit strictement 3-SAT (toutes les clauses contenant exactement 3 littéraux, on applique les transformations suivantes~:
+Si l'on souhaite que le résultat soit strictement 3-SAT (toutes les clauses contenant exactement 3 littéraux, on applique les
+transformations suivantes~:
 \begin{itemize}
 \item Les clauses qui contiennent un seul littéral, ${l_1}$, sont transformées en ${l_1, l_1, l_1}$.
 \item Les clauses qui contiennent exactement deux littéraux, ${l_1, l_2}$ sont transformées en ${l_1, l_2, l_1}$.
@@ -598,14 +607,14 @@ De plus, les expansions sont les suivantes :
 
 
 \begin{enonce}
-Pourquoi le principe de la réduction ne permet-il pas de réduire 3-SAT à 2-SAT et de prouver que 2-SAT est NP-complet ? (Il ne s'agit pas d'expliquer pourquoi 2-SAT n'est pas NP-complet, mais pourquoi cette réduction ne marche pas).
+Pourquoi le principe de la réduction ne permet-il pas de réduire 3-SAT à 2-SAT et de prouver que 2-SAT est NP-complet ? (Il ne s'agit pas
+d'expliquer pourquoi 2-SAT n'est pas NP-complet, mais pourquoi cette réduction ne marche pas).
 \end{enonce}
 
 Tentons de réduire la clause $(a \vee b \vee c)$ de manière similaire à l'algorithme donné pour la réduction de SAT à 3-SAT~. 
 
-On a $(a \vee z_1) \wedge (\lnot z_1 \vee b)$. A partir de là, on ne peut insérer de variable permettant de faire la liaison entre la clause qui contient $b$ et celle qui contient $c$.
-
-TODO: Cette question, est-elle répondue ? 
+On a $(a \vee z_1) \wedge (\lnot z_1 \vee b)$. A partir de là, on ne peut insérer de variable permettant de faire la liaison entre la clause
+qui contient $b$ et celle qui contient $c$, donc on ne peut pas appliquer cette réduction.
 
 \begin{enonce}
 Il s'agit de prouver que 2-SAT est un problème polynomial. Vous avez un article en français expliquant cette preuve à \\ http://philippe.gambette.free.fr/SCOL/Graphes
@@ -623,17 +632,23 @@ Une formule logique en forme normale conjonctive contenant des clauses à deux l
 \begin{enumerate}
 \item L'algorithme de construction de graphe : 
 \begin{enumerate}
-\item On crée un graphe avec $2n$ sommets ($n$ étant ici le nombre littéraux distincts de la formule) contenant tous les littéraux de la formule ainsi que les négations de ces littéraux.
+\item On crée un graphe avec $2n$ sommets ($n$ étant ici le nombre littéraux distincts de la formule) contenant tous les littéraux de la
+  formule ainsi que les négations de ces littéraux.
 \item On prend chaque clause de la formule que l'on traduit en implications dans les deux sens : $(a \vee b)$ 
 se transforme en deux clauses : $(\neg a \Rightarrow b)$ et ($\neg b \Rightarrow a)$.
 \item On crée des arcs correspondant aux implications créées à l'étape précédente (arc ($\neg a 
 \rightarrow b$) et ($\neg b \rightarrow a$))
 \end{enumerate}
 \item On effectue un tri topologique en numérotant les sommets de $1$ à $n$.
-\item En ordre inverse, du sommet $n$ au sommet $1$ du graphe, on affecte à tout noeud $x$ la valeur VRAI et au noeud $\neg x$ la valeur FAUX, c'est-à-dire dans l'ordre inverse du tri topologique.
+\item En ordre inverse, du sommet $n$ au sommet $1$ du graphe, on affecte à tout noeud $x$ la valeur VRAI et au noeud $\neg x$ la valeur
+  FAUX, c'est-à-dire dans l'ordre inverse du tri topologique.
 \end{enumerate}  	
 
-S'il existe une composante fortement connexe contenant un littéral et sa négation, la formule est insatisfiable étant donné qu'on a $x_{i} \Leftrightarrow \neg £x_{i}$ sinon, la formule est satisfiable, c'est-à-dire soit contingente soit valide. L'algorithme ne nous donne aucune information pour distinguer une formule contingente et une formule valide, il nous donne une ou deux informations : (1) il nous dit si la formule admet un modèle, et (2) si oui, il nous donne un modèle~: le modèle est assuré car le graphe en question ne contient aucun arc $VRAI \rightarrow FAUX$.
+S'il existe une composante fortement connexe contenant un littéral et sa négation, la formule est insatisfiable étant donné qu'on a $x_{i}
+\Leftrightarrow \neg £x_{i}$ sinon, la formule est satisfiable, c'est-à-dire soit contingente soit valide. L'algorithme ne nous donne aucune
+information pour distinguer une formule contingente et une formule valide, il nous donne une ou deux informations : (1) il nous dit si la
+formule admet un modèle, et (2) si oui, il nous donne un modèle~: le modèle est assuré car le graphe en question ne contient aucun arc $VRAI
+\rightarrow FAUX$.
 
 Prenons trois exemples~: une formule insatisfiable, une formule contingente et une formule valide.
 
@@ -665,7 +680,12 @@ Prenons trois exemples~: une formule insatisfiable, une formule contingente et u
 
 \paragraph*{Clause insatisfiable $(x_{1} \vee x_{1}) \wedge (\neg x_{1} \vee \neg x_{1})$~:}
 
-Le résultat de l'application de l'algorithme décrit ci-dessus est un graphe orienté cyclique. Il est impossible d'effectuer un tri topologique étant donné qu'un tri topologique ne peut être effectué que sur un graphe acyclique orienté. Ce graphe contient un composant fortement connexe contenant un littéral et sa négation, et la formule associée est, par conséquent, insatisfiable. Il est impossible d'attribuer un ordre aux sommets pour ensuite affecter des valeurs aux littéraux correspondant aux sommets car la formule admet aucun modèle. Pour cette raison, les arcs de ce graphe n'ont pas été numérotés ni affectés des valeurs $VRAI$ ou $FAUX$. En somme, l'algorithme nous dit simplement que ce graphe n'admet aucun modèle.
+Le résultat de l'application de l'algorithme décrit ci-dessus est un graphe orienté cyclique. Il est impossible d'effectuer un tri
+topologique étant donné qu'un tri topologique ne peut être effectué que sur un graphe acyclique orienté. Ce graphe contient un composant
+fortement connexe contenant un littéral et sa négation, et la formule associée est, par conséquent, insatisfiable. Il est impossible
+d'attribuer un ordre aux sommets pour ensuite affecter des valeurs aux littéraux correspondant aux sommets car la formule admet aucun
+modèle. Pour cette raison, les arcs de ce graphe n'ont pas été numérotés ni affectés des valeurs $VRAI$ ou $FAUX$. En somme, l'algorithme
+nous dit simplement que ce graphe n'admet aucun modèle.
 
 \begin{figure}[h!]
   \centering
@@ -724,7 +744,10 @@ Le résultat de l'application de l'algorithme décrit ci-dessus est un graphe or
 % \includegraphics[height=2in, width = 3in]{img/contingente.png
 
 \paragraph*{Clause contingente $(x_{1} \vee x_{2}) \wedge (x_{3} \vee x_{4})$~:}
-Le graphe de la figure \ref{fig:clause-conting} ne contient aucune composante fortement connexe contenant un littéral et sa négation, donc la formule associée admet bien un modèle. Ce modèle est le résultat du tri topologique effectué et les valeurs $VRAI$ et $FAUX$ affectées à des sommets par notre algorithme. Il existe aucun arc qui part d'un sommet étiqueté $VRAI$ vers un sommet étiqueté $FAUX$ et, en effet, les valeurs attribuées aux arcs donnent bien un modèle. 
+Le graphe de la figure \ref{fig:clause-conting} ne contient aucune composante fortement connexe contenant un littéral et sa négation, donc
+la formule associée admet bien un modèle. Ce modèle est le résultat du tri topologique effectué et les valeurs $VRAI$ et $FAUX$ affectées à
+des sommets par notre algorithme. Il existe aucun arc qui part d'un sommet étiqueté $VRAI$ vers un sommet étiqueté $FAUX$ et, en effet, les
+valeurs attribuées aux arcs donnent bien un modèle.
 
 
 
@@ -774,17 +797,25 @@ Le graphe de la figure \ref{fig:clause-conting} ne contient aucune composante fo
 % \includegraphics[height=2in, width = 3in]{img/valide.png}
 
 \paragraph*{Clause valide $(x_{1} \vee \neg x_{1}) \wedge (x_{2} \vee \neg x_{2})$~:}
-L'application de l'algorithme de transformation en graphe d'une formule valide nous donne un graphe ne contenant que des boucles à chaque sommet. Nous pouvons donc numéroter les arcs de n'importe quel façon. Ce étant, nous pouvous aussi affecter n'importe quelles valeurs aux sommets (hormis la même valeur à un littéral et sa négation, bien entendu) et la formule sera toujours vraie. 
+L'application de l'algorithme de transformation en graphe d'une formule valide nous donne un graphe ne contenant que des boucles à chaque
+sommet. Nous pouvons donc numéroter les arcs de n'importe quel façon. Ce étant, nous pouvous aussi affecter n'importe quelles valeurs aux
+sommets (hormis la même valeur à un littéral et sa négation, bien entendu) et la formule sera toujours vraie.
 
-L'objectif de cet algorithme n'est pas de dire si une formule satisfiable est contingente ou valide. Toutefois, si le résultat de l'algorithme est un graphe ne comportant que des boucles à chaque sommet, la formule associée est satisfiable et valide. Autrement, et si le graphe ne contient aucune composante fortement connexe contenant un littéral et sa négation, la formule est contingente.
+L'objectif de cet algorithme n'est pas de dire si une formule satisfiable est contingente ou valide. Toutefois, si le résultat de
+l'algorithme est un graphe ne comportant que des boucles à chaque sommet, la formule associée est satisfiable et valide. Autrement, et si le
+graphe ne contient aucune composante fortement connexe contenant un littéral et sa négation, la formule est contingente.
 
-TODO: VERIFIER CES DEUX DERNIERS PHRASES (PRECEDENTES), EST-CE QUE C'EST JUSTE ? C'EST MOI QUI A FAIT CES CONSTATATIONS
+%% TODO: VERIFIER CES DEUX DERNIERS PHRASES (PRECEDENTES), EST-CE QUE C'EST JUSTE ? C'EST MOI QUI A FAIT CES CONSTATATIONS
 
-%% TODO : Georges : Oui, c'est bon. Mettre un contre-modèle trivial à trouver dans le cas où une des clauses ne contient pas un littéral et sa négation : (a \/ b) /\ ..., il suffit d'avoir a faux ou bien b faux, la clasuse sera fausse, le reste est connecté par des /\, donc toute la formule sera fausse, c'est un contre-modèle.
+%% TODO : Georges @John : Oui, c'est bon. Mettre un contre-modèle trivial à trouver dans le cas où une des clauses ne contient pas un
+%% littéral et sa négation : (a \/ b) /\ ..., il suffit d'avoir a faux ou bien b faux, la clasuse sera fausse, le reste est connecté par des
+%% /\, donc toute la formule sera fausse, c'est un contre-modèle.
 
 \begin{sousenonce}
 Vous expliciterez ensuite l'algorithme de transformation et vous évaluerez sa complexité.
 \end{sousenonce}
+
+L'algorithme de transformation est expliqué plus haut, sous le nom \og L'algorithme de construction de graphe\fg{}
 
 TODO: GEORGES -> J'ai trouvé la citation du CORMEN que j'ai mis ici, mais je ne sais pas comment répondre à cette question avec justesse. Donc, j'ai trouvé toutes les infos, peut-être que quelqu'un pourrait finir cette question. On supprime, bien entendu, cette sitation de CORMEN. Merci, JC.
 JE NE SUIS PAS DU TOUT SUR DE LA REPONSE A CETTE QUESTION... J'AI COMMENCE A REDIGER, MAIS...
@@ -818,20 +849,15 @@ $$
 O(c \log c + c + c \log c + 2c + c \log c) = O(c \log c)
 $$
 
-
-TODO : Fin coût ala georges
-
-
-
-
-TODO : L'algo de transformation est explicité plus haut, sous le nom ``L'algorithme de construction de graphe''
+TODO : Fin Coût ala georges
+TODO : Ce qui suit est la version Johnesque du coût. Je pense qu'on peut la virer, la mienne suffira.
 
 
 TODO : Préciser que $O(n)$ $O(nombre-clauses)$
 
 Tout d'abord, il faut transformer une formule en forme normale conjonctive en une série d'implications. Cela se fait en temps linéaire, en $O(n)$. Ensuite, il faut créer le graphe associé -- numérotation et attribution des valeurs $VRAI$ et $FAUX$, ce qui se fait également en $O(n)$.
 
-TODO : ci-dessus : $O(n^2)$ normalement (pour chaque noeud x, on va chercher ``non x''. On peut l'optimiser en $O(n \log n)$.
+TODO : ci-dessus : $O(n^2)$ normalement (pour chaque noeud x, on va chercher ``non x''). On peut l'optimiser en $O(n \log n)$.
 
 CORMEN:
 We can perform a topological sort in polynomial time , since depth-first search takes $\theta(V + E)$
@@ -860,20 +886,78 @@ separate strongly connected component
 
 \begin{sousenonce}
 Vous expliciterez ensuite l'algorithme d'exploration du graphe et vous évaluerez sa complexité
- en fonction de la taille de l'ensemble de clauses initial.
+en fonction de la taille de l'ensemble de clauses initial.
 \end{sousenonce}
 
-TODO: J'ai répondu en quelques lignes ci-dessous, mais je ne sais pas du tout si ce que j'ai dit est juste. Quelqu'un pourrait le compléter ou le refaire, cette partie ? Merci, JC.
+L'algorithme a déjà été expliqué plus haut à la question 3(a).
 
-Le tri topologique se fait en $\theta(V + E)$ en faisant un parcours en profondeur. Etablir s'il existe une composante connexe (sans prendre en compte, pour l'instant, si ce composant contient un sommet ainsi que sa négation) se fait en $O(V + E)$. Etablir s'il existe un littéral et sa négation se fait en temps linéaire $O(n)$. 
+Pour la partie «trouver un modèle» de l'algorithme, le tri topologique se fait en $O(V + E)$ en faisant un parcours en profondeur. Ensuite,
+on parcourt chaque littéral auquel on n'a pas encore affecté de valeur~; on lui affecte vrai et on affecte faux à sa négation. Cela coûte
+$O(V^2)$ car pour chaque littéral, il faudra chercher sa négation dans $V$, et le coût total est donc $O(V + E + V^2) = O(V^2 + E)$.
 
-Tout l'algorithme se fait donc en temps linéaire, en $theta(V + E)$
+On peut toutefois trier les noeuds de $V$ et faire une recherche par dichotomie, ce qui coûte alors $O(V \log V)$ pour le tri, et la
+recherche coûte alors $O(\log V)$, soit $O(V \log V)$ pour toute la phase d'affectation des valeurs. Le coût total de cette partie est donc
+$O(V + E + V \log V + V \log V)$, soit $O(E + V \log V)$.
+
+Pour la partie «déterminer si la formule est invalide», il faut parcourir le graphe pour voir si une composante fortement connexe contient
+un littéral et sa négation. On fera encore un parcours en profondeur $O(V + E)$, et pour chaque noeud (littéral) rencontré lors du parcours,
+il faudra voir si on a déjà rencontré la négation de ce littéral dans la même composante, ce qui coûte $O(\text{taille de la
+  composante})$. Dans le pire des cas, la composante fortement connexe fait tout le graphe, et le coût de la recherche sera alors
+$O(V)$. Comme cette recherche est effectuée pour chaque noeud, le coût total sera $O(V+E)$ pour le parcours en profondeur, et $O(V^2)$ pour
+l'ensemble des recherches, soit $O(V+E+V^2) = O(V^2+E)$ au total.
+
+On peut améliorer le coût de la recherche en maintenant une structure de données permettant un accès rapide aux littéraux déjà rencontrés,
+par exemple un arbre binaire de recherche balancé (un AVL). Le coût de la recherche descend alors à $O(\log V)$ dans le pire des cas, pour
+un coût total de $O(E + V \log V)$.
+
+L'algorithme d'exploration du graphe (y compris la partie qui trouve un modèle) coûte donc $O(E + V^2)$ sans les tris supplémentaires, et
+$O(E + V \log V)$ avec.
 
 \begin{sousenonce}
 Enfin, vous justifierez l'équivalence de la réponse au problème 2-SAT et au problème qui est posé dans le graphe.
 \end{sousenonce}
 
-TODO: Désolé, mais je ne maîtrise pas du tout ... Help !! (JC)
+Un problème 2-SAT est une conjonction de disjonctions de deux littéraux (ou de leur négation). Pour que la formule soit satisfiable, il faut
+qu'il existe une affectation des littéraux telle que chaque clause soit vraie (car les clauses sont reliées par des $\wedge$, et il suffit
+donc qu'une seule d'entre elles soit fausse pour que toute la formule devienne fausse).
+
+Pour qu'une clause soit valide, il faut qu'au moins un de ses deux membres soit vrai. Cela signifie que si le premier membre est forcément
+faux, alors le deuxième doit être vrai pour que la formule entière soit vraie.
+
+On peut donc ré-écrire la formule
+$$(a_1 \vee a_2) \wedge (a_3 \vee a_4) \wedge \dots \wedge (a_{n-1} \vee a_n)$$
+(les $a_i$ étant des littéraux ou leur négation) de la manière suivante :
+$$(\lnot a_1 \rightarrow a_2) \wedge (\lnot a_3 \rightarrow a_4) \wedge \dots \wedge (\lnot a_{n-1} \rightarrow a_n)$$
+
+Le graphe que l'on constuit explicite ces implications en faisant un arc entre le littéral à gauche et le littéral à droite.
+
+Pour chercher une contradiction dans la formule, qui la rend insatisfiable, il faut trouver un ensemble d'implications présentes dans la
+formules telles que~:
+$$
+\begin{array}{rrcl}
+       & (a_{i1} & \Rightarrow & a_{i2}) \\
+  \vee & (a_{i3} & \Rightarrow & a_{i4}) \\
+  \vee & & \dots & \\
+  \vee & (a_{i5} & \Rightarrow & \lnot a_{i1}) \\
+  \vee & (\lnot a_{i1} & \Rightarrow & a_{i6}) \\
+  \vee & (a_{i7} & \Rightarrow & a_{i8}) \\
+  \vee & & \dots & \\
+  \vee & (a_{i9} & \Rightarrow & a_{i1}) \\
+\end{array}
+$$
+Ce qui peut se réduire à $a_{i1} \Rightarrow \lnot a_{i1} \Rightarrow a_{i1}$ autrement dit $a_{i1} \Leftrightarrow \lnot a_{i1}$, ce qui
+est bien éviemment insatisfiable.
+
+Cet ensemble d'implication se traduit dans le graphe par un chemin de $a_{i1}$ jusqu'à $\lnot a_{i1}$, et un chemin de $\lnot a_{i1}$
+jusqu'à $\lnot a_{i1}$, autrement dit, $a_{i1}$ et $\lnot a_{i1}$ sont dans la même composante connexe.
+
+%% TODO : Georges dit c'est bordélique et pas clair…
+
+L'algorithme utilise cette même transformation en implications pour déterminer un modèle~: Le graphe étant trié topologiquement, on part du
+terme «le plus à droite» d'une chaîne d'implications, et on lui affecte vrai si c'est un littéral sans négation, en affectant faux à sa
+négation, et vice versa si c'est un littéral avec négation. Lorsqu'on remonte ainsi de droite à gauche, on s'assure qu'il n'y aura jamais un
+$\text{vrai} \Rightarrow \text{faux}$ (puisqu'on vient de la droite et qu'on n'affecte que des valeurs qui rendent le membre vrai), à moins
+qu'il y ait une boucle (qui aurait été détectée à l'étape précédente), et cette combinaison de valeurs nous donne donc un modèle.
 
 \subsection{Partie Calculabilité}
 
@@ -932,7 +1016,7 @@ Une solution, pour tous les nombres naturels, serait de parcourir un graphe comm
   \label{fig:codage-zigzag}
 \end{figure}
 
-TODO: Il faudrait ajouter les coordonnées (0,0), (1,0), (0,1), et les codes correspondants au graphe ci-dessus, etc. VOIR LES DIAGRAMMES QUE J'AI DONNE A BERTRAND
+%% TODO: Il faudrait ajouter les coordonnées (0,0), (1,0), (0,1), et les codes correspondants au graphe ci-dessus, etc. VOIR LES DIAGRAMMES QUE J'AI DONNE A BERTRAND
 
 Dans la figure \ref{fig:codage-zigzag}, on commence par le couple $(0,0)$, puis on procède aux couples $(1,0)$, $(0,1)$, $(0,2)$, $(1,1)$, $(2,0)$, $(3,0)$, $(2,1)$, $(1,2)$, $(0,3)$, $(0,4)$\ldots L'algorithme pour simplement parcourir les couples de cette façon consisterait tout d'abord de déclarer et d'intialiser trois variables globales~: le point de départ, \lstinline!*current*!, et les valeurs maximales courantes de $x$ et de $y$, c'est-à-dire \lstinline!*max-x*! et \lstinline!*max-y*!. En LISP, ceci pourrait être codé comme suit~:
 
@@ -1004,6 +1088,8 @@ On peut parcourir le graphe à l'aide de la fonction 'zig-zag' qui, elle, se ser
 %% \ref{foobar}
 %%
 %% Tu changes foobar par un nom de ton choix.
+
+%% TODO TODO TODO !!!!!!!!
 L'intégralité du programme est en annexe à la page ???. Il existe également une version en C à la page ??.
 
 Voici une trace de cette fonction en passant \lstinline!*current*! égal à \lstinline!(0 0 0)! en paramètre et avec $n = 100$ :
@@ -1513,7 +1599,12 @@ Le codage d'une liste d'entiers relatifs peut donc être résumé par la figure 
 \end{figure}
 
 
-Pour coder les triplets, on considère un triplet, (3,1,2) par exemple, comme un couple (3,(1,2)). On calcule le code du couple imbriqué, c'est-à-dire du couple (1,2), ce qui nous donne 8. On refait le même codage en substituant 8 à (1,2), ce qui nous donne (3,8). On code ensuite (3,8) et notre résultat est 74. L'algorithme est récursif, tant qu'on n'a pas un couple à deux éléments atomiques, on continue à coder les \og{}sous-couples\fg{}, ce qui nous permet non seulement de coder les triplets, mais de coder n'importe quel k-uplet. Donc, pour ce faire, il nous faut deux informations, le code et la taille du k-uplet, qui est implicite lorsque l'on code, mais qui doit être explicitée lorsque l'on doit trouver le k-uplet à partir d'un code. 
+Pour coder les triplets, on considère un triplet, (3,1,2) par exemple, comme un couple (3,(1,2)). On calcule le code du couple imbriqué,
+c'est-à-dire du couple (1,2), ce qui nous donne 8. On refait le même codage en substituant 8 à (1,2), ce qui nous donne (3,8). On code
+ensuite (3,8) et notre résultat est 74. L'algorithme est récursif, tant qu'on n'a pas un couple à deux éléments atomiques, on continue à
+coder les \og{}sous-couples\fg{}, ce qui nous permet non seulement de coder les triplets, mais de coder n'importe quel k-uplet. Donc, pour
+ce faire, il nous faut deux informations, le code et la taille du k-uplet, qui est implicite lorsque l'on code, mais qui doit être
+explicitée lorsque l'on doit trouver le k-uplet à partir d'un code.
 
 Voici le code en C pour coder et décoder respectivement n'importe quel k-uplet de nombres entiers en reprenant les fonctions déjà décrites dans la réponse de la question précédente~:
 
@@ -1596,13 +1687,17 @@ h(p, x) = \left\{
      return (0);
   }
 \end{lstlisting}
-Si $gamma(n)$ se termine, alors $gamma(n)$ boucle et donc ne se termine pas. Si $gamma(n)$ ne se termine pas, alors $gamma(n)$ retourne 0, donc $gamma(n)$ se termine.
+Si $gamma(n)$ se termine, alors $gamma(n)$ boucle et donc ne se termine pas. Si $gamma(n)$ ne se termine pas, alors $gamma(n)$ retourne 0,
+donc $gamma(n)$ se termine.
 
-Dans les deux cas, il y a contradiction. Par conséquent, il n'est pas possible de déterminer algorithmiquement si un programme s'arrête ou boucle indéfiniment, et donc il est impossible d'énumerer toutes les fonctions C qui ne bouclent jamais (puisqu'on ne peut pas savoir si la fonction en question boucle ou non, on ne peut pas savoir si elle fait partie de l'énumération ou non).
+Dans les deux cas, il y a contradiction. Par conséquent, il n'est pas possible de déterminer algorithmiquement si un programme s'arrête ou
+boucle indéfiniment, et donc il est impossible d'énumerer toutes les fonctions C qui ne bouclent jamais (puisqu'on ne peut pas savoir si la
+fonction en question boucle ou non, on ne peut pas savoir si elle fait partie de l'énumération ou non).
 
 \section{Partie pratique sur les algorithmes de flots}
 
-TODO: ajouter tout simplement dans la partie qui suit la page correspondante dans l'annexe (qui contiendra tout le code de Yoann. On s'est mis d'accord sur ça lors de notre séance de travail de mercredi 1 décembre)
+TODO: ajouter tout simplement dans la partie qui suit la page correspondante dans l'annexe (qui contiendra tout le code de Yoann. On s'est
+mis d'accord sur ça lors de notre séance de travail de mercredi 1 décembre)
 
 
 \subsubsection*{Exercice \stepcounter{exocount}\bf\small \arabic{exocount} -- La méthode de Edmonds-Karp et celle de Dinic}
