@@ -1,0 +1,153 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{amssymb}
+\usetikzlibrary{chains,positioning,matrix,arrows,decorations,calc}
+\title{Rapport de projet : FMIN105\\ Cours algorithmique / complexité / calculabilité}
+\author{\textsc{Bonavero} Yoann \\ \textsc{Brun} Bertrand \\ \textsc{Charron} John \\ \textsc{Dupéron} Georges}
+\date{}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+
+\newcounter{exocount}
+\setcounter{exocount}{0}
+
+\newcounter{enoncecount}
+\setcounter{enoncecount}{0}
+
+\newenvironment{enonce}
+{
+\stepcounter{enoncecount}
+\bf\small \arabic{enoncecount}.
+\begin{bf}
+}
+{
+\end{bf}
+}
+
+
+\newcounter{sousenoncecount}
+\setcounter{sousenoncecount}{0}
+\newenvironment{sousenonce}
+{
+\stepcounter{sousenoncecount}
+\bf\small (\alph{sousenoncecount})
+\begin{bf}
+}
+{
+\end{bf}
+}
+
+\begin{document}
+\setcounter{page}{0}
+\pagestyle{plain}
+
+\makeatletter
+\def\myadv#1#2{%
+  \xdef\incr@backup{\the\@tempcnta}%
+  \@tempcnta=#1{}%
+  \advance\@tempcnta by #2{}%
+  \xdef#1{\the\@tempcnta}%
+  \@tempcnta=\incr@backup{}%
+}
+\def\incr#1{%
+  \myadv#1{1}%
+}
+\def\decr#1{%
+  \myadv#1{-1}%
+}
+\makeatother
+
+\begin{figure}[h!]
+  \xdef\maxdots{81}
+  \xdef\maxnums{56}
+  \xdef\maxcoords{20}
+  \centering
+  \begin{tikzpicture}[
+    dot/.style={
+      circle,
+      inner sep=0.5pt,
+      outer sep=0.5pt,
+      fill=black
+    },
+    numero/.style={red},
+    ]
+    \xdef\i{0}
+    \xdef\x{0}
+    \xdef\y{0}
+    \xdef\corner{0}
+    \xdef\sidelen{1}
+    \xdef\nextsidelen{1}
+    \xdef\direction{0}
+    \incr\maxnums
+    \incr\maxcoords
+    
+    \def\reallysmallcheat#1{%
+      \ensuremath{\hphantom{\vphantom{X}}_{\hphantom{\vphantom{X}}_{#1}}}
+    }
+    \def\drawnode{%
+      \node[dot] (\x-\y) at (\x,\y) {};
+      \ifnum\maxnums>\i
+        \ifnum\corner=0    \node[numero,anchor=north west] at (\x-\y.south east) {\i}; \else
+        \ifnum\corner=1    \node[numero,anchor=south west] at (\x-\y.north east) {\i}; \else
+        \ifnum\corner=2    \node[numero,anchor=south east] at (\x-\y.north west) {\i}; \else
+        \ifnum\corner=3    \node[numero,anchor=north east] at (\x-\y.south west) {\i}; \else
+        \ifnum\direction=0 \node[numero,anchor=west]       at (\x-\y.east)       {\i}; \else
+        \ifnum\direction=1 \node[numero,anchor=south]      at (\x-\y.north)      {\i}; \else
+        \ifnum\direction=2 \node[numero,anchor=east]       at (\x-\y.west)       {\i}; \else
+        \ifnum\direction=3 \node[numero,anchor=north]      at (\x-\y.south)      {\i}; \fi\fi\fi\fi\fi\fi\fi\fi
+      \fi
+      % {\i\reallysmallcheat{(\x, \y)}};
+    }
+    \def\drawlinknode{%
+      \drawnode%
+      \draw[->] (\oldx-\oldy) -- (\x-\y);%
+    }
+    \def\mystep{%
+      \incr\i%
+      \xdef\oldx{\x}%
+      \xdef\oldy{\y}%
+    }
+    
+    \drawnode
+    \mystep \incr\x
+
+    \foreach \pos in {1,...,\maxdots} {
+      % Detect when we are at the end of this edge.
+      \ifnum\sidelen=0
+        \ifnum\direction=0 \xdef\direction{1} \xdef\corner{1} \incr\nextsidelen \else
+        \ifnum\direction=1 \xdef\direction{2} \xdef\corner{2}                   \else
+        \ifnum\direction=2 \xdef\direction{3} \xdef\corner{3} \incr\nextsidelen \else
+        \ifnum\direction=3 \xdef\direction{0} \xdef\corner{0}                   \fi\fi\fi\fi% Brin d'acier
+        \xdef\sidelen{\nextsidelen}
+      \fi
+      % Draw node and link to previous, step counters
+      \drawlinknode \mystep
+      %% Se déplacer vers ↑←↓→
+      \ifnum\direction=0 \incr\y \fi
+      \ifnum\direction=1 \decr\x \fi
+      \ifnum\direction=2 \decr\y \fi
+      \ifnum\direction=3 \incr\x \fi
+      \decr\sidelen
+      \xdef\corner{4}%% 4 == pas de coin-coin.
+    }
+    % \foreach \sidelen in {2,4, ...,6} {
+    %   \foreach \pos in {2, ..., \sidelen} { \drawlinknode \mystep \incr\y }
+    %   \foreach \pos in {1, ..., \sidelen} { \drawlinknode \mystep \decr\x }
+    %   \foreach \pos in {1, ..., \sidelen} { \drawlinknode \mystep \decr\y }
+    %   \foreach \pos in {0, ..., \sidelen} { \drawlinknode \mystep \incr\x }
+    % }
+    % %% Dernier côté :
+    % \foreach \pos in {2, ..., 8} { \drawlinknode \mystep \incr\y }
+  \end{tikzpicture}
+  \caption{TODO : caption}
+  \label{fig:graphe-g}
+\end{figure}
+
+\end{document}

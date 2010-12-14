@@ -574,18 +574,22 @@ transformations suivantes~:
 \item Les clauses qui contiennent exactement deux littéraux, ${l_1, l_2}$ sont transformées en ${l_1, l_2, l_1}$.
 \end{itemize}
 
-Cette transformation est linéaire en complexité. En effet, on ne considère chaque littéral qu'une fois et on ajoute $n-3$ littéraux pour chaque clause. Il s'agit de complexité polynomiale.
+Cette transformation est linéaire en complexité. En effet, on ne considère chaque littéral qu'une fois et on ajoute $n-3$ littéraux pour
+chaque clause. Il s'agit de complexité polynomiale.
 
 \begin{sousenonce}
 Justifier alors que 3-SAT est NP-complet (sachant que SAT est NP-complet).
 \end{sousenonce}
 
-Vu que SAT est np-complet et que 3-SAT sait faire ce que sait faire SAT, avec une transformation polynomiale, 3-SAT (y compris la transformation) est au moins aussi dur que SAT. La difficulté peut résiter(??) dans la transformation, 3-SAT ou les deux.(??)
+Vu que SAT est np-complet et que 3-SAT sait faire ce que sait faire SAT, avec une transformation polynomiale, 3-SAT (y compris la
+transformation) est au moins aussi dur que SAT. La difficulté peut résiter(??) dans la transformation, 3-SAT ou les deux.(??)
 
 Vu que la difficulté ne s'est pas cachée dans la transformation, qui est polynomiale alors que SAT est np-complet, 3-SAT est np-complet lui aussi.  
 
 \begin{sousenonce}
-Application : si un ensemble de clauses contient $n_v$ variables, $n_1$ clauses à un littéral, $n_2$ clauses à 2 littéraux, $n_3$ clauses à 3 littéraux, $n_4$ clauses à 4 littéraux, $n_5$ clauses à 5 littéraux (et pas d'autres clauses), combien le système obtenu par votre réduction contient-il de variables et de clauses ? Vous devrez bien sûr justifier votre réponse.
+  Application : si un ensemble de clauses contient $n_v$ variables, $n_1$ clauses à un littéral, $n_2$ clauses à 2 littéraux, $n_3$ clauses
+  à 3 littéraux, $n_4$ clauses à 4 littéraux, $n_5$ clauses à 5 littéraux (et pas d'autres clauses), combien le système obtenu par votre
+  réduction contient-il de variables et de clauses ? Vous devrez bien sûr justifier votre réponse.
 \end{sousenonce}
 
 Le système obtenu par la réduction contient :
@@ -622,12 +626,15 @@ Il s'agit de prouver que 2-SAT est un problème polynomial. Vous avez un article
 \setcounter{sousenoncecount}{0}
 
 \begin{sousenonce}
-Vous commencerez par fabriquer trois ensembles de deux clauses, le premier valide, le deuxième insatisfiable et le troisième contingent, et pour chacun de ces ensembles de clauses vous construirez le graphe correspondant. Vous expliquerez comment apparaît sur chacun des trois graphes la validité de l'ensemble de clauses corresponsdantes.
+  Vous commencerez par fabriquer trois ensembles de deux clauses, le premier valide, le deuxième insatisfiable et le troisième contingent,
+  et pour chacun de ces ensembles de clauses vous construirez le graphe correspondant. Vous expliquerez comment apparaît sur chacun des
+  trois graphes la validité de l'ensemble de clauses corresponsdantes.
 \end{sousenonce}
 
 Philippe Gambette, dans son article intitulé 'Un graphe pour résoudre 2-SAT', donne une explication succincte de l'agorithme d'Aspvall, Plass et Tarjan.
 
-Une formule logique en forme normale conjonctive contenant des clauses à deux littéraux est transformé en un problème de graphe orienté. On doit tout d'abord établir si la formule admet un modèle, et ensuite, si tel est le cas, donner un modèle quelconque.
+Une formule logique en forme normale conjonctive contenant des clauses à deux littéraux est transformé en un problème de graphe orienté. On
+doit tout d'abord établir si la formule admet un modèle, et ensuite, si tel est le cas, donner un modèle quelconque.
 
 \begin{enumerate}
 \item L'algorithme de construction de graphe : 
@@ -936,13 +943,13 @@ formules telles que~:
 $$
 \begin{array}{rrcl}
        & (a_{i1} & \Rightarrow & a_{i2}) \\
-  \vee & (a_{i3} & \Rightarrow & a_{i4}) \\
-  \vee & & \dots & \\
-  \vee & (a_{i5} & \Rightarrow & \lnot a_{i1}) \\
-  \vee & (\lnot a_{i1} & \Rightarrow & a_{i6}) \\
-  \vee & (a_{i7} & \Rightarrow & a_{i8}) \\
-  \vee & & \dots & \\
-  \vee & (a_{i9} & \Rightarrow & a_{i1}) \\
+  \wedge & (a_{i3} & \Rightarrow & a_{i4}) \\
+  \wedge & & \dots & \\
+  \wedge & (a_{i5} & \Rightarrow & \lnot a_{i1}) \\
+  \wedge & (\lnot a_{i1} & \Rightarrow & a_{i6}) \\
+  \wedge & (a_{i7} & \Rightarrow & a_{i8}) \\
+  \wedge & & \dots & \\
+  \wedge & (a_{i9} & \Rightarrow & a_{i1}) \\
 \end{array}
 $$
 Ce qui peut se réduire à $a_{i1} \Rightarrow \lnot a_{i1} \Rightarrow a_{i1}$ autrement dit $a_{i1} \Leftrightarrow \lnot a_{i1}$, ce qui
