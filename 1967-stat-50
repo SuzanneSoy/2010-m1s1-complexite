@@ -1,0 +1,3534 @@
+This is SBCL 1.0.40.0.debian, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+* 
+T
+* 
+ek 3
+Evaluation took:
+  0.000 seconds of real time
+  0.000000 seconds of total run time (0.000000 user, 0.000000 system)
+  100.00% CPU
+  581,022 processor cycles
+  138,800 bytes consed
+  
+di 3
+Evaluation took:
+  0.001 seconds of real time
+  0.000000 seconds of total run time (0.000000 user, 0.000000 system)
+  0.00% CPU
+  743,756 processor cycles
+  196,240 bytes consed
+  
+ek 4
+Evaluation took:
+  0.001 seconds of real time
+  0.000000 seconds of total run time (0.000000 user, 0.000000 system)
+  0.00% CPU
+  1,227,317 processor cycles
+  244,912 bytes consed
+  
+di 4
+Evaluation took:
+  0.001 seconds of real time
+  0.000000 seconds of total run time (0.000000 user, 0.000000 system)
+  0.00% CPU
+  2,370,017 processor cycles
+  488,304 bytes consed
+  
+ek 5
+Evaluation took:
+  0.001 seconds of real time
+  0.000000 seconds of total run time (0.000000 user, 0.000000 system)
+  0.00% CPU
+  2,491,229 processor cycles
+  439,136 bytes consed
+  
+di 5
+Evaluation took:
+  0.007 seconds of real time
+  0.010000 seconds of total run time (0.010000 user, 0.000000 system)
+  142.86% CPU
+  20,050,745 processor cycles
+  1,092,464 bytes consed
+  
+ek 6
+Evaluation took:
+  0.001 seconds of real time
+  0.000000 seconds of total run time (0.000000 user, 0.000000 system)
+  0.00% CPU
+  4,209,101 processor cycles
+  672,336 bytes consed
+  
+di 6
+Evaluation took:
+  0.004 seconds of real time
+  0.010000 seconds of total run time (0.010000 user, 0.000000 system)
+  250.00% CPU
+  12,272,065 processor cycles
+  1,916,928 bytes consed
+  
+ek 7
+Evaluation took:
+  0.002 seconds of real time
+  0.000000 seconds of total run time (0.000000 user, 0.000000 system)
+  0.00% CPU
+  6,203,951 processor cycles
+  967,264 bytes consed
+  
+di 7
+Evaluation took:
+  0.008 seconds of real time
+  0.010000 seconds of total run time (0.010000 user, 0.000000 system)
+  125.00% CPU
+  21,038,693 processor cycles
+  3,139,712 bytes consed
+  
+ek 8
+Evaluation took:
+  0.003 seconds of real time
+  0.000000 seconds of total run time (0.000000 user, 0.000000 system)
+  0.00% CPU
+  8,069,828 processor cycles
+  1,228,528 bytes consed
+  
+di 8
+Evaluation took:
+  0.015 seconds of real time
+  0.010000 seconds of total run time (0.010000 user, 0.000000 system)
+  66.67% CPU
+  38,224,784 processor cycles
+  4,731,328 bytes consed
+  
+ek 9
+Evaluation took:
+  0.005 seconds of real time
+  0.010000 seconds of total run time (0.010000 user, 0.000000 system)
+  200.00% CPU
+  10,921,664 processor cycles
+  1,611,472 bytes consed
+  
+di 9
+Evaluation took:
+  0.029 seconds of real time
+  0.020000 seconds of total run time (0.020000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.010 seconds non-GC time. ]
+  68.97% CPU
+  76,267,113 processor cycles
+  6,669,184 bytes consed
+  
+ek 10
+Evaluation took:
+  0.006 seconds of real time
+  0.010000 seconds of total run time (0.000000 user, 0.010000 system)
+  166.67% CPU
+  15,904,863 processor cycles
+  2,005,088 bytes consed
+  
+di 10
+Evaluation took:
+  0.037 seconds of real time
+  0.040000 seconds of total run time (0.040000 user, 0.000000 system)
+  108.11% CPU
+  94,730,415 processor cycles
+  9,861,920 bytes consed
+  
+ek 11
+Evaluation took:
+  0.006 seconds of real time
+  0.000000 seconds of total run time (0.000000 user, 0.000000 system)
+  0.00% CPU
+  16,888,456 processor cycles
+  2,376,320 bytes consed
+  
+di 11
+Evaluation took:
+  0.039 seconds of real time
+  0.040000 seconds of total run time (0.040000 user, 0.000000 system)
+  102.56% CPU
+  102,373,583 processor cycles
+  11,686,096 bytes consed
+  
+ek 12
+Evaluation took:
+  0.008 seconds of real time
+  0.010000 seconds of total run time (0.010000 user, 0.000000 system)
+  125.00% CPU
+  20,736,339 processor cycles
+  2,796,688 bytes consed
+  
+di 12
+Evaluation took:
+  0.059 seconds of real time
+  0.060000 seconds of total run time (0.050000 user, 0.010000 system)
+  101.69% CPU
+  153,686,429 processor cycles
+  16,387,248 bytes consed
+  
+ek 13
+Evaluation took:
+  0.010 seconds of real time
+  0.010000 seconds of total run time (0.010000 user, 0.000000 system)
+  100.00% CPU
+  26,153,205 processor cycles
+  3,382,192 bytes consed
+  
+di 13
+Evaluation took:
+  0.082 seconds of real time
+  0.080000 seconds of total run time (0.070000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.060 seconds non-GC time. ]
+  97.56% CPU
+  213,712,785 processor cycles
+  19,650,976 bytes consed
+  
+ek 14
+Evaluation took:
+  0.016 seconds of real time
+  0.020000 seconds of total run time (0.020000 user, 0.000000 system)
+  125.00% CPU
+  41,213,029 processor cycles
+  3,768,976 bytes consed
+  
+di 14
+Evaluation took:
+  0.090 seconds of real time
+  0.090000 seconds of total run time (0.090000 user, 0.000000 system)
+  100.00% CPU
+  233,076,259 processor cycles
+  24,769,776 bytes consed
+  
+ek 15
+Evaluation took:
+  0.013 seconds of real time
+  0.020000 seconds of total run time (0.020000 user, 0.000000 system)
+  153.85% CPU
+  33,960,095 processor cycles
+  4,315,072 bytes consed
+  
+di 15
+Evaluation took:
+  0.117 seconds of real time
+  0.110000 seconds of total run time (0.110000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.100 seconds non-GC time. ]
+  94.02% CPU
+  303,591,509 processor cycles
+  29,798,416 bytes consed
+  
+ek 16
+Evaluation took:
+  0.017 seconds of real time
+  0.020000 seconds of total run time (0.020000 user, 0.000000 system)
+  117.65% CPU
+  44,866,718 processor cycles
+  4,779,056 bytes consed
+  
+di 16
+Evaluation took:
+  0.136 seconds of real time
+  0.140000 seconds of total run time (0.140000 user, 0.000000 system)
+  102.94% CPU
+  354,163,277 processor cycles
+  34,771,424 bytes consed
+  
+ek 17
+Evaluation took:
+  0.019 seconds of real time
+  0.020000 seconds of total run time (0.020000 user, 0.000000 system)
+  105.26% CPU
+  50,001,198 processor cycles
+  5,284,544 bytes consed
+  
+di 17
+Evaluation took:
+  0.153 seconds of real time
+  0.160000 seconds of total run time (0.160000 user, 0.000000 system)
+  104.58% CPU
+  397,304,076 processor cycles
+  38,995,824 bytes consed
+  
+ek 18
+Evaluation took:
+  0.020 seconds of real time
+  0.020000 seconds of total run time (0.020000 user, 0.000000 system)
+  100.00% CPU
+  51,883,728 processor cycles
+  5,920,672 bytes consed
+  
+di 18
+Evaluation took:
+  0.196 seconds of real time
+  0.200000 seconds of total run time (0.180000 user, 0.020000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.180 seconds non-GC time. ]
+  102.04% CPU
+  508,411,813 processor cycles
+  46,245,568 bytes consed
+  
+ek 19
+Evaluation took:
+  0.026 seconds of real time
+  0.020000 seconds of total run time (0.020000 user, 0.000000 system)
+  76.92% CPU
+  68,478,085 processor cycles
+  6,629,840 bytes consed
+  
+di 19
+Evaluation took:
+  0.235 seconds of real time
+  0.240000 seconds of total run time (0.210000 user, 0.030000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.220 seconds non-GC time. ]
+  102.13% CPU
+  608,137,504 processor cycles
+  52,642,800 bytes consed
+  
+ek 20
+Evaluation took:
+  0.023 seconds of real time
+  0.020000 seconds of total run time (0.020000 user, 0.000000 system)
+  86.96% CPU
+  60,621,327 processor cycles
+  6,974,304 bytes consed
+  
+di 20
+Evaluation took:
+  0.248 seconds of real time
+  0.250000 seconds of total run time (0.240000 user, 0.010000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.240 seconds non-GC time. ]
+  100.81% CPU
+  644,750,977 processor cycles
+  58,350,768 bytes consed
+  
+ek 21
+Evaluation took:
+  0.040 seconds of real time
+  0.040000 seconds of total run time (0.030000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.020 seconds non-GC time. ]
+  100.00% CPU
+  103,651,379 processor cycles
+  7,643,744 bytes consed
+  
+di 21
+Evaluation took:
+  0.271 seconds of real time
+  0.270000 seconds of total run time (0.270000 user, 0.000000 system)
+  99.63% CPU
+  702,739,583 processor cycles
+  65,710,784 bytes consed
+  
+ek 22
+Evaluation took:
+  0.033 seconds of real time
+  0.030000 seconds of total run time (0.030000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.020 seconds non-GC time. ]
+  90.91% CPU
+  84,215,430 processor cycles
+  8,142,160 bytes consed
+  
+di 22
+Evaluation took:
+  0.323 seconds of real time
+  0.320000 seconds of total run time (0.300000 user, 0.020000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.300 seconds non-GC time. ]
+  99.07% CPU
+  835,309,345 processor cycles
+  73,046,832 bytes consed
+  
+ek 23
+Evaluation took:
+  0.056 seconds of real time
+  0.050000 seconds of total run time (0.040000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.030 seconds non-GC time. ]
+  89.29% CPU
+  144,481,220 processor cycles
+  8,910,608 bytes consed
+  
+di 23
+Evaluation took:
+  0.339 seconds of real time
+  0.340000 seconds of total run time (0.330000 user, 0.010000 system)
+  100.29% CPU
+  877,416,462 processor cycles
+  79,495,760 bytes consed
+  
+ek 24
+Evaluation took:
+  0.039 seconds of real time
+  0.040000 seconds of total run time (0.040000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.030 seconds non-GC time. ]
+  102.56% CPU
+  102,672,921 processor cycles
+  9,487,344 bytes consed
+  
+di 24
+Evaluation took:
+  0.401 seconds of real time
+  0.400000 seconds of total run time (0.400000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.390 seconds non-GC time. ]
+  99.75% CPU
+  1,041,133,782 processor cycles
+  91,235,584 bytes consed
+  
+ek 25
+Evaluation took:
+  0.042 seconds of real time
+  0.040000 seconds of total run time (0.040000 user, 0.000000 system)
+  95.24% CPU
+  107,794,076 processor cycles
+  10,276,048 bytes consed
+  
+di 25
+Evaluation took:
+  0.443 seconds of real time
+  0.440000 seconds of total run time (0.420000 user, 0.020000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.410 seconds non-GC time. ]
+  99.32% CPU
+  1,147,560,089 processor cycles
+  99,166,480 bytes consed
+  
+ek 26
+Evaluation took:
+  0.040 seconds of real time
+  0.040000 seconds of total run time (0.040000 user, 0.000000 system)
+  100.00% CPU
+  102,573,367 processor cycles
+  10,762,448 bytes consed
+  
+di 26
+Evaluation took:
+  0.469 seconds of real time
+  0.470000 seconds of total run time (0.460000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.450 seconds non-GC time. ]
+  100.21% CPU
+  1,217,388,861 processor cycles
+  105,710,256 bytes consed
+  
+ek 27
+Evaluation took:
+  0.047 seconds of real time
+  0.050000 seconds of total run time (0.030000 user, 0.020000 system)
+  106.38% CPU
+  122,133,882 processor cycles
+  11,187,408 bytes consed
+  
+di 27
+Evaluation took:
+  0.466 seconds of real time
+  0.460000 seconds of total run time (0.450000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.440 seconds non-GC time. ]
+  98.71% CPU
+  1,209,465,660 processor cycles
+  108,602,048 bytes consed
+  
+ek 28
+Evaluation took:
+  0.051 seconds of real time
+  0.050000 seconds of total run time (0.050000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.040 seconds non-GC time. ]
+  98.04% CPU
+  133,116,152 processor cycles
+  11,951,728 bytes consed
+  
+di 28
+Evaluation took:
+  0.560 seconds of real time
+  0.560000 seconds of total run time (0.530000 user, 0.030000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.530 seconds non-GC time. ]
+  100.00% CPU
+  1,452,956,063 processor cycles
+  120,739,792 bytes consed
+  
+ek 29
+Evaluation took:
+  0.053 seconds of real time
+  0.050000 seconds of total run time (0.050000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.040 seconds non-GC time. ]
+  94.34% CPU
+  136,131,229 processor cycles
+  12,789,232 bytes consed
+  
+di 29
+Evaluation took:
+  0.610 seconds of real time
+  0.610000 seconds of total run time (0.580000 user, 0.030000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.590 seconds non-GC time. ]
+  100.00% CPU
+  1,579,965,855 processor cycles
+  133,359,904 bytes consed
+  
+ek 30
+Evaluation took:
+  0.068 seconds of real time
+  0.070000 seconds of total run time (0.070000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.060 seconds non-GC time. ]
+  102.94% CPU
+  176,553,832 processor cycles
+  13,080,016 bytes consed
+  
+di 30
+Evaluation took:
+  0.585 seconds of real time
+  0.580000 seconds of total run time (0.580000 user, 0.000000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.560 seconds non-GC time. ]
+  99.15% CPU
+  1,518,668,528 processor cycles
+  132,595,840 bytes consed
+  
+ek 31
+Evaluation took:
+  0.065 seconds of real time
+  0.060000 seconds of total run time (0.050000 user, 0.010000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.050 seconds non-GC time. ]
+  92.31% CPU
+  168,236,302 processor cycles
+  13,969,344 bytes consed
+  
+di 31
+Evaluation took:
+  0.659 seconds of real time
+  0.660000 seconds of total run time (0.650000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.640 seconds non-GC time. ]
+  100.15% CPU
+  1,709,453,434 processor cycles
+  144,065,552 bytes consed
+  
+ek 32
+Evaluation took:
+  0.094 seconds of real time
+  0.090000 seconds of total run time (0.060000 user, 0.030000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.060 seconds non-GC time. ]
+  95.74% CPU
+  242,273,616 processor cycles
+  14,634,880 bytes consed
+  
+di 32
+Evaluation took:
+  0.703 seconds of real time
+  0.710000 seconds of total run time (0.710000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.700 seconds non-GC time. ]
+  101.00% CPU
+  1,823,711,279 processor cycles
+  156,955,280 bytes consed
+  
+ek 33
+Evaluation took:
+  0.068 seconds of real time
+  0.070000 seconds of total run time (0.060000 user, 0.010000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.060 seconds non-GC time. ]
+  102.94% CPU
+  176,072,754 processor cycles
+  15,370,720 bytes consed
+  
+di 33
+Evaluation took:
+  0.759 seconds of real time
+  0.760000 seconds of total run time (0.750000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.740 seconds non-GC time. ]
+  100.13% CPU
+  1,968,720,039 processor cycles
+  162,407,568 bytes consed
+  
+ek 34
+Evaluation took:
+  0.068 seconds of real time
+  0.070000 seconds of total run time (0.070000 user, 0.000000 system)
+  102.94% CPU
+  176,624,890 processor cycles
+  15,497,264 bytes consed
+  
+di 34
+Evaluation took:
+  0.736 seconds of real time
+  0.740000 seconds of total run time (0.740000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.730 seconds non-GC time. ]
+  100.54% CPU
+  1,909,735,568 processor cycles
+  162,371,072 bytes consed
+  
+ek 35
+Evaluation took:
+  0.098 seconds of real time
+  0.090000 seconds of total run time (0.080000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.070 seconds non-GC time. ]
+  91.84% CPU
+  252,746,247 processor cycles
+  16,574,224 bytes consed
+  
+di 35
+Evaluation took:
+  0.818 seconds of real time
+  0.820000 seconds of total run time (0.810000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.800 seconds non-GC time. ]
+  100.24% CPU
+  2,119,961,181 processor cycles
+  177,441,536 bytes consed
+  
+ek 36
+Evaluation took:
+  0.086 seconds of real time
+  0.090000 seconds of total run time (0.090000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.080 seconds non-GC time. ]
+  104.65% CPU
+  222,585,298 processor cycles
+  17,548,720 bytes consed
+  
+di 36
+Evaluation took:
+  0.930 seconds of real time
+  0.920000 seconds of total run time (0.900000 user, 0.020000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.910 seconds non-GC time. ]
+  98.92% CPU
+  2,410,015,153 processor cycles
+  197,615,456 bytes consed
+  
+ek 37
+Evaluation took:
+  0.116 seconds of real time
+  0.120000 seconds of total run time (0.110000 user, 0.010000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.080 seconds non-GC time. ]
+  103.45% CPU
+  300,024,127 processor cycles
+  17,741,776 bytes consed
+  
+di 37
+Evaluation took:
+  0.904 seconds of real time
+  0.900000 seconds of total run time (0.890000 user, 0.010000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.870 seconds non-GC time. ]
+  99.56% CPU
+  2,345,325,801 processor cycles
+  194,630,544 bytes consed
+  
+ek 38
+Evaluation took:
+  0.087 seconds of real time
+  0.080000 seconds of total run time (0.080000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.070 seconds non-GC time. ]
+  91.95% CPU
+  225,895,579 processor cycles
+  18,176,528 bytes consed
+  
+di 38
+Evaluation took:
+  0.982 seconds of real time
+  0.990000 seconds of total run time (0.980000 user, 0.010000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.960 seconds non-GC time. ]
+  100.81% CPU
+  2,548,004,576 processor cycles
+  206,598,544 bytes consed
+  
+ek 39
+Evaluation took:
+  0.084 seconds of real time
+  0.080000 seconds of total run time (0.080000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.070 seconds non-GC time. ]
+  95.24% CPU
+  217,011,561 processor cycles
+  18,826,560 bytes consed
+  
+di 39
+Evaluation took:
+  0.966 seconds of real time
+  0.970000 seconds of total run time (0.950000 user, 0.020000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.940 seconds non-GC time. ]
+  100.41% CPU
+  2,504,892,637 processor cycles
+  204,535,856 bytes consed
+  
+ek 40
+Evaluation took:
+  0.089 seconds of real time
+  0.090000 seconds of total run time (0.080000 user, 0.010000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.080 seconds non-GC time. ]
+  101.12% CPU
+  230,243,520 processor cycles
+  19,244,928 bytes consed
+  
+di 40
+Evaluation took:
+  1.013 seconds of real time
+  1.020000 seconds of total run time (1.000000 user, 0.020000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.990 seconds non-GC time. ]
+  100.69% CPU
+  2,629,163,732 processor cycles
+  214,332,512 bytes consed
+  
+ek 41
+Evaluation took:
+  0.095 seconds of real time
+  0.090000 seconds of total run time (0.090000 user, 0.000000 system)
+  94.74% CPU
+  246,325,391 processor cycles
+  20,770,240 bytes consed
+  
+di 41
+Evaluation took:
+  1.181 seconds of real time
+  1.190000 seconds of total run time (1.180000 user, 0.010000 system)
+  [ Run times consist of 0.010 seconds GC time, and 1.180 seconds non-GC time. ]
+  100.76% CPU
+  3,063,243,339 processor cycles
+  245,459,680 bytes consed
+  
+ek 42
+Evaluation took:
+  0.094 seconds of real time
+  0.090000 seconds of total run time (0.080000 user, 0.010000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.080 seconds non-GC time. ]
+  95.74% CPU
+  243,636,120 processor cycles
+  20,899,424 bytes consed
+  
+di 42
+Evaluation took:
+  1.184 seconds of real time
+  1.180000 seconds of total run time (1.180000 user, 0.000000 system)
+  99.66% CPU
+  3,070,710,435 processor cycles
+  248,910,080 bytes consed
+  
+ek 43
+Evaluation took:
+  0.103 seconds of real time
+  0.100000 seconds of total run time (0.090000 user, 0.010000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.090 seconds non-GC time. ]
+  97.09% CPU
+  266,291,610 processor cycles
+  21,872,352 bytes consed
+  
+di 43
+Evaluation took:
+  1.232 seconds of real time
+  1.230000 seconds of total run time (1.230000 user, 0.000000 system)
+  [ Run times consist of 0.050 seconds GC time, and 1.180 seconds non-GC time. ]
+  99.84% CPU
+  3,195,548,005 processor cycles
+  249,711,552 bytes consed
+  
+ek 44
+Evaluation took:
+  0.108 seconds of real time
+  0.110000 seconds of total run time (0.110000 user, 0.000000 system)
+  101.85% CPU
+  279,622,148 processor cycles
+  22,207,760 bytes consed
+  
+di 44
+Evaluation took:
+  1.261 seconds of real time
+  1.260000 seconds of total run time (1.260000 user, 0.000000 system)
+  [ Run times consist of 0.020 seconds GC time, and 1.240 seconds non-GC time. ]
+  99.92% CPU
+  3,270,931,833 processor cycles
+  258,225,472 bytes consed
+  
+ek 45
+Evaluation took:
+  0.116 seconds of real time
+  0.110000 seconds of total run time (0.110000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.100 seconds non-GC time. ]
+  94.83% CPU
+  301,421,601 processor cycles
+  23,822,448 bytes consed
+  
+di 45
+Evaluation took:
+  1.479 seconds of real time
+  1.480000 seconds of total run time (1.480000 user, 0.000000 system)
+  [ Run times consist of 0.060 seconds GC time, and 1.420 seconds non-GC time. ]
+  100.07% CPU
+  3,835,214,019 processor cycles
+  292,458,768 bytes consed
+  
+ek 46
+Evaluation took:
+  0.118 seconds of real time
+  0.120000 seconds of total run time (0.110000 user, 0.010000 system)
+  101.69% CPU
+  307,621,587 processor cycles
+  24,397,616 bytes consed
+  
+di 46
+Evaluation took:
+  1.459 seconds of real time
+  1.460000 seconds of total run time (1.430000 user, 0.030000 system)
+  [ Run times consist of 0.040 seconds GC time, and 1.420 seconds non-GC time. ]
+  100.07% CPU
+  3,783,926,055 processor cycles
+  295,383,984 bytes consed
+  
+ek 47
+Evaluation took:
+  0.106 seconds of real time
+  0.100000 seconds of total run time (0.100000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.090 seconds non-GC time. ]
+  94.34% CPU
+  274,612,065 processor cycles
+  24,172,032 bytes consed
+  
+di 47
+Evaluation took:
+  1.387 seconds of real time
+  1.380000 seconds of total run time (1.370000 user, 0.010000 system)
+  [ Run times consist of 0.030 seconds GC time, and 1.350 seconds non-GC time. ]
+  99.50% CPU
+  3,596,080,111 processor cycles
+  286,911,296 bytes consed
+  
+ek 48
+Evaluation took:
+  0.123 seconds of real time
+  0.110000 seconds of total run time (0.090000 user, 0.020000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.090 seconds non-GC time. ]
+  89.43% CPU
+  320,418,761 processor cycles
+  25,204,816 bytes consed
+  
+di 48
+Evaluation took:
+  1.474 seconds of real time
+  1.470000 seconds of total run time (1.450000 user, 0.020000 system)
+  [ Run times consist of 0.030 seconds GC time, and 1.440 seconds non-GC time. ]
+  99.73% CPU
+  3,824,539,147 processor cycles
+  299,029,008 bytes consed
+  
+ek 49
+Evaluation took:
+  0.130 seconds of real time
+  0.130000 seconds of total run time (0.120000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.110 seconds non-GC time. ]
+  100.00% CPU
+  337,633,725 processor cycles
+  25,920,608 bytes consed
+  
+di 49
+Evaluation took:
+  1.565 seconds of real time
+  1.560000 seconds of total run time (1.550000 user, 0.010000 system)
+  [ Run times consist of 0.050 seconds GC time, and 1.510 seconds non-GC time. ]
+  99.68% CPU
+  4,057,693,406 processor cycles
+  316,437,024 bytes consed
+  
+ek 50
+Evaluation took:
+  0.127 seconds of real time
+  0.130000 seconds of total run time (0.120000 user, 0.010000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.120 seconds non-GC time. ]
+  102.36% CPU
+  330,166,538 processor cycles
+  26,452,784 bytes consed
+  
+di 50
+Evaluation took:
+  1.629 seconds of real time
+  1.630000 seconds of total run time (1.620000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 1.610 seconds non-GC time. ]
+  100.06% CPU
+  4,225,315,094 processor cycles
+  328,796,992 bytes consed
+  
+ek 51
+Evaluation took:
+  0.132 seconds of real time
+  0.130000 seconds of total run time (0.130000 user, 0.000000 system)
+  98.48% CPU
+  341,598,894 processor cycles
+  27,540,576 bytes consed
+  
+di 51
+Evaluation took:
+  1.691 seconds of real time
+  1.690000 seconds of total run time (1.690000 user, 0.000000 system)
+  [ Run times consist of 0.040 seconds GC time, and 1.650 seconds non-GC time. ]
+  99.94% CPU
+  4,385,664,296 processor cycles
+  340,910,256 bytes consed
+  
+ek 52
+Evaluation took:
+  0.139 seconds of real time
+  0.140000 seconds of total run time (0.140000 user, 0.000000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.130 seconds non-GC time. ]
+  100.72% CPU
+  361,477,623 processor cycles
+  28,173,200 bytes consed
+  
+di 52
+Evaluation took:
+  1.789 seconds of real time
+  1.790000 seconds of total run time (1.780000 user, 0.010000 system)
+  [ Run times consist of 0.060 seconds GC time, and 1.730 seconds non-GC time. ]
+  100.06% CPU
+  4,639,605,763 processor cycles
+  357,762,752 bytes consed
+  
+ek 53
+Evaluation took:
+  0.150 seconds of real time
+  0.150000 seconds of total run time (0.140000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.130 seconds non-GC time. ]
+  100.00% CPU
+  389,445,875 processor cycles
+  29,277,760 bytes consed
+  
+di 53
+Evaluation took:
+  1.867 seconds of real time
+  1.860000 seconds of total run time (1.820000 user, 0.040000 system)
+  [ Run times consist of 0.110 seconds GC time, and 1.750 seconds non-GC time. ]
+  99.63% CPU
+  4,843,898,280 processor cycles
+  365,228,624 bytes consed
+  
+ek 54
+Evaluation took:
+  0.177 seconds of real time
+  0.170000 seconds of total run time (0.170000 user, 0.000000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.130 seconds non-GC time. ]
+  96.05% CPU
+  460,632,588 processor cycles
+  30,075,440 bytes consed
+  
+di 54
+Evaluation took:
+  1.913 seconds of real time
+  1.920000 seconds of total run time (1.910000 user, 0.010000 system)
+  [ Run times consist of 0.070 seconds GC time, and 1.850 seconds non-GC time. ]
+  100.37% CPU
+  4,961,056,828 processor cycles
+  377,861,648 bytes consed
+  
+ek 55
+Evaluation took:
+  0.151 seconds of real time
+  0.160000 seconds of total run time (0.160000 user, 0.000000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.140 seconds non-GC time. ]
+  105.96% CPU
+  391,012,141 processor cycles
+  30,202,496 bytes consed
+  
+di 55
+Evaluation took:
+  1.927 seconds of real time
+  1.920000 seconds of total run time (1.910000 user, 0.010000 system)
+  [ Run times consist of 0.100 seconds GC time, and 1.820 seconds non-GC time. ]
+  99.64% CPU
+  4,997,269,940 processor cycles
+  380,374,208 bytes consed
+  
+ek 56
+Evaluation took:
+  0.174 seconds of real time
+  0.170000 seconds of total run time (0.170000 user, 0.000000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.150 seconds non-GC time. ]
+  97.70% CPU
+  451,275,032 processor cycles
+  31,560,128 bytes consed
+  
+di 56
+Evaluation took:
+  2.103 seconds of real time
+  2.100000 seconds of total run time (2.070000 user, 0.030000 system)
+  [ Run times consist of 0.080 seconds GC time, and 2.020 seconds non-GC time. ]
+  99.86% CPU
+  5,453,913,426 processor cycles
+  415,885,408 bytes consed
+  
+ek 57
+Evaluation took:
+  0.172 seconds of real time
+  0.170000 seconds of total run time (0.160000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.150 seconds non-GC time. ]
+  98.84% CPU
+  445,699,644 processor cycles
+  30,939,824 bytes consed
+  
+di 57
+Evaluation took:
+  1.936 seconds of real time
+  1.940000 seconds of total run time (1.940000 user, 0.000000 system)
+  [ Run times consist of 0.060 seconds GC time, and 1.880 seconds non-GC time. ]
+  100.21% CPU
+  5,020,911,532 processor cycles
+  382,918,480 bytes consed
+  
+ek 58
+Evaluation took:
+  0.178 seconds of real time
+  0.180000 seconds of total run time (0.170000 user, 0.010000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.150 seconds non-GC time. ]
+  101.12% CPU
+  460,196,620 processor cycles
+  32,248,176 bytes consed
+  
+di 58
+Evaluation took:
+  2.160 seconds of real time
+  2.150000 seconds of total run time (2.130000 user, 0.020000 system)
+  [ Run times consist of 0.110 seconds GC time, and 2.040 seconds non-GC time. ]
+  99.54% CPU
+  5,603,285,753 processor cycles
+  413,207,200 bytes consed
+  
+ek 59
+Evaluation took:
+  0.181 seconds of real time
+  0.180000 seconds of total run time (0.160000 user, 0.020000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.140 seconds non-GC time. ]
+  99.45% CPU
+  467,772,318 processor cycles
+  32,525,408 bytes consed
+  
+di 59
+Evaluation took:
+  2.063 seconds of real time
+  2.060000 seconds of total run time (2.050000 user, 0.010000 system)
+  [ Run times consist of 0.070 seconds GC time, and 1.990 seconds non-GC time. ]
+  99.85% CPU
+  5,349,952,218 processor cycles
+  405,337,920 bytes consed
+  
+ek 60
+Evaluation took:
+  0.195 seconds of real time
+  0.200000 seconds of total run time (0.200000 user, 0.000000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.160 seconds non-GC time. ]
+  102.56% CPU
+  505,453,520 processor cycles
+  34,289,568 bytes consed
+  
+di 60
+Evaluation took:
+  2.340 seconds of real time
+  2.340000 seconds of total run time (2.310000 user, 0.030000 system)
+  [ Run times consist of 0.120 seconds GC time, and 2.220 seconds non-GC time. ]
+  100.00% CPU
+  6,070,006,956 processor cycles
+  447,848,992 bytes consed
+  
+ek 61
+Evaluation took:
+  0.198 seconds of real time
+  0.200000 seconds of total run time (0.190000 user, 0.010000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.160 seconds non-GC time. ]
+  101.01% CPU
+  514,445,503 processor cycles
+  34,401,776 bytes consed
+  
+di 61
+Evaluation took:
+  2.287 seconds of real time
+  2.290000 seconds of total run time (2.280000 user, 0.010000 system)
+  [ Run times consist of 0.080 seconds GC time, and 2.210 seconds non-GC time. ]
+  100.13% CPU
+  5,930,369,276 processor cycles
+  447,449,424 bytes consed
+  
+ek 62
+Evaluation took:
+  0.198 seconds of real time
+  0.190000 seconds of total run time (0.160000 user, 0.030000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.150 seconds non-GC time. ]
+  95.96% CPU
+  513,462,079 processor cycles
+  34,379,792 bytes consed
+  
+di 62
+Evaluation took:
+  2.241 seconds of real time
+  2.230000 seconds of total run time (2.190000 user, 0.040000 system)
+  [ Run times consist of 0.020 seconds GC time, and 2.210 seconds non-GC time. ]
+  99.51% CPU
+  5,812,498,731 processor cycles
+  443,012,192 bytes consed
+  
+ek 63
+Evaluation took:
+  0.198 seconds of real time
+  0.200000 seconds of total run time (0.190000 user, 0.010000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.170 seconds non-GC time. ]
+  101.01% CPU
+  511,838,184 processor cycles
+  34,979,344 bytes consed
+  
+di 63
+Evaluation took:
+  2.309 seconds of real time
+  2.310000 seconds of total run time (2.280000 user, 0.030000 system)
+  [ Run times consist of 0.120 seconds GC time, and 2.190 seconds non-GC time. ]
+  100.04% CPU
+  5,988,154,094 processor cycles
+  451,281,520 bytes consed
+  
+ek 64
+Evaluation took:
+  0.220 seconds of real time
+  0.220000 seconds of total run time (0.220000 user, 0.000000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.180 seconds non-GC time. ]
+  100.00% CPU
+  569,717,343 processor cycles
+  37,188,272 bytes consed
+  
+di 64
+Evaluation took:
+  2.636 seconds of real time
+  2.640000 seconds of total run time (2.630000 user, 0.010000 system)
+  [ Run times consist of 0.120 seconds GC time, and 2.520 seconds non-GC time. ]
+  100.15% CPU
+  6,836,708,164 processor cycles
+  503,242,256 bytes consed
+  
+ek 65
+Evaluation took:
+  0.221 seconds of real time
+  0.220000 seconds of total run time (0.200000 user, 0.020000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.180 seconds non-GC time. ]
+  99.55% CPU
+  574,845,804 processor cycles
+  37,504,624 bytes consed
+  
+di 65
+Evaluation took:
+  2.555 seconds of real time
+  2.560000 seconds of total run time (2.500000 user, 0.060000 system)
+  [ Run times consist of 0.070 seconds GC time, and 2.490 seconds non-GC time. ]
+  100.20% CPU
+  6,627,682,373 processor cycles
+  495,386,688 bytes consed
+  
+ek 66
+Evaluation took:
+  0.208 seconds of real time
+  0.210000 seconds of total run time (0.200000 user, 0.010000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.180 seconds non-GC time. ]
+  100.96% CPU
+  539,089,395 processor cycles
+  37,733,024 bytes consed
+  
+di 66
+Evaluation took:
+  2.649 seconds of real time
+  2.650000 seconds of total run time (2.650000 user, 0.000000 system)
+  [ Run times consist of 0.120 seconds GC time, and 2.530 seconds non-GC time. ]
+  100.04% CPU
+  6,869,736,159 processor cycles
+  504,861,216 bytes consed
+  
+ek 67
+Evaluation took:
+  0.218 seconds of real time
+  0.220000 seconds of total run time (0.200000 user, 0.020000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.190 seconds non-GC time. ]
+  100.92% CPU
+  566,933,770 processor cycles
+  38,931,392 bytes consed
+  
+di 67
+Evaluation took:
+  2.762 seconds of real time
+  2.760000 seconds of total run time (2.710000 user, 0.050000 system)
+  [ Run times consist of 0.220 seconds GC time, and 2.540 seconds non-GC time. ]
+  99.93% CPU
+  7,163,180,375 processor cycles
+  518,729,728 bytes consed
+  
+ek 68
+Evaluation took:
+  0.234 seconds of real time
+  0.230000 seconds of total run time (0.230000 user, 0.000000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.180 seconds non-GC time. ]
+  98.29% CPU
+  606,757,463 processor cycles
+  39,581,216 bytes consed
+  
+di 68
+Evaluation took:
+  2.698 seconds of real time
+  2.700000 seconds of total run time (2.700000 user, 0.000000 system)
+  [ Run times consist of 0.140 seconds GC time, and 2.560 seconds non-GC time. ]
+  100.07% CPU
+  6,996,633,813 processor cycles
+  516,052,512 bytes consed
+  
+ek 69
+Evaluation took:
+  0.228 seconds of real time
+  0.230000 seconds of total run time (0.230000 user, 0.000000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.180 seconds non-GC time. ]
+  100.88% CPU
+  591,499,038 processor cycles
+  39,925,040 bytes consed
+  
+di 69
+Evaluation took:
+  2.706 seconds of real time
+  2.690000 seconds of total run time (2.650000 user, 0.040000 system)
+  [ Run times consist of 0.090 seconds GC time, and 2.600 seconds non-GC time. ]
+  99.41% CPU
+  7,018,764,701 processor cycles
+  516,109,440 bytes consed
+  
+ek 70
+Evaluation took:
+  0.238 seconds of real time
+  0.240000 seconds of total run time (0.220000 user, 0.020000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.210 seconds non-GC time. ]
+  100.84% CPU
+  617,122,623 processor cycles
+  41,222,480 bytes consed
+  
+di 70
+Evaluation took:
+  2.990 seconds of real time
+  2.990000 seconds of total run time (2.970000 user, 0.020000 system)
+  [ Run times consist of 0.120 seconds GC time, and 2.870 seconds non-GC time. ]
+  100.00% CPU
+  7,752,023,578 processor cycles
+  568,557,088 bytes consed
+  
+ek 71
+Evaluation took:
+  0.234 seconds of real time
+  0.230000 seconds of total run time (0.230000 user, 0.000000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.190 seconds non-GC time. ]
+  98.29% CPU
+  608,967,034 processor cycles
+  41,652,272 bytes consed
+  
+di 71
+Evaluation took:
+  2.974 seconds of real time
+  2.970000 seconds of total run time (2.920000 user, 0.050000 system)
+  [ Run times consist of 0.130 seconds GC time, and 2.840 seconds non-GC time. ]
+  99.87% CPU
+  7,712,238,053 processor cycles
+  563,615,696 bytes consed
+  
+ek 72
+Evaluation took:
+  0.245 seconds of real time
+  0.250000 seconds of total run time (0.250000 user, 0.000000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.210 seconds non-GC time. ]
+  102.04% CPU
+  635,000,795 processor cycles
+  42,122,400 bytes consed
+  
+di 72
+Evaluation took:
+  2.911 seconds of real time
+  2.910000 seconds of total run time (2.860000 user, 0.050000 system)
+  [ Run times consist of 0.100 seconds GC time, and 2.810 seconds non-GC time. ]
+  99.97% CPU
+  7,551,278,098 processor cycles
+  548,640,448 bytes consed
+  
+ek 73
+Evaluation took:
+  0.261 seconds of real time
+  0.260000 seconds of total run time (0.240000 user, 0.020000 system)
+  [ Run times consist of 0.060 seconds GC time, and 0.200 seconds non-GC time. ]
+  99.62% CPU
+  674,945,414 processor cycles
+  43,541,536 bytes consed
+  
+di 73
+Evaluation took:
+  3.034 seconds of real time
+  3.030000 seconds of total run time (3.010000 user, 0.020000 system)
+  [ Run times consist of 0.120 seconds GC time, and 2.910 seconds non-GC time. ]
+  99.87% CPU
+  7,867,782,858 processor cycles
+  573,804,672 bytes consed
+  
+ek 74
+Evaluation took:
+  0.225 seconds of real time
+  0.230000 seconds of total run time (0.210000 user, 0.020000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.220 seconds non-GC time. ]
+  102.22% CPU
+  584,829,609 processor cycles
+  43,959,440 bytes consed
+  
+di 74
+Evaluation took:
+  3.092 seconds of real time
+  3.090000 seconds of total run time (3.050000 user, 0.040000 system)
+  [ Run times consist of 0.110 seconds GC time, and 2.980 seconds non-GC time. ]
+  99.94% CPU
+  8,019,990,251 processor cycles
+  587,531,488 bytes consed
+  
+ek 75
+Evaluation took:
+  0.266 seconds of real time
+  0.270000 seconds of total run time (0.260000 user, 0.010000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.230 seconds non-GC time. ]
+  101.50% CPU
+  690,141,231 processor cycles
+  45,230,672 bytes consed
+  
+di 75
+Evaluation took:
+  3.224 seconds of real time
+  3.220000 seconds of total run time (3.180000 user, 0.040000 system)
+  [ Run times consist of 0.150 seconds GC time, and 3.070 seconds non-GC time. ]
+  99.88% CPU
+  8,360,389,687 processor cycles
+  605,795,264 bytes consed
+  
+ek 76
+Evaluation took:
+  0.228 seconds of real time
+  0.220000 seconds of total run time (0.210000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.200 seconds non-GC time. ]
+  96.49% CPU
+  592,128,966 processor cycles
+  45,252,800 bytes consed
+  
+di 76
+Evaluation took:
+  3.341 seconds of real time
+  3.340000 seconds of total run time (3.290000 user, 0.050000 system)
+  [ Run times consist of 0.150 seconds GC time, and 3.190 seconds non-GC time. ]
+  99.97% CPU
+  8,665,158,580 processor cycles
+  622,113,184 bytes consed
+  
+ek 77
+Evaluation took:
+  0.286 seconds of real time
+  0.290000 seconds of total run time (0.290000 user, 0.000000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.240 seconds non-GC time. ]
+  101.40% CPU
+  742,092,078 processor cycles
+  47,095,472 bytes consed
+  
+di 77
+Evaluation took:
+  3.524 seconds of real time
+  3.510000 seconds of total run time (3.470000 user, 0.040000 system)
+  [ Run times consist of 0.170 seconds GC time, and 3.340 seconds non-GC time. ]
+  99.60% CPU
+  9,140,209,858 processor cycles
+  650,899,296 bytes consed
+  
+ek 78
+Evaluation took:
+  0.259 seconds of real time
+  0.260000 seconds of total run time (0.240000 user, 0.020000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.220 seconds non-GC time. ]
+  100.39% CPU
+  673,489,037 processor cycles
+  45,243,408 bytes consed
+  
+di 78
+Evaluation took:
+  3.209 seconds of real time
+  3.210000 seconds of total run time (3.190000 user, 0.020000 system)
+  [ Run times consist of 0.130 seconds GC time, and 3.080 seconds non-GC time. ]
+  100.03% CPU
+  8,321,501,799 processor cycles
+  605,547,104 bytes consed
+  
+ek 79
+Evaluation took:
+  0.266 seconds of real time
+  0.270000 seconds of total run time (0.270000 user, 0.000000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.230 seconds non-GC time. ]
+  101.50% CPU
+  690,577,732 processor cycles
+  47,709,920 bytes consed
+  
+di 79
+Evaluation took:
+  3.630 seconds of real time
+  3.630000 seconds of total run time (3.580000 user, 0.050000 system)
+  [ Run times consist of 0.170 seconds GC time, and 3.460 seconds non-GC time. ]
+  100.00% CPU
+  9,415,353,389 processor cycles
+  678,907,584 bytes consed
+  
+ek 80
+Evaluation took:
+  0.281 seconds of real time
+  0.280000 seconds of total run time (0.270000 user, 0.010000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.230 seconds non-GC time. ]
+  99.64% CPU
+  726,950,276 processor cycles
+  47,784,432 bytes consed
+  
+di 80
+Evaluation took:
+  3.663 seconds of real time
+  3.670000 seconds of total run time (3.590000 user, 0.080000 system)
+  [ Run times consist of 0.270 seconds GC time, and 3.400 seconds non-GC time. ]
+  100.19% CPU
+  9,499,889,438 processor cycles
+  663,252,256 bytes consed
+  
+ek 81
+Evaluation took:
+  0.282 seconds of real time
+  0.280000 seconds of total run time (0.230000 user, 0.050000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.230 seconds non-GC time. ]
+  99.29% CPU
+  729,278,758 processor cycles
+  48,174,048 bytes consed
+  
+di 81
+Evaluation took:
+  3.556 seconds of real time
+  3.550000 seconds of total run time (3.470000 user, 0.080000 system)
+  [ Run times consist of 0.200 seconds GC time, and 3.350 seconds non-GC time. ]
+  99.83% CPU
+  9,222,709,353 processor cycles
+  658,770,256 bytes consed
+  
+ek 82
+Evaluation took:
+  0.299 seconds of real time
+  0.300000 seconds of total run time (0.300000 user, 0.000000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.250 seconds non-GC time. ]
+  100.33% CPU
+  775,200,192 processor cycles
+  49,563,040 bytes consed
+  
+di 82
+Evaluation took:
+  3.678 seconds of real time
+  3.680000 seconds of total run time (3.580000 user, 0.100000 system)
+  [ Run times consist of 0.230 seconds GC time, and 3.450 seconds non-GC time. ]
+  100.05% CPU
+  9,539,952,292 processor cycles
+  674,516,496 bytes consed
+  
+ek 83
+Evaluation took:
+  0.301 seconds of real time
+  0.310000 seconds of total run time (0.290000 user, 0.020000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.260 seconds non-GC time. ]
+  102.99% CPU
+  780,759,252 processor cycles
+  50,563,936 bytes consed
+  
+di 83
+Evaluation took:
+  3.769 seconds of real time
+  3.760000 seconds of total run time (3.750000 user, 0.010000 system)
+  [ Run times consist of 0.210 seconds GC time, and 3.550 seconds non-GC time. ]
+  99.76% CPU
+  9,774,271,351 processor cycles
+  696,413,392 bytes consed
+  
+ek 84
+Evaluation took:
+  0.316 seconds of real time
+  0.310000 seconds of total run time (0.260000 user, 0.050000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.260 seconds non-GC time. ]
+  98.10% CPU
+  818,985,739 processor cycles
+  51,149,408 bytes consed
+  
+di 84
+Evaluation took:
+  4.038 seconds of real time
+  4.030000 seconds of total run time (3.940000 user, 0.090000 system)
+  [ Run times consist of 0.260 seconds GC time, and 3.770 seconds non-GC time. ]
+  99.80% CPU
+  10,474,428,757 processor cycles
+  728,647,904 bytes consed
+  
+ek 85
+Evaluation took:
+  0.301 seconds of real time
+  0.300000 seconds of total run time (0.290000 user, 0.010000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.250 seconds non-GC time. ]
+  99.67% CPU
+  781,874,938 processor cycles
+  52,006,128 bytes consed
+  
+di 85
+Evaluation took:
+  3.860 seconds of real time
+  3.860000 seconds of total run time (3.810000 user, 0.050000 system)
+  [ Run times consist of 0.180 seconds GC time, and 3.680 seconds non-GC time. ]
+  100.00% CPU
+  10,010,463,008 processor cycles
+  717,931,376 bytes consed
+  
+ek 86
+Evaluation took:
+  0.280 seconds of real time
+  0.280000 seconds of total run time (0.270000 user, 0.010000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.240 seconds non-GC time. ]
+  100.00% CPU
+  726,406,824 processor cycles
+  51,397,072 bytes consed
+  
+di 86
+Evaluation took:
+  3.747 seconds of real time
+  3.750000 seconds of total run time (3.680000 user, 0.070000 system)
+  [ Run times consist of 0.200 seconds GC time, and 3.550 seconds non-GC time. ]
+  100.08% CPU
+  9,717,506,279 processor cycles
+  694,964,128 bytes consed
+  
+ek 87
+Evaluation took:
+  0.317 seconds of real time
+  0.320000 seconds of total run time (0.310000 user, 0.010000 system)
+  [ Run times consist of 0.060 seconds GC time, and 0.260 seconds non-GC time. ]
+  100.95% CPU
+  821,686,151 processor cycles
+  52,633,184 bytes consed
+  
+di 87
+Evaluation took:
+  4.083 seconds of real time
+  4.080000 seconds of total run time (4.050000 user, 0.030000 system)
+  [ Run times consist of 0.230 seconds GC time, and 3.850 seconds non-GC time. ]
+  99.93% CPU
+  10,587,565,274 processor cycles
+  746,816,752 bytes consed
+  
+ek 88
+Evaluation took:
+  0.325 seconds of real time
+  0.320000 seconds of total run time (0.320000 user, 0.000000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.270 seconds non-GC time. ]
+  98.46% CPU
+  842,439,312 processor cycles
+  53,856,400 bytes consed
+  
+di 88
+Evaluation took:
+  4.225 seconds of real time
+  4.220000 seconds of total run time (4.150000 user, 0.070000 system)
+  [ Run times consist of 0.160 seconds GC time, and 4.060 seconds non-GC time. ]
+  99.88% CPU
+  10,956,657,647 processor cycles
+  779,293,232 bytes consed
+  
+ek 89
+Evaluation took:
+  0.315 seconds of real time
+  0.320000 seconds of total run time (0.300000 user, 0.020000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.270 seconds non-GC time. ]
+  101.59% CPU
+  816,393,760 processor cycles
+  53,819,760 bytes consed
+  
+di 89
+Evaluation took:
+  4.123 seconds of real time
+  4.120000 seconds of total run time (4.080000 user, 0.040000 system)
+  [ Run times consist of 0.250 seconds GC time, and 3.870 seconds non-GC time. ]
+  99.93% CPU
+  10,691,307,809 processor cycles
+  747,569,168 bytes consed
+  
+ek 90
+Evaluation took:
+  0.342 seconds of real time
+  0.350000 seconds of total run time (0.340000 user, 0.010000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.300 seconds non-GC time. ]
+  102.34% CPU
+  888,340,596 processor cycles
+  56,528,000 bytes consed
+  
+di 90
+Evaluation took:
+  4.505 seconds of real time
+  4.500000 seconds of total run time (4.430000 user, 0.070000 system)
+  [ Run times consist of 0.240 seconds GC time, and 4.260 seconds non-GC time. ]
+  99.89% CPU
+  11,684,443,784 processor cycles
+  821,324,160 bytes consed
+  
+ek 91
+Evaluation took:
+  0.324 seconds of real time
+  0.320000 seconds of total run time (0.280000 user, 0.040000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.270 seconds non-GC time. ]
+  98.77% CPU
+  840,324,238 processor cycles
+  55,379,312 bytes consed
+  
+di 91
+Evaluation took:
+  4.120 seconds of real time
+  4.110000 seconds of total run time (4.0000000 user, 0.110000 system)
+  [ Run times consist of 0.200 seconds GC time, and 3.910 seconds non-GC time. ]
+  99.76% CPU
+  10,686,432,146 processor cycles
+  754,043,248 bytes consed
+  
+ek 92
+Evaluation took:
+  0.291 seconds of real time
+  0.290000 seconds of total run time (0.280000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.270 seconds non-GC time. ]
+  99.66% CPU
+  753,640,706 processor cycles
+  56,307,856 bytes consed
+  
+di 92
+Evaluation took:
+  4.249 seconds of real time
+  4.240000 seconds of total run time (4.190000 user, 0.050000 system)
+  [ Run times consist of 0.160 seconds GC time, and 4.080 seconds non-GC time. ]
+  99.79% CPU
+  11,017,373,484 processor cycles
+  776,131,792 bytes consed
+  
+ek 93
+Evaluation took:
+  0.357 seconds of real time
+  0.360000 seconds of total run time (0.340000 user, 0.020000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.310 seconds non-GC time. ]
+  100.84% CPU
+  924,127,698 processor cycles
+  58,258,032 bytes consed
+  
+di 93
+Evaluation took:
+  4.612 seconds of real time
+  4.610000 seconds of total run time (4.530000 user, 0.080000 system)
+  [ Run times consist of 0.180 seconds GC time, and 4.430 seconds non-GC time. ]
+  99.96% CPU
+  11,961,271,660 processor cycles
+  836,089,744 bytes consed
+  
+ek 94
+Evaluation took:
+  0.408 seconds of real time
+  0.410000 seconds of total run time (0.390000 user, 0.020000 system)
+  [ Run times consist of 0.120 seconds GC time, and 0.290 seconds non-GC time. ]
+  100.49% CPU
+  1,057,585,815 processor cycles
+  57,302,048 bytes consed
+  
+di 94
+Evaluation took:
+  4.161 seconds of real time
+  4.150000 seconds of total run time (4.080000 user, 0.070000 system)
+  [ Run times consist of 0.110 seconds GC time, and 4.040 seconds non-GC time. ]
+  99.74% CPU
+  10,791,863,628 processor cycles
+  774,907,568 bytes consed
+  
+ek 95
+Evaluation took:
+  0.361 seconds of real time
+  0.360000 seconds of total run time (0.350000 user, 0.010000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.320 seconds non-GC time. ]
+  99.72% CPU
+  934,634,116 processor cycles
+  59,575,920 bytes consed
+  
+di 95
+Evaluation took:
+  4.622 seconds of real time
+  4.620000 seconds of total run time (4.560000 user, 0.060000 system)
+  [ Run times consist of 0.240 seconds GC time, and 4.380 seconds non-GC time. ]
+  99.96% CPU
+  11,987,446,913 processor cycles
+  839,150,496 bytes consed
+  
+ek 96
+Evaluation took:
+  0.403 seconds of real time
+  0.400000 seconds of total run time (0.370000 user, 0.030000 system)
+  [ Run times consist of 0.080 seconds GC time, and 0.320 seconds non-GC time. ]
+  99.26% CPU
+  1,045,879,445 processor cycles
+  60,979,440 bytes consed
+  
+di 96
+Evaluation took:
+  4.800 seconds of real time
+  4.800000 seconds of total run time (4.740000 user, 0.060000 system)
+  [ Run times consist of 0.180 seconds GC time, and 4.620 seconds non-GC time. ]
+  100.00% CPU
+  12,447,828,224 processor cycles
+  882,156,304 bytes consed
+  
+ek 97
+Evaluation took:
+  0.364 seconds of real time
+  0.370000 seconds of total run time (0.350000 user, 0.020000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.320 seconds non-GC time. ]
+  101.65% CPU
+  944,273,005 processor cycles
+  60,768,208 bytes consed
+  
+di 97
+Evaluation took:
+  4.761 seconds of real time
+  4.750000 seconds of total run time (4.690000 user, 0.060000 system)
+  [ Run times consist of 0.240 seconds GC time, and 4.510 seconds non-GC time. ]
+  99.77% CPU
+  12,348,475,360 processor cycles
+  859,305,936 bytes consed
+  
+ek 98
+Evaluation took:
+  0.388 seconds of real time
+  0.390000 seconds of total run time (0.340000 user, 0.050000 system)
+  [ Run times consist of 0.080 seconds GC time, and 0.310 seconds non-GC time. ]
+  100.52% CPU
+  1,007,742,749 processor cycles
+  60,143,408 bytes consed
+  
+di 98
+Evaluation took:
+  4.606 seconds of real time
+  4.610000 seconds of total run time (4.530000 user, 0.080000 system)
+  [ Run times consist of 0.180 seconds GC time, and 4.430 seconds non-GC time. ]
+  100.09% CPU
+  11,945,555,973 processor cycles
+  848,795,056 bytes consed
+  
+ek 99
+Evaluation took:
+  0.374 seconds of real time
+  0.380000 seconds of total run time (0.380000 user, 0.000000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.340 seconds non-GC time. ]
+  101.60% CPU
+  969,072,299 processor cycles
+  62,305,264 bytes consed
+  
+di 99
+Evaluation took:
+  5.010 seconds of real time
+  5.010000 seconds of total run time (4.950000 user, 0.060000 system)
+  [ Run times consist of 0.260 seconds GC time, and 4.750 seconds non-GC time. ]
+  100.00% CPU
+  12,992,456,516 processor cycles
+  907,327,296 bytes consed
+  
+ek 100
+Evaluation took:
+  0.457 seconds of real time
+  0.460000 seconds of total run time (0.430000 user, 0.030000 system)
+  [ Run times consist of 0.130 seconds GC time, and 0.330 seconds non-GC time. ]
+  100.66% CPU
+  1,186,292,653 processor cycles
+  63,152,256 bytes consed
+  
+di 100
+Evaluation took:
+  5.010 seconds of real time
+  5.0000000 seconds of total run time (4.940000 user, 0.060000 system)
+  [ Run times consist of 0.190 seconds GC time, and 4.810 seconds non-GC time. ]
+  99.80% CPU
+  12,994,330,024 processor cycles
+  909,180,048 bytes consed
+  
+ek 101
+Evaluation took:
+  0.361 seconds of real time
+  0.360000 seconds of total run time (0.340000 user, 0.020000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.330 seconds non-GC time. ]
+  99.72% CPU
+  938,129,686 processor cycles
+  64,373,168 bytes consed
+  
+di 101
+Evaluation took:
+  5.284 seconds of real time
+  5.280000 seconds of total run time (5.150000 user, 0.130000 system)
+  [ Run times consist of 0.170 seconds GC time, and 5.110 seconds non-GC time. ]
+  99.92% CPU
+  13,704,359,370 processor cycles
+  950,017,856 bytes consed
+  
+ek 102
+Evaluation took:
+  0.402 seconds of real time
+  0.400000 seconds of total run time (0.370000 user, 0.030000 system)
+  [ Run times consist of 0.090 seconds GC time, and 0.310 seconds non-GC time. ]
+  99.50% CPU
+  1,041,022,580 processor cycles
+  62,798,400 bytes consed
+  
+di 102
+Evaluation took:
+  4.748 seconds of real time
+  4.750000 seconds of total run time (4.650000 user, 0.100000 system)
+  [ Run times consist of 0.260 seconds GC time, and 4.490 seconds non-GC time. ]
+  100.04% CPU
+  12,312,489,046 processor cycles
+  867,580,080 bytes consed
+  
+ek 103
+Evaluation took:
+  0.377 seconds of real time
+  0.380000 seconds of total run time (0.380000 user, 0.000000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.330 seconds non-GC time. ]
+  100.80% CPU
+  976,918,774 processor cycles
+  63,379,184 bytes consed
+  
+di 103
+Evaluation took:
+  5.179 seconds of real time
+  5.180000 seconds of total run time (5.130000 user, 0.050000 system)
+  [ Run times consist of 0.160 seconds GC time, and 5.020 seconds non-GC time. ]
+  100.02% CPU
+  13,432,085,758 processor cycles
+  927,702,768 bytes consed
+  
+ek 104
+Evaluation took:
+  0.354 seconds of real time
+  0.350000 seconds of total run time (0.330000 user, 0.020000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.320 seconds non-GC time. ]
+  98.87% CPU
+  919,088,534 processor cycles
+  63,960,400 bytes consed
+  
+di 104
+Evaluation took:
+  4.850 seconds of real time
+  4.850000 seconds of total run time (4.750000 user, 0.100000 system)
+  [ Run times consist of 0.140 seconds GC time, and 4.710 seconds non-GC time. ]
+  100.00% CPU
+  12,578,794,501 processor cycles
+  882,993,712 bytes consed
+  
+ek 105
+Evaluation took:
+  0.455 seconds of real time
+  0.460000 seconds of total run time (0.430000 user, 0.030000 system)
+  [ Run times consist of 0.120 seconds GC time, and 0.340 seconds non-GC time. ]
+  101.10% CPU
+  1,179,770,670 processor cycles
+  66,746,000 bytes consed
+  
+di 105
+Evaluation took:
+  5.384 seconds of real time
+  5.380000 seconds of total run time (5.260000 user, 0.120000 system)
+  [ Run times consist of 0.240 seconds GC time, and 5.140 seconds non-GC time. ]
+  99.93% CPU
+  13,963,966,601 processor cycles
+  972,553,984 bytes consed
+  
+ek 106
+Evaluation took:
+  0.388 seconds of real time
+  0.390000 seconds of total run time (0.380000 user, 0.010000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.350 seconds non-GC time. ]
+  100.52% CPU
+  1,008,356,102 processor cycles
+  66,372,192 bytes consed
+  
+di 106
+Evaluation took:
+  5.196 seconds of real time
+  5.200000 seconds of total run time (5.140000 user, 0.060000 system)
+  [ Run times consist of 0.200 seconds GC time, and 5.0000 seconds non-GC time. ]
+  100.08% CPU
+  13,475,880,093 processor cycles
+  927,728,432 bytes consed
+  
+ek 107
+Evaluation took:
+  0.363 seconds of real time
+  0.360000 seconds of total run time (0.350000 user, 0.010000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.330 seconds non-GC time. ]
+  99.17% CPU
+  941,226,598 processor cycles
+  68,095,344 bytes consed
+  
+di 107
+Evaluation took:
+  5.597 seconds of real time
+  5.600000 seconds of total run time (5.510000 user, 0.090000 system)
+  [ Run times consist of 0.190 seconds GC time, and 5.410 seconds non-GC time. ]
+  100.05% CPU
+  14,516,939,047 processor cycles
+  1,009,786,800 bytes consed
+  
+ek 108
+Evaluation took:
+  0.435 seconds of real time
+  0.440000 seconds of total run time (0.430000 user, 0.010000 system)
+  [ Run times consist of 0.070 seconds GC time, and 0.370 seconds non-GC time. ]
+  101.15% CPU
+  1,128,640,604 processor cycles
+  69,246,832 bytes consed
+  
+di 108
+Evaluation took:
+  5.751 seconds of real time
+  5.740000 seconds of total run time (5.660000 user, 0.080000 system)
+  [ Run times consist of 0.280 seconds GC time, and 5.460 seconds non-GC time. ]
+  99.81% CPU
+  14,915,648,865 processor cycles
+  1,024,207,584 bytes consed
+  
+ek 109
+Evaluation took:
+  0.412 seconds of real time
+  0.410000 seconds of total run time (0.380000 user, 0.030000 system)
+  99.51% CPU
+  1,068,222,363 processor cycles
+  70,895,664 bytes consed
+  
+di 109
+Evaluation took:
+  6.012 seconds of real time
+  6.020000 seconds of total run time (5.930000 user, 0.090000 system)
+  [ Run times consist of 0.300 seconds GC time, and 5.720 seconds non-GC time. ]
+  100.13% CPU
+  15,591,866,017 processor cycles
+  1,083,151,040 bytes consed
+  
+ek 110
+Evaluation took:
+  0.374 seconds of real time
+  0.370000 seconds of total run time (0.350000 user, 0.020000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.350 seconds non-GC time. ]
+  98.93% CPU
+  971,383,218 processor cycles
+  69,038,288 bytes consed
+  
+di 110
+Evaluation took:
+  5.638 seconds of real time
+  5.640000 seconds of total run time (5.530000 user, 0.110000 system)
+  [ Run times consist of 0.260 seconds GC time, and 5.380 seconds non-GC time. ]
+  100.04% CPU
+  14,622,017,189 processor cycles
+  996,989,232 bytes consed
+  
+ek 111
+Evaluation took:
+  0.396 seconds of real time
+  0.400000 seconds of total run time (0.390000 user, 0.010000 system)
+  [ Run times consist of 0.060 seconds GC time, and 0.340 seconds non-GC time. ]
+  101.01% CPU
+  1,027,285,168 processor cycles
+  69,757,456 bytes consed
+  
+di 111
+Evaluation took:
+  5.582 seconds of real time
+  5.570000 seconds of total run time (5.450000 user, 0.120000 system)
+  [ Run times consist of 0.310 seconds GC time, and 5.260 seconds non-GC time. ]
+  99.79% CPU
+  14,478,085,323 processor cycles
+  984,942,848 bytes consed
+  
+ek 112
+Evaluation took:
+  0.432 seconds of real time
+  0.430000 seconds of total run time (0.410000 user, 0.020000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.390 seconds non-GC time. ]
+  99.54% CPU
+  1,119,291,251 processor cycles
+  71,660,928 bytes consed
+  
+di 112
+Evaluation took:
+  6.011 seconds of real time
+  6.010000 seconds of total run time (5.890000 user, 0.120000 system)
+  [ Run times consist of 0.340 seconds GC time, and 5.670 seconds non-GC time. ]
+  99.98% CPU
+  15,590,057,834 processor cycles
+  1,065,475,120 bytes consed
+  
+ek 113
+Evaluation took:
+  0.491 seconds of real time
+  0.490000 seconds of total run time (0.450000 user, 0.040000 system)
+  [ Run times consist of 0.120 seconds GC time, and 0.370 seconds non-GC time. ]
+  99.80% CPU
+  1,272,541,218 processor cycles
+  71,667,712 bytes consed
+  
+di 113
+Evaluation took:
+  5.805 seconds of real time
+  5.800000 seconds of total run time (5.640000 user, 0.160000 system)
+  [ Run times consist of 0.270 seconds GC time, and 5.530 seconds non-GC time. ]
+  99.91% CPU
+  15,054,600,535 processor cycles
+  1,038,494,672 bytes consed
+  
+ek 114
+Evaluation took:
+  0.419 seconds of real time
+  0.420000 seconds of total run time (0.400000 user, 0.020000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.390 seconds non-GC time. ]
+  100.24% CPU
+  1,086,570,043 processor cycles
+  73,522,464 bytes consed
+  
+di 114
+Evaluation took:
+  6.314 seconds of real time
+  6.320000 seconds of total run time (6.170000 user, 0.150000 system)
+  [ Run times consist of 0.300 seconds GC time, and 6.020 seconds non-GC time. ]
+  100.10% CPU
+  16,376,841,091 processor cycles
+  1,110,603,040 bytes consed
+  
+ek 115
+Evaluation took:
+  0.419 seconds of real time
+  0.420000 seconds of total run time (0.400000 user, 0.020000 system)
+  [ Run times consist of 0.060 seconds GC time, and 0.360 seconds non-GC time. ]
+  100.24% CPU
+  1,085,316,050 processor cycles
+  72,829,312 bytes consed
+  
+di 115
+Evaluation took:
+  6.067 seconds of real time
+  6.060000 seconds of total run time (5.980000 user, 0.080000 system)
+  [ Run times consist of 0.370 seconds GC time, and 5.690 seconds non-GC time. ]
+  99.88% CPU
+  15,734,695,600 processor cycles
+  1,066,796,592 bytes consed
+  
+ek 116
+Evaluation took:
+  0.458 seconds of real time
+  0.460000 seconds of total run time (0.430000 user, 0.030000 system)
+  [ Run times consist of 0.080 seconds GC time, and 0.380 seconds non-GC time. ]
+  100.44% CPU
+  1,186,558,802 processor cycles
+  74,531,040 bytes consed
+  
+di 116
+Evaluation took:
+  6.364 seconds of real time
+  6.350000 seconds of total run time (6.240000 user, 0.110000 system)
+  [ Run times consist of 0.420 seconds GC time, and 5.930 seconds non-GC time. ]
+  99.78% CPU
+  16,504,704,892 processor cycles
+  1,101,183,856 bytes consed
+  
+ek 117
+Evaluation took:
+  0.441 seconds of real time
+  0.440000 seconds of total run time (0.430000 user, 0.010000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.400 seconds non-GC time. ]
+  99.77% CPU
+  1,141,938,616 processor cycles
+  74,851,968 bytes consed
+  
+di 117
+Evaluation took:
+  6.238 seconds of real time
+  6.230000 seconds of total run time (6.070000 user, 0.160000 system)
+  [ Run times consist of 0.360 seconds GC time, and 5.870 seconds non-GC time. ]
+  99.87% CPU
+  16,176,502,641 processor cycles
+  1,088,971,264 bytes consed
+  
+ek 118
+Evaluation took:
+  0.431 seconds of real time
+  0.430000 seconds of total run time (0.420000 user, 0.010000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.380 seconds non-GC time. ]
+  99.77% CPU
+  1,116,929,866 processor cycles
+  74,956,272 bytes consed
+  
+di 118
+Evaluation took:
+  6.481 seconds of real time
+  6.470000 seconds of total run time (6.310000 user, 0.160000 system)
+  [ Run times consist of 0.310 seconds GC time, and 6.160 seconds non-GC time. ]
+  99.83% CPU
+  16,808,058,813 processor cycles
+  1,140,289,888 bytes consed
+  
+ek 119
+Evaluation took:
+  0.475 seconds of real time
+  0.470000 seconds of total run time (0.460000 user, 0.010000 system)
+  [ Run times consist of 0.010 seconds GC time, and 0.460 seconds non-GC time. ]
+  98.95% CPU
+  1,232,253,386 processor cycles
+  79,460,160 bytes consed
+  
+di 119
+Evaluation took:
+  7.286 seconds of real time
+  7.290000 seconds of total run time (7.160000 user, 0.130000 system)
+  [ Run times consist of 0.450 seconds GC time, and 6.840 seconds non-GC time. ]
+  100.05% CPU
+  18,898,402,471 processor cycles
+  1,256,378,704 bytes consed
+  
+ek 120
+Evaluation took:
+  0.457 seconds of real time
+  0.460000 seconds of total run time (0.440000 user, 0.020000 system)
+  [ Run times consist of 0.070 seconds GC time, and 0.390 seconds non-GC time. ]
+  100.66% CPU
+  1,187,186,065 processor cycles
+  77,473,984 bytes consed
+  
+di 120
+Evaluation took:
+  6.605 seconds of real time
+  6.590000 seconds of total run time (6.430000 user, 0.160000 system)
+  [ Run times consist of 0.420 seconds GC time, and 6.170 seconds non-GC time. ]
+  99.77% CPU
+  17,131,428,808 processor cycles
+  1,147,311,248 bytes consed
+  
+ek 121
+Evaluation took:
+  0.464 seconds of real time
+  0.460000 seconds of total run time (0.450000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.440 seconds non-GC time. ]
+  99.14% CPU
+  1,204,989,695 processor cycles
+  79,386,448 bytes consed
+  
+di 121
+Evaluation took:
+  6.956 seconds of real time
+  6.960000 seconds of total run time (6.840000 user, 0.120000 system)
+  [ Run times consist of 0.450 seconds GC time, and 6.510 seconds non-GC time. ]
+  100.06% CPU
+  18,040,448,036 processor cycles
+  1,212,943,872 bytes consed
+  
+ek 122
+Evaluation took:
+  0.488 seconds of real time
+  0.490000 seconds of total run time (0.470000 user, 0.020000 system)
+  [ Run times consist of 0.090 seconds GC time, and 0.400 seconds non-GC time. ]
+  100.41% CPU
+  1,266,703,945 processor cycles
+  78,931,008 bytes consed
+  
+di 122
+Evaluation took:
+  6.578 seconds of real time
+  6.570000 seconds of total run time (6.480000 user, 0.090000 system)
+  [ Run times consist of 0.330 seconds GC time, and 6.240 seconds non-GC time. ]
+  99.88% CPU
+  17,059,662,347 processor cycles
+  1,142,443,184 bytes consed
+  
+ek 123
+Evaluation took:
+  0.584 seconds of real time
+  0.590000 seconds of total run time (0.580000 user, 0.010000 system)
+  [ Run times consist of 0.130 seconds GC time, and 0.460 seconds non-GC time. ]
+  101.03% CPU
+  1,513,821,777 processor cycles
+  80,844,768 bytes consed
+  
+di 123
+Evaluation took:
+  7.217 seconds of real time
+  7.210000 seconds of total run time (7.090000 user, 0.120000 system)
+  [ Run times consist of 0.410 seconds GC time, and 6.800 seconds non-GC time. ]
+  99.90% CPU
+  18,717,506,080 processor cycles
+  1,246,276,416 bytes consed
+  
+ek 124
+Evaluation took:
+  0.466 seconds of real time
+  0.460000 seconds of total run time (0.450000 user, 0.010000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.430 seconds non-GC time. ]
+  98.71% CPU
+  1,208,854,465 processor cycles
+  80,401,840 bytes consed
+  
+di 124
+Evaluation took:
+  6.863 seconds of real time
+  6.870000 seconds of total run time (6.780000 user, 0.090000 system)
+  [ Run times consist of 0.430 seconds GC time, and 6.440 seconds non-GC time. ]
+  100.10% CPU
+  17,799,327,910 processor cycles
+  1,182,990,048 bytes consed
+  
+ek 125
+Evaluation took:
+  0.491 seconds of real time
+  0.480000 seconds of total run time (0.470000 user, 0.010000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.450 seconds non-GC time. ]
+  97.76% CPU
+  1,273,155,442 processor cycles
+  81,893,904 bytes consed
+  
+di 125
+Evaluation took:
+  7.442 seconds of real time
+  7.440000 seconds of total run time (7.330000 user, 0.110000 system)
+  [ Run times consist of 0.350 seconds GC time, and 7.090 seconds non-GC time. ]
+  99.97% CPU
+  19,301,563,645 processor cycles
+  1,279,699,120 bytes consed
+  
+ek 126
+Evaluation took:
+  0.473 seconds of real time
+  0.470000 seconds of total run time (0.440000 user, 0.030000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.440 seconds non-GC time. ]
+  99.37% CPU
+  1,228,844,370 processor cycles
+  81,320,128 bytes consed
+  
+di 126
+Evaluation took:
+  7.007 seconds of real time
+  7.010000 seconds of total run time (6.830000 user, 0.180000 system)
+  [ Run times consist of 0.440 seconds GC time, and 6.570 seconds non-GC time. ]
+  100.04% CPU
+  18,173,164,750 processor cycles
+  1,222,908,480 bytes consed
+  
+ek 127
+Evaluation took:
+  0.481 seconds of real time
+  0.470000 seconds of total run time (0.440000 user, 0.030000 system)
+  [ Run times consist of 0.090 seconds GC time, and 0.380 seconds non-GC time. ]
+  97.71% CPU
+  1,245,647,403 processor cycles
+  80,433,936 bytes consed
+  
+di 127
+Evaluation took:
+  6.670 seconds of real time
+  6.670000 seconds of total run time (6.470000 user, 0.200000 system)
+  [ Run times consist of 0.490 seconds GC time, and 6.180 seconds non-GC time. ]
+  100.00% CPU
+  17,297,833,618 processor cycles
+  1,145,738,720 bytes consed
+  
+ek 128
+Evaluation took:
+  0.480 seconds of real time
+  0.480000 seconds of total run time (0.480000 user, 0.000000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.460 seconds non-GC time. ]
+  100.00% CPU
+  1,245,436,556 processor cycles
+  82,846,000 bytes consed
+  
+di 128
+Evaluation took:
+  7.436 seconds of real time
+  7.430000 seconds of total run time (7.320000 user, 0.110000 system)
+  [ Run times consist of 0.440 seconds GC time, and 6.990 seconds non-GC time. ]
+  99.92% CPU
+  19,283,884,802 processor cycles
+  1,275,976,864 bytes consed
+  
+ek 129
+Evaluation took:
+  0.614 seconds of real time
+  0.610000 seconds of total run time (0.520000 user, 0.090000 system)
+  [ Run times consist of 0.170 seconds GC time, and 0.440 seconds non-GC time. ]
+  99.35% CPU
+  1,592,080,906 processor cycles
+  82,968,080 bytes consed
+  
+di 129
+Evaluation took:
+  7.237 seconds of real time
+  7.230000 seconds of total run time (7.110000 user, 0.120000 system)
+  [ Run times consist of 0.340 seconds GC time, and 6.890 seconds non-GC time. ]
+  99.90% CPU
+  18,768,553,674 processor cycles
+  1,258,292,496 bytes consed
+  
+ek 130
+Evaluation took:
+  0.523 seconds of real time
+  0.520000 seconds of total run time (0.490000 user, 0.030000 system)
+  [ Run times consist of 0.080 seconds GC time, and 0.440 seconds non-GC time. ]
+  99.43% CPU
+  1,357,540,470 processor cycles
+  84,216,544 bytes consed
+  
+di 130
+Evaluation took:
+  7.402 seconds of real time
+  7.400000 seconds of total run time (7.280000 user, 0.120000 system)
+  [ Run times consist of 0.420 seconds GC time, and 6.980 seconds non-GC time. ]
+  99.97% CPU
+  19,196,107,892 processor cycles
+  1,266,567,904 bytes consed
+  
+ek 131
+Evaluation took:
+  0.515 seconds of real time
+  0.510000 seconds of total run time (0.500000 user, 0.010000 system)
+  [ Run times consist of 0.070 seconds GC time, and 0.440 seconds non-GC time. ]
+  99.03% CPU
+  1,334,484,112 processor cycles
+  84,089,040 bytes consed
+  
+di 131
+Evaluation took:
+  7.506 seconds of real time
+  7.500000 seconds of total run time (7.320000 user, 0.180000 system)
+  [ Run times consist of 0.510 seconds GC time, and 6.990 seconds non-GC time. ]
+  99.92% CPU
+  19,467,023,862 processor cycles
+  1,269,741,648 bytes consed
+  
+ek 132
+Evaluation took:
+  0.536 seconds of real time
+  0.530000 seconds of total run time (0.490000 user, 0.040000 system)
+  [ Run times consist of 0.090 seconds GC time, and 0.440 seconds non-GC time. ]
+  98.88% CPU
+  1,389,523,239 processor cycles
+  85,877,696 bytes consed
+  
+di 132
+Evaluation took:
+  7.596 seconds of real time
+  7.600000 seconds of total run time (7.440000 user, 0.160000 system)
+  [ Run times consist of 0.350 seconds GC time, and 7.250 seconds non-GC time. ]
+  100.05% CPU
+  19,700,605,067 processor cycles
+  1,298,641,488 bytes consed
+  
+ek 133
+Evaluation took:
+  0.518 seconds of real time
+  0.520000 seconds of total run time (0.500000 user, 0.020000 system)
+  [ Run times consist of 0.070 seconds GC time, and 0.450 seconds non-GC time. ]
+  100.39% CPU
+  1,345,184,191 processor cycles
+  87,428,688 bytes consed
+  
+di 133
+Evaluation took:
+  7.784 seconds of real time
+  7.770000 seconds of total run time (7.580000 user, 0.190000 system)
+  [ Run times consist of 0.470 seconds GC time, and 7.300 seconds non-GC time. ]
+  99.82% CPU
+  20,188,152,296 processor cycles
+  1,332,747,824 bytes consed
+  
+ek 134
+Evaluation took:
+  0.514 seconds of real time
+  0.510000 seconds of total run time (0.510000 user, 0.000000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.460 seconds non-GC time. ]
+  99.22% CPU
+  1,332,504,901 processor cycles
+  87,118,176 bytes consed
+  
+di 134
+Evaluation took:
+  7.373 seconds of real time
+  7.380000 seconds of total run time (7.250000 user, 0.130000 system)
+  [ Run times consist of 0.380 seconds GC time, and 7.0000 seconds non-GC time. ]
+  100.09% CPU
+  19,123,374,413 processor cycles
+  1,254,537,456 bytes consed
+  
+ek 135
+Evaluation took:
+  0.534 seconds of real time
+  0.540000 seconds of total run time (0.540000 user, 0.000000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.510 seconds non-GC time. ]
+  101.12% CPU
+  1,384,291,831 processor cycles
+  89,118,432 bytes consed
+  
+di 135
+Evaluation took:
+  8.059 seconds of real time
+  8.050000 seconds of total run time (7.920000 user, 0.130000 system)
+  [ Run times consist of 0.480 seconds GC time, and 7.570 seconds non-GC time. ]
+  99.89% CPU
+  20,901,360,922 processor cycles
+  1,361,661,584 bytes consed
+  
+ek 136
+Evaluation took:
+  0.627 seconds of real time
+  0.620000 seconds of total run time (0.580000 user, 0.040000 system)
+  [ Run times consist of 0.120 seconds GC time, and 0.500 seconds non-GC time. ]
+  98.88% CPU
+  1,626,206,270 processor cycles
+  89,969,984 bytes consed
+  
+di 136
+Evaluation took:
+  8.361 seconds of real time
+  8.370000 seconds of total run time (8.210000 user, 0.160000 system)
+  [ Run times consist of 0.440 seconds GC time, and 7.930 seconds non-GC time. ]
+  100.11% CPU
+  21,685,159,028 processor cycles
+  1,426,176,944 bytes consed
+  
+ek 137
+Evaluation took:
+  0.568 seconds of real time
+  0.560000 seconds of total run time (0.540000 user, 0.020000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.510 seconds non-GC time. ]
+  98.59% CPU
+  1,473,457,011 processor cycles
+  92,612,464 bytes consed
+  
+di 137
+Evaluation took:
+  8.636 seconds of real time
+  8.640000 seconds of total run time (8.430000 user, 0.210000 system)
+  [ Run times consist of 0.680 seconds GC time, and 7.960 seconds non-GC time. ]
+  100.05% CPU
+  22,398,795,133 processor cycles
+  1,441,417,312 bytes consed
+  
+ek 138
+Evaluation took:
+  0.516 seconds of real time
+  0.520000 seconds of total run time (0.480000 user, 0.040000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.490 seconds non-GC time. ]
+  100.78% CPU
+  1,336,132,317 processor cycles
+  90,848,368 bytes consed
+  
+di 138
+Evaluation took:
+  8.448 seconds of real time
+  8.440000 seconds of total run time (8.260000 user, 0.180000 system)
+  [ Run times consist of 0.480 seconds GC time, and 7.960 seconds non-GC time. ]
+  99.91% CPU
+  21,908,783,468 processor cycles
+  1,437,956,544 bytes consed
+  
+ek 139
+Evaluation took:
+  0.590 seconds of real time
+  0.590000 seconds of total run time (0.550000 user, 0.040000 system)
+  [ Run times consist of 0.080 seconds GC time, and 0.510 seconds non-GC time. ]
+  100.00% CPU
+  1,529,271,120 processor cycles
+  92,942,752 bytes consed
+  
+di 139
+Evaluation took:
+  8.262 seconds of real time
+  8.260000 seconds of total run time (8.030000 user, 0.230000 system)
+  [ Run times consist of 0.460 seconds GC time, and 7.800 seconds non-GC time. ]
+  99.98% CPU
+  21,427,787,134 processor cycles
+  1,397,568,944 bytes consed
+  
+ek 140
+Evaluation took:
+  0.559 seconds of real time
+  0.560000 seconds of total run time (0.530000 user, 0.030000 system)
+  [ Run times consist of 0.100 seconds GC time, and 0.460 seconds non-GC time. ]
+  100.18% CPU
+  1,449,165,484 processor cycles
+  91,985,984 bytes consed
+  
+di 140
+Evaluation took:
+  8.139 seconds of real time
+  8.130000 seconds of total run time (7.880000 user, 0.250000 system)
+  [ Run times consist of 0.540 seconds GC time, and 7.590 seconds non-GC time. ]
+  99.89% CPU
+  21,109,070,190 processor cycles
+  1,369,210,160 bytes consed
+  
+ek 141
+Evaluation took:
+  0.609 seconds of real time
+  0.610000 seconds of total run time (0.610000 user, 0.000000 system)
+  [ Run times consist of 0.060 seconds GC time, and 0.550 seconds non-GC time. ]
+  100.16% CPU
+  1,578,206,968 processor cycles
+  95,566,144 bytes consed
+  
+di 141
+Evaluation took:
+  8.986 seconds of real time
+  8.980000 seconds of total run time (8.750000 user, 0.230000 system)
+  [ Run times consist of 0.490 seconds GC time, and 8.490 seconds non-GC time. ]
+  99.93% CPU
+  23,303,659,678 processor cycles
+  1,523,550,992 bytes consed
+  
+ek 142
+Evaluation took:
+  0.653 seconds of real time
+  0.660000 seconds of total run time (0.630000 user, 0.030000 system)
+  [ Run times consist of 0.090 seconds GC time, and 0.570 seconds non-GC time. ]
+  101.07% CPU
+  1,694,470,804 processor cycles
+  97,827,120 bytes consed
+  
+di 142
+Evaluation took:
+  9.477 seconds of real time
+  9.470000 seconds of total run time (9.280000 user, 0.190000 system)
+  [ Run times consist of 0.660 seconds GC time, and 8.810 seconds non-GC time. ]
+  99.93% CPU
+  24,578,331,999 processor cycles
+  1,571,752,272 bytes consed
+  
+ek 143
+Evaluation took:
+  0.586 seconds of real time
+  0.580000 seconds of total run time (0.550000 user, 0.030000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.530 seconds non-GC time. ]
+  98.98% CPU
+  1,519,286,847 processor cycles
+  95,033,968 bytes consed
+  
+di 143
+Evaluation took:
+  8.921 seconds of real time
+  8.920000 seconds of total run time (8.810000 user, 0.110000 system)
+  [ Run times consist of 0.640 seconds GC time, and 8.280 seconds non-GC time. ]
+  99.99% CPU
+  23,135,724,638 processor cycles
+  1,489,012,112 bytes consed
+  
+ek 144
+Evaluation took:
+  0.594 seconds of real time
+  0.600000 seconds of total run time (0.590000 user, 0.010000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.550 seconds non-GC time. ]
+  101.01% CPU
+  1,540,251,843 processor cycles
+  93,937,760 bytes consed
+  
+di 144
+Evaluation took:
+  8.571 seconds of real time
+  8.560000 seconds of total run time (8.250000 user, 0.310000 system)
+  [ Run times consist of 0.520 seconds GC time, and 8.040 seconds non-GC time. ]
+  99.87% CPU
+  22,227,859,667 processor cycles
+  1,433,457,984 bytes consed
+  
+ek 145
+Evaluation took:
+  0.592 seconds of real time
+  0.590000 seconds of total run time (0.580000 user, 0.010000 system)
+  [ Run times consist of 0.070 seconds GC time, and 0.520 seconds non-GC time. ]
+  99.66% CPU
+  1,534,816,790 processor cycles
+  93,681,168 bytes consed
+  
+di 145
+Evaluation took:
+  8.151 seconds of real time
+  8.150000 seconds of total run time (8.020000 user, 0.130000 system)
+  [ Run times consist of 0.530 seconds GC time, and 7.620 seconds non-GC time. ]
+  99.99% CPU
+  21,139,812,824 processor cycles
+  1,382,030,656 bytes consed
+  
+ek 146
+Evaluation took:
+  0.588 seconds of real time
+  0.580000 seconds of total run time (0.570000 user, 0.010000 system)
+  [ Run times consist of 0.060 seconds GC time, and 0.520 seconds non-GC time. ]
+  98.64% CPU
+  1,526,492,851 processor cycles
+  96,783,616 bytes consed
+  
+di 146
+Evaluation took:
+  8.802 seconds of real time
+  8.800000 seconds of total run time (8.530000 user, 0.270000 system)
+  [ Run times consist of 0.630 seconds GC time, and 8.170 seconds non-GC time. ]
+  99.98% CPU
+  22,828,778,752 processor cycles
+  1,468,638,640 bytes consed
+  
+ek 147
+Evaluation took:
+  0.569 seconds of real time
+  0.570000 seconds of total run time (0.540000 user, 0.030000 system)
+  [ Run times consist of 0.060 seconds GC time, and 0.510 seconds non-GC time. ]
+  100.18% CPU
+  1,477,323,510 processor cycles
+  95,601,344 bytes consed
+  
+di 147
+Evaluation took:
+  8.339 seconds of real time
+  8.330000 seconds of total run time (8.210000 user, 0.120000 system)
+  [ Run times consist of 0.550 seconds GC time, and 7.780 seconds non-GC time. ]
+  99.89% CPU
+  21,628,499,464 processor cycles
+  1,403,773,664 bytes consed
+  
+ek 148
+Evaluation took:
+  0.604 seconds of real time
+  0.600000 seconds of total run time (0.580000 user, 0.020000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.560 seconds non-GC time. ]
+  99.34% CPU
+  1,566,333,535 processor cycles
+  98,843,888 bytes consed
+  
+di 148
+Evaluation took:
+  8.965 seconds of real time
+  8.970000 seconds of total run time (8.800000 user, 0.170000 system)
+  [ Run times consist of 0.520 seconds GC time, and 8.450 seconds non-GC time. ]
+  100.06% CPU
+  23,251,996,690 processor cycles
+  1,505,334,320 bytes consed
+  
+ek 149
+Evaluation took:
+  0.591 seconds of real time
+  0.590000 seconds of total run time (0.560000 user, 0.030000 system)
+  [ Run times consist of 0.070 seconds GC time, and 0.520 seconds non-GC time. ]
+  99.83% CPU
+  1,532,882,117 processor cycles
+  98,821,392 bytes consed
+  
+di 149
+Evaluation took:
+  9.280 seconds of real time
+  9.270000 seconds of total run time (9.010000 user, 0.260000 system)
+  [ Run times consist of 0.590 seconds GC time, and 8.680 seconds non-GC time. ]
+  99.89% CPU
+  24,067,833,491 processor cycles
+  1,538,819,488 bytes consed
+  
+ek 150
+Evaluation took:
+  0.622 seconds of real time
+  0.620000 seconds of total run time (0.580000 user, 0.040000 system)
+  [ Run times consist of 0.090 seconds GC time, and 0.530 seconds non-GC time. ]
+  99.68% CPU
+  1,613,728,506 processor cycles
+  98,740,192 bytes consed
+  
+di 150
+Evaluation took:
+  9.003 seconds of real time
+  8.990000 seconds of total run time (8.760000 user, 0.230000 system)
+  [ Run times consist of 0.660 seconds GC time, and 8.330 seconds non-GC time. ]
+  99.86% CPU
+  23,351,177,616 processor cycles
+  1,493,551,648 bytes consed
+  
+ek 151
+Evaluation took:
+  0.601 seconds of real time
+  0.600000 seconds of total run time (0.560000 user, 0.040000 system)
+  [ Run times consist of 0.090 seconds GC time, and 0.510 seconds non-GC time. ]
+  99.83% CPU
+  1,558,337,651 processor cycles
+  97,632,576 bytes consed
+  
+di 151
+Evaluation took:
+  8.823 seconds of real time
+  8.820000 seconds of total run time (8.560000 user, 0.260000 system)
+  [ Run times consist of 0.690 seconds GC time, and 8.130 seconds non-GC time. ]
+  99.97% CPU
+  22,882,590,978 processor cycles
+  1,444,863,280 bytes consed
+  
+ek 152
+Evaluation took:
+  0.624 seconds of real time
+  0.620000 seconds of total run time (0.590000 user, 0.030000 system)
+  [ Run times consist of 0.090 seconds GC time, and 0.530 seconds non-GC time. ]
+  99.36% CPU
+  1,618,713,187 processor cycles
+  100,098,704 bytes consed
+  
+di 152
+Evaluation took:
+  9.192 seconds of real time
+  9.190000 seconds of total run time (8.990000 user, 0.200000 system)
+  [ Run times consist of 0.650 seconds GC time, and 8.540 seconds non-GC time. ]
+  99.98% CPU
+  23,839,097,477 processor cycles
+  1,514,020,928 bytes consed
+  
+ek 153
+Evaluation took:
+  0.649 seconds of real time
+  0.650000 seconds of total run time (0.620000 user, 0.030000 system)
+  [ Run times consist of 0.080 seconds GC time, and 0.570 seconds non-GC time. ]
+  100.15% CPU
+  1,683,289,738 processor cycles
+  103,313,072 bytes consed
+  
+di 153
+Evaluation took:
+  10.313 seconds of real time
+  10.310000 seconds of total run time (10.040000 user, 0.270000 system)
+  [ Run times consist of 0.850 seconds GC time, and 9.460 seconds non-GC time. ]
+  99.97% CPU
+  26,748,360,223 processor cycles
+  1,667,957,456 bytes consed
+  
+ek 154
+Evaluation took:
+  0.650 seconds of real time
+  0.650000 seconds of total run time (0.620000 user, 0.030000 system)
+  [ Run times consist of 0.110 seconds GC time, and 0.540 seconds non-GC time. ]
+  100.00% CPU
+  1,687,562,981 processor cycles
+  102,004,400 bytes consed
+  
+di 154
+Evaluation took:
+  9.817 seconds of real time
+  9.800000 seconds of total run time (9.500000 user, 0.300000 system)
+  [ Run times consist of 0.560 seconds GC time, and 9.240 seconds non-GC time. ]
+  99.83% CPU
+  25,460,078,930 processor cycles
+  1,622,816,656 bytes consed
+  
+ek 155
+Evaluation took:
+  0.629 seconds of real time
+  0.630000 seconds of total run time (0.630000 user, 0.000000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.590 seconds non-GC time. ]
+  100.16% CPU
+  1,632,377,071 processor cycles
+  103,304,640 bytes consed
+  
+di 155
+Evaluation took:
+  9.846 seconds of real time
+  9.830000 seconds of total run time (9.580000 user, 0.250000 system)
+  [ Run times consist of 0.720 seconds GC time, and 9.110 seconds non-GC time. ]
+  99.84% CPU
+  25,535,612,778 processor cycles
+  1,635,169,760 bytes consed
+  
+ek 156
+Evaluation took:
+  0.632 seconds of real time
+  0.630000 seconds of total run time (0.620000 user, 0.010000 system)
+  [ Run times consist of 0.060 seconds GC time, and 0.570 seconds non-GC time. ]
+  99.68% CPU
+  1,638,054,210 processor cycles
+  102,942,480 bytes consed
+  
+di 156
+Evaluation took:
+  9.798 seconds of real time
+  9.800000 seconds of total run time (9.560000 user, 0.240000 system)
+  [ Run times consist of 0.790 seconds GC time, and 9.010 seconds non-GC time. ]
+  100.02% CPU
+  25,409,307,105 processor cycles
+  1,597,892,432 bytes consed
+  
+ek 157
+Evaluation took:
+  0.723 seconds of real time
+  0.720000 seconds of total run time (0.690000 user, 0.030000 system)
+  [ Run times consist of 0.100 seconds GC time, and 0.620 seconds non-GC time. ]
+  99.59% CPU
+  1,875,669,614 processor cycles
+  108,230,016 bytes consed
+  
+di 157
+Evaluation took:
+  11.086 seconds of real time
+  11.080000 seconds of total run time (10.760000 user, 0.320000 system)
+  [ Run times consist of 0.710 seconds GC time, and 10.370 seconds non-GC time. ]
+  99.95% CPU
+  28,753,550,904 processor cycles
+  1,831,842,208 bytes consed
+  
+ek 158
+Evaluation took:
+  0.668 seconds of real time
+  0.670000 seconds of total run time (0.650000 user, 0.020000 system)
+  [ Run times consist of 0.070 seconds GC time, and 0.600 seconds non-GC time. ]
+  100.30% CPU
+  1,730,801,397 processor cycles
+  106,060,480 bytes consed
+  
+di 158
+Evaluation took:
+  10.238 seconds of real time
+  10.230000 seconds of total run time (10.020000 user, 0.210000 system)
+  [ Run times consist of 0.750 seconds GC time, and 9.480 seconds non-GC time. ]
+  99.92% CPU
+  26,552,358,456 processor cycles
+  1,660,443,760 bytes consed
+  
+ek 159
+Evaluation took:
+  0.668 seconds of real time
+  0.670000 seconds of total run time (0.650000 user, 0.020000 system)
+  [ Run times consist of 0.080 seconds GC time, and 0.590 seconds non-GC time. ]
+  100.30% CPU
+  1,732,878,732 processor cycles
+  107,320,800 bytes consed
+  
+di 159
+Evaluation took:
+  10.509 seconds of real time
+  10.510000 seconds of total run time (10.270000 user, 0.240000 system)
+  [ Run times consist of 0.760 seconds GC time, and 9.750 seconds non-GC time. ]
+  100.01% CPU
+  27,257,123,374 processor cycles
+  1,720,494,960 bytes consed
+  
+ek 160
+Evaluation took:
+  0.637 seconds of real time
+  0.630000 seconds of total run time (0.620000 user, 0.010000 system)
+  [ Run times consist of 0.100 seconds GC time, and 0.530 seconds non-GC time. ]
+  98.90% CPU
+  1,651,913,471 processor cycles
+  105,423,888 bytes consed
+  
+di 160
+Evaluation took:
+  10.042 seconds of real time
+  10.040000 seconds of total run time (9.740000 user, 0.300000 system)
+  [ Run times consist of 0.720 seconds GC time, and 9.320 seconds non-GC time. ]
+  99.98% CPU
+  26,044,142,553 processor cycles
+  1,637,919,376 bytes consed
+  
+ek 161
+Evaluation took:
+  0.628 seconds of real time
+  0.630000 seconds of total run time (0.620000 user, 0.010000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.580 seconds non-GC time. ]
+  100.32% CPU
+  1,630,254,587 processor cycles
+  105,792,368 bytes consed
+  
+di 161
+Evaluation took:
+  9.913 seconds of real time
+  9.900000 seconds of total run time (9.560000 user, 0.340000 system)
+  [ Run times consist of 0.780 seconds GC time, and 9.120 seconds non-GC time. ]
+  99.87% CPU
+  25,710,026,212 processor cycles
+  1,602,183,808 bytes consed
+  
+ek 162
+Evaluation took:
+  0.607 seconds of real time
+  0.610000 seconds of total run time (0.600000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.590 seconds non-GC time. ]
+  100.49% CPU
+  1,574,558,128 processor cycles
+  105,931,712 bytes consed
+  
+di 162
+Evaluation took:
+  9.745 seconds of real time
+  9.740000 seconds of total run time (9.420000 user, 0.320000 system)
+  [ Run times consist of 0.690 seconds GC time, and 9.050 seconds non-GC time. ]
+  99.95% CPU
+  25,271,534,873 processor cycles
+  1,588,102,464 bytes consed
+  
+ek 163
+Evaluation took:
+  0.677 seconds of real time
+  0.670000 seconds of total run time (0.650000 user, 0.020000 system)
+  [ Run times consist of 0.070 seconds GC time, and 0.600 seconds non-GC time. ]
+  98.97% CPU
+  1,754,558,988 processor cycles
+  107,737,600 bytes consed
+  
+di 163
+Evaluation took:
+  10.351 seconds of real time
+  10.340000 seconds of total run time (10.070000 user, 0.270000 system)
+  [ Run times consist of 1.000 seconds GC time, and 9.340 seconds non-GC time. ]
+  99.89% CPU
+  26,844,178,790 processor cycles
+  1,667,960,192 bytes consed
+  
+ek 164
+Evaluation took:
+  0.667 seconds of real time
+  0.670000 seconds of total run time (0.660000 user, 0.010000 system)
+  [ Run times consist of 0.080 seconds GC time, and 0.590 seconds non-GC time. ]
+  100.45% CPU
+  1,730,742,130 processor cycles
+  108,425,952 bytes consed
+  
+di 164
+Evaluation took:
+  10.497 seconds of real time
+  10.490000 seconds of total run time (10.200000 user, 0.290000 system)
+  [ Run times consist of 0.650 seconds GC time, and 9.840 seconds non-GC time. ]
+  99.93% CPU
+  27,224,222,610 processor cycles
+  1,722,343,456 bytes consed
+  
+ek 165
+Evaluation took:
+  0.645 seconds of real time
+  0.640000 seconds of total run time (0.630000 user, 0.010000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.600 seconds non-GC time. ]
+  99.22% CPU
+  1,674,302,435 processor cycles
+  110,059,104 bytes consed
+  
+di 165
+Evaluation took:
+  9.890 seconds of real time
+  9.890000 seconds of total run time (9.640000 user, 0.250000 system)
+  [ Run times consist of 0.600 seconds GC time, and 9.290 seconds non-GC time. ]
+  100.00% CPU
+  25,650,482,897 processor cycles
+  1,621,151,504 bytes consed
+  
+ek 166
+Evaluation took:
+  0.699 seconds of real time
+  0.700000 seconds of total run time (0.690000 user, 0.010000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.650 seconds non-GC time. ]
+  100.14% CPU
+  1,812,775,133 processor cycles
+  112,393,696 bytes consed
+  
+di 166
+Evaluation took:
+  10.954 seconds of real time
+  10.950000 seconds of total run time (10.660000 user, 0.290000 system)
+  [ Run times consist of 0.760 seconds GC time, and 10.190 seconds non-GC time. ]
+  99.96% CPU
+  28,407,360,709 processor cycles
+  1,766,964,368 bytes consed
+  
+ek 167
+Evaluation took:
+  0.681 seconds of real time
+  0.680000 seconds of total run time (0.660000 user, 0.020000 system)
+  [ Run times consist of 0.060 seconds GC time, and 0.620 seconds non-GC time. ]
+  99.85% CPU
+  1,766,566,893 processor cycles
+  112,817,472 bytes consed
+  
+di 167
+Evaluation took:
+  10.943 seconds of real time
+  10.930000 seconds of total run time (10.570000 user, 0.360000 system)
+  [ Run times consist of 0.700 seconds GC time, and 10.230 seconds non-GC time. ]
+  99.88% CPU
+  28,380,982,812 processor cycles
+  1,789,778,096 bytes consed
+  
+ek 168
+Evaluation took:
+  0.711 seconds of real time
+  0.710000 seconds of total run time (0.680000 user, 0.030000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.660 seconds non-GC time. ]
+  99.86% CPU
+  1,843,642,671 processor cycles
+  115,464,320 bytes consed
+  
+di 168
+Evaluation took:
+  11.604 seconds of real time
+  11.600000 seconds of total run time (11.200000 user, 0.400000 system)
+  [ Run times consist of 0.770 seconds GC time, and 10.830 seconds non-GC time. ]
+  99.97% CPU
+  30,096,554,657 processor cycles
+  1,893,704,608 bytes consed
+  
+ek 169
+Evaluation took:
+  0.759 seconds of real time
+  0.760000 seconds of total run time (0.740000 user, 0.020000 system)
+  [ Run times consist of 0.110 seconds GC time, and 0.650 seconds non-GC time. ]
+  100.13% CPU
+  1,966,864,315 processor cycles
+  114,442,080 bytes consed
+  
+di 169
+Evaluation took:
+  10.953 seconds of real time
+  10.950000 seconds of total run time (10.660000 user, 0.290000 system)
+  [ Run times consist of 0.720 seconds GC time, and 10.230 seconds non-GC time. ]
+  99.97% CPU
+  28,405,736,801 processor cycles
+  1,788,606,048 bytes consed
+  
+ek 170
+Evaluation took:
+  0.713 seconds of real time
+  0.710000 seconds of total run time (0.670000 user, 0.040000 system)
+  [ Run times consist of 0.030 seconds GC time, and 0.680 seconds non-GC time. ]
+  99.58% CPU
+  1,850,095,689 processor cycles
+  116,646,576 bytes consed
+  
+di 170
+Evaluation took:
+  11.387 seconds of real time
+  11.380000 seconds of total run time (11.050000 user, 0.330000 system)
+  [ Run times consist of 0.730 seconds GC time, and 10.650 seconds non-GC time. ]
+  99.94% CPU
+  29,531,050,250 processor cycles
+  1,851,522,944 bytes consed
+  
+ek 171
+Evaluation took:
+  0.707 seconds of real time
+  0.710000 seconds of total run time (0.700000 user, 0.010000 system)
+  [ Run times consist of 0.040 seconds GC time, and 0.670 seconds non-GC time. ]
+  100.42% CPU
+  1,834,889,433 processor cycles
+  115,846,896 bytes consed
+  
+di 171
+Evaluation took:
+  11.344 seconds of real time
+  11.340000 seconds of total run time (11.010000 user, 0.330000 system)
+  [ Run times consist of 0.810 seconds GC time, and 10.530 seconds non-GC time. ]
+  99.96% CPU
+  29,420,951,573 processor cycles
+  1,853,276,544 bytes consed
+  
+ek 172
+Evaluation took:
+  0.684 seconds of real time
+  0.680000 seconds of total run time (0.650000 user, 0.030000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.660 seconds non-GC time. ]
+  99.42% CPU
+  1,773,664,763 processor cycles
+  114,853,952 bytes consed
+  
+di 172
+Evaluation took:
+  11.264 seconds of real time
+  11.260000 seconds of total run time (10.960000 user, 0.300000 system)
+  [ Run times consist of 0.700 seconds GC time, and 10.560 seconds non-GC time. ]
+  99.96% CPU
+  29,213,957,370 processor cycles
+  1,853,363,360 bytes consed
+  
+ek 173
+Evaluation took:
+  0.771 seconds of real time
+  0.770000 seconds of total run time (0.740000 user, 0.030000 system)
+  [ Run times consist of 0.090 seconds GC time, and 0.680 seconds non-GC time. ]
+  99.87% CPU
+  1,999,211,877 processor cycles
+  120,722,512 bytes consed
+  
+di 173
+Evaluation took:
+  12.062 seconds of real time
+  12.050000 seconds of total run time (11.670000 user, 0.380000 system)
+  [ Run times consist of 0.750 seconds GC time, and 11.300 seconds non-GC time. ]
+  99.90% CPU
+  31,283,055,687 processor cycles
+  1,952,952,176 bytes consed
+  
+ek 174
+Evaluation took:
+  0.741 seconds of real time
+  0.740000 seconds of total run time (0.720000 user, 0.020000 system)
+  [ Run times consist of 0.070 seconds GC time, and 0.670 seconds non-GC time. ]
+  99.87% CPU
+  1,922,192,519 processor cycles
+  119,259,648 bytes consed
+  
+di 174
+Evaluation took:
+  11.734 seconds of real time
+  11.740000 seconds of total run time (11.590000 user, 0.150000 system)
+  [ Run times consist of 0.900 seconds GC time, and 10.840 seconds non-GC time. ]
+  100.05% CPU
+  30,432,472,928 processor cycles
+  1,890,704,608 bytes consed
+  
+ek 175
+Evaluation took:
+  0.722 seconds of real time
+  0.730000 seconds of total run time (0.700000 user, 0.030000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.680 seconds non-GC time. ]
+  101.11% CPU
+  1,871,934,168 processor cycles
+  118,700,672 bytes consed
+  
+di 175
+Evaluation took:
+  11.703 seconds of real time
+  11.690000 seconds of total run time (11.440000 user, 0.250000 system)
+  [ Run times consist of 0.830 seconds GC time, and 10.860 seconds non-GC time. ]
+  99.89% CPU
+  30,351,759,022 processor cycles
+  1,882,882,592 bytes consed
+  
+ek 176
+Evaluation took:
+  0.692 seconds of real time
+  0.690000 seconds of total run time (0.640000 user, 0.050000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.640 seconds non-GC time. ]
+  99.71% CPU
+  1,792,924,731 processor cycles
+  117,069,872 bytes consed
+  
+di 176
+Evaluation took:
+  11.002 seconds of real time
+  11.0000000 seconds of total run time (10.660000 user, 0.340000 system)
+  [ Run times consist of 0.760 seconds GC time, and 10.240 seconds non-GC time. ]
+  99.98% CPU
+  28,533,107,005 processor cycles
+  1,790,064,832 bytes consed
+  
+ek 177
+Evaluation took:
+  0.816 seconds of real time
+  0.810000 seconds of total run time (0.790000 user, 0.020000 system)
+  [ Run times consist of 0.120 seconds GC time, and 0.690 seconds non-GC time. ]
+  99.26% CPU
+  2,116,035,012 processor cycles
+  121,523,568 bytes consed
+  
+di 177
+Evaluation took:
+  12.270 seconds of real time
+  12.270000 seconds of total run time (11.930000 user, 0.340000 system)
+  [ Run times consist of 0.770 seconds GC time, and 11.500 seconds non-GC time. ]
+  100.00% CPU
+  31,823,694,981 processor cycles
+  1,977,732,480 bytes consed
+  
+ek 178
+Evaluation took:
+  0.764 seconds of real time
+  0.770000 seconds of total run time (0.760000 user, 0.010000 system)
+  [ Run times consist of 0.060 seconds GC time, and 0.710 seconds non-GC time. ]
+  100.79% CPU
+  1,981,228,405 processor cycles
+  121,357,088 bytes consed
+  
+di 178
+Evaluation took:
+  12.175 seconds of real time
+  12.160000 seconds of total run time (11.900000 user, 0.260000 system)
+  [ Run times consist of 0.800 seconds GC time, and 11.360 seconds non-GC time. ]
+  99.88% CPU
+  31,575,861,161 processor cycles
+  1,971,436,368 bytes consed
+  
+ek 179
+Evaluation took:
+  0.763 seconds of real time
+  0.770000 seconds of total run time (0.700000 user, 0.070000 system)
+  [ Run times consist of 0.100 seconds GC time, and 0.670 seconds non-GC time. ]
+  100.92% CPU
+  1,979,247,244 processor cycles
+  120,761,568 bytes consed
+  
+di 179
+Evaluation took:
+  12.052 seconds of real time
+  12.040000 seconds of total run time (11.740000 user, 0.300000 system)
+  [ Run times consist of 0.720 seconds GC time, and 11.320 seconds non-GC time. ]
+  99.90% CPU
+  31,254,871,856 processor cycles
+  1,948,700,240 bytes consed
+  
+ek 180
+Evaluation took:
+  0.783 seconds of real time
+  0.780000 seconds of total run time (0.770000 user, 0.010000 system)
+  [ Run times consist of 0.020 seconds GC time, and 0.760 seconds non-GC time. ]
+  99.62% CPU
+  2,030,862,366 processor cycles
+  124,917,904 bytes consed
+  
+di 180
+Evaluation took:
+  13.090 seconds of real time
+  13.090000 seconds of total run time (12.730000 user, 0.360000 system)
+  [ Run times consist of 0.900 seconds GC time, and 12.190 seconds non-GC time. ]
+  100.00% CPU
+  33,949,558,422 processor cycles
+  2,118,947,440 bytes consed
+  
+ek 181
+Evaluation took:
+  0.826 seconds of real time
+  0.820000 seconds of total run time (0.800000 user, 0.020000 system)
+  [ Run times consist of 0.070 seconds GC time, and 0.750 seconds non-GC time. ]
+  99.27% CPU
+  2,142,432,461 processor cycles
+  127,282,976 bytes consed
+  
+di 181
+Evaluation took:
+  13.339 seconds of real time
+  13.340000 seconds of total run time (12.980000 user, 0.360000 system)
+  [ Run times consist of 0.850 seconds GC time, and 12.490 seconds non-GC time. ]
+  100.01% CPU
+  34,595,499,848 processor cycles
+  2,137,925,872 bytes consed
+  
+ek 182
+Evaluation took:
+  0.787 seconds of real time
+  0.790000 seconds of total run time (0.780000 user, 0.010000 system)
+  [ Run times consist of 0.090 seconds GC time, and 0.700 seconds non-GC time. ]
+  100.38% CPU
+  2,040,291,175 processor cycles
+  123,387,328 bytes consed
+  
+di 182
+Evaluation took:
+  11.851 seconds of real time
+  11.840000 seconds of total run time (11.530000 user, 0.310000 system)
+  [ Run times consist of 0.870 seconds GC time, and 10.970 seconds non-GC time. ]
+  99.91% CPU
+  30,735,753,802 processor cycles
+  1,914,780,032 bytes consed
+  
+ek 183
+Evaluation took:
+  0.788 seconds of real time
+  0.790000 seconds of total run time (0.780000 user, 0.010000 system)
+  [ Run times consist of 0.090 seconds GC time, and 0.700 seconds non-GC time. ]
+  100.25% CPU
+  2,044,734,263 processor cycles
+  123,870,992 bytes consed
+  
+di 183
+Evaluation took:
+  12.447 seconds of real time
+  12.430000 seconds of total run time (12.030000 user, 0.400000 system)
+  [ Run times consist of 0.790 seconds GC time, and 11.640 seconds non-GC time. ]
+  99.86% CPU
+  32,280,421,043 processor cycles
+  1,990,893,040 bytes consed
+  
+ek 184
+Evaluation took:
+  0.736 seconds of real time
+  0.740000 seconds of total run time (0.740000 user, 0.000000 system)
+  [ Run times consist of 0.080 seconds GC time, and 0.660 seconds non-GC time. ]
+  100.54% CPU
+  1,908,890,555 processor cycles
+  121,564,096 bytes consed
+  
+di 184
+Evaluation took:
+  11.455 seconds of real time
+  11.440000 seconds of total run time (11.150000 user, 0.290000 system)
+  [ Run times consist of 0.850 seconds GC time, and 10.590 seconds non-GC time. ]
+  99.87% CPU
+  29,706,484,392 processor cycles
+  1,854,825,904 bytes consed
+  
+ek 185
+Evaluation took:
+  0.744 seconds of real time
+  0.740000 seconds of total run time (0.700000 user, 0.040000 system)
+  [ Run times consist of 0.070 seconds GC time, and 0.670 seconds non-GC time. ]
+  99.46% CPU
+  1,930,562,738 processor cycles
+  123,617,600 bytes consed
+  
+di 185
+Evaluation took:
+  12.188 seconds of real time
+  12.180000 seconds of total run time (11.840000 user, 0.340000 system)
+  [ Run times consist of 0.830 seconds GC time, and 11.350 seconds non-GC time. ]
+  99.93% CPU
+  31,610,238,998 processor cycles
+  1,963,788,736 bytes consed
+  
+ek 186
+Evaluation took:
+  0.744 seconds of real time
+  0.740000 seconds of total run time (0.730000 user, 0.010000 system)
+  [ Run times consist of 0.050 seconds GC time, and 0.690 seconds non-GC time. ]
+  99.46% CPU
+  1,927,310,957 processor cycles
+  125,314,720 bytes consed
+  
+di 186
+Evaluation took:
+  12.033 seconds of real time
+  12.040000 seconds of total run time (11.770000 user, 0.270000 system)
+  [ Run times consist of 0.810 seconds GC time, and 11.230 seconds non-GC time. ]
+  100.06% CPU
+  31,206,510,751 processor cycles
+  1,935,165,536 bytes consed
+  
+ek 187
+Evaluation took:
+  0.840 seconds of real time
+  0.840000 seconds of total run time (0.790000 user, 0.050000 system)
+  [ Run times consist of 0.100 seconds GC time, and 0.740 seconds non-GC time. ]
+  100.00% CPU
+  2,179,004,204 processor cycles
+  128,899,216 bytes consed
+  
+di 187
+Evaluation took:
+  13.123 seconds of real time
+  13.120000 seconds of total run time (12.840000 user, 0.280000 system)
+  [ Run times consist of 0.900 seconds GC time, and 12.220 seconds non-GC time. ]
+  99.98% CPU
+  34,036,021,695 processor cycles
+  2,113,569,472 bytes consed
+  
+ek 188
+Evaluation took:
+  0.819 seconds of real time
+  0.810000 seconds of total run time (0.780000 user, 0.030000 system)
+  [ Run times consist of 0.160 seconds GC time, and 0.650 seconds non-GC time. ]
+  98.90% CPU
+  2,122,920,371 processor cycles
+  125,030,752 bytes consed
+  
+di 188
+Evaluation took:
+  11.849 seconds of real time
+  11.840000 seconds of total run time (11.540000 user, 0.300000 system)
+  [ Run times consist of 0.740 seconds GC time, and 11.100 seconds non-GC time. ]
+  99.92% CPU
+  30,729,022,935 processor cycles
+  1,916,791,648 bytes consed
+  
+ek 189
+Evaluation took:
+  0.803 seconds of real time
+  0.800000 seconds of total run time (0.790000 user, 0.010000 system)
+  [ Run times consist of 0.070 seconds GC time, and 0.730 seconds non-GC time. ]
+  99.63% CPU
+  2,086,218,914 processor cycles
+  129,037,008 bytes consed
+  
+di 189
+Evaluation took:
+  12.990 seconds of real time
+  12.980000 seconds of total run time (12.610000 user, 0.370000 system)
+  [ Run times consist of 0.960 seconds GC time, and 12.020 seconds non-GC time. ]
+  99.92% CPU
+  33,687,766,112 processor cycles
+  2,081,301,776 bytes consed
+  
+ek 190
+Evaluation took:
+  0.880 seconds of real time
+  0.880000 seconds of total run time (0.840000 user, 0.040000 system)
+  [ Run times consist of 0.070 seconds GC time, and 0.810 seconds non-GC time. ]
+  100.00% CPU
+  2,283,239,556 processor cycles
+  132,603,136 bytes consed
+  
+di 190
+Evaluation took:
+  13.372 seconds of real time
+  13.360000 seconds of total run time (12.950000 user, 0.410000 system)
+  [ Run times consist of 0.950 seconds GC time, and 12.410 seconds non-GC time. ]
+  99.91% CPU
+  34,681,034,063 processor cycles
+  2,138,872,480 bytes consed
+  
+ek 191
+Evaluation took:
+  0.859 seconds of real time
+  0.860000 seconds of total run time (0.850000 user, 0.010000 system)
+  [ Run times consist of 0.080 seconds GC time, and 0.780 seconds non-GC time. ]
+  100.12% CPU
+  2,228,767,190 processor cycles
+  132,178,512 bytes consed
+  
+di 191
+Evaluation took:
+  13.813 seconds of real time
+  13.800000 seconds of total run time (13.520000 user, 0.280000 system)
+  [ Run times consist of 0.950 seconds GC time, and 12.850 seconds non-GC time. ]
+  99.91% CPU
+  35,825,575,409 processor cycles
+  2,190,840,400 bytes consed
+  
+ek 192
+Evaluation took:
+  0.833 seconds of real time
+  0.830000 seconds of total run time (0.810000 user, 0.020000 system)
+  [ Run times consist of 0.080 seconds GC time, and 0.750 seconds non-GC time. ]
+  99.64% CPU
+  2,160,486,679 processor cycles
+  132,659,008 bytes consed
+  
+di 192
+Evaluation took:
+  13.841 seconds of real time
+  13.840000 seconds of total run time (13.440000 user, 0.400000 system)
+  [ Run times consist of 1.060 seconds GC time, and 12.780 seconds non-GC time. ]
+  99.99% CPU
+  35,897,003,831 processor cycles
+  2,170,044,448 bytes consed
+  
+ek 193
+Evaluation took:
+  0.834 seconds of real time
+  0.830000 seconds of total run time (0.820000 user, 0.010000 system)
+  [ Run times consist of 0.100 seconds GC time, and 0.730 seconds non-GC time. ]
+  99.52% CPU
+  2,165,015,983 processor cycles
+  132,034,832 bytes consed
+  
+di 193
+Evaluation took:
+  13.001 seconds of real time
+  12.990000 seconds of total run time (12.550000 user, 0.440000 system)
+  [ Run times consist of 1.090 seconds GC time, and 11.900 seconds non-GC time. ]
+  99.92% CPU
+  33,718,582,105 processor cycles
+  2,066,936,800 bytes consed
+  
+ek 194
+Evaluation took:
+  0.780 seconds of real time
+  0.780000 seconds of total run time (0.770000 user, 0.010000 system)
+  [ Run times consist of 0.060 seconds GC time, and 0.720 seconds non-GC time. ]
+  100.00% CPU
+  2,023,166,730 processor cycles
+  130,936,624 bytes consed
+  
+di 194
+Evaluation took:
+  12.562 seconds of real time
+  12.560000 seconds of total run time (12.160000 user, 0.400000 system)
+  [ Run times consist of 0.850 seconds GC time, and 11.710 seconds non-GC time. ]
+  99.98% CPU
+  32,581,485,781 processor cycles
+  1,995,936,896 bytes consed
+  
+ek 195
+Evaluation took:
+  0.802 seconds of real time
+  0.800000 seconds of total run time (0.740000 user, 0.060000 system)
+  [ Run times consist of 0.080 seconds GC time, and 0.720 seconds non-GC time. ]
+  99.75% CPU
+  2,079,581,205 processor cycles
+  130,697,696 bytes consed
+  
+di 195
+Evaluation took:
+  12.990 seconds of real time
+  12.980000 seconds of total run time (12.500000 user, 0.480000 system)
+  [ Run times consist of 1.030 seconds GC time, and 11.950 seconds non-GC time. ]
+  99.92% CPU
+  33,688,426,707 processor cycles
+  2,051,484,208 bytes consed
+  
+ek 196
+Evaluation took:
+  0.822 seconds of real time
+  0.820000 seconds of total run time (0.790000 user, 0.030000 system)
+  [ Run times consist of 0.060 seconds GC time, and 0.760 seconds non-GC time. ]
+  99.76% CPU
+  2,130,789,232 processor cycles
+  132,268,272 bytes consed
+  
+di 196
+Evaluation took:
+  13.065 seconds of real time
+  13.060000 seconds of total run time (12.620000 user, 0.440000 system)
+  [ Run times consist of 0.860 seconds GC time, and 12.200 seconds non-GC time. ]
+  99.96% CPU
+  33,883,779,085 processor cycles
+  2,086,619,472 bytes consed
+  
+ek 197
+Evaluation took:
+  0.814 seconds of real time
+  0.810000 seconds of total run time (0.810000 user, 0.000000 system)
+  [ Run times consist of 0.070 seconds GC time, and 0.740 seconds non-GC time. ]
+  99.51% CPU
+  2,111,118,438 processor cycles
+  133,508,576 bytes consed
+  
+di 197
+Evaluation took:
+  13.740 seconds of real time
+  13.730000 seconds of total run time (13.380000 user, 0.350000 system)
+  [ Run times consist of 1.020 seconds GC time, and 12.710 seconds non-GC time. ]
+  99.93% CPU
+  35,632,935,442 processor cycles
+  2,149,555,728 bytes consed
+  
+ek 198
+Evaluation took:
+  0.893 seconds of real time
+  0.900000 seconds of total run time (0.830000 user, 0.070000 system)
+  [ Run times consist of 0.120 seconds GC time, and 0.780 seconds non-GC time. ]
+  100.78% CPU
+  2,315,117,194 processor cycles
+  136,541,520 bytes consed
+  
+di 198
+Evaluation took:
+  14.170 seconds of real time
+  14.160000 seconds of total run time (13.760000 user, 0.400000 system)
+  [ Run times consist of 1.140 seconds GC time, and 13.020 seconds non-GC time. ]
+  99.93% CPU
+  36,750,290,148 processor cycles
+  2,218,853,552 bytes consed
+  
+ek 199
+Evaluation took:
+  0.879 seconds of real time
+  0.880000 seconds of total run time (0.840000 user, 0.040000 system)
+  [ Run times consist of 0.090 seconds GC time, and 0.790 seconds non-GC time. ]
+  100.11% CPU
+  2,279,107,701 processor cycles
+  136,809,104 bytes consed
+  
+di 199
+Evaluation took:
+  14.074 seconds of real time
+  14.060000 seconds of total run time (13.590000 user, 0.470000 system)
+  [ Run times consist of 1.380 seconds GC time, and 12.680 seconds non-GC time. ]
+  99.90% CPU
+  36,501,380,474 processor cycles
+  2,153,399,824 bytes consed
+  
+ek 200
+Evaluation took:
+  0.816 seconds of real time
+  0.820000 seconds of total run time (0.800000 user, 0.020000 system)
+  [ Run times consist of 0.060 seconds GC time, and 0.760 seconds non-GC time. ]
+  100.49% CPU
+  2,114,574,969 processor cycles
+  134,813,120 bytes consed
+  
+di 200
+Evaluation took:
+  13.211 seconds of real time
+  13.200000 seconds of total run time (12.870000 user, 0.330000 system)
+  [ Run times consist of 0.930 seconds GC time, and 12.270 seconds non-GC time. ]
+  99.92% CPU
+  34,263,369,777 processor cycles
+  2,086,214,816 bytes consed
+  
+NIL
+* 

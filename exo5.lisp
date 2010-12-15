@@ -306,7 +306,7 @@
      for n from (max minn 3) to maxn
      for gts = (loop
                 repeat nb-average
-                collect (build-graphe-exemple n))
+                collect (build-graphe-exemple n 100))
      for eks = (progn
 		 (format t "~&ek ~a~&" n)
 		 (time (loop
