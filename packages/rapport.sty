@@ -1,0 +1,89 @@
+\def\institution#1{\def\@institution{#1}}
+\def\blurb#1{\def\@blurb{#1}}
+
+\def\maketitle{%
+  \thispagestyle{empty}%
+  \begin{adjustwidth}{-2.5cm}{-2.5cm}%
+    \center%
+    \begin{minipage}[c]{5.5cm}%
+      \includegraphics[height=2cm]{img/nouveauLogo_UM2.png}%
+    \end{minipage}%
+    \hfill%
+    \begin{minipage}[c]{7cm}%
+      \center%
+      \@institution%
+    \end{minipage}%
+    \hfill%
+    \begin{minipage}[c]{5.5cm}%
+      \raggedleft%
+      \includegraphics[height=2cm]{img/ufr.png}%
+    \end{minipage}%
+ %   
+    \vskip 1cm%
+    \begin{minipage}[c]{5.5cm}%
+    \end{minipage}%
+    \hfill%
+    \begin{minipage}[c]{8cm}%
+      \center%
+      \@blurb%
+    \end{minipage}%
+    \hfill%
+    \begin{minipage}[c]{5.5cm}%
+    \end{minipage}%
+    %
+    \vfill%
+    \begin{center}%
+      \huge\@title\par%
+    \end{center}%
+    \vfill%
+    \center%
+    \Large\@author%
+    \vfill%
+    \begin{center}%
+      \includegraphics[height=2.5cm]{img/petitlogoUM2.png}%
+    \end{center}%
+  \end{adjustwidth}%
+}
+
+
+\hypersetup{%
+  colorlinks,%
+  linkcolor=black,%
+  filecolor=black,%
+  urlcolor=black,%
+  citecolor=black,%
+  pdftex%
+}
+
+\let\li\lstinline
+
+\newlength\attentionlinewidth%
+\long\def\attention#1{%
+	\def\attentionsignwidth{3em}%
+	\attentionlinewidth=\textwidth%
+	\advance\attentionlinewidth by -\attentionsignwidth%
+	\advance\attentionlinewidth by -2pt%
+	{%
+	\parindent=0pt%
+	\vspace{2pt}%
+	\framebox[\textwidth]{%
+		\begin{minipage}[c]{\textwidth}%
+			\begin{minipage}[c]{\attentionsignwidth}%
+				\vspace{2pt}%
+				\center%
+				\tikz{
+					\node[draw=red, thick, regular polygon, regular polygon
+					 sides=3, inner sep=.2pt]{\small\bf !};%
+				}%
+				\vspace{2pt}%
+			\end{minipage}%
+			\begin{minipage}[c]{\attentionlinewidth}%
+				\vspace{2pt}%
+				#1%
+				\vspace{2pt}%
+			\end{minipage}%
+		\end{minipage}%
+	}%
+	\vspace{2pt}%
+	}%
+}

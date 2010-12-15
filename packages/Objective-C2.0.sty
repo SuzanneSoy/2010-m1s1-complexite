@@ -1,0 +1,53 @@
+\usepackage{color}
+\usepackage{listings}
+
+%Definition Objective-C 2.0
+\definecolor{pink}  {rgb}{0.67, 0.05, 0.57} % keywords
+\definecolor{red}   {rgb}{0.87, 0.20, 0.00} % strings
+\definecolor{green} {rgb}{0.00, 0.47, 0.00} % comments
+\definecolor{violet}{rgb}{0.41, 0.12, 0.61} % classes
+\definecolor{blue}  {rgb}{0.21, 0.00, 0.44} % functions
+\definecolor{brown} {rgb}{0.39, 0.22, 0.13} % brown
+
+\lstdefinelanguage{Objective-C 2.0}[Objective]{C} {
+    morekeywords={id, Class, SEL, IMP, BOOL, nil, Nil, NO, YES,
+                  oneway, in, out, inout, bycopy, byref, IBOutlet, IBAction,
+                  self, super, _cmd, retain, release, readwrite, nonatomic, readonly, autorelease, alloc, new, copy,
+                  @required, @optional,
+                  @try, @throw, @catch, @finally,
+                  @synchronized, @property, @synthesize, @dynamic},
+    moredelim=[s][color{red}]{@''}{``},
+    moredelim=[s][color{red}]{<}{>}
+}
+
+\lstdefinestyle{Xcode} {
+    language        = Objective-C 2.0,
+    basicstyle      = \footnotesize\ttfamily,
+    identifierstyle 	= \color{black},
+    commentstyle	= \color{green},
+    keywordstyle		= \color{pink},
+    stringstyle			= \color{red},
+    directivestyle	= \color{brown},
+    extendedchars   = true,
+    tabsize         = 2,
+    showspaces      = false,
+    showstringspaces = false,
+    breakautoindent = true,
+    flexiblecolumns = true,
+    keepspaces      = true,
+    xleftmargin     = 0pt
+}
+
+\lstset {
+    style 				= Xcode,
+    language		=	Objective-C2.0,
+    tabsize			= 2,
+    frame				= none,
+    framesep		=	1em,
+    columns		=	flexible,
+		breaklines	= true,
+		emph				=	{ABNewPersonViewController, ABPeoplePickerNavigationController,ABPersonViewController,ABUnknownPersonViewController,AVAudioPlayer,AVAudioRecorder,AVAudioSession,CAAnimation,CAAnimationGroup,CABasicAnimation,CADisplayLink,CAEAGLLayer,CAGradientLayer,CAKeyframeAnimation,CALayer,CAMediaTimingFunction,CAPropertyAnimation,CAReplicatorLayer,CAScrollLayer,CAShapeLayer,CATiledLayer,CATransaction,CATransformLayer,CATransition,CAValueFunction,CLHeading,CLLocation,CLLocationManager,EAAccessory,EAAccessoryManager,EAGLContext,EAGLSharegroup,EASession,GKPeerPickerController,GKSession,GKVoiceChatService,MFMailComposeViewController,MKAnnotationView,MKMapView,MKPinAnnotationView,MKPlacemark,MKReverseGeocoder,MKUserLocation,MPMediaItem,MPMediaItemArtwork,MPMediaItemCollection,MPMediaLibrary,MPMediaPickerController,MPMediaPlaylist,MPMediaPredicate,MPMediaPropertyPredicate,MPMediaQuery,MPMoviePlayerController,MPMusicPlayerController,MPVolumeView,NSArray,NSAssertionHandler,NSAtomicStore,NSAtomicStoreCacheNode,NSAttributeDescription,NSAutoreleasePool,NSBundle,NSCachedURLResponse,NSCalendar,NSCharacterSet,NSCoder,NSComparisonPredicate,NSCompoundPredicate,NSCondition,NSConditionLock,NSCountedSet,NSData,NSDate,NSDateComponents,NSDateFormatter,NSDecimalNumber,NSDecimalNumberHandler,NSDictionary,NSDirectoryEnumerator,NSDistributedNotificationCenter,NSEntityDescription,NSEntityMapping,NSEntityMigrationPolicy,NSEnumerator,NSError,NSException,NSExpression,NSFetchRequest,NSFetchRequestExpression,NSFetchedPropertyDescription,NSFetchedResultsController,NSFileHandle,NSFileManager,NSFormatter,NSHTTPCookie,NSHTTPCookieStorage,NSHTTPURLResponse,NSIndexPath,NSIndexSet,NSInputStream,NSInteger,NSInvocation,NSInvocationOperation,NSKeyedArchiver,NSKeyedUnarchiver,NSLocale,NSLock,NSMachPort,NSManagedObject,NSManagedObjectContext,NSManagedObjectID,NSManagedObjectModel,NSMappingModel,NSMessagePort,NSMethodSignature,NSMigrationManager,NSMutableArray,NSMutableCharacterSet,NSMutableData,NSMutableDictionary,NSMutableIndexSet,NSMutableSet,NSMutableString,NSMutableURLRequest,NSNetService,NSNetServiceBrowser,NSNotification,NSNotificationCenter,NSNotificationQueue,NSNull,NSNumber,NSNumberFormatter,NSObject,NSOperation,NSOperationQueue,NSOutputStream,NSPersistentStore,NSPersistentStoreCoordinator,NSPipe,NSPort,NSPredicate,NSProcessInfo,NSPropertyDescription,NSPropertyListSerialization,NSPropertyMapping,NSProxy,NSRecursiveLock,NSRelationshipDescription,NSRunLoop,NSScanner,NSSet,NSSortDescriptor,NSStream,NSString,NSThread,NSTimeZone,NSTimer,NSURL,NSURLAuthenticationChallenge,NSURLCache,NSURLConnection,NSURLCredential,NSURLCredentialStorage,NSURLProtectionSpace,NSURLProtocol,NSURLRequest,NSURLResponse,NSUndoManager,NSUserDefaults,NSValue,NSValueTransformer,NSXMLParser,NSXMLParserDelegate,SKMutablePayment,SKPayment,SKPaymentQueue,SKPaymentTransaction,SKProduct,SKProductsRequest,SKRequest,UIAcceleration,UIAccelerometer,UIAccessibilityElement,UIActionSheet,UIActivityIndicatorView,UIAlertView,UIAlertViewDelegate,UIApplication,UIApplicationDelegate,UIBarButtonItem,UIBarItem,UIButton,UIColor,UIControl,UIDatePicker,UIDevice,UIEvent,UIFont,UIImage,UIImagePickerController,UIImageView,UILabel,UILocalizedIndexedCollation,UIMenuController,UINavigationBar,UINavigationController,UINavigationItem,UIPageControl,UIPasteboard,UIPickerView,UIProgressView,UIResponder,UIScreen,UIScrollView,UISearchBar,UISearchDisplayController,UISegmentedControl,UISlider,UISwitch,UITabBar,UITabBarController,UITabBarItem,UITableView,UITableViewCell,UITableViewController,UITableViewDelegate,UITextField,UITextView,UIToolbar,UITouch,UIVideoEditorController,UIView,UIViewController,UIWebView,UIWindow},
+		emphstyle	=	\color{violet}
+}
+
+%Fin de la definition d'Objective-C
