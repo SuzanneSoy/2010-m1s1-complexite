@@ -12,6 +12,16 @@
 \author{\textsc{Bonavero} Yoann \\ \textsc{Brun} Bertrand \\ \textsc{Charron} John \\ \textsc{Dupéron} Georges}
 \date{}
 
+\lstset{
+  language=C,    %% Preload
+  language=Lisp, %% Preload + default
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=4,
+  columns=flexible% if this is not enough, use columns=fullflexible.
+}
+
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{2ex}
 
@@ -68,7 +78,7 @@ Vos résultats seront présentés en procédant à la rédaction d'un mémoire d
 
 
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   \centering
   \begin{tikzpicture}[node distance=3cm]
     \node (J1) {$J_{1}$};
@@ -87,7 +97,7 @@ Construire le graphe $G^*$ pour $n = 3$, $T = 5$, $p_1 = 1$, $p_2 = 2$, $p_3 = 1
 $E = \{(1,2), (1,3), (3,2)\}$ et les coûts suivants :
 \end{enonce}
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   \centering
 	\begin{tabular}{cccccc}
 	\hline	
@@ -100,7 +110,7 @@ $E = \{(1,2), (1,3), (3,2)\}$ et les coûts suivants :
 \end{tabular}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   \centering
   \colorlet{affectation}{green!75!black}
   \colorlet{auxiliaire}{black}
@@ -136,7 +146,7 @@ $E = \{(1,2), (1,3), (3,2)\}$ et les coûts suivants :
       }
     ]
     
-    \matrix[matrix of math nodes, nodes in empty cells, row sep=1cm, column sep=1cm] (m) {
+    \matrix[matrix of math nodes, nodes in empty cells, row sep=1cm, column sep=0.9cm] (m) {
       & v_{1,0} & v_{1,1} & v_{1,2} & v_{1,3} & v_{1,4} & v_{1,5} & \\
       s & v_{3,0} & v_{3,1} & v_{3,2} & v_{3,3} & v_{3,4} & v_{3,5} & t \\
       & v_{2,0} & v_{2,1} & v_{2,2} & v_{2,3} & v_{2,4} & & \\
@@ -183,7 +193,6 @@ $E = \{(1,2), (1,3), (3,2)\}$ et les coûts suivants :
 	\draw[précédence] (m-1-3)-- node[capacité précédence,pos=0.3]{$\infty$} (m-3-4);
 	\draw[précédence] (m-1-4)-- node[capacité précédence,pos=0.3]{$\infty$} (m-3-5);
 	\draw[précédence] (m-1-5)-- node[capacité précédence,pos=0.3]{$\infty$} (m-3-6);
-
   \end{tikzpicture}
   \caption{Graphe $G^*(X^*, E^*)$}
   \label{fig:graphe-g*}
@@ -251,10 +260,8 @@ On va construire cet ordonancement de la manière suivante~: à chaque
 fois qu'un arc d'affectation $v_{ai,t}, v_{ai,t+1}$ traverse la coupe,
 on exécute le job $ai$ à l'instant $t$ dans l'ordonancement. 
 
-\textbf{On cherche un ordonancement, une suite de paires
-$(\text{tâche},\text{date de début})$ respectant les dépendances.}
-Autrement dit, chaque tâche apparaît après ses dépendances dans la
-suite.
+\textbf{Cherchons un ordonancement}, un ensemble de paires $(\text{tâche},\text{date de début})$ respectant les dépendances.
+Autrement dit, chaque tâche apparaît après ses dépendances dans la suite.
 
 Soit $te(ai) = t$ la fonction qui à un job $ai$ associe son temps de début d'exécution $t$.
 Nous allons montrer que~:
@@ -272,8 +279,9 @@ traverse la coupe, et donc :
 
 On a la même chose pour $\forall tt' <= t' \quad v_{aj,tt'} \in S$.
 
-Comme il y a un arc d'affectation du job $ai$ vers le job $aj$, $\exists tdest > t \quad (v_{ai,t},v_{aj,tdest}) \in E^*$, et vu que la
-capacité de cet arc de précédence est infinie, $tdest \in S$. En utilisant les équations \ref{eq:tous-t-debut-ligne} et
+Comme il y a un arc d'affectation du job $ai$ vers le job $aj$,
+$$\exists\ {} tdest > t \quad (v_{ai,t},v_{aj,tdest}) \in E^*$$
+et vu que la capacité de cet arc de précédence est infinie, $tdest \in S$. En utilisant les équations \ref{eq:tous-t-debut-ligne} et
 \ref{eq:tous-t-avant-exec}, on peut affirmer que $tdest <= t$. Nous avons donc bien montré que l'arc d'affectation entre la tâche $ai$ et la
 tâche $aj$ «forçait» $aj$ à s'exécuter après $ai$.
 
@@ -652,14 +660,14 @@ se transforme en deux clauses : $(\neg a \Rightarrow b)$ et ($\neg b \Rightarrow
 \end{enumerate}  	
 
 S'il existe une composante fortement connexe contenant un littéral et sa négation, la formule est insatisfiable étant donné qu'on a $x_{i}
-\Leftrightarrow \neg £x_{i}$ sinon, la formule est satisfiable, c'est-à-dire soit contingente soit valide. L'algorithme ne nous donne aucune
+\Leftrightarrow \neg x_{i}$ sinon, la formule est satisfiable, c'est-à-dire soit contingente soit valide. L'algorithme ne nous donne aucune
 information pour distinguer une formule contingente et une formule valide, il nous donne une ou deux informations : (1) il nous dit si la
 formule admet un modèle, et (2) si oui, il nous donne un modèle~: le modèle est assuré car le graphe en question ne contient aucun arc $VRAI
 \rightarrow FAUX$.
 
 Prenons trois exemples~: une formule insatisfiable, une formule contingente et une formule valide.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   \centering
   \begin{tikzpicture}[
       node distance=2.5cm,
@@ -694,7 +702,7 @@ d'attribuer un ordre aux sommets pour ensuite affecter des valeurs aux littérau
 modèle. Pour cette raison, les arcs de ce graphe n'ont pas été numérotés ni affectés des valeurs $VRAI$ ou $FAUX$. En somme, l'algorithme
 nous dit simplement que ce graphe n'admet aucun modèle.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   \centering
   \begin{tikzpicture}[
       start chain=circle placed {at=(\tikzchaincount*-45+22.5+90:2.5)},
@@ -758,7 +766,7 @@ valeurs attribuées aux arcs donnent bien un modèle.
 
 
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   \centering
   \begin{tikzpicture}[
       start chain=circle placed {at=(\tikzchaincount*-90+180:1.6)},
@@ -908,10 +916,10 @@ $O(V + E + V \log V + V \log V)$, soit $O(E + V \log V)$.
 
 Pour la partie «déterminer si la formule est invalide», il faut parcourir le graphe pour voir si une composante fortement connexe contient
 un littéral et sa négation. On fera encore un parcours en profondeur $O(V + E)$, et pour chaque noeud (littéral) rencontré lors du parcours,
-il faudra voir si on a déjà rencontré la négation de ce littéral dans la même composante, ce qui coûte $O(\text{taille de la
-  composante})$. Dans le pire des cas, la composante fortement connexe fait tout le graphe, et le coût de la recherche sera alors
-$O(V)$. Comme cette recherche est effectuée pour chaque noeud, le coût total sera $O(V+E)$ pour le parcours en profondeur, et $O(V^2)$ pour
-l'ensemble des recherches, soit $O(V+E+V^2) = O(V^2+E)$ au total.
+il faudra voir si on a déjà rencontré la négation de ce littéral dans la même composante, ce qui coûte $O(\text{taille composante})$. Dans
+le pire des cas, la composante fortement connexe fait tout le graphe, et le coût de la recherche sera alors $O(V)$. Comme cette recherche
+est effectuée pour chaque noeud, le coût total sera $O(V+E)$ pour le parcours en profondeur, et $O(V^2)$ pour l'ensemble des recherches,
+soit $O(V+E+V^2) = O(V^2+E)$ au total.
 
 On peut améliorer le coût de la recherche en maintenant une structure de données permettant un accès rapide aux littéraux déjà rencontrés,
 par exemple un arbre binaire de recherche balancé (un AVL). Le coût de la recherche descend alors à $O(\log V)$ dans le pire des cas, pour
@@ -983,7 +991,7 @@ Il ne serait pas du tout utile de commencer par tous les couples $(0,y_{i})$  te
 
 Une solution, pour tous les nombres naturels, serait de parcourir un graphe comme suit:
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   %% «Paramètres»
   \xdef\maxdots{23}
   \xdef\maxdotsX{5}
@@ -1261,7 +1269,7 @@ On peut parcourir le graphe à l'aide de la fonction 'zig-zag' qui, elle, se ser
 %% TODO TODO TODO !!!!!!!!
 L'intégralité du programme est en annexe à la page ???. Il existe également une version en C à la page ??.
 
-Voici une trace de cette fonction en passant \lstinline!*current*! égal à \lstinline!(0 0 0)! en paramètre et avec $n = 100$ :
+Voici une trace de cette fonction en passant \lstinline!*current*! égal à \lstinline!(0 0 0)! et $n = 100$ en paramètres~:
 
 \begin{lstlisting}[language=Lisp]
 > (zig-zag *current* 100)
@@ -1298,7 +1306,7 @@ Voici une trace de cette fonction en passant \lstinline!*current*! égal à \lst
 Donner les fonctions de codage et de décodage $f_1(z)\rightarrow x$ et $f_2(z)\rightarrow y$.
 \end{enonce}
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   %% «Paramètres»
   \xdef\maxdots{23}
   \xdef\maxdotsX{5}
@@ -1619,7 +1627,7 @@ int* codeToOrderedPairInt(long int code){
 
 Un autre système de codage pourrait être utilisé en parcourant un graphe comme montré dans la figure \ref{fig:codage-rel}.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   %% «Paramètres»
   \xdef\maxdots{81}
   \xdef\maxnums{56}
@@ -1912,7 +1920,7 @@ Montrer que l'on peut coder les triplets. Généraliser aux k-uplets, puis aux l
 
 Pour coder un triplet $(x_1, x_2, x_3)$, on code d'abord le couple $(x_1, x_2)$, puis, soit $x^*$ le résultat intermédiaire, on code le couple $(x^*, x_3)$.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   \centering
   \begin{tikzpicture}
     \node (x11) {$x_1$};
@@ -1977,7 +1985,7 @@ Soit $n$ le $i$-ième élément du k-uplet, si $n$ est positif, on le transforme
 
 Le codage d'une liste d'entiers relatifs peut donc être résumé par la figure \ref{fig:codage-all}
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   \centering
   \begin{tikzpicture}[
     level distance=0.7cm,
