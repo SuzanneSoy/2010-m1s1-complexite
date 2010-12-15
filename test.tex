@@ -48,43 +48,107 @@
 \setcounter{page}{0}
 \pagestyle{plain}
 
-\makeatletter
-\def\myadv#1#2{%
-  \xdef\incr@backup{\the\@tempcnta}%
-  \@tempcnta=#1{}%
-  \advance\@tempcnta by #2{}%
-  \xdef#1{\the\@tempcnta}%
-  \@tempcnta=\incr@backup{}%
-}
-\def\incr#1{%
-  \myadv#1{1}%
-}
-\def\decr#1{%
-  \myadv#1{-1}%
-}
-\makeatother
-
 \begin{figure}[h!]
+  %% «Paramètres»
   \xdef\maxdots{81}
   \xdef\maxnums{56}
   \xdef\maxcoords{20}
-  \centering
+  
+  %% ===== Code is below =====
+  
+  %% Macros crades
+  \makeatletter
+  \def\myadv#1#2{%
+    \xdef\incr@backup{\the\@tempcnta}%
+    \@tempcnta=#1{}%
+    \advance\@tempcnta by #2{}%
+    \xdef#1{\the\@tempcnta}%
+    \@tempcnta=\incr@backup{}%
+  }
+  \def\incr#1{%
+    \myadv#1{1}%
+  }
+  \def\decr#1{%
+    \myadv#1{-1}%
+  }
+  \makeatother
+  % \centering
+  \hskip -21mm%% Hack-o-matic to get the picture more or less centered…
   \begin{tikzpicture}[
     dot/.style={
       circle,
-      inner sep=0.5pt,
-      outer sep=0.5pt,
+      inner sep=0.7pt,
       fill=black
     },
-    numero/.style={red},
+    dotphantom/.style={
+      circle,
+      inner sep=3pt,
+      fill=none,
+      draw=none
+    },
+    numero/.style={circle, fill=white, inner sep=0.2pt, text=red, scale=.75},
+    coord/.style={darkgray, scale=.6},
+    %
+    bigarrow/.style={
+      ->,
+      thick,
+      draw=green!50!black
+    }
     ]
+    
+    % Diagonales
+    \node[dotphantom] (pre-phantom-0-0) at (0,0) {};
+    \node[dotphantom] (pre-phantom-1-0) at (1,0) {};
+    
+    % Top right
+    \node[inner sep=0.1pt] (tr-start) at (4,4) {};
+    \xdef\previous{tr-start}
+    \foreach \pos/\content in {0/$1\times 2=2$,1/$3\times 4=12$,2/$5\times 6=30$,3/$7\times 8=56$,4/$\vphantom{X}\dots$}{
+      \node[anchor=south] (tr-temp-\pos) at (intersection cs: first line={(\previous.north west)--(\previous.north east)}, second line={(0,0)--(6,6)}) {\phantom{\content}};
+      \node[anchor=north west] (tr-\pos) at (intersection cs: first line={(tr-temp-\pos.north west)--(tr-temp-\pos.north east)}, second line={(0,0)--(6,6)}) {\content};
+      \xdef\previous{tr-\pos}
+    }
+    \draw[bigarrow] (pre-phantom-0-0) -- (intersection cs: first line={(\previous.north west)--(\previous.south west)}, second line={(0,0)--(6,6)});
+    
+    % Top left
+    \node[inner sep=0.1pt] (tl-start) at (-4,4) {};
+    \xdef\previous{tl-start}
+    \foreach \pos/\content in {0/$0^2=0$,1/$2^2=4$,2/$6^2=36$,3/$8^2=64$,4/$\vphantom{X}\dots$}{
+      \node[anchor=south] (tl-temp-\pos) at (intersection cs: first line={(\previous.north west)--(\previous.north east)}, second line={(0,0)--(-6,6)}) {\phantom{\content}};
+      \node[anchor=north east] (tl-\pos) at (intersection cs: first line={(tl-temp-\pos.north west)--(tl-temp-\pos.north east)}, second line={(0,0)--(-6,6)}) {\content};
+      \xdef\previous{tl-\pos}
+    }
+    \draw[bigarrow] (pre-phantom-0-0) -- (intersection cs: first line={(\previous.north east)--(\previous.south east)}, second line={(0,0)--(-6,6)});
+    
+    % Bottom left
+    \node[inner sep=0.1pt] (bl-start) at (-4,-4) {};
+    \xdef\previous{bl-start}
+    \foreach \pos/\content in {0/$0\times 1=0$,1/$2\times 3=6$,2/$4\times 5=20$,3/$6\times 7=42$,4/$\vphantom{X}\dots$}{
+      \node[anchor=north] (bl-temp-\pos) at (intersection cs: first line={(\previous.south west)--(\previous.south east)}, second line={(0,0)--(-6,-6)}) {\phantom{\content}};
+      \node[anchor=south east] (bl-\pos) at (intersection cs: first line={(bl-temp-\pos.south west)--(bl-temp-\pos.south east)}, second line={(0,0)--(-6,-6)}) {\content};
+      \xdef\previous{bl-\pos}
+    }
+    \draw[bigarrow] (pre-phantom-0-0) -- (intersection cs: first line={(\previous.north east)--(\previous.south east)}, second line={(0,0)--(-6,-6)});
+    
+    % Bottom right
+    \node[inner sep=0.1pt] (br-start) at (5,-4) {};
+    \xdef\previous{br-start}
+    \foreach \pos/\content in {0/$1^2=1$,1/$3^2=9$,2/$5^2=25$,3/$7^2=49$,4/$\vphantom{X}\dots$}{
+      \node[anchor=north] (br-temp-\pos) at (intersection cs: first line={(\previous.south west)--(\previous.south east)}, second line={(1,0)--(6,-5)}) {\phantom{\content}};
+      \node[anchor=south west] (br-\pos) at (intersection cs: first line={(br-temp-\pos.south west)--(br-temp-\pos.south east)}, second line={(1,0)--(6,-5)}) {\content};
+      \xdef\previous{br-\pos}
+    }
+    \draw[bigarrow] (pre-phantom-1-0) -- (intersection cs: first line={(\previous.north west)--(\previous.south west)}, second line={(1,0)--(6,-5)});
+    % Fin diagonales
+
+    % Définitions pour le code ci-dessous.
     \xdef\i{0}
     \xdef\x{0}
     \xdef\y{0}
-    \xdef\corner{0}
-    \xdef\sidelen{1}
+    \xdef\corner{4}
+    \xdef\sidelen{0}
     \xdef\nextsidelen{1}
-    \xdef\direction{0}
+    \xdef\direction{3}
     \incr\maxnums
     \incr\maxcoords
     
@@ -92,39 +156,54 @@
       \ensuremath{\hphantom{\vphantom{X}}_{\hphantom{\vphantom{X}}_{#1}}}
     }
     \def\drawnode{%
-      \node[dot] (\x-\y) at (\x,\y) {};
+      \node[dot] (dot-\x-\y) at (\x,\y) {};
+      \node[dotphantom] (phantom-\x-\y) at (\x,\y) {};
       \ifnum\maxnums>\i
-        \ifnum\corner=0    \node[numero,anchor=north west] at (\x-\y.south east) {\i}; \else
-        \ifnum\corner=1    \node[numero,anchor=south west] at (\x-\y.north east) {\i}; \else
-        \ifnum\corner=2    \node[numero,anchor=south east] at (\x-\y.north west) {\i}; \else
-        \ifnum\corner=3    \node[numero,anchor=north east] at (\x-\y.south west) {\i}; \else
-        \ifnum\direction=0 \node[numero,anchor=west]       at (\x-\y.east)       {\i}; \else
-        \ifnum\direction=1 \node[numero,anchor=south]      at (\x-\y.north)      {\i}; \else
-        \ifnum\direction=2 \node[numero,anchor=east]       at (\x-\y.west)       {\i}; \else
-        \ifnum\direction=3 \node[numero,anchor=north]      at (\x-\y.south)      {\i}; \fi\fi\fi\fi\fi\fi\fi\fi
+        \ifnum\corner=0    \node[numero,anchor=north west] at (dot-\x-\y.south east) {\i}; \else
+        \ifnum\corner=1    \node[numero,anchor=south west] at (dot-\x-\y.north east) {\i}; \else
+        \ifnum\corner=2    \node[numero,anchor=south east] at (dot-\x-\y.north west) {\i}; \else
+        \ifnum\corner=3    \node[numero,anchor=north east] at (dot-\x-\y.south west) {\i}; \else
+        \ifnum\direction=0 \node[numero,anchor=west]       at (dot-\x-\y.east)       {\i}; \else
+        \ifnum\direction=1 \node[numero,anchor=south]      at (dot-\x-\y.north)      {\i}; \else
+        \ifnum\direction=2 \node[numero,anchor=east]       at (dot-\x-\y.west)       {\i}; \else
+        \ifnum\direction=3 \node[numero,anchor=north]      at (dot-\x-\y.south)      {\i}; \fi\fi\fi\fi\fi\fi\fi\fi
       \fi
-      % {\i\reallysmallcheat{(\x, \y)}};
+      \ifnum\maxcoords>\i
+        \ifnum\corner=0    \node[coord,anchor=south east] at (dot-\x-\y.north west) {\reallysmallcheat{(\x, \y)}}; \else
+        \ifnum\corner=1    \node[coord,anchor=north east] at (dot-\x-\y.south west) {\reallysmallcheat{(\x, \y)}}; \else
+        \ifnum\corner=2    \node[coord,anchor=north west] at (dot-\x-\y.south east) {\reallysmallcheat{(\x, \y)}}; \else
+        \ifnum\corner=3    \node[coord,anchor=south west] at (dot-\x-\y.north east) {\reallysmallcheat{(\x, \y)}}; \else
+        \ifnum\direction=0 \node[coord,anchor=east]       at (dot-\x-\y.west)       {\reallysmallcheat{(\x, \y)}}; \else
+        \ifnum\direction=1 \node[coord,anchor=north]      at (dot-\x-\y.south)      {\reallysmallcheat{(\x, \y)}}; \else
+        \ifnum\direction=2 \node[coord,anchor=west]       at (dot-\x-\y.east)       {\reallysmallcheat{(\x, \y)}}; \else
+        \ifnum\direction=3 \node[coord,anchor=south]      at (dot-\x-\y.north)      {\reallysmallcheat{(\x, \y)}}; \fi\fi\fi\fi\fi\fi\fi\fi
+      \fi
     }
     \def\drawlinknode{%
       \drawnode%
-      \draw[->] (\oldx-\oldy) -- (\x-\y);%
+      \draw[->] (phantom-\oldx-\oldy) -- (phantom-\x-\y);%
     }
     \def\mystep{%
       \incr\i%
       \xdef\oldx{\x}%
       \xdef\oldy{\y}%
     }
+    \def\changedir#1{%
+      \xdef\direction{#1}%
+      \xdef\corner{#1}%
+    }
     
     \drawnode
     \mystep \incr\x
+    \xdef\cornerc{0}
 
     \foreach \pos in {1,...,\maxdots} {
       % Detect when we are at the end of this edge.
       \ifnum\sidelen=0
-        \ifnum\direction=0 \xdef\direction{1} \xdef\corner{1} \incr\nextsidelen \else
-        \ifnum\direction=1 \xdef\direction{2} \xdef\corner{2}                   \else
-        \ifnum\direction=2 \xdef\direction{3} \xdef\corner{3} \incr\nextsidelen \else
-        \ifnum\direction=3 \xdef\direction{0} \xdef\corner{0}                   \fi\fi\fi\fi% Brin d'acier
+        \ifnum\direction=0 \changedir{1} \incr\nextsidelen \else
+        \ifnum\direction=1 \changedir{2}                   \else
+        \ifnum\direction=2 \changedir{3} \incr\nextsidelen \else
+        \ifnum\direction=3 \changedir{0}                   \fi\fi\fi\fi% Brin d'acier
         \xdef\sidelen{\nextsidelen}
       \fi
       % Draw node and link to previous, step counters
@@ -137,17 +216,9 @@
       \decr\sidelen
       \xdef\corner{4}%% 4 == pas de coin-coin.
     }
-    % \foreach \sidelen in {2,4, ...,6} {
-    %   \foreach \pos in {2, ..., \sidelen} { \drawlinknode \mystep \incr\y }
-    %   \foreach \pos in {1, ..., \sidelen} { \drawlinknode \mystep \decr\x }
-    %   \foreach \pos in {1, ..., \sidelen} { \drawlinknode \mystep \decr\y }
-    %   \foreach \pos in {0, ..., \sidelen} { \drawlinknode \mystep \incr\x }
-    % }
-    % %% Dernier côté :
-    % \foreach \pos in {2, ..., 8} { \drawlinknode \mystep \incr\y }
   \end{tikzpicture}
-  \caption{TODO : caption}
-  \label{fig:graphe-g}
+  \caption{Codage d'un couple d'entiers relatifs}
+  \label{fig:codage-rel}
 \end{figure}
 
 \end{document}
