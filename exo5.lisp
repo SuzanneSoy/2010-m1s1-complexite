@@ -316,11 +316,4 @@
 		(format t "~&di ~a~&" n)
 		(time (loop
 		       for gt in gts
-		       collect (car (dinic gt)))))
-     do (loop
-         for gt in gts
-         for ek in eks
-         for d in ds
-         unless (equal ek d)
-           do (print gt)
-           and do (error "edmonds-karp et dinic ont des résultats différents ! Le graphe : ~a et ~a pour" ek d))))
+		       collect (car (dinic gt)))))))
