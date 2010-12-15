@@ -7,6 +7,8 @@
 \usepackage{amsmath}
 \usepackage{listings}
 \usepackage{amssymb}
+\usepackage{pdfpages}
+%\usepackage{hyperref}
 \usetikzlibrary{chains,positioning,matrix,arrows,decorations,calc}
 \title{Rapport de projet : FMIN105\\ Cours algorithmique / complexité / calculabilité}
 \author{\textsc{Bonavero} Yoann \\ \textsc{Brun} Bertrand \\ \textsc{Charron} John \\ \textsc{Dupéron} Georges}
@@ -55,8 +57,8 @@
 }
 
 \begin{document}
+\includepdf{couverture.pdf}
 \setcounter{page}{0}
-\maketitle
 \pagestyle{empty}
 \thispagestyle{empty}
 \tableofcontents
@@ -67,7 +69,7 @@
 
 
 \section{Descriptif des tâches}
-Vos résultats seront présentés en procédant à la rédaction d'un mémoire dont la qualité influencera la note finale. Ce manuscrit sera rendu le jour de la soutenance. La soutenance consiste à présenter résultats pratiques (choix du langage, choix des structures de données, résultats obtenus, tests sur un grand jeu de données, analyse de ceux-ci ...) Vous aurez 15 minutes au maximum, questions comprises. Vous avez la possibilité d'utiliser des transparents.
+Vos résultats seront présentés en procédant à la rédaction d'un mémoire dont la qualité influencera la note finale. Ce manuscrit sera rendu le jour de la soutenance. La soutenance consiste à présenter résultats pratiques (choix du langage, choix des structures de données, résultats obtenus, tests sur un grand jeu de données, analyse de ceux-ci ...). Vous aurez 15 minutes au maximum, questions comprises. Vous avez la possibilité d'utiliser des transparents.
 
 
 \section{Partie théorique}
@@ -78,7 +80,7 @@ Vos résultats seront présentés en procédant à la rédaction d'un mémoire d
 
 
 
-\begin{figure}[ht!]
+\begin{figure}[h!]
   \centering
   \begin{tikzpicture}[node distance=3cm]
     \node (J1) {$J_{1}$};
@@ -224,17 +226,17 @@ est donc \og obligé\fg{} d'inclure dans $S$ toutes les extrémités des arcs de
 construire $S$ itérativement en suivant cette règle.
 
 \begin{itemize}
-\item $s \in S$, et tous les arcs sortant de $s$ sont les arcs auxiliaires, de capacité infinie, qui pointent sur tous les $v_{ai,0}$. On
+\item $s \in S$ et tous les arcs sortants de $s$ sont les arcs auxiliaires de capacité infinie qui pointent sur tous les $v_{ai,0}$. On
   les inclut donc dans $S$.
-\item Pour chaque $v_{ai,t}$ dans $S$, on n'a pas besoin de suivre les arcs d'affectation, car ils sont de capacité finie. Comme ces arcs
+\item Pour chaque $v_{ai,t}$ dans $S$ on n'a pas besoin de suivre les arcs d'affectation car ils sont de capacité finie. Comme ces arcs
   d'affectation \og restent sur la même ligne\fg, à partir du moment où un $v_{ai,t}$ est présent dans $S$, les arcs d'affectation ne nous
   obligent pas à inclure les $v_{ai,t'}$ avec $t' > t$.
-\item Par contre les arcs de précédence nous obligent, lorsqu'on inclut un $v_{ai,t}$, d'inclure tous les $v_{aj,t'}$ qui sont à l'extrémité
+\item Par contre les arcs de précédence nous obligent, lorsqu'on inclut un $v_{ai,t}$, d'inclure tous les $v_{aj,t'}$ qui sont à l'extrêmité
   d'un arc de précédence partant de ce $v_{ai,t}$.
 \end{itemize}
 
 Puisque la coupe est minimale et que tous les $v_{ai,0}$ font partie de $S$, lorsqu'un $v_{ai,t}$ fait partie de S, alors tous les
-$v_{ai,t'}$ avec $0 <= t' <= t$ font aussi partie de $S$ (car sinon on ajoute le coût des arcs d'affectation intermédiaires).
+$v_{ai,t'}$ avec $0 \leq t' \leq t$ font aussi partie de $S$ (car sinon on ajoute le coût des arcs d'affectation intermédiaires).
 
 On a donc $s \in S$ et
 \begin{equation}
@@ -244,7 +246,7 @@ On a donc $s \in S$ et
 
 Il ne sort donc qu'un et un seul arc d'affectation par job dans toute coupe minimale.
 
-Évidemment, cette coupe minimale ne peut exister que s'il y a «suffisement de temps pour tout faire», autrement dit, si la somme des durées
+Évidemment, cette coupe minimale ne peut exister que s'il y a «suffisemment de temps pour tout faire», autrement dit, si la somme des durées
 d'exécution des tâches est supérieure au temps disponible, on ne pourra pas effectuer toutes les tâches.
 
 \begin{enonce}
@@ -266,7 +268,7 @@ Autrement dit, chaque tâche apparaît après ses dépendances dans la suite.
 Soit $te(ai) = t$ la fonction qui à un job $ai$ associe son temps de début d'exécution $t$.
 Nous allons montrer que~:
 $$(\exists ai,t,aj,t' \quad (v_{ai,t},v_{aj,t'}) \in E^*) \qquad \Rightarrow \qquad (te(ai) > te(aj) \quad \Leftrightarrow \quad ai > aj)$$
-Autrement dit, s'il existe un arc de précédence entre deux noeuds, alors le job qui
+Cela signifie que s'il existe un arc de précédence entre deux noeuds, alors le job qui
 correspond au noeud «le plus haut» s'exécute avant le job qui correspond au
 noeud «le plus bas».
 
@@ -277,7 +279,7 @@ traverse la coupe, et donc :
   \label{eq:tous-t-avant-exec}
 \end{equation}
 
-On a la même chose pour $\forall tt' <= t' \quad v_{aj,tt'} \in S$.
+Il en va de même pour $\forall tt' <= t' \quad v_{aj,tt'} \in S$.
 
 Comme il y a un arc d'affectation du job $ai$ vers le job $aj$,
 $$\exists\ {} tdest > t \quad (v_{ai,t},v_{aj,tdest}) \in E^*$$
@@ -286,15 +288,15 @@ et vu que la capacité de cet arc de précédence est infinie, $tdest \in S$. En
 tâche $aj$ «forçait» $aj$ à s'exécuter après $ai$.
 
 Grâce au tri topoligique, nous pouvons affirmer que tous les arcs de précédence entrants dans le noeud $v_{ai,te(ai)}$ viennent d'une ligne
-«plus haut», autrement dit d'un noeud $v_{aj,t'}$ avec $aj < ai$. Et grâce à ce que nous avons prouvé précédemment,
+«plus haute», autrement dit d'un noeud $v_{aj,t'}$ avec $aj < ai$. Et grâce à ce que nous avons prouvé précédemment,
 on sait que $te(aj) < te(ai)$.
 
 \textbf{On cherche un ordonancement réalisable}, c'est-à-dire pour lequel
 toutes les tâches peuvent être menées à bout durant le temps
 imparti.
 
-%% TODO : pas très clair…
-La propriété énoncée dans la question 2 de l'exercice 1 nous indique que de toute coupe minimale, sort un et un seul arc d'affectation par
+
+La propriété énoncée dans la question 2 de l'exercice 1 nous indique que de toute coupe minimale sort un et un seul arc d'affectation par
 job. Cela signifie que chaque job a commencé à être exécuté. Comme il exite un noeud pour le job $aj$ à l'instant $t$ si et seulement s'il y
 a le temps de l'exécuter (\ogà chaque date de début possible\fg), cela signifie que tous les jobs commencés ont eu le temps d'être terminés
 et, comme nous venons de voir, que tous les jobs ont pu être commencés -- ils ont tous pu être terminés -- et, par conséquent,
@@ -311,7 +313,7 @@ précédent, mais en suivant l'algorithme dans l'autre sens.
 Si on exécute le job $ai$ à l'instant $t$ dans l'ordonancement, alors
 tous les noeuds $v_{ai,t'}$ avec $t' \leq t$ sont dans la partie \og
 gauche\fg{} de la coupe. De plus, $s$ appartient lui aussi à la partie
-gauche de la coupe, et aucun arc de précédence ne sort de la coupe.
+gauche de la coupe et aucun arc de précédence ne sort de la coupe.
 
 La capacité de cette coupe est la somme de la capacité de tous les
 arcs qui sortent de la coupe, c'est-à-dire la somme des capacités des
@@ -400,8 +402,8 @@ Comme $A,B,D,F$ ne sont pas dans l'ensemble et que nous avons
 seulement 8 candidats, la seule possibilité qui reste pour un ensemble
 de cardinal 4 est $C,E,G,H$. Or, dans cet ensemble, l'arête $(1,4)$
 est commune à $G$ et $H$, donc on ne peut pas construire un ensemble
-de chemins d'arcs disjoints de taille 4 (donc pas de taille supérieure
-à 4 non plus).
+de chemins d'arcs disjoints de taille 4 ni de taille supérieure
+à 4.
 
 Conclusion~: Le nombre maximum de chemins d'arcs disjoints est 3.
 
@@ -506,10 +508,10 @@ Enumérer tous les s-t-coupes dans le réseau donnés par la figure 1. Pour chaq
 \end{tabular}
 
 \begin{enonce}
-Vérifier que le nombre maximum de chemeins d'arcs disjoints à partir du sommet source jusqu'au puits est égal au nombre minimum d'arcs avant dans une s-t-coupe.
+Vérifier que le nombre maximum de chemins d'arcs disjoints à partir du sommet source jusqu'au puits est égal au nombre minimum d'arcs avant dans une s-t-coupe.
 \end{enonce}
 
-%% TODO : John ou Bertrand ou Yoann, c'est FACILE
+D'après notre conclusion de la question 1, on  a uniquement trois chemins d'arcs disjoints et d'après le tableau de la question 2, on constate que le nombre minimum d'arcs avant est de 3. On peut donc vérifier que le nombre maximum d'arcs disjoints est égal au nombre minimum d'arcs avants. 
 
 \subsection{Partie complexité}
 
@@ -559,38 +561,31 @@ Pour la réduction de SAT à 3-SAT, on prend chaque clause de littéraux du prob
 \item Si la clause possède 3 littéraux ou moins, on la laisse telle quelle. Elle est déjà sous forme 3-SAT.
 \item Sinon, soient $l_1, \dots, l_n$ les littéraux de la clause, on construit plusieurs clauses ainsi~:
 $$
-{l_1, l_2, z_1}, {\lnot z_1, l_3, z_2}, {\lnot z_2, l_4, z_3}, \dots, {\lnot z_{i-2}, l_{i}, z_{i-1}}, \dots, {\lnot z_{n-3}, l_{n-1}, l_{n}}
+(l_1, l_2, z_1), (\lnot z_1, l_3, z_2), (\lnot z_2, l_4, z_3), \dots, (\lnot z_{i-2}, l_{i}, z_{i-1}), \dots, (\lnot z_{n-3}, l_{n-1}, l_{n})
 $$
 \end{itemize}
 
 Les littéraux $z_i$, qui n'était pas présents dans la clause d'origine, sont ajoutés afin de pouvoir subdiviser une clause en deux ou
-plusieurs les clauses et afin de les relier. Par exemple, la clause $(a \vee \lnot b \vee c \vee d)$ sera transformée en deux clauses~: $(a
+plusieurs clauses et afin de les relier. Par exemple, la clause $(a \vee \lnot b \vee c \vee d)$ sera transformée en deux clauses~: $(a
 \vee \lnot b \vee z_1) \wedge (\lnot z_1 \vee c \vee d)$ ; la clause ${\lnot a \vee b \vee \lnot c \vee d \vee e}$ sera transformée en trois
 clauses, à savoir $(\lnot a \vee b \vee z_1) \wedge (\lnot z_1 \vee \lnot c \vee z_2) \wedge (\lnot z_2 \vee d \vee e)$.
 
-L'ensemble des clauses ainsi créées sont équivalentes aux clauses d'origines correspondante car, à chaque fois, soit un des littéraux
-d'origine vérifie la clause, et $z_i$ peut être faux, ce qui permet au $\lnot z_i$ de valider la clause suivante, de proche en proche, soit
-aucun des littéraux d'origine ne vérifie la clause, auquel cas, si on prend un $z_i$ faux, la clause est fausse, et si on prend un $z_i$
-vrai, la clause suivante contiendra $\lnot z_i$ qui sera faux, et le résultat dépendra des littéraux de la ou des clause(s) suivante(s).
+L'ensemble des clauses ainsi créées sont équivalentes à l'ensemble des clauses d'origines correspondant car, à chaque fois, soit un des littéraux d'origine vérifie la clause et $z_i$ peut être faux, ce qui permet à $\lnot z_i$ de valider la clause suivante, de proche en proche, soit aucun des littéraux d'origine ne vérifie la clause, auquel cas, si on prend un $z_i$ faux, la clause est fausse, et si on prend un $z_i$ vrai, la clause suivante 
+contiendra $\lnot z_i$ qui sera faux, et le résultat dépendra des littéraux de la ou des clause(s) suivante(s).
 
-% TODO BERTRAND: éclaircir ça, c'est mal expliqué.
-
-Si l'on souhaite que le résultat soit strictement 3-SAT (toutes les clauses contenant exactement 3 littéraux, on applique les
-transformations suivantes~:
+Si l'on souhaite que le résultat soit strictement 3-SAT (toutes les clauses contenant exactement 3 littéraux, on applique les transformations suivantes~:
 \begin{itemize}
 \item Les clauses qui contiennent un seul littéral, ${l_1}$, sont transformées en ${l_1, l_1, l_1}$.
 \item Les clauses qui contiennent exactement deux littéraux, ${l_1, l_2}$ sont transformées en ${l_1, l_2, l_1}$.
 \end{itemize}
 
-Cette transformation est linéaire en complexité. En effet, on ne considère chaque littéral qu'une fois et on ajoute $n-3$ littéraux pour
-chaque clause. Il s'agit de complexité polynomiale.
+Cette transformation est linéaire en complexité. En effet, on ne considère chaque littéral qu'une fois et on ajoute $n-3$ littéraux pour chaque clause. Il s'agit de complexité polynomiale.
 
 \begin{sousenonce}
 Justifier alors que 3-SAT est NP-complet (sachant que SAT est NP-complet).
 \end{sousenonce}
 
-Vu que SAT est np-complet et que 3-SAT sait faire ce que sait faire SAT, avec une transformation polynomiale, 3-SAT (y compris la
-transformation) est au moins aussi dur que SAT. La difficulté peut résiter(??) dans la transformation, 3-SAT ou les deux.(??)
+Vu que SAT est np-complet et que 3-SAT sait faire ce que sait faire SAT, avec une transformation polynomiale, 3-SAT (y compris la transformation) est au moins aussi dur que SAT. La difficulté peut résider dans la transformation 3-SAT ou les deux.
 
 Vu que la difficulté ne s'est pas cachée dans la transformation, qui est polynomiale alors que SAT est np-complet, 3-SAT est np-complet lui aussi.  
 
@@ -616,6 +611,7 @@ De plus, les expansions sont les suivantes :
 \item Cinq littéraux : 3 clause
 \item Soit au total $n_1 + n_2 + n_3 + 2n_4 + 3n_5$ clauses.
 \end{itemize}
+
 
 
 \begin{enonce}
@@ -685,9 +681,7 @@ Prenons trois exemples~: une formule insatisfiable, une formule contingente et u
     \node[coordinate,xshift=-0.1cm] (nx1l) at (nx1.south) {};
     \draw[->] (x1r) -- (nx1r);
     \draw[->] (nx1l) -- (x1l);
-    \path
-      (x1) edge[loop below] (x1)
-      (nx1) edge[loop above] (nx1) ;
+
   \end{tikzpicture}
   \caption{Clause insatisfiable : $(x_{1} \vee x_{1}) \wedge (\neg x_{1} \vee \neg x_{1})$}
   \label{fig:clause-insat}
@@ -820,11 +814,6 @@ L'objectif de cet algorithme n'est pas de dire si une formule satisfiable est co
 l'algorithme est un graphe ne comportant que des boucles à chaque sommet, la formule associée est satisfiable et valide. Autrement, et si le
 graphe ne contient aucune composante fortement connexe contenant un littéral et sa négation, la formule est contingente.
 
-%% TODO: VERIFIER CES DEUX DERNIERS PHRASES (PRECEDENTES), EST-CE QUE C'EST JUSTE ? C'EST MOI QUI A FAIT CES CONSTATATIONS
-
-%% TODO : Georges @John : Oui, c'est bon. Mettre un contre-modèle trivial à trouver dans le cas où une des clauses ne contient pas un
-%% littéral et sa négation : (a \/ b) /\ ..., il suffit d'avoir a faux ou bien b faux, la clasuse sera fausse, le reste est connecté par des
-%% /\, donc toute la formule sera fausse, c'est un contre-modèle.
 
 \begin{sousenonce}
 Vous expliciterez ensuite l'algorithme de transformation et vous évaluerez sa complexité.
@@ -832,27 +821,25 @@ Vous expliciterez ensuite l'algorithme de transformation et vous évaluerez sa c
 
 L'algorithme de transformation est expliqué plus haut, sous le nom \og L'algorithme de construction de graphe\fg{}
 
-TODO: GEORGES -> J'ai trouvé la citation du CORMEN que j'ai mis ici, mais je ne sais pas comment répondre à cette question avec justesse. Donc, j'ai trouvé toutes les infos, peut-être que quelqu'un pourrait finir cette question. On supprime, bien entendu, cette sitation de CORMEN. Merci, JC.
-JE NE SUIS PAS DU TOUT SUR DE LA REPONSE A CETTE QUESTION... J'AI COMMENCE A REDIGER, MAIS...
+On pose~:
 
-TODO : Début Coût ala georges
-
-Note : en triant la liste des sommets du graphe (coût nlogn pour le tri), on peut effectuer les opérations de recherche d'un littéral (ou de sa négation) par dichotomie (coût logn), donc les $c \times l$ et $O(l \times l)$ (1.a, 1.c, 3.) ci-dessous deviennent respectivement $O(c \log l)$ et $O(l \log l)$
-
-c = nb clauses
+c = nb clauses \\
 l = nb littéraux
+
+En triant la liste des sommets du graphe (coût $n \log n$ pour le tri), on peut effectuer les opérations de recherche d'un littéral (ou de sa négation) par dichotomie (coût $\log n$), donc les $c \times l$ et $O(l \times l)$ (1.a, 1.c, 3.) ci-dessous deviennent respectivement $O(c \log l)$ et $O(l \log l)$
+
 
 \begin{itemize}
 \item 1.a : $O(c \times l)$ car pour chaque littéral qu'on insère, il faut chercher s'il existe déjà.
 \item 1.b : $O(c)$ une opération pour chaque clause
 \item 1.c : $O(c \times l)$ pour chaque clause, on cherche ses 2 littéraux et leur négation dans le graphe
-\item 2. : $O(card(V) + card(E))$, comme $card(V) = 2l$ et $card(E) <= 2c$ (inférieur ou égal à cause des doublons potentiels qui n'ajoutent rien au graphe)., donc $O(l+c)$
-\item 3. : $O(l \times l)$, car pour chaque littéral qu'on rencontre, on devra chercher sa négation dans tout le graphe.
+\item 2. : $O(card(V) + card(E))$, comme $card(V) = 2l$ et $card(E) <= 2c$ (inférieur ou égal à cause des doublons potentiels qui n'ajoutent rien au graphe)., on a $O(l+c)$
+\item 3. : $O(l \times l)$ car pour chaque littéral qu'on rencontre on devra chercher sa négation dans tout le graphe.
 \end{itemize}
 
 Comme $l <= 2c$, tous les l ci-dessus peuvent être transformés en c.
 
-Donc, on prend le coût le plus élevé :
+Donc, on prend le coût le plus élevé~:
 $$
 O(c^2 + c + c^2 + 2c + c^2) = O(c^2)
 $$
@@ -864,40 +851,6 @@ $$
 O(c \log c + c + c \log c + 2c + c \log c) = O(c \log c)
 $$
 
-TODO : Fin Coût ala georges
-TODO : Ce qui suit est la version Johnesque du coût. Je pense qu'on peut la virer, la mienne suffira.
-
-
-TODO : Préciser que $O(n)$ $O(nombre-clauses)$
-
-Tout d'abord, il faut transformer une formule en forme normale conjonctive en une série d'implications. Cela se fait en temps linéaire, en $O(n)$. Ensuite, il faut créer le graphe associé -- numérotation et attribution des valeurs $VRAI$ et $FAUX$, ce qui se fait également en $O(n)$.
-
-TODO : ci-dessus : $O(n^2)$ normalement (pour chaque noeud x, on va chercher ``non x''). On peut l'optimiser en $O(n \log n)$.
-
-CORMEN:
-We can perform a topological sort in polynomial time , since depth-first search takes $\theta(V + E)$
-time and it takes O(1) time to insert each of the |V| vertices onto the front of the linked list.
-
-
-Our algorithm for finding strongly connected components of a graph G = (V, E) uses the
-transpose of G, which is defined in Exercise 22.1-3 to be the graph GT = (V, ET), where ET =
-{(u, v) : (v, u) E}. That is, ET consists of the edges of G with their directions reversed. Given
-an adjacency-list representation of G, the time to create GT is O(V + E). It is interesting to
-observe that G and GT have exactly the same strongly connected components: u and v are
-reachable from each other in G if and only if they are reachable from each other in GT. Figure
-22.9(b) shows the transpose of the graph in Figure 22.9(a), with the strongly connected
-components shaded.
-The following linear-time (i.e., $\theta(V + E)$-time) algorithm computes the strongly connected
-components of a directed graph G = (V, E) using two depth-first searches, one on G and one
-on GT.
-STRONGLY-CONNECTED-COMPONENTS (G)
-1 call DFS (G) to compute finishing times f[u] for each vertex u
-2 compute GT
-3 call DFS (GT), but in the main loop of DFS, consider the vertices
-in order of decreasing f[u] (as computed in line 1)
-4 output the vertices of each tree in the depth-first forest formed in
-line 3 as a
-separate strongly connected component
 
 \begin{sousenonce}
 Vous expliciterez ensuite l'algorithme d'exploration du graphe et vous évaluerez sa complexité
@@ -906,34 +859,30 @@ en fonction de la taille de l'ensemble de clauses initial.
 
 L'algorithme a déjà été expliqué plus haut à la question 3(a).
 
-Pour la partie «trouver un modèle» de l'algorithme, le tri topologique se fait en $O(V + E)$ en faisant un parcours en profondeur. Ensuite,
-on parcourt chaque littéral auquel on n'a pas encore affecté de valeur~; on lui affecte vrai et on affecte faux à sa négation. Cela coûte
-$O(V^2)$ car pour chaque littéral, il faudra chercher sa négation dans $V$, et le coût total est donc $O(V + E + V^2) = O(V^2 + E)$.
+Pour la partie «trouver un modèle» de l'algorithme, le tri topologique se fait en $O(V + E)$ en faisant un parcours en profondeur. Ensuite, on parcourt chaque littéral auquel on n'a pas encore affecté de valeur~; on lui affecte VRAI et on affecte FAUX à sa négation. Cela coûte
+$O(V^2)$ car pour chaque littéral, il faudra chercher sa négation dans $V$ et le coût total est donc $O(V + E + V^2) = O(V^2 + E)$.
 
-On peut toutefois trier les noeuds de $V$ et faire une recherche par dichotomie, ce qui coûte alors $O(V \log V)$ pour le tri, et la
+On peut toutefois trier les noeuds de $V$ et faire une recherche par dichotomie, ce qui coûte alors $O(V \log V)$ pour le tri et la
 recherche coûte alors $O(\log V)$, soit $O(V \log V)$ pour toute la phase d'affectation des valeurs. Le coût total de cette partie est donc
 $O(V + E + V \log V + V \log V)$, soit $O(E + V \log V)$.
 
 Pour la partie «déterminer si la formule est invalide», il faut parcourir le graphe pour voir si une composante fortement connexe contient
-un littéral et sa négation. On fera encore un parcours en profondeur $O(V + E)$, et pour chaque noeud (littéral) rencontré lors du parcours,
+un littéral et sa négation. On fera encore un parcours en profondeur $O(V + E)$ et pour chaque noeud (littéral) rencontré lors du parcours,
 il faudra voir si on a déjà rencontré la négation de ce littéral dans la même composante, ce qui coûte $O(\text{taille composante})$. Dans
-le pire des cas, la composante fortement connexe fait tout le graphe, et le coût de la recherche sera alors $O(V)$. Comme cette recherche
-est effectuée pour chaque noeud, le coût total sera $O(V+E)$ pour le parcours en profondeur, et $O(V^2)$ pour l'ensemble des recherches,
+le pire des cas, la composante fortement connexe fait tout le graphe et le coût de la recherche sera alors $O(V)$. Comme cette recherche
+est effectuée pour chaque noeud, le coût total sera $O(V+E)$ pour le parcours en profondeur et $O(V^2)$ pour l'ensemble des recherches,
 soit $O(V+E+V^2) = O(V^2+E)$ au total.
 
-On peut améliorer le coût de la recherche en maintenant une structure de données permettant un accès rapide aux littéraux déjà rencontrés,
-par exemple un arbre binaire de recherche balancé (un AVL). Le coût de la recherche descend alors à $O(\log V)$ dans le pire des cas, pour
-un coût total de $O(E + V \log V)$.
+On peut améliorer le coût de la recherche en maintenant une structure de données permettant un accès rapide aux littéraux déjà rencontrés, par exemple, un arbre binaire de recherche balancé (AVL). Le coût de la recherche descend alors à $O(\log V)$ dans le pire des cas, pour un coût total de $O(E + V \log V)$.
 
-L'algorithme d'exploration du graphe (y compris la partie qui trouve un modèle) coûte donc $O(E + V^2)$ sans les tris supplémentaires, et
-$O(E + V \log V)$ avec.
+L'algorithme d'exploration du graphe (y compris la partie qui trouve un modèle) coûte donc $O(E + V^2)$ sans les tris supplémentaires et $O(E + V \log V)$ avec.
 
 \begin{sousenonce}
 Enfin, vous justifierez l'équivalence de la réponse au problème 2-SAT et au problème qui est posé dans le graphe.
 \end{sousenonce}
 
 Un problème 2-SAT est une conjonction de disjonctions de deux littéraux (ou de leur négation). Pour que la formule soit satisfiable, il faut
-qu'il existe une affectation des littéraux telle que chaque clause soit vraie (car les clauses sont reliées par des $\wedge$, et il suffit
+qu'il existe une affectation des littéraux telle que chaque clause soit vraie (car les clauses sont reliées par des $\wedge$ et il suffit
 donc qu'une seule d'entre elles soit fausse pour que toute la formule devienne fausse).
 
 Pour qu'une clause soit valide, il faut qu'au moins un de ses deux membres soit vrai. Cela signifie que si le premier membre est forcément
@@ -961,18 +910,16 @@ $$
 \end{array}
 $$
 Ce qui peut se réduire à $a_{i1} \Rightarrow \lnot a_{i1} \Rightarrow a_{i1}$ autrement dit $a_{i1} \Leftrightarrow \lnot a_{i1}$, ce qui
-est bien éviemment insatisfiable.
+est bien évidemment insatisfiable.
 
 Cet ensemble d'implication se traduit dans le graphe par un chemin de $a_{i1}$ jusqu'à $\lnot a_{i1}$, et un chemin de $\lnot a_{i1}$
 jusqu'à $\lnot a_{i1}$, autrement dit, $a_{i1}$ et $\lnot a_{i1}$ sont dans la même composante connexe.
 
-%% TODO : Georges dit c'est bordélique et pas clair…
-
-L'algorithme utilise cette même transformation en implications pour déterminer un modèle~: Le graphe étant trié topologiquement, on part du
-terme «le plus à droite» d'une chaîne d'implications, et on lui affecte vrai si c'est un littéral sans négation, en affectant faux à sa
-négation, et vice versa si c'est un littéral avec négation. Lorsqu'on remonte ainsi de droite à gauche, on s'assure qu'il n'y aura jamais un
-$\text{vrai} \Rightarrow \text{faux}$ (puisqu'on vient de la droite et qu'on n'affecte que des valeurs qui rendent le membre vrai), à moins
-qu'il y ait une boucle (qui aurait été détectée à l'étape précédente), et cette combinaison de valeurs nous donne donc un modèle.
+L'algorithme utilise cette même transformation en implications pour déterminer un modèle~: le graphe étant trié topologiquement, on part du
+terme «le plus à droite» d'une chaîne d'implications et on lui affecte vrai si c'est un littéral sans négation en affectant faux à sa
+négation et vice versa si c'est un littéral avec négation. Lorsque l'on remonte ainsi de droite à gauche, on s'assure qu'il n'y aura jamais un
+$\text{VRAI} \Rightarrow \text{FAUX}$ (puisqu'on vient de la droite et qu'on n'affecte que des valeurs qui rendent le membre vrai), à moins
+qu'il y ait une boucle (qui aurait été détectée à l'étape précédente). Cette combinaison de valeurs nous donne donc un modèle.
 
 \subsection{Partie Calculabilité}
 
@@ -1234,7 +1181,7 @@ Puis, les conditions pour déterminer la direction à prendre afin de parcourir 
          (up-right L))))
 \end{lstlisting}
  
-La liste \lstinline!*current*! est passée en paramètre lorsque l'on appelle ces fonctions~: L correspond toujours à *current*. Les fonctions 'right', 'down', 'down-left' et 'up-right', qui correspondent au parcours dans la figure ???, incrémente la première valeur de L (le codage), qui est une liste de la forme \lstinline!(code x y)!. Par ailleurs, la fonction 'right' incrémente la valeur courante de $x$ (le deuxième élément de la liste), la fonction 'down' incrémente la valeur courante de $y$ (la troisième élément de la liste), la fonction 'down-left' décrémente la valeur de $x$ et incrémente la valeur $y$ et la fonction 'up-right', elle, fait le contraire, elle incrémente la valeur de $x$ et décrémente la valeur de $y$. 
+La liste \lstinline!*current*! est passée en paramètre lorsque l'on appelle ces fonctions~: L correspond toujours à *current*. Les fonctions 'right', 'down', 'down-left' et 'up-right', qui correspondent au parcours dans la figure \ref{fig:codage-zigzag}, incrémente la première valeur de L (le codage), qui est une liste de la forme \lstinline!(code x y)!. Par ailleurs, la fonction 'right' incrémente la valeur courante de $x$ (le deuxième élément de la liste), la fonction 'down' incrémente la valeur courante de $y$ (la troisième élément de la liste), la fonction 'down-left' décrémente la valeur de $x$ et incrémente la valeur $y$ et la fonction 'up-right', elle, fait le contraire, elle incrémente la valeur de $x$ et décrémente la valeur de $y$. 
 
 On peut parcourir le graphe à l'aide de la fonction 'zig-zag' qui, elle, se sert de la fonction move-and-update afin de mettre à jour les variables globales *max-x* et *max-y*. 'move-and-update' se sert de 'move' qui choisit la bonne direction à prendre pour parcourir le graphe, c'est-à-dire 'right', 'down', 'down-left' ou 'up-right'~:
 
@@ -1267,7 +1214,7 @@ On peut parcourir le graphe à l'aide de la fonction 'zig-zag' qui, elle, se ser
 %% Tu changes foobar par un nom de ton choix.
 
 %% TODO TODO TODO !!!!!!!!
-L'intégralité du programme est en annexe à la page ???. Il existe également une version en C à la page ??.
+L'intégralité du programme est en annexe à la page \pageref{couples.lisp}.
 
 Voici une trace de cette fonction en passant \lstinline!*current*! égal à \lstinline!(0 0 0)! et $n = 100$ en paramètres~:
 
@@ -1507,15 +1454,14 @@ Donner les fonctions de codage et de décodage $f_1(z)\rightarrow x$ et $f_2(z)\
   \caption{Codage d'un couple d'entiers relatifs}%% TODO : caption
   \label{fig:codage-nat-avec-constatation}
 \end{figure}
-%% TODO: Même figure que la précédente, mais avec les 'constatations' ajoutées (je ferai un diagramme papier pour qu'on sache ce que je veux ici)
-%% TODO : Réponse georges, c'est bon ?
 
-En reprenant la figure ??? ci-dessus, on peut faire plusieurs constatations~:
+
+En reprenant la figure \ref{fig:codage-nat-avec-constatation} ci-dessus, on peut faire plusieurs constatations~:
 
 \begin{itemize}
 \item La somme de $x$ et $y$ de chaque sommet du graphe d'une diagonale dans le sens du parcours est toujours la même.
 \item La longueur de chaque diagonale successive s'incrémente à chaque fois et nous donne par conséquent toujours une longueur impaire suivie d'une longueur paire.
-\item Le point à partir duquel on commence à incrémenter le code au long d'une diagonale correspond aux codes $1$, $3$, $6$, $10$, $15$, $21$\ldots (voir la figure ???), ce qui correspond à la formule de Gauss, à savoir~:
+\item Le point à partir duquel on commence à incrémenter le code au long d'une diagonale correspond aux codes $1$, $3$, $6$, $10$, $15$, $21$\ldots (voir la figure \ref{fig:codage-nat-avec-constatation}), ce qui correspond à la formule de Gauss, à savoir~:
 
 $$\dfrac{(n \times (n + 1))}{2}$$
 \end{itemize}
@@ -1540,7 +1486,7 @@ long int orderedPairToCodeNat(int x, int y){
 \end{lstlisting}
 
 
-En reprenant les trois informations constatées à partir du diagramme ??? et les algorithmes décrits ci-dessus, il est également relativement facile de calculer n'importe quel couple d'entiers naturels à partir d'un code. En voici l'algorithme en C~:
+En reprenant les trois informations constatées à partir du figure \ref{fig:codage-nat-avec-constatation} et les algorithmes décrits ci-dessus, il est également relativement facile de calculer n'importe quel couple d'entiers naturels à partir d'un code. En voici l'algorithme en C~:
 
 \begin{lstlisting}[language=C]
 int* codeToOrderedPairNat(long int code){
@@ -1807,8 +1753,8 @@ On peut faire plusieurs constations~:
 \begin{itemize}
 \item Le code correspondant aux couples (1,1), (2,2), (3,3), (4,4)\ldots sont respectivement 1, 2, 12, 30\ldots, ce qui correspond à $(1 \times 2)$, $(3 \times 4)$, $(5 \times 6)$, $(7 \times 8)$\ldots
 \item Le code correspondant aux couples (0,0), (-1,-1), (-2,-2), (-3,-3)\ldots sont respectivement 0, 6, 20, 42\ldots, ce qui correspond à $(0 \times 1)$, $(2 \times 3)$, $(4 \times 5)$, $(6 \times 7)$\ldots
-\item Le code des couples $(1,0)$, $(2,-1)$, $(3,-2)$, $(4,-3)$ sont respectivement $1$, $9$, $25$, $49$\ldots ce qui correspond à la valeur de $(x + \|y\|))^{2}$, ce sont les carrés des entiers impairs.
-\item Le code des couples $(-1,-1)$, $(-2,-2)$, $(-3,-3)$, $(-4,-4)$ sont respectivement $4$, $16$, $36$, $64$\ldots,  ce qui correspond à la valeur de $(\|x\| + \|y\|))^{2}$, ce sont les carrés des entiers pairs.
+\item Le code des couples $(1,0)$, $(2,-1)$, $(3,-2)$, $(4,-3)$ sont respectivement $1$, $9$, $25$, $49$\ldots ce qui correspond à la valeur de $(x + |y|))^{2}$, ce sont les carrés des entiers impairs.
+\item Le code des couples $(-1,-1)$, $(-2,-2)$, $(-3,-3)$, $(-4,-4)$ sont respectivement $4$, $16$, $36$, $64$\ldots,  ce qui correspond à la valeur de $(|x| + |y|))^{2}$, ce sont les carrés des entiers pairs.
 \end{itemize}
 
 
@@ -1874,9 +1820,8 @@ long int orderedPairToCodeIntAlgo2(int x, int y){
 }
 \end{lstlisting}
 
-TODO: A REVERIFIER CE QUI SUIT !! (jc)
 
-On commence par trouver le max de $\|x\|$ et $\|y\|$~: $(-3,1)$ nous donnerait comme $absmax$ la valeur $3$. Ensuite on détermine si cette valeur correspond à la valeur de $x$ ou la valeur de $y$. Si cette valeur correspond à la valeur de $x$ (resp. $y$), on affecte la valeur de $x$ (resp. $y$) aux variables temporaires $_x$ et $_y$. Ensuite, on se sert de la propriété des multiplications décrite précédemment selon les quatre cas de figures possibles, à savoir, le cas où $x$ et $y$ sont positives, le cas où $x$ et $y$ sont négatives, celui où $x$ est positive et $y$ est négative, et inversement. On affecte une valeur provisoire à la variable $code$, qui est soit $temp$ (la valeur absolue de la max des deux coordonnées) multiplié par $temp + 1$ ou bien $temp$ multiplié par $temp - 1$ selon que la valeur de la coordonnée $absmax$ est négative ou positive respectivement. Nous avons à ce point un code approximatif. On peut facilement trouver la coordonnée correspondant à $absmax$, et pour trouver l'autre coordonnée on calcule la différence entre la valeur absolue de la coordonnée qu'on connaît et l'autre coordonnée afin d'ajuster le code. Puis, enfin, on retourne le code exact.
+On commence par trouver le max de $|x|$ et $|y|$~: $(-3,1)$ nous donnerait comme $absmax$ la valeur $3$. Ensuite on détermine si cette valeur correspond à la valeur de $x$ ou la valeur de $y$. Si cette valeur correspond à la valeur de $x$ (resp. $y$), on affecte la valeur de $x$ (resp. $y$) aux variables temporaires $\_x$ et $\_y$. Ensuite, on se sert de la propriété des multiplications décrite précédemment selon les quatre cas de figures possibles, à savoir, le cas où $x$ et $y$ sont positives, le cas où $x$ et $y$ sont négatives, celui où $x$ est positive et $y$ est négative, et inversement. On affecte une valeur provisoire à la variable $code$, qui est soit $temp$ (la valeur absolue de la max des deux coordonnées) multiplié par $temp + 1$ ou bien $temp$ multiplié par $temp - 1$ selon que la valeur de la coordonnée $absmax$ est négative ou positive respectivement. Nous avons à ce point un code approximatif. On peut facilement trouver la coordonnée correspondant à $absmax$, et pour trouver l'autre coordonnée on calcule la différence entre la valeur absolue de la coordonnée qu'on connaît et l'autre coordonnée afin d'ajuster le code. Puis, enfin, on retourne le code exact.
 
 Le décodage utilise le même principe mais dans le sens inverse~:
 
@@ -1911,6 +1856,8 @@ int* codeToOrderedPairIntAlgo2(long int code){
 	return pair;
 }
 \end{lstlisting}
+
+Plusieurs programmes complets pour le codage des entiers naturels et le codage des entiers se trouve annexe~: couples-2.lisp (page \pageref{couples2lisp}), couples-3.lisp (page \pageref{couples3lisp}), couples.c (page \pageref{couplesc}) et couple\_entiers.c (page \pageref{coupleentiersc}.
 
 
 
@@ -2201,26 +2148,20 @@ size)' qui se servent du deuxième algorithme pour coder et pour décoder les k-
   clairement et le plus synthétiquement possible.
 \end{enonce}
 
-GEORGES : quick answer, TODO BERTRAND
-
 On sait énumérer récursivement toutes les séquences d'octets~:
 
 Pour passer d'une séquence à la suivante, on commence par le dernier octet. S'il est inférieur à 255, on incrémente sa valeur de 1, sinon on passe à l'octet d'avant, et continue la même démarche. Si on arrive au premier octet de la séquence sans avoir pu en incrémenter de 1, on crée une séquence d'octets de longueur $n + 1$ (où $n$ est la longueur de la séquence courante) dans laquelle chaque octet vaut zéro.
 
 Pour énumérer les fonctions C syntaxiquement correctes, on passe successivement chaque séquence d'octets et on vérifie si elle correspond à une fonction C syntaxiquement correcte (La reconaissance de la syntaxe C peut être faite grâce à un automate, qui se termine toujours dans un temps fini). S'il s'agit d'une fonction C syntaxiquement correcte, on l'affiche, et dans tous les cas on passe à la suivante et on recommence.
 
-TODO : Ajouter par BERTRAND
-
-TODO : mettre l'énoncé + phrase intro
-
-TODO : Georges a dit (jacques aussi) : Énumérer les fonctions consiste à fournir un algorithme (donc un programme) permettant de donner l'élément suivant à partir de l'élément courant (ou de les donner un à un, ce qui revient à la même chose).
+Énumérer les fonctions consiste à fournir un algorithme (donc un programme) permettant de donner l'élément suivant à partir de l'élément courant (ou de les donner un à un, ce qui revient à la même chose).
 
 Dans ce cas-ci, il faudrait donc faire un programme (algorithme) qui énumère toutes les fonctions C (ce qu'on sait faire), et soit capable de ne pas lister celles qui bouclent indéfiniment.
 
 Or, cela signifierait que ce programme (algorithme) serait capable de résoudre le problème de l'arrêt, ce qui n'est pas possible.
 
 % TODO : faire un titre de la ligne suivante
-Démonstration de l'impossibilité de résoudre algorithmiquement le problème de l'arrêt.
+\textbf{Démonstration de l'impossibilité de résoudre algorithmiquement le problème de l'arrêt.}
 
 Supposons qu'il existe un programme $h(p, x)$ prennant en paramètre un programme et une donnée tel que :
 \[
@@ -2249,9 +2190,6 @@ boucle indéfiniment, et donc il est impossible d'énumerer toutes les fonctions
 fonction en question boucle ou non, on ne peut pas savoir si elle fait partie de l'énumération ou non).
 
 \section{Partie pratique sur les algorithmes de flots}
-
-TODO: ajouter tout simplement dans la partie qui suit la page correspondante dans l'annexe (qui contiendra tout le code de Yoann. On s'est
-mis d'accord sur ça lors de notre séance de travail de mercredi 1 décembre)
 
 
 \subsubsection*{Exercice \stepcounter{exocount}\bf\small \arabic{exocount} -- La méthode de Edmonds-Karp et celle de Dinic}
@@ -2312,4 +2250,977 @@ En déduire l'algorithme de Dinic.
 Comparer les résultats (temps d'exécution, taux d'occupation mémoire) entre les deux méthodes. Vous apporterez un soin tout particulier à la génération de vos résultats et à leur présentation.
 \end{enonce}
 
+\appendix
+\section{Annexe}
+\label{annexe-deb}
+
+\subsection{couples.lisp}
+\label{coupleslisp}
+\begin{lstlisting}[language=Lisp]
+
+;;COUPLES.LISP
+
+;; definition des variables globales (toujours entre asterisques)
+(defvar *current* (list 0 0 0)) ;; liste courante "(code x y)"
+(setf *current* (list 0 0 0)) 
+(defvar *db* nil) ;; base de donnees qui stocke tous les "(code x y)"
+(setf *db* nil)
+(push *current* *db*)
+
+(defvar *max-x* 0) ;; valeur maximal courante de x
+(setf *max-x* 0)
+(defvar *max-y* 0) ;; valeur maximal courante de y
+(setf *max-y* 0)
+
+#| pour remettre toutes les variables globales a leur valeurs par defaut 
+afin de tester, de refaire un 'zig-zag', etc.
+|#
+(defun reset ()
+  (progn
+    (defvar *current* (list 0 0 0)) ;; liste courante (cle x y)
+    (setf *current* (list 0 0 0))  
+    (defvar *db* nil) ;; base de donnees qui stocke tous les "(cle x y)"
+    (setf *db* nil)
+    (push *current* *db*)
+    (defvar *max-x* 0) ;; valeur maximal de x jusque "la"
+    (setf *max-x* 0)
+    (defvar *max-y* 0) ;; valeur maximal de y jusque "la"
+    (setf *max-y* 0)
+    *current*))
+  
+#| Les fonctions "right" "down-left", "down", "up-right" imitent le movement des 
+coordonnees sur un graphe mais au les coordonnees "y" positifs sont en DESSOUS du graphe
+|#
+(defun right (L)
+  (progn
+    (push
+      (setf *current*
+        (cons (+ 1 (first L)) (cons (+ 1 (second L)) (last L)))) *db*)
+    *current*))
+  
+(defun down (L)
+  (progn
+    (push
+      (setf *current*
+        (cons (+ 1 (first L)) (cons (second L) (cons (+ 1 (third L)) ())))) *db*)
+     *current*))
+
+(defun up-right (L)
+  (progn
+    (push
+      (setf *current*
+        (cons (+ 1 (first L)) (cons (+ 1 (second L)) (cons (- (third L) 1) ())))) *db*)
+    *current*))
+    
+(defun down-left (L)
+  (progn
+	(push
+	  (setf *current*
+	    (cons (+ 1 (first L)) (cons (- (second L) 1) (cons (+ 1 (third L)) ())))) *db*)
+    *current*))
+
+(defun update-max-x (L)
+  (if (> (second L) *max-x*)
+    (setf *max-x* (second L))
+    nil))
+
+(defun update-max-y (L)
+  (if (> (third L) *max-y*)
+    (setf *max-y* (third L))
+    nil))
+
+(defun update-max-x-y (L)
+  (cond
+    ((> (second L) *max-x*)
+      (setf *max-x* (second L)))
+    ((> (third L) *max-y*)
+      (setf *max-y* (third L)))
+    (t ())))
+
+;; "move" s'occupe de choisir "right", "down-left" etc. selon les valeurs dans *current*
+(defun move (L)
+  (cond
+    ((and (zerop (third L)) (= *max-x* *max-y*)) ;; RIGHT takes precedence over LEFT becuase it occurs first
+      (print "in RIGHT") ;; 
+         (right L))
+    ((and (zerop (second L)) (= *max-x* *max-y*)) ;; DOWN
+      (print "in DOWN") 
+         (down L))
+    ((> *max-x* *max-y*) ;; DOWN-LEFT
+      (print "in DOWN-LEFT")  
+         (down-left L))
+    ((< *max-x* *max-y*) ;; UP-RIGHT
+      (print "in UP-RIGHT") 
+         (up-right L))))
+
+#|
+On fait un "move" et puis un "update-max-x-y"
+Attention : il faut bien faire un setf L, sinon, le parametre L de "update-max-x-y utilise la valeur
+de L inchange !
+|#
+(defun move-and-update (L)
+  (progn
+    (setf L (move L))
+    (update-max-x-y L)
+    *db*))
+
+;; "zig-zag" fait n "move-and-update" en un seul coup et affiche le contenu de *db* (toutes les couples) 
+(defun zig-zag (L n)
+    (if (zerop n) 
+      (move-and-update *current*)
+      (progn
+        (move-and-update *current*)
+        (zig-zag L (- n 1)))))
+
+;;END COUPLES.LISP
+
+\end{lstlisting}
+
+\subsection{couples-2.lisp}
+\label{couples2lisp}
+\begin{lstlisting}[language=Lisp]
+
+;;COUPLES-2.LISP
+
+(defun gauss-formula (n)
+  (/ (* n (+ n 1)) 2))
+
+(defun get-n (code)
+  (isqrt (* code 2)))
+
+(defun get-axis (code)
+  (gauss-formula (isqrt (* code 2))))
+
+(defun get-axis-from-n (n)
+  (gauss-formula n))
+
+(defun axis-code-compare (code)
+  (format t "~d    ~d~%" code (get-axis code))) 
+
+(defun axis-code-compare-n (startcode n)
+  (let ((i 0))
+    (loop
+      (when (> i n) (return))
+      (axis-code-compare (+ startcode i))
+      (incf i))))
+  
+(defun ord-pr-to-code (x y)
+  (let ((sumxy (+ x y)))
+    (if (evenp sumxy)
+      (+ (gauss-formula sumxy) x)
+      (+ (gauss-formula sumxy) y))))
+
+(defun code-to-ord-pr (code)
+  (let ((n (get-n code))
+        (axis (get-axis code))
+        (diff 0))
+  (progn
+    (when (> (get-axis code) code)
+      (progn
+        (setf n (- n 1))
+        (setf axis (get-axis-from-n n))))
+    (setf diff (- code axis))
+    (if (evenp n)
+      (cons diff (cons (- n diff) ()))
+      (cons (- n diff) (cons diff ()))))))
+
+(defun ord-mult-to-code (L)
+  (if (= (list-length L) 1)
+    (car L)
+    (ord-mult-to-code (append (butlast (butlast L)) 
+                        (cons (ord-pr-to-code (car (last (butlast L))) (car (last L))) ())))))
+
+(defun code-to-ord-mult (L-or-code size)
+  (if (atom L-or-code)
+       (code-to-ord-mult (code-to-ord-pr L-or-code) (- size 1))
+    (if (not (= size 1))
+        (code-to-ord-mult (append (butlast L-or-code) (code-to-ord-pr (car (last L-or-code))))
+          (- size 1))
+      L-or-code)))
+
+#| Les codes generes par cette fonction ne correspondent pas au code genere par le
+diagramme du rapport ni des fonctions ord-mult-to-code et code-to-ord-mult. 
+Toutefois, la fonction ci-dessous a ete creees ici car son ecriture et beaucoup plus idiomatique
+en LISP (d'ou le nom 'ord-mult-to-code-lisp'). En effet, si on avait a coder les nombres naturels en LISP, on ajouterait 
+(resp. supprimerait) des elements de la liste en partant du debut de la liste afin de creer
+une paire ou un n-uplet (resp. pour trouver le code correspondant a une paire ou un n-uplet
+|#
+(defun ord-mult-to-code-lisp (L)
+  (if (= (list-length L) 1)
+    (car L)
+    (ord-mult-to-code-lisp (cons (ord-pr-to-code (first L) (second L)) (cddr L)))))
+
+#| voir le commentaire precedent concernant la fonction ord-mult-to-code-lisp |#
+(defun code-to-ord-mult-lisp (L-or-code size)
+  (if (atom L-or-code)
+    (code-to-ord-mult-lisp (code-to-ord-pr L-or-code) (- size 1))
+    (if (not (= size 1))
+      (code-to-ord-mult-lisp (append (code-to-ord-pr (car L-or-code)) (cdr L-or-code)) (- size 1))
+      L-or-code)))
+
+#|
+(defun code-to-ord-pr (code)
+  (;let* ((code*2 (* code 2))
+         (n (isqrt code*2))
+         (axis (gauss-formula n))
+         (diff 0))
+    (cond 
+      ((> axis code)
+         (loop while (> axis code)
+           ((setf n (- n 1)) 
+           (setf axis (gauss-formula n))))
+       (< axis code)
+          ((loop while (< axis code)
+             ((setf n (- n 1)) 
+             (setf axis (gauss-formula n))))
+           (when (> axis code)
+             ((setf n (- n 1))
+             (setf axis (gauss-formula n))))))
+        (t 5))))
+  |#           
+  
+
+(defun loop-test (n)
+  (let ((n 0))
+    (loop
+      (when (> n 10) (return))
+      (format t "~d ~d ~d~%" n (isqrt n) (gauss-formula n))
+      ;(print n) (write (* n n)) (write n)
+      (incf n))))
+
+;;END COUPLES-2.LISP
+
+\end{lstlisting}
+
+\subsection{couples-3.lisp}
+\label{couples3lisp}
+\begin{lstlisting}[language=Lisp]
+
+;;COUPLES-3.LISP
+
+(defun gauss-formula (n)
+  (/ (* n (+ n 1)) 2))
+
+(defun get-n (code)
+  (isqrt (* code 2)))
+
+(defun get-axis (code)
+  (gauss-formula (isqrt (* code 2))))
+
+(defun get-axis-from-n (n)
+  (gauss-formula n))
+
+(defun axis-code-compare (code)
+  (format t "~d    ~d~%" code (get-axis code))) 
+
+(defun axis-code-compare-n (startcode n)
+  (let ((i 0))
+    (loop
+      (when (> i n) (return))
+      (axis-code-compare (+ startcode i))
+      (incf i))))
+  
+(defun ord-pr-to-code-nat (x y)
+  (let ((sumxy (+ x y)))
+    (if (evenp sumxy)
+      (+ (gauss-formula sumxy) x)
+      (+ (gauss-formula sumxy) y))))
+
+(defun code-to-ord-pr-nat (code)
+  (let ((n (get-n code))
+        (axis (get-axis code))
+        (diff 0))
+  (progn
+    (when (> (get-axis code) code)
+      (progn
+        (setf n (- n 1))
+        (setf axis (get-axis-from-n n))))
+    (setf diff (- code axis))
+    (if (evenp n)
+      (cons diff (cons (- n diff) ()))
+      (cons (- n diff) (cons diff ()))))))
+
+(defun nat-to-int (nat)
+  (if (< nat 0)
+    (- (* 2 (abs nat)) 1)
+    (* 2 (abs nat))))
+
+(defun int-to-nat (int)
+  (if (evenp int)
+    (/ int 2) 
+    (ceiling (- (- (/ int 2)) 1))))
+    
+
+(defun ord-pr-to-code-int (x y)
+  (setf x (nat-to-int x))
+  (setf y (nat-to-int y))
+  (ord-pr-to-code-nat x y))
+
+(defun code-to-ord-pr-int (code)
+  (let ((L (code-to-ord-pr-nat code)))
+    (progn
+        (setf L (cons (int-to-nat (first L)) (cdr L)))
+        (setf L (cons (car L) (cons (int-to-nat (second L)) ())))
+      L)))  
+
+(defun ord-mult-to-code-nat (L)
+  (if (= (list-length L) 1)
+    (car L)
+    (ord-mult-to-code-nat (append (butlast (butlast L)) 
+                        (cons (ord-pr-to-code-nat (car (last (butlast L))) (car (last L))) ())))))
+
+(defun code-to-ord-mult-nat (L-or-code size)
+  (if (atom L-or-code)
+       (code-to-ord-mult-nat (code-to-ord-pr L-or-code) (- size 1))
+    (if (not (= size 1))
+        (code-to-ord-mult-nat (append (butlast L-or-code) (code-to-ord-pr (car (last L-or-code))))
+          (- size 1))
+      L-or-code)))
+
+#| Les codes generes par cette fonction ne correspondent pas au code genere par le
+diagramme du rapport ni des fonctions ord-mult-to-code et code-to-ord-mult. 
+Toutefois, la fonction ci-dessous a ete creees ici car son ecriture et beaucoup plus idiomatique
+en LISP (d'ou le nom 'ord-mult-to-code-lisp'). En effet, si on avait a coder les nombres naturels en LISP, on ajouterait 
+(resp. supprimerait) des elements de la liste en partant du debut de la liste afin de creer
+une paire ou un n-uplet (resp. pour trouver le code correspondant a une paire ou un n-uplet.
+On aurait pu faire pareil pour les fonctions concernant tous les entiers
+|#
+(defun ord-mult-to-code-nat-lisp (L)
+  (if (= (list-length L) 1)
+    (car L)
+    (ord-mult-to-code-lisp (cons (ord-pr-to-code (first L) (second L)) (cddr L)))))
+
+#| voir le commentaire precedent concernant la fonction ord-mult-to-code-lisp |#
+(defun code-to-ord-mult-nat-lisp (L-or-code size)
+  (if (atom L-or-code)
+    (code-to-ord-mult-lisp (code-to-ord-pr L-or-code) (- size 1))
+    (if (not (= size 1))
+      (code-to-ord-mult-lisp (append (code-to-ord-pr (car L-or-code)) (cdr L-or-code)) (- size 1))
+      L-or-code)))
+
+(defun loop-test (n)
+  (let ((n 0))
+    (loop
+      (when (> n 10) (return))
+      (format t "~d ~d ~d~%" n (isqrt n) (gauss-formula n))
+      ;(print n) (write (* n n)) (write n)
+      (incf n))))
+
+;;END COUPLES-3.LISP
+
+\end{lstlisting}
+
+\subsection{couples.c}
+\label{couplesc}
+\begin{lstlisting}[language=C]
+
+//COUPLES.C
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int even(int x){
+	return (!(x % 2));
+}
+
+int max(int a, int b){
+	if(a > b) 
+		return a;
+	return b;
+}
+
+long int orderedPairToCodeNat(int x, int y){
+	long code;
+	int sumxy; 
+	sumxy = x + y;
+	code = ((sumxy)*(sumxy + 1))/2;
+
+	if(even(sumxy)){
+		code = code + x;
+	}
+	else{
+		code = code + y; 
+	}
+	return code;
+}
+
+int* codeToOrderedPairNat(long int code){
+	int *couple = malloc(2*sizeof(int));
+	int n = sqrt(code * 2);
+	long int axis = (n * (n + 1))/2;
+	int diff = 0;
+	if(axis > code){
+			n = n - 1;
+			axis = (n * (n + 1))/2;
+	}
+	diff = code - axis;
+	if(even(n)){
+		couple[0] = diff;
+		couple[1] = n - diff;
+	}
+	else{
+		couple[0] = n - diff;
+		couple[1] = diff;
+	}
+	return couple;
+}
+
+long int orderedPairToCodeInt(int x, int y){
+	long int code = 0;	
+
+	if (x < 0){
+		x = (2 * (abs (x))) - 1;
+	}
+	else{
+		x = 2 * x;
+	}
+
+	if (y < 0){
+		y = (2 * (abs(y))) - 1;
+	}
+	else{
+		y = 2 * y;
+	}
+
+	code = orderedPairToCodeNat(x, y);
+	return code;
+}
+
+int* codeToOrderedPairInt(long int code){
+	int *pair = codeToOrderedPairNat(code);
+
+	if (even(pair[0])){
+		pair[0] = pair[0] / 2;
+	}
+	else{
+		pair[0] = (pair[0] / 2)*(-1) - 1;
+	} 
+	
+	if (even (pair[1])){
+		pair[1] = pair[1] / 2;
+	}
+	else{
+		pair[1] = (pair[1] / 2)*(-1) - 1;
+	}
+
+	return pair;
+}
+
+long int orderedPairToCodeIntAlgo2(int x, int y){
+	long int code = 0;
+	int _x, _y, diff;
+	_x = _y = diff = 0;
+	int temp;
+	int absmax;	
+	absmax = max(abs(x), abs(y));	
+	
+	if(absmax == abs(x)){ // _x == x 
+		_x = _y = x;
+		temp = abs(x) * 2;
+		if(x < 0){ // x negative
+			code = temp * (temp + 1);
+			if(y < 0){ // x negative, y negative
+				diff = abs(_y) - abs(y);
+			}
+			else{ // x negative, y positive
+				diff = abs(_y) + abs(y);
+			}
+		}
+		else{ // x positive
+			code = (temp - 1) * temp; 
+			if(y > 0){ // x positive, y positive
+				diff = abs(_y) - abs(y);
+			}
+			else{ // x positive, y negative
+				diff = abs(_y) + abs(y);
+			}
+		}
+		code = code - diff;
+	}
+	else{ // _y = y
+		_x = _y = y;
+		temp = abs(y) * 2;
+		if(y < 0){ // y negative
+			code = temp * (temp + 1);		
+			if(x < 0){ // y negative, x negative
+				diff = abs(_x) - abs(x);
+			}
+			else{ // y negative, x positive
+				diff = abs(_x) + abs (x);
+			}
+		}
+		else{ // y positive
+			code = (temp - 1) * temp;
+			if(x > 0){ // y positive, x positive
+				diff = abs(_x) - abs(x);
+			}
+			else{ // y positive, x negative
+				diff = abs(_x) + abs(x);
+			}	
+		}	
+		code = code + diff;	
+	}
+	return code;
+}
+
+int* codeToOrderedPairIntAlgo2(long int code){
+	int* pair = malloc(2*sizeof(int));
+	int isqrtcode = (int) sqrt(code);
+	long int pivotcode = isqrtcode * (isqrtcode + 1);
+	int x, y;
+	x = y = 0;	
+
+	if(even(isqrtcode)){
+		x = y = -(isqrtcode / 2);
+		if(code > pivotcode){
+			x = x + (code - pivotcode);
+		}
+		else{
+			y = y + (pivotcode - code);
+		}
+	}
+	else{
+		x = y = (isqrtcode / 2) + 1;
+		if(code > pivotcode){
+			x = x - (code - pivotcode);
+		}
+		else{
+			y = y - (pivotcode - code); 
+		}
+	}
+	pair[0] = x;
+	pair[1] = y; 
+	return pair;
+}
+
+long int orderedMultipleToCodeNat(int *arr, int size){
+	long int code;	
+	if(size > 1){
+		code = orderedPairToCodeNat(arr[size - 2], arr[size - 1]);
+		arr[size - 2] = code;
+		arr = realloc(arr, (size - 1));
+		if(size > 2){		
+			code = orderedMultipleToCodeNat(&arr[0], (size - 1));
+		}
+	}
+	return code;
+}
+
+int* codeToOrderedMultipleNat(long int code, int size){
+	int *multiple = malloc(size*sizeof(int));
+	int *pair;
+	int i = 0;
+	for(i = 0; i < (size - 1); i++){
+		pair = codeToOrderedPairNat(code);
+		code = pair[1];
+		multiple[i] = pair[0];
+		multiple[i + 1] = pair[1];
+	}
+	return multiple;
+}
+
+
+long int orderedMultipleToCodeInt(int *arr, int size){
+	long int code;	
+	if(size > 1){
+		code = orderedPairToCodeInt(arr[size - 2], arr[size - 1]);
+		arr[size - 2] = code;
+		arr = realloc(arr, (size - 1));
+		if(size > 2){		
+			code = orderedMultipleToCodeInt(&arr[0], (size - 1));
+		}
+	}
+	return code;
+}
+
+int* codeToOrderedMultipleInt(long int code, int size){
+	int *multiple = malloc(size*sizeof(int));
+	int *pair;
+	int i = 0;
+	for(i = 0; i < (size - 1); i++){
+		pair = codeToOrderedPairInt(code);
+		code = pair[1];
+		multiple[i] = pair[0];
+		multiple[i + 1] = pair[1];
+	}
+	return multiple;
+}
+
+
+long int orderedMultipleToCodeIntAlgo2(int *arr, int size){
+	long int code = 0;	
+	if(size > 1){
+		code = orderedPairToCodeIntAlgo2(arr[size - 2], arr[size - 1]);
+		arr[size - 2] = code;
+		arr = realloc(arr, (size - 1));
+		if(size > 2){		
+			code = orderedMultipleToCodeIntAlgo2(&arr[0], (size - 1));
+		}
+	}
+	return code;
+}
+
+int* codeToOrderedMultipleIntAlgo2(long int code, int size){
+	int *multiple = malloc(size*sizeof(int));
+	int *pair;
+	int i = 0;
+	for(i = 0; i < (size - 1); i++){
+		pair = codeToOrderedPairIntAlgo2(code);
+		code = pair[1];
+		multiple[i] = pair[0];
+		multiple[i + 1] = pair[1];
+	}
+	return multiple;
+}
+
+
+void testMultiNat(){
+	
+	int x = 0;
+	int y = 0;
+	long int code = 0;
+	int *p;
+	int size = 0;
+
+	do{		
+		printf("\n(NATURAL NUMBERS) testPairInt();Enter a size of a multidimensional array representing a 'ordered multiple': ");
+		scanf("%d",&size);
+		p = malloc(size * sizeof(int));
+		int i;
+		for(i = 0; i < size; i++){
+			printf("Enter value number %d: ", i);
+			scanf("%d", &p[i]);
+		}
+
+		code = orderedMultipleToCodeNat(p, size);
+		printf("\n... The code is %ld", code);
+		printf ("\ncode = ");
+		scanf("%ld",&code);
+		printf ("\nnumber of ordered elements = ");
+		scanf("%d",&size);
+		p = codeToOrderedMultipleNat(code, size);
+		printf("The ordered multiple identified by code %ld contains the following elements: ", code);
+		printf("(");
+	
+		for(i = 0; i < (size - 1); i++){
+			printf("%d, ", p[i]);
+		}
+		printf("%d)", p[size-1]);
+	}
+	while(1);
+}
+
+void testPairInt(){
+	
+	int x = 0;
+	int y = 0;
+	long int code = 0;
+	int *p;
+
+	do{		
+		p = malloc(2 * sizeof(int));
+		int i;
+		for(i = 0; i < 2; i++){
+			printf("(ORDERED PAIRS INT) Enter value number %d: ", i);
+			scanf("%d", &p[i]);
+		}
+
+		code = orderedPairToCodeInt(p[0], p[1]);
+		printf("\n... The code is %ld", code);
+		printf ("\ncode = ");
+		scanf("%ld",&code);
+		p = codeToOrderedPairInt(code);
+		printf("The ordered pair identified by code %ld contains the following elements: ", code);
+		printf("(");
+	
+		for(i = 0; i < 1; i++){
+			printf("%d, ", p[i]);
+		}
+		printf("%d)\n", p[1]);
+	}
+	while(1);
+}
+
+void testMultiInt(){
+	
+	int x = 0;
+	int y = 0;
+	long int code = 0;
+	int *p;
+	int size = 0;
+
+	do{		
+		printf("\n(INTEGERS) Enter a size of a multidimensional array representing a 'ordered multiple': ");
+		scanf("%d",&size);
+		p = malloc(size * sizeof(int));
+		int i;
+		for(i = 0; i < size; i++){
+			printf("Enter value number %d: ", i);
+			scanf("%d", &p[i]);
+		}
+
+		code = orderedMultipleToCodeInt(p, size);
+		printf("\n... The code is %ld", code);
+		printf ("\ncode = ");
+		scanf("%ld",&code);
+		printf ("\nnumber of ordered elements = ");
+		scanf("%d",&size);
+		p = codeToOrderedMultipleInt(code, size);
+		printf("The ordered multiple identified by code %ld contains the following elements: ", code);
+		printf("(");
+	
+		for(i = 0; i < (size - 1); i++){
+			printf("%d, ", p[i]);
+		}
+		printf("%d)", p[size-1]);
+	}
+	while(1);
+}
+
+void testPairIntAlgo2(){
+	
+	int x = 0;
+	int y = 0;
+	long int code = 0;
+	int *p;
+
+	do{		
+		p = malloc(2 * sizeof(int));
+		int i;
+		
+		for(i = 0; i < 2; i++){
+			printf("(ORDERED PAIRS INT) Enter value number %d: ", i);
+			scanf("%d", &p[i]);
+		}
+
+		code = orderedPairToCodeIntAlgo2(p[0], p[1]);
+		printf("\n... The code is %ld", code);	
+
+		printf ("\ncode = ");
+		scanf("%ld",&code);
+		p = codeToOrderedPairIntAlgo2(code);
+		printf("The ordered pair identified by code %ld contains the following elements: ", code);
+		printf("(");
+	
+		for(i = 0; i < 1; i++){
+			printf("%d, ", p[i]);
+		}
+		printf("%d)\n", p[1]);
+	}
+	while(1);
+}
+
+
+void testMultiIntAlgo2(){
+	
+	int x = 0;
+	int y = 0;
+	long int code = 0;
+	int *p;
+	int size = 0;
+
+	do{		
+		printf("\n(INTEGERS) Enter a size of a multidimensional array representing a 'ordered multiple': ");
+		scanf("%d",&size);
+		p = malloc(size * sizeof(int));
+		int i;
+		for(i = 0; i < size; i++){
+			printf("Enter value number %d: ", i);
+			scanf("%d", &p[i]);
+		}
+
+		code = orderedMultipleToCodeIntAlgo2(p, size);
+		printf("\n... The code is %ld", code);
+		printf ("\ncode = ");
+		scanf("%ld",&code);
+		printf ("\nnumber of ordered elements = ");
+		scanf("%d",&size);
+		p = codeToOrderedMultipleIntAlgo2(code, size);
+		printf("The ordered multiple identified by code %ld contains the following elements: ", code);
+		printf("(");
+	
+		for(i = 0; i < (size - 1); i++){
+			printf("%d, ", p[i]);
+		}
+		printf("%d)", p[size-1]);
+	}
+	while(1);
+}
+
+
+
+
+int main(int argc, char **argv, char **envp){
+	// testMultiNat();
+	// testPairInt();
+	// testMultiInt();
+	// testPairIntAlgo2();
+	 testMultiIntAlgo2();
+}
+
+
+//END COUPLES.C
+
+\end{lstlisting}
+
+\subsection{couple\_entiers.c}
+\label{coupleentiers}
+\begin{lstlisting}[language=C]
+
+
+//COUPLES_ENTIERS.C
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int pair(int x){
+	return (!(x % 2));
+}
+
+int orderedPairToCode(int x, int y){
+	int sumxy, code;
+	sumxy = x + y;
+	code = ((sumxy)*(sumxy + 1))/2;
+
+	if(pair(sumxy)){
+		code = code + x;
+	}
+	else{
+		code = code + y; 
+	}
+	return code;
+}
+
+
+int* codeToOrderedPair(int code){
+	int *couple = malloc(2*sizeof(int));
+	int n = sqrt(code * 2);
+	int axis = (n * (n + 1))/2;
+	int diff = 0;
+	if(axis > code){
+		while(axis > code){
+			n = n - 1;
+			axis = (n * (n + 1))/2;
+		}
+	}
+	else if(axis < code){
+		while(axis < code){
+			n = n + 1;
+			axis = (n * (n + 1))/2;
+		}
+		if(axis > code){
+			n = n - 1;
+			axis = (n * (n + 1))/2;
+		}
+	}
+
+	if(axis == code){ // je pense que je peux me dispenser de cet "if", ca revient au meme car diff serait = 0
+		if(pair(n)){
+			couple[0] = 0;
+			couple[1] = n;
+		}
+		else{
+			couple[0] = n;
+			couple[1] = 0;
+		}
+	}
+	if(axis != code){ // idem
+		diff = code - axis;
+		if(pair(n)){
+			couple[0] = diff;
+			couple[1] = n - diff;
+		}
+		else{
+			couple[0] = n - diff;
+			couple[1] = diff;
+		}
+	}
+	return couple;
+}
+
+int	orderedMultipleToCode(int *arr, int size){
+	int code;	
+	if(size > 1){
+		code = orderedPairToCode(arr[size - 2], arr[size - 1]);
+		arr[size - 2] = code;
+		arr = realloc(arr, (size - 1));
+		if(size > 2){		
+			code = orderedMultipleToCode(&arr[0], (size - 1));
+		}
+	}
+	return code;
+}
+
+int* codeToOrderedMultiple(int code, int size){
+	int *multiple = malloc(size*sizeof(int));
+	int *pair;
+	int i = 0;
+	for(i = 0; i < (size - 1); i++){
+		pair = codeToOrderedPair(code);
+		code = pair[1];
+		multiple[i] = pair[0];
+		multiple[i + 1] = pair[1];
+	}
+	return multiple;
+}
+
+
+int main(int argc, char **argv, char **envp){
+
+	int x = 0;
+	int y = 0;
+	int code = 0;
+	int *p;
+	int size = 0;
+
+	do{
+	/*
+		printf ("\nx = ");
+		scanf("%d",&x);
+		printf ("y = ");
+		scanf("%d",&y);
+		code = orderedPairToCode(x, y);
+		printf("Le code du couple (%d, %d) est %d\n", x, y, code);
+
+		printf ("\ncode = ");
+		scanf("%d",&code);
+		p = codeToOrderedPair(code);
+		printf("The ordered pair identified by code %d is (%d, %d)", code, p[0], p[1]);
+	
+*/			
+		printf("\nEnter a size of a multidimensional array representing a 'ordered multiple': ");
+		scanf("%d",&size);
+		p = malloc(size * sizeof(int));
+		int i;
+		for(i = 0; i < size; i++){
+			printf("Enter value number %d: ", i);
+			scanf("%d", &p[i]);
+		}
+
+		code = orderedMultipleToCode(p, size);
+		printf("\n... The code is %d", code);
+	
+
+
+		printf ("\ncode = ");
+		scanf("%d",&code);
+		printf ("\nnumber of ordered elements = ");
+		scanf("%d",&size);
+		p = codeToOrderedMultiple(code, size);
+		printf("The ordered multiple identified by code %d contains the following elements: ", code);
+		printf("(");
+		for(i = 0; i < (size - 1); i++){
+			printf("%d, ", p[i]);
+		}
+		printf("%d)", p[size-1]);
+
+
+	}
+	while(code != -1);
+}
+
+//END COUPLES_ENTIERS.C
+\end{lstlisting}
 \end{document}
