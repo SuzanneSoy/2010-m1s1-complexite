@@ -46,8 +46,6 @@
      do (setf (aref c index2) 0)
      finally (return ge)))
 
-(transport->ecart (build-transport-list 0 8 '((1 8 9) (2 8 1) (3 5 2) (3 4 4) (3 2 4) (4 8 2) (5 8 2) (4 6 3) (6 7 5) (7 1 6))))
-
 (defun transport->couche (gt)
   (let ((ge (transport->ecart gt)))
     (make-couche :nb-noeuds (transport-nb-noeuds ge)
@@ -127,18 +125,43 @@
        return (get-flot gt ge)
      do (maj-ecart ge pcc delta)))
 
-(defmacro mbuild-transport (name across/in)
-  `(defun ,name (source puits arcs+capa)
+(defun nettoyer (arcs+capa)
+  (loop
+   with nb-noeuds = (1+ (max (loop for i in arcs+capa maximize (car i))
+                             (loop for i in arcs+capa maximize (cadr i))))
+   and copaing
+   with arcs-sortants = (make-array nb-noeuds :initial-element nil)
+   initially (loop
+	      for arc in arcs+capa
+	      do (push (aref arcs-sortants (car arc)) arc))
+   for arc in arcs+capa
+   for arcsrest = (setf (aref arcs-sortants (car arc)) (cdr (aref arcs-sortants (car arc))))
+   unless (= (car arc) (cadr arc)) ;; boucle
+     if (setq copaing (find (cadr arc) arcsrest ;; arcs multiples
+			    :key #'cadr))
+       do (incf (caddr copaing) (caddr arc))
+     else if (setq copaing (find (cadr arc) (aref arcs-sortants (cadr arc))
+				 :key #'identity))
+       collect (list (car arc) nb-noeuds (caddr arc))
+       and collect (list nb-noeuds (cadr arc) (caddr arc))
+       and do (setf (car arc) nb-noeuds)
+       and do (incf nb-noeuds)
+     else
+       collect arc
+     end))
+
+(defun build-transport-list (source puits arcs+capa)
+     (setq arcs+capa (nettoyer arcs+capa))
      (loop
         with source = source
         and puits = puits
-        and nb-noeuds = (1+ (max (loop for i ,across/in arcs+capa maximize (car i))
-                                 (loop for i ,across/in arcs+capa maximize (cadr i))))
+        and nb-noeuds = (1+ (max (loop for i in arcs+capa maximize (car i))
+                                 (loop for i in arcs+capa maximize (cadr i))))
         and nb-arcs = (length arcs+capa)
         with arcs-sortants = (make-array nb-noeuds :initial-element nil)
         and arcs = (make-array nb-arcs)
         and capa = (make-array nb-arcs)
-        for ac ,across/in arcs+capa
+        for ac in arcs+capa
         for i upfrom 0
         do (push i (aref arcs-sortants (car ac)))
         do (setf (aref arcs i) (cons (car ac) (cadr ac)))
@@ -149,11 +172,11 @@
                                   :puits puits
                                   :arcs-sortants arcs-sortants
                                   :arcs arcs
-                                  :capacites capa)))))
+                                  :capacites capa))))
 
-(mbuild-transport build-transport-array across)
-(mbuild-transport build-transport-list  in)
-
+(defun build-transport-array (source puits arcs+capa)
+  (build-transport-list source puits (map 'list #'identity arcs+capa)))
+  
 (defun liste-plus-courts-chemins (gc)
   "Modifie les arcs présents dans un graphe de couche (seuls les arcs qui font partie d'un plus court chemin de s à t sont conservés)."
   (loop named pcc
@@ -265,28 +288,39 @@
              and do (push (list x y (random maxcapa)) arcs))
      finally (return (build-transport-list 0 (- n 1) arcs))))
 
-(defvar exemple-gt (build-transport-array 0 3 #((0 1 3) (0 2 2) (1 3 4) (2 3 1) (2 1 1))))
+;; (defvar exemple-gt (build-transport-array 0 3 #((0 1 3) (0 2 2) (1 3 4) (2 3 1) (2 1 1))))
 
-(edmonds-karp exemple-gt)
-;; => 5
-(edmonds-karp (build-graphe-exemple 5 3))
-(car (edmonds-karp (build-graphe-exemple 20)))
-(car (edmonds-karp (build-graphe-exemple 100 10)))
-(car (edmonds-karp (build-graphe-exemple 1000 10 40)))
-(car (edmonds-karp (build-graphe-exemple 10000 10 100)))
+;; (edmonds-karp exemple-gt)
+;; ;; => 5
+;; (edmonds-karp (build-graphe-exemple 5 3))
+;; (car (edmonds-karp (build-graphe-exemple 20)))
+;; (car (edmonds-karp (build-graphe-exemple 100 10)))
+;; (car (edmonds-karp (build-graphe-exemple 1000 10 40)))
+;; (car (edmonds-karp (build-graphe-exemple 10000 10 100)))
 
-(dinic exemple-gt)
-;; => 5
+;; (dinic exemple-gt)
+;; ;; => 5
 
-;; TODO :
-
-(defun test-between (maxn &optional (minn 3) (nb-average 5))
+(defun test-between (maxn &optional (nb-average 5) (minn 3))
   (loop
      for n from (max minn 3) to maxn
+     for gts = (loop
+                repeat nb-average
+                collect (build-graphe-exemple n))
+     for eks = (progn
+		 (format t "~&ek ~a~&" n)
+		 (time (loop
+			for gt in gts
+			collect (car (edmonds-karp gt)))))
+     for ds = (progn
+		(format t "~&di ~a~&" n)
+		(time (loop
+		       for gt in gts
+		       collect (car (dinic gt)))))
      do (loop
-           for repeat from 1 to nb-average
-           for gt = (build-graphe-exemple n)
-           for ek = (car (progn (format t "~&ek ~a ~a~&" n repeat) (time (edmonds-karp gt))))
-           for d  = (car (progn (format t "~&di ~a ~a~&" n repeat) (time (dinic gt))))
-           unless (= ek d)
-             do (error "edmonds-karp et dinic ont des résultats différents ! Le graphe :~&~a" gt))))
+         for gt in gts
+         for ek in eks
+         for d in ds
+         unless (equal ek d)
+           do (print gt)
+           and do (error "edmonds-karp et dinic ont des résultats différents ! Le graphe : ~a et ~a pour" ek d))))
