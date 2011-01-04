@@ -8,6 +8,7 @@
 \usepackage{listings}
 \usepackage{amssymb}
 \usepackage{pdfpages}
+\usetikzlibrary{chains,positioning,matrix,arrows,decorations,calc,fit}
 %\usepackage{hyperref}
 \usetikzlibrary{chains,positioning,matrix,arrows,decorations,calc}
 \title{Rapport de projet : FMIN105\\ Cours algorithmique / complexité / calculabilité}
@@ -1214,7 +1215,7 @@ On peut parcourir le graphe à l'aide de la fonction 'zig-zag' qui, elle, se ser
 %% Tu changes foobar par un nom de ton choix.
 
 %% TODO TODO TODO !!!!!!!!
-L'intégralité du programme est en annexe à la page \pageref{couples.lisp}.
+L'intégralité du programme est en annexe à la page \pageref{coupleslisp}.
 
 Voici une trace de cette fonction en passant \lstinline!*current*! égal à \lstinline!(0 0 0)! et $n = 100$ en paramètres~:
 
@@ -1857,7 +1858,7 @@ int* codeToOrderedPairIntAlgo2(long int code){
 }
 \end{lstlisting}
 
-Plusieurs programmes complets pour le codage des entiers naturels et le codage des entiers se trouve annexe~: couples-2.lisp (page \pageref{couples2lisp}), couples-3.lisp (page \pageref{couples3lisp}), couples.c (page \pageref{couplesc}) et couple\_entiers.c (page \pageref{coupleentiersc}.
+Plusieurs programmes complets pour le codage des entiers naturels et le codage des entiers se trouve annexe~: couples-2.lisp (page \pageref{couples2lisp}), couples-3.lisp (page \pageref{couples3lisp}), couples.c (page \pageref{couplesc}) et couple\_entiers.c (page \pageref{coupleentiersc}).
 
 
 
@@ -2200,63 +2201,83 @@ fonction en question boucle ou non, on ne peut pas savoir si elle fait partie de
 Programmer une procédure qui construit à partir d'un graphe orienté valué (les valuations représentent les capacités) et deux sommets $s$ et $p$ du graphe, le graphe d'écart associé (correspondant à un flot nul sur chaque arc).
 \end{enonce}
 
+(Voir Annexe B, page \pageref{annexeexo5})
 
 \begin{enonce}
 Programmer un procédure qui à partir d'un graphe orienté et deux sommets $s$ et $p$ donne un plus court chemin en nombre d'arcs de $s$ à $p$ ou qui signale s'il n'y en a pas.
 \end{enonce}
 
+(Voir Annexe B, page \pageref{annexeexo5})
 
 \begin{enonce}
 Etant donnés un graphe G orienté et valué et un chemin de G, écrire une fonction uqi calcule l'arc de plus petite valuation sur le chemin.
 \end{enonce}
 
+(Voir Annexe B, page \pageref{annexeexo5})
 
 \begin{enonce}
 Etant donnés un graphe d'écard, un chemin et un entier $k$, donner une procédure qui met à jour le graphe d'écard si on augmente le flot de $k$ le long de la chaîne augmentante correspondant au chemin. 
 \end{enonce}
 
+(Voir Annexe B, page \pageref{annexeexo5})
 
 \begin{enonce}
 Ecrire une procédure qui à partir du graphe initial et du graphe d'écard final (plus de chemins entre $s$ et $p$ donne la valeur du flot maximum ainsi que la valeur deu flot sur chaque arc lorsque le flot maximum est atteint. 
 \end{enonce}
 
+(Voir Annexe B, page \pageref{annexeexo5})
 
 \begin{enonce}
 En utilisant les procédures et les fonctions précédentes, programmer l'algorithme de Edmond-Karp. 
 \end{enonce}
 
+(Voir Annexe B, page \pageref{annexeexo5})
 
 \begin{enonce}
 Ecrire une procédure qui prend en compte l'ensemble des plus cours chemins en nombres d'arcs.
 \end{enonce}
 
+(Voir Annexe B, page \pageref{annexeexo5})
 
 \begin{enonce}
 Ecrire une procédure qui calcule la plus petite valeur du flot dans le graphe de couche.
 \end{enonce}
 
+(Voir Annexe B, page \pageref{annexeexo5})
 
 \begin{enonce}
 Ecrire une procédure qui met à jour le flot dans le graphe G. 
 \end{enonce}
 
+(Voir Annexe B, page \pageref{annexeexo5})
 
 \begin{enonce}
 En déduire l'algorithme de Dinic.
 \end{enonce}
 
+(Voir Annexe B, page \pageref{annexeexo5})
 
 \begin{enonce}
 Comparer les résultats (temps d'exécution, taux d'occupation mémoire) entre les deux méthodes. Vous apporterez un soin tout particulier à la génération de vos résultats et à leur présentation.
 \end{enonce}
 
-\appendix
-\section{Annexe}
-\label{annexe-deb}
+Les graphiques ci-dessous représentent le temps d'exécution et l'espace mémoire utilisé par nos implémentations de l'algorithme de Dinic et d'Elmonds-Karp. Notre implémentation de l'algorithme de Dinic fonctionne, mais les résultats montrés dans les graphiques ne reflète pas la réalité car nous avons mal implémenté la gestion de la structure de couche dans cet algorithme, ce qui rend notre implémentation très gourmand en mémoire. 
 
+\newpage
+\input{temps}
+\newpage
+\input{espace}
+\newpage
+\input{espace2}
+\newpage
+
+\appendix
+\section{Annexe~: Exercice 4}
+\label{annexe-deb}
+\newpage
 \subsection{couples.lisp}
 \label{coupleslisp}
-\begin{lstlisting}[language=Lisp]
+\begin{lstlisting}[language=Lisp, basicstyle=\footnotesize]
 
 ;;COUPLES.LISP
 
@@ -2378,7 +2399,7 @@ de L inchange !
 
 \subsection{couples-2.lisp}
 \label{couples2lisp}
-\begin{lstlisting}[language=Lisp]
+\begin{lstlisting}[language=Lisp, basicstyle=\footnotesize]
 
 ;;COUPLES-2.LISP
 
@@ -2494,7 +2515,7 @@ une paire ou un n-uplet (resp. pour trouver le code correspondant a une paire ou
 
 \subsection{couples-3.lisp}
 \label{couples3lisp}
-\begin{lstlisting}[language=Lisp]
+\begin{lstlisting}[language=Lisp, basicstyle=\footnotesize]
 
 ;;COUPLES-3.LISP
 
@@ -2612,7 +2633,7 @@ On aurait pu faire pareil pour les fonctions concernant tous les entiers
 
 \subsection{couples.c}
 \label{couplesc}
-\begin{lstlisting}[language=C]
+\begin{lstlisting}[language=C, basicstyle=\footnotesize]
 
 //COUPLES.C
 
@@ -3065,8 +3086,8 @@ int main(int argc, char **argv, char **envp){
 \end{lstlisting}
 
 \subsection{couple\_entiers.c}
-\label{coupleentiers}
-\begin{lstlisting}[language=C]
+\label{coupleentiersc}
+\begin{lstlisting}[language=C, basicstyle=\footnotesize]
 
 
 //COUPLES_ENTIERS.C
@@ -3223,4 +3244,9 @@ int main(int argc, char **argv, char **envp){
 
 //END COUPLES_ENTIERS.C
 \end{lstlisting}
+\newpage
+\section{Annexe~: Exercice 5}
+\label{annexeexo5}
+\includepdf[pages=-]{exo5}
+
 \end{document}
